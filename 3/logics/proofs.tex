@@ -1,0 +1,454 @@
+\documentclass{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cmap}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+\frenchspacing
+
+\begin{document}
+
+\section*{24.10.2015}
+Аримфметика Пеано (NB: перечислимость множества аксиом важна).
+
+Первая теорема Гёделя грубо: не получится вывести~$\exists k: T(n, x, k)$~---
+проблема остановки.
+Вторая теорема Гёделя о~построении арифметичного предиката выводимости.
+
+Примитивно-рекурсивные функции ($\mathcal{PR}$)~--- наименьшее множество,
+замкнутое относительно операций композиции, примитивной рекурсии
+и~содержащее~$\{I_i^n, S, 0\}$.
+
+Лемма о~разборе случаев:~$g I(h(y) = 0) + h (1 - I(h(y) = 0)) \in \mathcal{PR}$,
+если $g, h \in \mathcal{PR}$.
+
+Еще лемма:~$f(x, y) = \sum_{z \le x} g(z, y) \in \mathcal{PR}$, если $f \in
+\mathcal{PR}$. Произведение, конечно, тоже.
+
+Примитивно-рекурсивное отношение~--- то, у~которого характеристическая функция
+примитивно-рекурсивна.
+
+Еще лемма: если $R \in \mathcal{PR}$, то $\exists z \le x: R(z, y) \in
+\mathcal{PR}$, а~также~$\forall z \le x: R(z, y) \in \mathcal{PR}$.
+
+Конечно, примитивно-рекурсивны~$P \land Q, P \lor Q, \neg P$, также усечённая
+минимизация, предыдущее число, равенство и~много ещё что.
+
+Примитивно-рекурсивен оператор ограниченной минимизации~$f(x, y) = \mu z <
+x.h(z, y) = 0$. То есть можно считать какие-нибудь обратные функции вроде корня.
+
+\section*{31.10.2015}
+
+Примитивно-рекурсивное кодирование пар $\left<x, y\right> = \frac{(x + y)(x + y
++ 1)}{2} + x$. Проекторы: $\pi^1\left<x,y\right> = x, \pi^2\left<x,y\right> =
+y$.
+
+Последовательности кодируем как $[a_1, \ldots, a_n] = p_1^{a_1 + 1} \ldots
+p_n^{a_n+1}$. Говоря так, мы на самом деле работаем с~примитивно-рекурсивными
+функциями $IsSeq(x), Len(x), Get(x, i)$ и~прочее.
+
+С~помощью этого всего можно реализовать другую схему рекурсии, обращающуюся
+ко всем предыдущим значениям (возвратная рекурсия).
+
+\begin{theorem}
+  Пусть~$f(\overline{x}, 0) = g(\overline{x}), f(\overline{x}, z + 1) = h(z,
+  f'(\overline{x},z))$, где~$f'(\overline{x}, z) = \left[f(\overline{x}, 0),
+    \ldots, f(\overline{x}, z)\right]$. Тогда, если $g, h \in \mathcal{PR}$, то
+    $f \in \mathcal{PR}$.
+\end{theorem}
+
+Интресное: обратная функция Аккермана (было письмо).
+
+\section*{07.11.2015}
+
+Наша теория: предикатный символ равенства, функциональный символ последователя
+$S^{(1)}$, нуля~$0^{(0)}$, а~также множество символов $Fnc$.
+
+$Fnc^0 \ni 0, Fnc^1 \ni S, Fnc^n \supseteq \{ I^n_k \mid 0 \le k < n \}$, причём
+$g_1, \ldots, g_m \in Fnc^n, h \in Fnc^m \Rightarrow Chg_1\ldots g_m) \in
+Fnc^n$, а~также $g \in Fnc^n, h \in Fnc^{n+2} \Rightarrow Rgh \in Fnc^{n+1}$,
+где $Rgh$ обозначает оператор примитивной рекурсии, $Fnc = \bigcup\limits_{i\in
+\mathbb{N}} Fnc^i$.
+
+Теперь надо закодировать весь наш язык первого порядка. Переменные $\#(v_k) =
+\left<1, k\right>$. Логические символы $\{\neg, \rightarrow, \forall\}$ кодируем
+как $\left<2, x\right>$, единственный предикатный символ как~$\left<3,
+0\right>$. Осталось закодировать~$Fnc$.
+
+$\#(0) = \left<4, \left<1, 0\right>\right>$.
+$\#(S) = \left<5, \left<1, 1\right>\right>$.
+$\#(I^m_k) = \left<6, \left<k, m\right>\right>$.
+$\#(C) = \left<7, 0\right>$.
+$\#(R) = \left<8, 0\right>$.
+
+В~качестве кода какой-то программы~$p$ из $Fnc$ хотим взять код
+последовательности номеров символов в~записи.
+
+Хотим записать предикат <<быть кодом функционального терма с~$m$ переменными>>.
+$FTm(x, n) = 1$ в~следующих случаях:
+\begin{itemize}
+  \item $Sq(x) \land Len(x) = 1 \land n = 0 \land (x)_0 = \#(0)$
+  \item $\ldots, n = 1 \land (x)_0 = \#(S)$
+  \item $\ldots, \exists 0 < k < n: (x)_0 = \left<6, \left<k, n\right>\right>$
+  \item $Sq(x) \land Len(x) \ge 3 \land (x)_0 = \#(C) \land FTm((x)_1, Len(x)
+    - 2) = 1 \land \forall i < Len(x) - 2 \rightarrow (FTm((x)_{i+2}, n))$
+  \item $Sq(x) \land Len(x) = 3 \land n > 0 \land x > n + 1 \land (x)_0 = \#(R)
+    \land FTm((x)_1, n - 1) \land (FTm((x)_2, n + 1))$
+\end{itemize}
+
+Кодирование терма $T(x)$:
+\begin{itemize}
+  \item $Sq(x) \land Len(x) = 1 \land \exists k < x: (x)_0 = \#(v_k)$
+  \item $Sq(x) \land FTm((x)_0, Len(x) - 1) \land Len(x) > 0 \land \forall i <
+    Len(x) - 1 \rightarrow (T((x)_i) = 1)$
+\end{itemize}
+
+Кодирование формул $F(x)$ ($\lceil \forall v_j \phi \rceil = [\#(\forall),
+\#(v_j), \lceil \phi \rceil]]$):
+\begin{itemize}
+  \item $Sq(x) \land Len(x) = 3 \land (x)_0 = \#(=) \land T((x)_1) = 1 \land
+    T((x)_2) = 1$
+  \item $Sq(x) \land Len(x) = 3 \land (x)_0 = \#(\forall) \land \exists j < x:
+    ((x)_1 = \left<1, j\right>) \land Fm((x)_2) = 1$
+  \item $\ldots$
+\end{itemize}
+
+Следующая цель: функция подстановки $Sub(\lceil \phi \rceil, j, \lceil t \rceil)
+= \lceil \phi(t \mid_{v_j}) \rceil$.
+
+\section*{14.11.2015}
+
+План построения~$Sub$ (считаем, что все формулы записываются через~$\forall,
+\rightarrow, \bot$):
+\begin{itemize}
+  \item проверить, что первый аргумент~--- формула, если нет, то вернуть 0.
+  \item если первый аргумент~--- код одной переменной, то осуществить простую
+    подстановку.
+  \item если первый аргумент начинается с~квантора по переменной, то
+    нужно его проигнорировать в~случае, если переменная заменяемая и~осуществить
+    подстановку под квантором в~противном случае.
+  \item $\ldots$
+\end{itemize}
+
+Можно построить также двухаргументный~$Sub: Sub(\lceil \phi \rceil, \lceil t
+\rceil) = sub(\lceil \phi \rceil, i, \lceil t \rceil), i = \mu j < \lceil \phi
+\rceil: j$ входит свободно в~$\lceil \phi \rceil$.
+
+Нумералы: $\overline 0 = 0, \overline{n + 1} = S\overline n$. Рассмотрим функцию
+$\nu(n) = \lceil \overline n \rceil$ (примитивно-рекурсивную). Тогда $Sub(\lceil
+\phi \rceil, \nu(n)) = \lceil \phi(\overline{n} / x) \rceil$. Такую функцию
+назовем~$S(x, y)$.
+
+Теперь выпишем предикатные аксиомы:
+\begin{itemize}
+  \item $\phi \rightarrow (\psi \rightarrow \phi)$
+  \item $(\phi \rightarrow (\psi \rightarrow \theta)) \rightarrow ((\phi
+    \rightarrow \psi) \rightarrow (\phi \rightarrow \theta))$
+  \item $(\neg \psi \rightarrow \neg \phi) \rightarrow (\phi \rightarrow \psi)$
+  \item $\forall x \phi \rightarrow \phi(t / x)$
+  \item $\forall x (\phi \rightarrow \psi) \rightarrow (\forall x \phi
+    \rightarrow \forall x \psi)$
+  \item $\phi \rightarrow \forall x \phi, x \not\in FV(\phi)$
+  \item Modus ponens, обобщение: $\frac{\phi}{\forall x \phi}$.
+\end{itemize}
+
+Примитивно-рекурсивная арифметика ($\mathcal{PRA}$):
+\begin{itemize}
+  \item $x = x$
+  \item $x = y \rightarrow (A \rightarrow A(y / x))$
+  \item $\neg(Sx = 0)$
+  \item $Sx = Sy \rightarrow x = y$
+  \item $I^n_k x_1, \ldots, x_n = x_k$
+  \item Аксиомы композиции
+  \item Аксиомы примитивной рекурсии
+  \item Индукция по бекванторным формулам: $\phi(0) \rightarrow (\forall
+    x(\phi(x) \rightarrow \phi(Sx)) \rightarrow \phi$, где в~$\phi$ нет
+    кванторов.
+\end{itemize}
+
+Вывод в~$\mathcal{PRA}$ определяется как обычно: каждый шаг это либо логическая
+аксиома, либо аксиома~$\mathcal{PRA}$, либо выводится из предыдущих по modus
+ponens или обобщению. Стоит заметить, что множество аксиом
+примитивно-рекурсивно.
+
+Теперь можно написать предикат $Prf_{\mathcal{PRA}}(y, x) = $ <<$y$ вывод
+в~$\mathcal{PRA}$ формулы с~кодом~$x$>>. $\mathcal{PRA}$ можно расширять
+примитивно-рекурсивным множеством аксиом, сохраняя предикат доказательства.
+
+Также можно построить предикат~$Pr_{\mathcal{PRA}}(x) = \exists y
+Prf_{\mathcal{PRA}}(y, x)$ (квантор неограниченный!).
+
+Если $T$ примитивно-рекурсивно расширяет~$\mathcal{PRA}$, то у~нас есть
+$Prf_T$ и~$Pr_T$, причём первый из них примитивно рекурсивен. Притом так как
+предикат~$Prf_T \in \mathcal{PR}$, то его характеристическая функция~---
+какая-то примитивно-рекурсивная формула.
+
+Обозначим $\lceil \phi(x \cdot) \rceil = S\overline{\lceil \phi
+\rceil} x$.
+
+\begin{theorem}[Гильберта-Бернайса-Лёба]
+  Пусть~$T$~--- примитивно-рекурсивное расширение~$\mathcal{PRA}$.
+  \begin{itemize}
+    \item Если~$\phi$~--- замкнутая формула, то~$T \vdash \phi \Rightarrow
+      \mathcal{PRA} \vdash Pr_T(\lceil \phi \rceil)$
+    \item $\mathcal{PRA} \vdash Pr_T(\lceil \phi(\overline{x}\cdot) \rightarrow
+      \psi(\overline{x}\cdot) \rceil) \rightarrow (Pr_T(\lceil \phi
+      (\overline{x}\cdot) \rceil) \rightarrow Pr_T(\lceil
+      \psi(\overline{x}\cdot)\rceil))$
+    \item $\mathcal{PRA} \vdash Pr_T(\phi(\overline{x}\cdot) \rightarrow
+      Pr_T(\lceil Pr_T(\lceil \phi(\overline{x}\cdot) \rceil))$
+  \end{itemize}
+\end{theorem}
+
+Будем далее обозначать: $\square_T \phi = Pr_T(\lceil \phi \rceil)$, а~также
+$[\phi(x_1, \ldots, x_n)] = \lceil \phi(x_1\cdot, \ldots, x_n\cdot) \rceil$.
+Это терм, в~котором все переменные свободны.
+
+\section*{12.12.2015}
+
+\begin{theorem}[Лёба]
+  Пусть~$T$ примитивно-рекурсивна и~расширяет~$\mathcal{PRA}$. Тогда~$\forall
+  \phi$~--- предложения если~$T$ выводит $\square_T \phi \rightarrow \phi$, то
+  выводит и~$\phi$.
+\end{theorem}
+
+\begin{theorem}[Тарский]
+  Не существует формулы~$\psi$, такую что~$\forall \phi$~--- предложения
+  выполнено, что в~$\mathbb{N}$ верно $\psi(\lceil \phi \rceil)
+  \Leftrightarrow в~\mathbb{N}$ верно $\phi$.
+\end{theorem}
+
+\begin{theorem}[1-я~Гёделя о~непноте]
+  Если $T$ примитивно-рекурсивное расширение $\mathcal{PRA}$, то
+  (1) $T$ не выводит $\bot$.
+  (2) Если $T$ $\Sigma_1$-корректна, то существует предложение~$\phi$, такое,
+  что не выводится ни~$\phi$, ни~$\neg\phi$.
+\end{theorem}
+
+\begin{theorem}[2-я~Гёделя о~непноте]
+  Если $T$ примитивно-рекурсивное расширение $\mathcal{PRA}$, $T$ не выводит
+  $\bot$, $T$ является $\Sigma_1$-корректной. Тогда $T$ не выводит $Con(T)$
+  и~$\neg Con(T)$ ($Con(T) = \neg \square_T \bot$).
+\end{theorem}
+
+\begin{theorem}[усиление Гёделя-Россера]
+  Если $T$ примитивно-рекурсивное расширение $\mathcal{PRA}$, не выводит ложь,
+  то существует предложение~$\phi$, такое что $T$ не выводит $\phi$ и~$\neg
+  \phi$.
+\end{theorem}
+
+\begin{lemma}
+  $\forall \phi(\overline{y}) \in \Delta_0 \rightarrow \exists \widetilde{f} \in
+  \widetilde{\mathcal{PR}}: \mathcal{PRA} \vdash \phi(\overline{y})
+  \leftrightarrow (\widetilde{f}\overline{y}=0)$.
+\end{lemma}
+
+Класс $\Delta_0$ с~ограниченными кванторами (?). $\Sigma_1, \Pi_1$ и~т.д.:
+сначала обычные кванторы, потом~$\Delta_0$.
+
+\begin{lemma}
+  $\mathcal{PRA} \vdash \phi \leftrightarrow \exists y(Prf_T(y,\lceil \neg \phi
+  \rceil) \land \forall z < y \neg Prf_T(z, \lceil \phi \rceil)$.
+\end{lemma}
+\begin{proof}
+  Если $T \vdash \neg \phi$, то $\exists m \in \mathbb{N}: \mathbb{N} \vDash
+  \forall Prf(\underline{m}, \lceil \neg \phi \rceil)$.
+  $T \not\vdash \bot \Rightarrow \mathbb{N} \vDash \forall z < \underline{m}
+  \neg Prf(z, \lceil \phi \rceil)$.
+
+  Если $T \vdash \phi$, то $\vdash \exists y(Prf(y, \lceil \neg \phi \rceil)
+  \land \forall z < y Prf(z, \lceil \phi \rceil))$, также $\mathbb{N} \vDash
+  Prf(\underline{n}, \lceil \phi \rceil)$. По~$\Sigma_1$-полноте $T \vdash
+  Prf(\underline{n}, \lceil \phi \rceil)$, так как $T \not\vdash \bot$, то $T
+  \vdash \forall y \le \underline{n} \neg Prf(y, \lceil \neg \phi \rceil)$.
+  $\mathcal{PRA} \vdash (y \le \underline{n}) \lor (\underline{n} < y)$.
+\end{proof}
+
+\begin{theorem}[формализованная теорема Лёба]
+  Если $T$ примитивно-рекурсивное расширение $\mathcal{PRA}$, то $\mathcal{PRA}
+  \vdash \square_T(\square_T \phi \rightarrow \phi) \rightarrow \square_T \phi$,
+  то есть $\mathcal{PRA}$ знает о~теореме Лёба.
+\end{theorem}
+
+Если подставить ложь, то $\mathcal{PRA} \vdash \square_T Con(T) \rightarrow \neg
+Con(T)$, то есть $\mathcal{PRA} \vdash Con(T) \rightarrow \neg \square_T
+Con(T)$.
+
+Если к~аксиомам добавить~$\neg Con(T)$, то $\mathcal{PRA} \vdash Con(T)
+\rightarrow Con(T + \neg Con(T))$, что есть формализованная вторая тоерема
+Гёделея.
+
+Если $T \not \vdash \bot$ и~$T$~--- п.р. расширение~$\mathcal{PRA}$, то $T +
+\neg Con(T) \not \vdash \bot$, но $\mathbb{N} \not \vDash T + \neg Con(T)$.
+Получается пример непротиворечивой, но некорректной теории.
+
+$Rf_n(T) = \{ \square_T \phi \rightarrow \phi \}$ по всем предложениям
+$\phi$~--- локальная схема рефлексии для~$T$.
+
+$RFN(T) = \{ \forall \overline{x} (\square_T [\phi] \rightarrow \phi) \}$ по
+всем формулам $\phi(\overline{x})$~--- равномерная схема рефлексии.
+
+$\{Con(T)\} \subset Rf_n(T) \subset RFN(T)$. Однако множество кодов $RFN(T)$
+примитивно-рекурсивно, то есть его можно добавлять к~$T$.
+
+\begin{lemma}
+  Над $\mathcal{PRA}$ эквивалентны схемы
+  \begin{itemize}
+    \item $RFN(T)$
+    \item $\{ \forall \overline{x} \square_T [\phi] \rightarrow \forall
+      \overline{x} \phi\}$
+    \item $\frac{\forall \overline{x} \square_T [\phi]}{\forall \overline{x}}
+      \phi$ (правило Клини, более слабая вариация омега-правила).
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  $(1) \Rightarrow (2) \Rightarrow (3)$ понятно.
+
+  $(3) \Rightarrow (1)$.
+  \begin{lemma}[о~явной рефлексии]
+    Выполнено утверждение и~его обобщение:
+    \begin{itemize}
+      \item $\forall m, n \in \mathbb{N}\ \forall \phi(x)\ T \vdash
+        Prf_T(\underline{m}, \lceil \phi(\underline{n} / x) \rceil) \rightarrow
+        \phi(\underline{n} / x)$.
+      \item $\mathcal{PRA} \vdash \forall x, y \square_T[Prf_T(y, [\phi])
+        \rightarrow \phi]$, то есть об этом знает~$\mathcal{PRA}$.
+    \end{itemize}
+  \end{lemma}
+  \begin{proof}
+    $\mathbb{N} Prf_T(\underline{m}, \lceil \phi(n) \rceil) \lor \neg
+    Prf(\underline{m}, \lceil \phi(\underline{n}) \rceil)$.
+
+    1 случай. $T \vdash \phi(\underline{n})$, тогда $T \vdash
+    Prf_T(\underline{m}, \phi(\underline{n})) \rightarrow \phi(\underline{n})$.
+
+    2 случай. $T \vdash \neg Ptf_t(\underline{m}, \lceil \phi(\underline{n})
+    \rceil) \overset{\Sigma_1}\Rightarrow T \vdash \neg Prf_T(\underline{m},
+    \lceil \phi(n) \rceil) \Rightarrow T \vdash Prf_T(\underline{m}, \lceil
+    \phi(n) \rceil) \rightarrow \phi(\underline{m})$.
+
+    Обобщение аналогично.
+  \end{proof}
+
+  Научимся получить произвольную формулу~$RFN(T)$ с~помощью правила Клини.
+  $\mathcal{PRA} \vdash \forall x \forall y \square_T[Rf_T(y, [\phi])
+  \rightarrow \phi(x)]$. Применим к~ней правило Клини:
+  $\mathcal{PRA} \vdash \forall x \forall y (Prf_T(y, [\phi]) \rightarrow
+  \phi(x) \vdash \forall x(\exists y Prf_T(y, [\phi]) \rightarrow \phi) \vdash
+  \forall x(\square_T [\phi] \rightarrow \phi)$.
+\end{proof}
+
+\section*{12.12.2015}
+
+$RFN_{\Pi_n}(T) = \{ \forall \overline{x} (\square_T [\phi] \rightarrow \phi)
+\mid \phi(\overline{x}) \in {\Pi_n}\}$~--- ограниченная схема рефлексии
+(аналогично по~$\Sigma_n$).
+
+\begin{lemma}
+  При $n \ge 1$ над $\mathcal{PRA}$ эквивалентны
+  \begin{itemize}
+    \item $RFN_{\Sigma_n}(T)$ и~$RFN_{\Pi_{n+1}}(T)$
+    \item $RFN_{\Pi_1}(T)$, $Rfn_{\Pi_1}(T)$ и~$Con(T)$.
+  \end{itemize}
+\end{lemma}
+
+\begin{theorem}[Частичное определение истинности]
+  Пусть $n \ge 1$, тогда существует $Tr_{\Pi_n}(z) \in \Pi_n$, такая
+  что~$\forall \phi(\overline{x}) \in \Pi_n$ выполнено~$\mathcal{PRA} \vdash
+  \phi(\overline{x} \Leftrightarrow Tr_{\Pi_n}[\phi(\overline{x})]$.
+\end{theorem}
+\begin{remark}
+  Под $\mathcal{PRA}$ $RFN(T)$ эквивалентна $\{RFN_{\Pi_n(T)} \mid n \ge 1\}$,
+  каждая из которых конечно аксиоматизируема.
+\end{remark}
+
+Теория $U$~--- $\Gamma$-расширение теории~$T$, если $U \equiv T + \Phi, \Phi
+\subset \Gamma$ (конечное расширение, $\Sigma_1$~расширение).
+
+\begin{lemma}
+  при $n \ge 1$
+  \begin{itemize}
+    \item
+      $Rfn_{\Pi_n}(T)$ не содержится ни в~каком
+      \begin{itemize}
+        \item непротиворечивом
+        \item конечном
+        \item $\Sigma_n$
+      \end{itemize}
+      Расширении~$U$ теории~$T$.
+    \item
+      $Rfn_{\Pi_n}(T)$ не содержится ни в~каком непротиворечивом
+      $\Sigma_n$-расширении~$U$ теории~$T$.
+  \end{itemize}
+\end{lemma}
+
+\begin{remark}
+  Следствия
+  \begin{itemize}
+    \item $Rfn(T)$ не содержится ни в~каком непротиворечивом конечном
+      расширении~$T$.
+    \item $RFN(T)$ не содержится ни в~каком непротиворечивом расширении~$T$
+      ограниченной сложности.
+    \item $T + Th_{\Pi_1}(\mathbb{N})$ (все истинные в~$\mathbb{N}\
+      \Pi_1$-формулы) $\vdash Rfn(T)$.
+  \end{itemize}
+\end{remark}
+
+\begin{theorem}
+  Если $T$~--- $\Sigma_1$-корректна, то $T + Rfn(T) \not\vdash RFN(T)$.
+\end{theorem}
+
+\begin{remark}
+  Факт: $\mathcal{PA} \vdash RFN(\mathcal{PRA})$.
+
+  Следствие: $PA$ не содержится ни в~каком непротиворечивом расширении~$PRA$
+  ограниченной сложности (в~частности, в~конечном).
+\end{remark}
+
+\begin{theorem}
+  Пусть~$U$ перечислимоe непротиворечивое $\Sigma_n$ расширение~$T$. Тогда
+  существует предложение~$\phi \in \Sigma_n$, такое что $T + \phi$
+  непротиворечива и~$T + \phi \vdash U$.
+\end{theorem}
+\begin{remark}
+  Факт (лемма Craig'a): Пусть~$\Gamma$~--- перечислимое множество формул. Тогда
+  существует примитивно-рекурсивное множество формул $\Delta$, такое что
+  $\mathcal{PRA} + \Delta = \mathcal{PRA} + T$.
+\end{remark}
+
+\begin{remark}
+  Первое следствие из теоремы: $Rfn_{\Pi_n(T)}$ не содержится ни в~каком
+  непротиворечивом перечислимом $\Sigma_n$-расширении теории~$T$.
+
+  Второе: $Rfn$ не содержится ни в~каком
+  непротиворечивом перечислимом расширении теории~$T$ ограниченной сложности.
+
+  Из этого следует, что множество всех истинных~$\Pi_1$-формул
+  $Th_{\Pi_1}(\mathbb{N})$ неперечислимо (иначе противоречие со вторым
+  следствием).
+\end{remark}
+
+\section*{Можно почитать}
+
+\begin{itemize}
+  \item Смаринский <<Self-reference and modal logics>>
+  \item Доказуемая $\Sigma_1$~--- полнота (Бухгольц?).
+\end{itemize}
+
+\end{document}

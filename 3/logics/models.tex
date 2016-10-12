@@ -1,0 +1,283 @@
+\documentclass{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cmap}
+
+\newtheorem{theorem}{Теорема}
+\newtheorem{claim}{Утверждение}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+
+\frenchspacing
+
+\begin{document}
+
+\section*{24.10.2015}
+
+\begin{itemize}
+  \item Графы~--- множество моделей теории с~парой предикатных символов.
+  \item Группы~--- множество моделей теории с~чуть большим количеством
+  предикатных и~функциональных символов.
+\end{itemize}
+
+Мысль первая: много моделей можно описать какими-то равенствами (кванторы
+всеобщности можно убрать, ибо из~$\phi$ выводится $\forall \phi$. Также
+всегда считаем, что всегда есть бинарный предикатный символ равенства.
+
+Поэтому рассматриваем \emph{решётки}~--- $\mathcal{L} = (L \ne \varnothing,
+\land, \lor, =)$. Что делает решётку решеткой:
+
+\begin{itemize}
+  \item[L1.] Коммутативность
+  \item[L2.] Ассоциативность
+  \item[L3.] Рефлексивность (можно получить из остальных)
+  \item[L4.] Идемпотентность
+\end{itemize}
+
+Примеры
+\begin{itemize}
+  \item Булевы функции $(\mathbb{B}, \land, \lor)$
+  \item Подмножества $(2^X, \cap, \cup)$
+  \item $(\mathbb{N}_+, (\cdot, \cdot), [\cdot, \cdot])$
+  \item Нормальные подгруппы $(N(G), \cap, \cdot)$
+\end{itemize}
+
+Порой (во всех предыдущих случаях) можно сопоставить решетке какой-то
+порядок.
+
+Пусть $(A, \le)$~--- ч.у.м. Говорим, что~$a$~--- верхняя (нижняя) грань~$P
+\subset A$, если~$\forall x \in P x \le a (x \ge a)$. Ясно, что можно
+определить~$\sup P$.
+
+Говорим, что~$a \prec b$ (покрывает), если~$\forall c (a \le b \le c
+\Rightarrow c = a \land c = b$).
+
+Диаграммы Хасса~--- изображения порядков.
+
+\begin{theorem}
+  $(L, \land, \lor)$~--- решётка тогда и~только тогда, когда $\exists
+  \le \subset L^2$~--- ч.у.м. и~$a \land b = \inf\{a, b\}, a \lor b =
+  \sup\{a, b\}$.
+\end{theorem}
+\begin{proof}~\\
+  $\Longrightarrow a \le b \overset{def}{=} a \land b = a$. Формально проверяем
+  конструкцию.\\
+  $\Longleftarrow$ Определим $a \land b = \inf\{a, b\}, a \lor b =
+  \sup\{a, b\}$ и~снова всё проверим.
+\end{proof}
+
+Изоморфизм решёток:~$(L_1, \land_1, \lor_1) \overset{\alpha}{\cong} (L_2,
+\land_2, \lor_2)$. При этом~$\alpha$~--- биекция, сохраняет~$\land, \lor$.
+
+\begin{theorem}
+  $L_1 \overset{\alpha}{\cong} L_2$ тогда и~только тогда, когда $L_1
+  \overset{\alpha}{\sim} L_2$ и~$\alpha, \alpha^{-1}$~--- монотонные
+  отображения, то есть являются изоморфизмами упорядоченных множеств.
+\end{theorem}
+\begin{proof}~\\
+  $\Longrightarrow a \le_1 b \Rightarrow a = a \land_1 b \Rightarrow \alpha(a) =
+  \alpha(a \land_1 b) = \alpha(a) \land_2 \alpha(b) \Rightarrow \alpha(a) \le_2
+  \alpha(b)$. $\alpha^{-1}$~--- тоже изоморфизм.\\
+  $\Longleftarrow$ Хотим: $\alpha(a \lor_1 b) = \alpha(a) \lor_2 \alpha(b)$.
+  Пишем: $a \le_1 a \lor_1 b, b \le_1 a \lor_1 b \Rightarrow \alpha(a),
+  \alpha(b) \le_2 \alpha(a \lor_1 b)$, то есть верхняя грань. $\alpha(a) \le_2
+  c, \alpha(b) \le_2 c \Rightarrow a \le_1 \alpha^{-1}(c), b \le_1
+  \alpha^{-1}(c) \Rightarrow \alpha(a \lor_1 b) \le_2 c$, что и~нужно.
+\end{proof}
+
+(Изомофрное) \emph{вложение} $\eta: \mathcal{L}_1 \rightarrow \mathcal{L}_2$,
+причём $\eta$ сохраняет порядок и~инъективно.
+\emph{Подрешётка}~--- когда носители вложены, причем $\eta = id_{L_1}: L_1
+\rightarrow L_2$~--- вложение (NB: подмодель $\ne$ подрешётка).
+
+\section*{31.10.2015}
+
+Давайте посмотрим на~$\emph{дистрибутивные решётки}$. Это вот такие:
+\begin{gather*}
+D\land: x \land (y \lor z) = (x \land y) \lor (x \land z),\\
+D\lor: x \lor (y \land z) = (x \lor y) \land (x \lor z).
+\end{gather*}
+
+\begin{theorem}
+Достаточно любого из свойств выше.
+\end{theorem}
+
+Ещё бывают $\emph{модулярные решётки}$:
+$$ M: x \le y \Rightarrow x \lor (y \land z) = y \land (x \lor z). $$
+
+\begin{theorem}
+  Любая дистрибутивная решётка модулярна.
+\end{theorem}
+
+Решётка~$M_5$ ($d \rightarrow a, b, c \rightarrow e$) недистрибутивна.
+Решётка~$N_5$ ($d \rightarrow (a \rightarrow b), c \rightarrow e$) даже не
+модулярна. В~некотром смысле она внезапно оказывается единственной немодулярной.
+
+\begin{claim}
+  $L \models x \le y \Rightarrow L \models x \lor (y \land z) \le y \land (x
+  \lor z)$.
+\end{claim}
+
+\begin{theorem}[Дедекинд]
+  $L \not\models M \Longleftrightarrow N_5$ вкладывается в~$L$.
+\end{theorem}
+\begin{proof}
+  В~одну сторону проверено. Если решётка не модулярна, то есть~$a, b, c, a \le
+  b: \underbrace{a \lor (b \land c)}_{a_1} < \underbrace{b \land (a \lor
+  c)}_{b_1}$. Можно убедиться, что элементы~$a_1 \land c \rightarrow (a_1
+  \rightarrow b_1), c \rightarrow a_1 \lor c$ образуют~$N_5$.
+  Придётся попотеть, доказать все неравенства, а~ещё нужно, чтобы никакие два
+  не совпадали.
+\end{proof}
+
+\begin{theorem}[Биркгоф]
+  $L \not\models D\land \Longleftrightarrow N_5$ или~$M_5$ вкладывается в~$L$.
+\end{theorem}
+\begin{proof}
+  В~одну сторону снова ясно. Если решётка не дистрибутивна, то~$\exists a, b, c:
+  a \land (b \lor c) > (a \land b) \lor (a \land c)$, ибо нестрогое неравенство
+  выполнено в~любой решётке, а~равенства нет. Тогда скажем, что
+  \begin{gather*}
+    d = (a \land b) \lor (a \land c) \lor (b \land c),\\
+    e = (a \lor b) \land (a \lor c) \land (b \lor c),\\
+    a_1 = (a \land e) \lor d,\\
+    b_1 = (b \land e) \lor d,\\
+    c_1 = (c \land e) \lor d.
+  \end{gather*}
+  Аккуратно проверим и~получим~$d \rightarrow a_1, b_1, c_1 \rightarrow e$
+  изоморфно~$M_5$.
+\end{proof}
+
+\section*{07.11.2015}
+
+Упорядоченное множество \emph{полно}, если у~любого подмножества есть супремум
+и~инфимум. Решётка полна, если соответствующее упорядоченное множество полно.
+
+\begin{theorem}
+  Решётка полна тогда и~только тогда, когда у~любого подмножества существует
+  супремум.
+\end{theorem}
+\begin{proof}
+  Возьмем~$A$~--- множество нижних граней~$B$. У~него есть супремум, он будет
+  инфимумом~$B$.
+\end{proof}
+
+Рассмотрим~$Eq(A)$~--- множество всех отношений эквивалентности на~$A$.
+
+\begin{claim}
+  $(Eq(A), \subseteq)$~--- полная решётка.
+\end{claim}
+\begin{proof}
+  Легко показать, что~$\bigcap\limits_{i\in I}E_i = \bigwedge\limits_{i\in
+  I}E_i$. То есть инфимумом будет пересечение.
+\end{proof}
+
+$\bigvee\limits_{i \in I}E_i = \bigcup \left\{ E_{i_1} \circ \ldots \circ
+E_{i_k} \mid \left(i_1, \ldots, i_k\right) \in I^k, k \in \mathbb{N}
+\right\}$, где~$\circ$ есть композиция отношений.
+
+$C$~--- \emph{оператор замыкания}, если выпонены
+\begin{itemize}
+  \item[C1.] $X \subset C(X)$.
+  \item[C2.] $C(C(X)) = C(X)$.
+  \item[C3.] $X \subset Y \Rightarrow C(X) \subset C(Y)$.
+\end{itemize}
+
+Пример~--- замкнутые классы булевых функций, дедуктивное замыкание: $C(\Gamma) =
+\{ \phi \in Formulas \mid \Gamma \vdash \phi\}$.
+
+Есть ещё четвертое свойтсво (не входит в~определение): $C(X) = \bigcup\{C(Y)
+\mid Y \overset{(fin)}\subset X\}$. Обратное включение верно всегда. Прямое
+можно вывести из теоремы о~полноте, если она есть.
+
+Закнутое множество совпадает со своим замыканием. Пересечение замыканий равно
+замыканию пересечений. То есть замкнутые множества образуют полную решётку.
+Следствие: множество замкнутых классов булевых функций образует полную решётку
+(решётку Поста).
+
+\begin{theorem}
+  Любая полная решётка~$\mathcal{L} = (L, \le)$ изоморфна решётке~$(L_c,
+  \subset)$ для некоторого оператора замыкания~$C$.
+\end{theorem}
+\begin{proof}
+  $X \subset L, C(X) = \left\{ a \in L \mid a \le \bigvee X \right\}$. Тогда
+  элементу~$a$ сопоставим замкнутый класс $\{b \in L \mid b \le a\}$.
+\end{proof}
+
+$a \in L$ \emph{компактен}, если $\forall A \subset L (\exists \vee A, a \le
+\vee A \Rightarrow \exists A' \overset{fin} \subset A: a \le \vee A' \}$.
+
+$b$ компактно порождённый, если $\exists C \subset L, b = \vee C, \forall x \in
+C, x$~--- компактен.
+
+Решётка~$L$~--- алгебраическая, если она полна и~любой её элемент компактно
+порождён.
+
+В~частности, конечная решётка алгебраическая и~решётка всех подмножеств
+алгебраическая (компакты в~ней это в~точности конечные подмножества).
+
+\section*{14.11.2015}
+
+Замыкание: $C: P(A) \rightarrow P(A)$.
+$$ (C4)~\forall X \subseteq A \rightarrow C(X) = \bigcup \{ C(Y) \mid Y
+\overset{f} \subseteq X \} $$
+
+(C1)~--- (C4) дают \emph{алгебраичность} оператора замыкания.
+
+\begin{theorem}
+  Если $C$~--- алгебраический оператор замыкания, то $(L_c = \{ X \subseteq A
+  \mid X = C(X) \}, \subseteq)$ есть алгебраическая решётка, причём элементы
+  есть в~точности $C(X)$, где~$X$~--- конечно.
+\end{theorem}
+\begin{proof}
+  Пусть $X \overset{f}\subseteq A$, тогда докажем, что~$C(X)$ компактно:
+  \begin{gather*}
+    X = \{x_1, \ldots, x_k \}, X \subseteq C(X) \subseteq \bigvee\limits_{i\in
+    I} C(A_i) = C(\bigcup\limits_{i\in I}A_i),\\
+    \forall x_k \in X \rightarrow x_k \in C(A_{i_1} \cup \ldots \cup
+    A_{i_{s_k}}),\\
+    X \subset \bigcup\limits_{1 \le k \le n} C(A_{i_1} \cup \ldots
+    \cup A_{i_{s_k}}),\\
+    C(X) \subset C(\bigcup\limits_{1 \le k \le n} C(A_{i_1} \cup \ldots
+    \cup A_{i_{s_k}})).
+  \end{gather*}
+
+  Далее, (C4): $C(X) = \bigcup\{C(Z) \mid Z \overset{f}\subseteq X\} \subseteq
+  C(\bigcup\limits_{Z\overset{f}\subseteq X} C(Z)) \subset \bigvee\limits_{Z
+  \overset{f}\subseteq X} C(Z) \subseteq C(\bigcup_f C(Z)) \subseteq C(\bigcup_f
+  Z).$
+
+  Алгебраичность: $C(X) \subseteq\{ C(Y) \mid Y \overset{f}\subseteq X \}
+  \subseteq \bigvee\limits_{Y \overset{f}\subseteq X} C(Y) \subseteq C(X)$.
+\end{proof}
+
+\begin{theorem}
+  Пусть~$L$~--- алгебраическая решётка. Тогда~$L \cong L_C$ для некоторго
+  алгебрическаого оператора замыкания~$C$.
+\end{theorem}
+\begin{proof}
+  Пусть~$A$~--- множество компактных элементов~$X \subseteq A$ решётки~$L$,
+  а~$C(X)$ задано как~$C(X) = \{ b \in A \mid b \le \bigvee X \}$.
+
+  Проверяем все свойства оператора замыкания и~отображаем элемент~$a \mapsto \{
+  b \in A \mid b \le a \}$, то есть во множество компактов, которые его не
+  превосходят.
+\end{proof}
+
+Рассмотрим структуру~$\mathcal{A} = (A \ne \varnothing, \mathcal{F})$, притом
+$\forall f \in \mathcal{F} \rightarrow \exists n \in \mathbb{N}~f: A^n
+\rightarrow A$. Это, собственно, алгебра.
+
+Решётка~--- булева алгебра с~двумя функциями. Булева алгебра~--- дистрибутивная
+решётка, в~которой есть~$0, 1$, с~тождетсвами~$x \land 0 = 0, x \lor 1 = 1, x
+\land x' = 0, x \lor x' = 1$ (из этого всё выводится).
+
+\end{document}

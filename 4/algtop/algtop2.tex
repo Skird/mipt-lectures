@@ -1,0 +1,145 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 2. }
+\addcontentsline{toc}{section}{Лекция 2. }
+
+\resetcntrs
+
+\section{Поднятие}
+
+\begin{lemma}[О~поднятии]
+	Для любого пути в~базе $\phi: [0; 1] \rightarrow B$ и~$v_0 \in
+	\pi^{-1}(\phi(0))$ существует единственный путь-поднятие:
+	$\overline{\phi}_v: [0; 1] \rightarrow E: \overline{\phi}_v(0) = v$
+	и~$\phi = \pi \circ \overline{\phi}_v$.
+\end{lemma}
+
+\begin{proof}
+	Для каждой точки отрезка $\forall t \in [0; 1]\ \exists U_t$~--- окрестность
+	точки~$t$ с~таким свойством, что $\phi(U_t) \subset U(\phi(t))$,
+	где~$U(\phi(t))$~--- тривиализующая окретсность: $\pi^{-1}(U(\phi(t)))
+	\overset{k}\rightarrow U(\phi(t)) \times F$.
+
+	В~силу компактности отрезка выберем конечное подпокрытие: $\exists t_0,
+	\ldots, t_N: [0; 1] = \bigcup\limits_{j=0}^{N} U_{t_j}$. Более того, сузим все
+	интервалы до отрезков, граничащих по концам: $[0; 1] =
+	\bigcup\limits_{j=0}^{N-1} [t_j; t_{j+1}]$.
+
+	Для каждого~$j\ \exists U_j \subset B: \phi([t_j; t_{j+1}]) \subset U_j, k_j:
+	\pi^{-1}(U_j) \rightarrow U_j \times F$ (при этом $\pi = k_j \circ p_1$).
+
+	Поднятие тогда определим так: $\overline{\phi} = k_j^{-1}(\phi(t), p_2 \circ
+	k(\overline\phi(t_j))$. Это отображение непрерывно, так как непрерывно на
+	каждом из замкнутых множеств, которые разбивают весь отрезок.
+
+	$\pi \circ \overline\phi(t) = \pi(k^{-1}(\phi(t), \ldots)) = p_1(\phi(t),
+	\ldots) = \phi(t)$.
+
+	Единственность покажем по индукции: если $\overline\phi'$ тоже поднятие и~оно
+	совпадает на нескольких первых отрезках, нужно показать, что оно совпадает
+	и~на следующем.
+\end{proof}
+\begin{definition}[Действие фундаментальной группы]
+	Действие группы~$\pi_1(B, b_0)$ на множестве~$\pi^{-1}(b_0)$ определим
+	формулой $\psi: \pi_1(B, b_0) \rightarrow S(\pi^{-1}(b_0)), \psi([\phi])(v) =
+	\overline\phi_v(1)$.
+\end{definition}
+
+\begin{claim}
+	$\overline{(\phi_1 \phi_2)} = \overline\phi_{1,v_1} \overline\phi_{2,v_0}$,
+	где~$v_1 = \overline\phi_{2,v_0}(1)$.
+\end{claim}
+\begin{proof}
+	Отображение является поднятием какого-то пути, если удовлетворяет двум
+	свойствам из определения. Первое свойство очевидно, второе: $\pi \circ
+	(\overline\phi_{1,v_1}\overline\phi_{2,v_0} = \phi_2$ при $t \in [0;
+	\frac{1}{2})$ и~$\phi_1(2t+1)$ иначе.
+\end{proof}
+
+Корректность определения:
+\begin{itemize}
+	\item Гомоморфизм: $\psi([\phi_1][\phi_2])(v) = \psi([\phi_1 \phi_2])(v) =
+		\overline{(\phi_1 \phi_2)}_v(1) = \overline\phi_{1,v_1}
+		\overline\phi_{2,v}(1) = \overline\phi_{1,v_1}(1) =
+		\psi([\phi_1])(\overline\phi_{2,v}(1)) = \psi([\phi_1]) \circ
+		\psi([\phi_2])(v)$ где, $v_1 = \overline\phi_{2,v}$
+	\item Биективность: обратным будет отображение $\psi([\phi^{-1}])$.
+	\item Если $[\phi_1] = [\phi_2]$, то $\overline\phi_{1,v}(1) =
+		\overline\phi_{2,v}(1)$ (упражнение).
+\end{itemize}
+
+\section{Группа монодромии}
+
+\begin{definition}[Группа монодромии]
+	Группа монодромии~$G_{b_0}$ накрытия~$\pi: E \rightarrow B \ni b_0$~--- это
+	образ $\psi(\pi_1(B, b_0))$.
+\end{definition}
+
+\begin{example}
+	У~накрытия $\exp: \mathbb{R} \rightarrow S^1$ выполнено $\psi([\phi])(v) =
+	v + 1$, то есть $G_{b_0} \cong \mathbb{Z} \cong \pi(B, b_0)$.
+\end{example}
+
+\begin{example}
+	У~тривиального накрытия группа монодромии тривиальна, в~то время, как
+	фундаментальная группа $\pi_1(B, b_0)$ может быть нетривиальна, то есть нельзя
+	сказать, что $\psi$~--- изоморфизм.
+\end{example}
+
+\begin{example}
+	У~накрытия $P_k: S^1 \rightarrow S^1, P_k(e^{2\pi it}) = e^{2\pi ikt}$
+	выполнено $\psi([\phi])(v) = v e^{\frac{2\pi it}{k}}$, то есть $G_{b_0} \cong
+	\mathbb{Z}_k$.
+\end{example}
+
+\begin{definition}[Изоморфизм накрытий]
+	Накрытия~$\pi_i: E_i \rightarrow B_i$, $i \in \{0, 1\}$ изоморфны, если
+	существует гомеоморфизмы~$f: E_1 \leftrightarrow E_2, g: B_1 \leftrightarrow
+	B_2$, такие что~$\pi_2 \circ f \cong g \circ \pi_1$.
+\end{definition}
+
+\begin{remark}[Связь группы монодромии с~фундаментальной группой]
+	Если $\phi: [0; 1] \rightarrow B, \phi(0) = b_0, \phi(1) = b_1$, то $G_{b_0}
+	\cong G_{b_1}$.
+\end{remark}
+\begin{remark}[Изоморфизм групп монодромии]
+	Если два накрытия изоморфны, то $G_{b_1} \cong G_{g(b_1)}$.
+\end{remark}
+\begin{proof}
+	Рассмотрим два построения.
+
+	Рассмотрим $[\phi] \in \pi_1(b_1, b_0)$ и~$[g(\phi)] \in \pi_1(B_2, b_2)$.
+	Отображение определим как	$h: G_{b_1} \rightarrow G_{g(b_1)}, h(\psi([\phi]) =
+	\psi(g_\ast([\phi]))$, где $g_\ast$~--- индуцированное отображением $g$
+	отображение фундаментальных групп. Нужно показать, что если $[\phi_1] \ne
+	[\phi_2]$, то $\psi([\phi_1]) \ne \psi([\phi_2])$.
+
+	Пусть $\sigma \in G_{b_1} \subset S(\pi^{-1}(b_1))$. Определим отображение
+	$h(\sigma)(v) = f(\sigma(f^{-1}(v)))$. Нужно показать корректность: $h(\sigma)
+	\in G_{b_2}$.
+
+	Если покажем, что эти построения это на самом деле одно и~то же, то оба будут
+	корректны.
+
+	Утверждается, что $\psi([g(\phi)])(v) = \overline{g(\phi)}_v(1) =
+	f(\overline\phi_{f^{-1}(v)})(1)$. Для этого надо проверить свойства:
+	1) $f(\overline\phi_{f^{-1}(v)})(0) = f(f^{-1}(v)) = v$; 2)
+	$\pi_2(f(\overline\phi_{f^{-1}(v)})) = g(\pi_1(\overline\phi_{f^{-1}(v)})) =
+	g(\phi)$.
+
+	Тогда $\psi([g(\phi)]) = f(\overline\phi_{f^{-1}(v)})(1) =
+	f(\psi([\phi])(f^{-1}(v))) = f(\sigma(f^{-1}(v)))$, что нам и~надо.
+\end{proof}
+\begin{remark}[Гомоморфизм накрытий]
+	Эти рассуждения работают, если $f, g$~--- непрерывные отображения, такие что
+	$\pi_2 \circ f = g \circ \pi_1$, а~также, что $f\mid_{P_i}$~--- биекция, где
+	$P_i$~--- это $i$-й слой накрытия. В~этом случае не факт, что индуцированное
+	отображение является изоморфизмом.
+
+	Такие $f, g$ задают так называемый гомоморфизм накрытий.
+\end{remark}
+
+\end{document}

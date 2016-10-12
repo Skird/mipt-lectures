@@ -1,0 +1,64 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 3. Преоразование Фурье}
+\addcontentsline{toc}{section}{Лекция 3. Преоразование Фурье}
+\resetcntrs
+
+\section{Общая конструкция преобразования Фурье}
+
+Пусть есть топологическая группа~$G$. Определелим характер~$\gamma \in Hom(G,
+S^1), S^1 = \{\lambda \in \mathbb{C} : |\lambda| = 1\})$, притом потребуем того,
+что $\gamma$~--- непрерывен.
+
+\begin{definition}
+	Дуальная группа~$\hat G = \{\gamma\}$ определена поточечным умножением
+	характеров.
+\end{definition}
+
+\begin{theorem}[Понтрягина о~двойственности]
+Если $G$~--- абелева топологическая группа, тогда $\hat{\hat{G}} = G$.
+
+При этом, если~$G$~--- компактна, то $\hat G$~--- дискретна. Если $G$~---
+дискретна, то $\hat G$~--- компактна.
+\end{theorem}
+
+Топологические группы с~нестандартной топологией могут быть представлены как
+стандратные топологии на смежных классах $G/H, H < G$.
+
+\begin{exercise}
+	Можно ли придумать нестандартную топологию на конечной группе, которая не
+	встречатеся среди стандартных групповых топологий?
+\end{exercise}
+
+\begin{definition}
+	Преобразование Фурье: $F: f(x) \mapsto \hat f(\gamma) = \int\limits_G
+	f(x)\overline{\gamma(x)} d\mu$, где $\mu$~--- левая мера Хаара.
+\end{definition}
+
+Характеры $\mathbb{R}: \gamma_t(x) = \exp(2\pi itx), t \in \mathbb{R}$,
+$\hat{\mathbb{R}} = \mathbb{R}$. Преобразование Фурье выглядит так:
+$\hat f(t) = \int\limits_{-\infty}^{\infty} f(x) \exp(-2\pi itx) dx$.
+
+Тор $\mathbb{T} = \mathbb{R} / \mathbb{Z}$, его характеры $\gamma_t = \exp(2\pi
+itx), t \in \mathbb{Z}$, дуальная группа $\hat{\mathbb{T}} = \mathbb{Z}$.
+Преобразование Фурье: $\hat f(j) = \int\limits_0^1 f(x) \exp(-2\pi ijx) dx$.
+
+Соответственно $\hat{\mathbb{Z}} = \mathbb{T}$, так как достаточно задать
+$\gamma(1) = \exp(2\pi i\alpha)$.
+
+Для $\mathbb{Z}_n = \mathbb{Z} / n\mathbb{Z}$ характеры такие: $\gamma_j(x) =
+\exp(2\pi i \frac{jx}{n})$, $\hat f(j) = \sum\limits_{x=0}^{n-1} f(x) \exp(-2\pi
+i \frac{jx}{n})$.
+
+\begin{exercise}
+	Топология на $\mathbb{Z}_{(2)}$~--- односторонние двоичные последовательности
+	со сложением. Проверить, что это компактная группа.
+\end{exercise}
+\begin{exercise}
+	Преобразование Фурье на~$\mathbb{Z}_2^n$.
+\end{exercise}
+
+\end{document}

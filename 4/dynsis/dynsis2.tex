@@ -1,0 +1,117 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 2. Эргодическая теорема I}
+\addcontentsline{toc}{section}{Лекция 2. Эргодическая теорема II}
+\resetcntrs
+
+\section{Эргодические системы, теорема Биркгофа-Хинчина}
+
+Рассматриваются системы вида $(G, (X, \mathcal{B}, \mu), T^t)$, с~конечной
+мерой~$\mu(X) = 1$. Ограничимся также только дискретным временем $\mathbb{Z}$.
+
+\begin{definition}
+	$T$ называется \emph{эргодическим}, если $\forall A \in \mathcal{B}:
+	0 < \mu(A) < \mu(X), TA \ne A \pmod 0$.
+\end{definition}
+
+Это значит, что в~$X$ нет разбиения на два инвариантных множества~$A, B$
+ненулевой меры. Действие называется эргодическим, если $T^t$ эргодчино для
+любого $t$.
+
+\begin{theorem}[Эргодическая теорема Биркгофа-Хинчина]
+	Если $T$~--- эргодическое, то $\underset{\text{п.н.}}{\forall} x \in X,
+	\text{ограниченной измеримой } f \in L^\infty(X)$ выполнено
+	$$\frac{1}{n} \sum\limits_0^{n-1} f(T^kx) \rightarrow const = \int\limits_X f
+	d\mu$$
+\end{theorem}
+
+\begin{definition}
+	$T$ называется \emph{перемешивающим} ($T \in Mix$), если $$\forall A, B \in
+	\mathcal{B}: \mu(T^k A \cap B) \rightarrow \mu(A)\mu(B)$$.
+\end{definition}
+
+\begin{definition}
+	$T$ называется \emph{слабо перемешивающим} ($T \in WMix$), если $$\forall A, B
+	\in \mathcal{B}\,\exists \{k_j\}_1^\infty : \mu(T^k_j A \cap B) \rightarrow
+	\mu(A)\mu(B)$$.
+\end{definition}
+
+\section{Оператор Купмана}
+
+\begin{definition}
+	Оператор Купмана $\hat T: f(x) \mapsto f(Tx)$.
+\end{definition}
+
+Для недискретного времени это будет представлением группы времени. Изучение
+свойств этого линейного оператора приводит к~так называемой спектральной теории.
+
+\begin{remark}
+	Можно переформулировать все три данных определения:
+	\begin{itemize}
+		\item Эргодичность: $\hat T f_0 = f_0 \Rightarrow f_0 = const$.
+		\item Перемешивание: $\left<T^k f, g\right> \rightarrow 0$, $\int f d\mu =
+			\int g d\mu = 0$. Иначе, $\hat T^k \underset{w}{\rightarrow} \Theta =
+			P_{\{const\}}$ (ортопроектор на константу).
+		\item $WCl(\{\hat T^k\}) \ni \Theta$.
+	\end{itemize}
+\end{remark}
+
+\begin{theorem}
+	$T \in Mix \Rightarrow T$~--- эргодическое.
+\end{theorem}
+\begin{proof}
+	От противного: пусть $\exists \xi \ne const \hat T \xi = \xi$.
+	$\xi_0 = \xi - \Theta \xi = \xi - \mathbb{E}\xi = \xi - \overline{\xi}$
+	($\Theta: f(x) \mapsto (x \rightarrow \int f d\mu)$. Обозначение $\Theta$
+	похоже на 0, неслучайно: $\Theta A = A \Theta = \Theta$).
+
+	$\Theta \xi_0 = 0, \int \xi_0 d\mu = 0, \xi_0 \ne const$.
+	$\left< T^k \xi_0, \xi_0 \right> \rightarrow 0$, но $\left< T^k \xi_0, \xi_0
+	\right> = \left< \xi_0, \xi_0 \right> > 0$, противоречие.
+\end{proof}
+
+\section{Семинарская часть}
+
+\begin{exercise}
+	Показать, что $[0; 1] \cong [0; 1] \times [0; 1]$ как пространства с~мерой, то
+	есть построить измеримую биекцию, сохраняющую меру.
+\end{exercise}
+\begin{definition}
+	Преобразование пекаря: $A\mid B \rightarrow \frac{B}{A}$.
+\end{definition}
+
+Формула для преобразования пекаря в~двоичном коде очень простая: $\ldots y_2
+y_1 x_1 x_2 \ldots \Rightarrow \ldots y_2 y_1 x_1 x_2 x_3 \ldots$, почти как
+левый сдвиг для случайных процессов.
+
+\begin{definition}
+	Подкова Смейла: $(x, y) \mapsto (\frac{x}{3}, 3y) \pmod 1$.
+\end{definition}
+
+\begin{definition}
+	Сдвиг Бернулли: $\mathbb{A} = \{0, 1\}, p = (p_0, p_1), p_0 + p_1 = 1$.
+	$\Sigma_2 = \mathbb{A}^\mathbb{Z} = \{ x : \mathbb{Z} \rightarrow \mathbb{A}
+	\}$. Тогда для слова $w$: $P([w]) = p_0^{\text{\#нулей в~w}}
+	p_1^{\text{\#единиц в~w}}$.
+\end{definition}
+
+\begin{exercise}
+	Найти инвариантное множество для подковы Смейла.
+	Показать, что канторовское множество изоморфно $[0; 1]$ как пространство
+	с~мерой.
+\end{exercise}
+
+\begin{exercise}
+	Попробовать устранить <<негладкость>> преобразования пекаря и~<<сингулярность
+	подковы Смейла>>.
+\end{exercise}
+
+\begin{exercise}[$\star\star$]
+	$T \in Mix \Leftrightarrow \forall A \in \mathcal{B} \rightarrow
+	\mu(T^k A \cap A) \rightarrow \mu(A)^2$.
+\end{exercise}
+
+\end{document}

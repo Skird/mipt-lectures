@@ -1,0 +1,119 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 4. Амплификация}
+\addcontentsline{toc}{section}{Лекция 4. Амплификация}
+\resetcntrs
+
+\section{Простые техники амплификации}
+
+Хотим в~\textbf{RP} уменьшить ошибку с~$\frac{1}{2}$ до~$\frac{1}{2^k}$.
+Стандартный метод: повторить~$k$ раз с~новыми случайными битами: время
+увеличится в~$k$ раз, случайных битов нужно $mk$ вместо $m$.
+
+Техника попарной независимости: время увеличено в~$2^k$ раз, но требуется $m +
+k$ случайных битов.
+
+\begin{claim}
+	Пусть $X_1, \ldots, X_t$~--- попарно независимые СВ со значениями
+	в~$\{0, 1\}$. $X = \frac{1}{t} \sum X_i$, $EX = \mu = \frac{1}{t} \sum \mu_i$.
+	Тогда $P(|X - \mu| > \eps) < \frac{1}{t\eps^2}$.
+\end{claim}
+\begin{proof}
+	$DX = E(X - \mu)^2 = \frac{1}{t^2} \left(\sum\limits_{i\ne j} cov(X_i, X_j)
+	+ \sum DX_i \le \frac{1}{t}\right)$, значит по неравенству Чебышева
+	утверждение доказано.
+\end{proof}
+
+\section{Амплификация экспандерами}
+
+Экспандеры: время увеличино в~$k$ раз, требуется в~$mk$ случайных битов.
+
+Идея: возьмём экспандер, в~нём случайную вершину, запустим случайное блуждание
+длины~$t$ и~все вершины по дороге используем в~качестве случайных битов для
+алгоритма.
+
+Нужно показать, что для люого множества вершин, доля которого~$\le \frac{1}{2}$,
+вероятность того, что всё блуждание останется внутри этого множества, будет
+эскпоненциально малой.
+
+\begin{theorem}
+	Пусть~$G$~--- $d$-регулярный экспандер с~параметром $\lambda = 1 - \gamma$. $B
+	\subset V(G), \frac{|B|}{|V(G)|} = \mu$. $v_1, \ldots, v_t$~--- случайное
+	блуждание со стартом в~начальной вершине.
+
+	Тогда $P(\forall i v_i \in B) \le (\mu + \lambda(1 - \mu))^t$.
+\end{theorem}
+\begin{proof}
+	Будем считать, что любой вектор разложен на компоненты $v = v^\Vert + v^\bot,
+	v^\Vert = \frac{\left<u, v\right>}{\left<u, u\right>}u, u = (\frac{1}{n},
+	\ldots, \frac{1}{n}), v^\bot = v - v^\Vert$.
+
+	Пусть~$M$~--- матрица блуждания. $vM = (v^\Vert + v^\bot) = v^\Vert M + v^\bot
+	M = v^\Vert + v^\bot M$. Однако, $\left\Vert v^\bot M \right\Vert \le \lambda
+	\left\Vert v^\bot \right\Vert$. Отметим, что для распределения вероятностей
+	очевидно $v^\Vert = u$.
+
+	Также рассмотрим матричное разложение: $vM = v^\Vert + v^\bot = \gamma v^\Vert
+	+ (\lambda v^\Vert + v^\bot M) = \gamma v J + \lambda v E = v(\gamma J +
+	\lambda E)$, где $J = \frac{1}{N} (1, \ldots, 1)^T (1, \ldots, 1)$~--- матрица
+	из единиц.
+
+	$vJ = v^\Vert, v^\Vert J = v^\Vert, v^\bot J = 0$. $E$ определена как
+	остаточная матрица и~мы будем показывать про нее, что $\Vert vE \Vert \le
+	\Vert v \Vert$.
+
+	\begin{claim}
+		Граф~--- экспандер с~параметром~$\lambda \Leftrightarrow M = \gamma J +
+		\lambda E, \Vert E \Vert \le 1$.
+	\end{claim}
+	\begin{proof}
+		$E = \frac{M - \gamma J}{\lambda}$. $uE = \frac{uM - \gamma uJ}{\lambda} =
+		\frac{u(1 - \gamma)}{\lambda} = u$.
+
+		Если $v \bot u$, то $vE = \frac{v^\bot - \gamma v^\bot J}{\lambda} =
+		\frac{1}{\lambda} v^\bot M \Rightarrow \Vert v^\bot E \Vert =
+		\frac{1}{\lambda} \Vert v^\bot M \Vert \le \Vert v^\bot \Vert$.
+	\end{proof}
+
+	Пусть $P = \text{diag}\{ \chi_B(i) \}, P(i, j) = I(i = j, i \in B)$. Тогда
+	$P(v \in B) = |\pi P|_1$.
+
+	\begin{claim}
+		$P(v_1, \ldots, v_t \in B) = |u P(MP)^{t-1}|_1$.
+	\end{claim}
+	\begin{proof}
+		Более того, $P(v_1, \ldots, v_{l+1} \in B, v_{l + 1} = i) =
+		(uP(MP)^{l})_i$. Докажем индукцией по~$l$:
+
+		База~$l = 0$ очевидна. Показываем переход: ясно, что $(uP(MP)^l \cdot M)_i =
+		P(v_1, \ldots v_{l+1} \in B, v_{l+2} = i)$. Если еще раз умножить на $P$, то
+		все координаты для $i \notin B$.
+	\end{proof}
+
+	$P^2 = P$, а~значит $uP(MP)^{t-1} = uP(PMP)^{t-1}$.
+
+	\begin{claim}
+		$\Vert PMP \Vert \le \mu + \lambda(1 - \mu)$.
+	\end{claim}
+	\begin{proof}
+		$\Vert PMP \Vert = \Vert P(\gamma J + \lambda E) P \Vert = \gamma \Vert PJP
+		\Vert + \lambda \Vert PEP \Vert \le \gamma \Vert PJP \Vert + \lambda$.
+
+		$xPJP = yJP = N(yu^T)(uP) = (\sum y_i) (uP), \Vert xPJP \Vert = (\sum y_i)
+		\Vert uP \Vert \le (\sqrt{\mu N} \Vert y \Vert) \sqrt{\frac{\mu}{N}} = \mu
+		\Vert y \Vert \le \mu \Vert x \Vert \Rightarrow \Vert PJP \Vert \le \mu$.
+
+		Итого, $\Vert PMP \Vert \le \gamma \mu + \lambda = \mu + \lambda(1 - \mu)$.
+	\end{proof}
+
+	Итого, $P(\forall i v_i \in B) \le |uP(MP)^{t-1}|_1 \le \sqrt{\mu N} \Vert
+	uP(PMP)^{t-1} \Vert = \sqrt{\muN} \Vert uP \Vert \Vert PMP \Vert^{t-1} \le \mu
+	(\mu + (1 - \mu)\lambda)^{t-1} < (\mu + (1 - \mu) \lambda)^t$.
+\end{proof}
+
+Для \textbf{BPP} применима аналогичная техника.
+
+\end{document}

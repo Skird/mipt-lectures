@@ -1,0 +1,91 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 4. Спектральная теорема}
+\addcontentsline{toc}{section}{Лекция 4. Спектральная теорема}
+\resetcntrs
+
+\section{Спектральная теорема}
+
+Перед тем, как сформулировать спектальную теорему, вспомним некотрорые факты:
+\begin{itemize}
+	\item Оператор Купмана~$\hat T^t$ унитарен.
+	\item Под гильбертовым пространством~$H$ понимаем линейное пространство
+		над~$\mathbb{C}$ с~эрмитовым скалряным произведением $\left< u, v \right>$,
+		полное относительно порождённой метрики.
+
+		Мы будем интересоваться как правило пространством~$H = L^2(X, \mathcal{B},
+		\mu) = \left\{f: \Vert f \Vert^2 = \int\limits_X |f|^2 d\mu < \infty
+		\right\} /_\sim$.
+	\item Циклическое пространство $Z(h) = \overline{Span}(\hat T^k h: k \in
+		\mathbb{Z})$~--- минимальное замкнутое инвариантное подпространство.
+\end{itemize}
+
+\begin{theorem}[Спектральная теорема для систем с~простым спектром]
+	Пусть есть унитарный оператор в~гильбертовом пространстве и~пусть $\exists h:
+	Z(h) = H$, тогда имеет место коммутативная диаграмма:
+
+	$$\begin{CD}
+	H           @>\hat T>>  H\\
+	@VV\psi V              @VV\psi V\\
+	H @> M_z: \phi(\lambda) \mapsto \lambda \phi(\lambda) >> L^2(S^1,\sigma_h)
+	\end{CD}$$
+
+	Где $\sigma_h: \left<\hat T^kh, h\right> = \int\limits_{S^1} z^k d\sigma_h$.
+
+	Притом, если есть циклический вектор~$h'$, то $\sigma_h \sim \sigma_{h'}$, где
+	$\hat T \sim \hat S = \Phi^{-1} \hat T \Phi \Leftrightarrow \sigma^{(\hat
+	T)}_h \sim \sigma^{(\hat S)}_h$, $\nu \sim \mu \Leftrightarrow \nu \ll \mu,
+	\mu \ll \nu$; $\nu \ll \mu: \nu = p(\lambda) \mu$.
+\end{theorem}
+
+Что такое кратность? Модельный пример~--- система из двух одинаковых маятников,
+независимо колеблющихся. Более формально,
+$H > L_1 \oplus \ldots L_m: \hat T\mid_{H_i} \sim \hat T\mid_{H_j}$.
+
+Общие спектральные инварианты: $([\sigma], \mathcal{M}(\lambda))$,
+$\mathcal{M}$~--- функция кратности, $\mathcal{M}: S^1 \rightarrow \mathbb{N}
+\sqcup \{\infty\}$.
+
+\section{Семинарская часть}
+
+$\begin{bmatrix}1 & 1\\ 1 & -1\end{bmatrix}$ имеет СЗ $\pm\sqrt{2}$. Спектр
+	этого оператора $\sigma = \frac{\delta_{-\sqrt{2}} + \delta_{\sqrt{2}}}{2}$.
+
+\begin{exercise}[$\ast$]
+	Придумать вектор: $h$, дающий такую $\sigma$.
+\end{exercise}
+
+$\Lambda = \{\pm \sqrt{2}\}, L^2(\Lambda, \sigma) = \{\phi: \Lambda \rightarrow
+\mathbb{C} \} \cong \mathbb{C}^2$. $M_\lambda(\phi) = \lambda \phi(\lambda)$.
+Если функцию $\phi$ представлять столбцом значений в~$\pm\sqrt{2}$, то
+$$M_\lambda(\begin{bmatrix}\phi(-\sqrt{2})\\ \phi(\sqrt{2})\end{bmatrix}) =
+\begin{bmatrix} -\sqrt{2}\phi(-\sqrt{2})\\ \sqrt{2}\phi(\sqrt{2}) \end{bmatrix}
+= \begin{bmatrix} -\sqrt{2} & 0\\ 0 & \sqrt{2}\end{bmatrix}
+	\begin{bmatrix}\phi(-\sqrt{2})\\ \phi(\sqrt{2})\end{bmatrix}$$.
+
+Рассмотрим теперь группу~$\mathbb{T} = \mathbb{R}^2 / \mathbb{Z}^2$.
+И~матрицу~$A(x, y) = \begin{bmatrix}2&1\\1&1\end{bmatrix}
+	\begin{bmatrix}x\\y\end{bmatrix}$
+
+Характеры тора (гомоморфизмы в~комплексную единичную окружность) выглядят так:
+$\gamma_{j,k}(x, y) = \exp(2\pi i(jx + ky))$. Возьмём один характер и~рассмотрим
+его динамику под действием оператора Купмана.
+
+Можно проверить, что $\gamma_{j_0,k_0}(A(x, y)) = \gamma_{A^T(j_0,k_0)}(x, y)$.
+Действие корректно задано на торе, если все элементы~$A$~--- целые. Оно
+обратимо, если обратная матрица тоже целочисленна, то есть $\det A = 1$.
+
+Орбиты этого действия на~$\mathbb{Z}^2$ получились гиперболами на
+соответствующих целых точках (плюс одна стационарная орбита). Спектральный тип
+этой системы получился~$(Leb, \infty)$.
+
+\begin{exercise}
+	Возмем последовательность характеров на одной гиперболе: $\xi_j: \hat A\xi_i =
+	\xi_{i+1}$. Посчитать $\sigma_{\xi_0}$ и~$\left<\hat A^k \xi_i, \xi_i
+	\right>$.
+\end{exercise}
+
+\end{document}

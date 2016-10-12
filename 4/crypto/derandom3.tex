@@ -1,0 +1,82 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 3. Вершинные экспандеры}
+\addcontentsline{toc}{section}{Лекция 3. Вершинные экспандеры}
+\resetcntrs
+
+\section{Экспандеры и~их спектральные свойства}
+
+Вершинный экспандер~--- двудольный граф, где любое не слишком большое
+подмножество левой доли ($\le \frac{n}{3}$) хорошо расширяется (хотя бы
+в~константу раз).
+
+\begin{claim}
+	Вершинный экспандер существует.
+\end{claim}
+
+По $D$-регулярному графу построим матрицу случайного блуждания
+$M = \frac{A}{D}$, где $A$~--- матрица смежности.
+
+\begin{itemize}
+	\item $u = (\frac{1}{N}, \ldots, \frac{1}{N})$~--- собственый с~$\lambda = 1$.
+	\item Все собственные значения $\le 1$ по модулю.
+	\item Граф несвязен $\Leftrightarrow \lambda = 1$ имеет кратность $> 1$.
+		В~одну сторону очевидно, в~другую нужно рассмотреть любой СВ, не
+		пропорциональный~$(1, \ldots, 1)$ и~взять максимальную компоненту
+		и~минимальную~--- это и~есть две компоненты связности.
+	\item Пусть граф связен, тогда $\lambda = -1$~--- СЗ $\Leftrightarrow$ граф
+		двудольный. В~одну сторону очевидно, в~другую нужно показать, что у~СВ с~СЗ
+		$\lambda = -1$ максимальная компонента равна минус минимальной, далее
+		аналогично предыдущему.
+\end{itemize}
+
+\begin{definition}
+	$\lambda(G) = \max\limits_\pi \frac{\left| \pi M - u\right|}{\left| \pi - u
+	\right|} = \max\limits_{x \bot u} \frac{|xM|}{|x|}$.
+\end{definition}
+
+\begin{claim}
+	$\lambda(G)$~--- модуль второго СЗ матрицы~$M$.
+\end{claim}
+\begin{proof}
+	$w = \alpha_2 v^2 + \ldots \alpha_n v^n \rightarrow wM = \alpha_2 \lambda_2
+	v^2 + \ldots + \alpha_n \lambda_n v^n$.
+
+	$|wM|^2 = \alpha_2^2 \lambda_2^2 + \ldots + \alpha_n^2 \lambda_n^2 \le
+	\lambda_2^2 (\alpha_2^2 + \ldots + \alpha_n^2) = \lambda_2^2 |w|^2$.
+\end{proof}
+
+$|\pi M^t - u| \le \alpha(G)^t |\pi - u| \le \lambda(G)^t$, то есть
+$\lambda(G)$~--- задает скорость сходимости распределения к~равномерному.
+
+Утверждается, что если граф связный и~не двудольный, то $\lambda(G) <
+1 - \frac{1}{N \cdot D \cdot \text{diam}(G)}$.
+
+\begin{theorem}
+	Если $\lambda(G) \le \lambda \Rightarrow \forall \alpha \rightarrow G$~---
+	$(\alpha N, \frac{1}{\alpha + (1 - \alpha) \lambda^2})$-экспандер
+\end{theorem}
+\begin{proof}
+	$CP(\pi) = |\pi|^2$~--- вероятность коллизии. $CP(\pi) = |\pi - u|^2 +
+	\frac{1}{N}$. $CP(\pi) \ge \frac{1}{|\text{Supp} \pi|}$ по КБШ.
+
+	$CP(\pi M) - \frac{1}{N} = |\pi M - u|^2 \le \lambda(G) |pi - u|^2 \le
+	\lambda^2 (CP(\pi) - \frac{1}{N})$. Если $\pi$~равномерное на $S$, то $CP(\pi)
+	= \frac{1}{|S|}$, а~$CP(\pi M) \ge \frac{1}{\text{Supp} \pi M} =
+	\frac{1}{|N(s)|}$.
+
+	Итого, $\frac{1}{|N(S)|} - \frac{1}{N} \le \lambda^2 (\frac{1}{|S|} -
+	\frac{1}{N})$, подставляя $|S| \le \alpha N, \frac{1}{N} \le
+	\frac{\alpha}{|S|}$, получаем требуемое.
+\end{proof}
+
+Спектральный разрыв: $\gamma(G) = 1 - \lambda(G)$.
+
+Известно, что если граф $D$-регулярный и~является $\left(\frac{N}{2}, 1 +
+\delta\right)$-экспандер, то $\gamma(G) =
+\Omega\left(\frac{\delta}{D}^2\right)$.
+
+\end{document}
