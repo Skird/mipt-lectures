@@ -1,0 +1,2494 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass amsart
+\begin_preamble
+\usepackage{datetime}
+\usepackage{cmap}
+\end_preamble
+\use_default_options true
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+theorems-ams-extended
+\end_modules
+\maintain_unincluded_children false
+\language russian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format pdf2
+\output_sync 0
+\bibtex_command default
+\index_command makeindex
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "Лекции по диофантовым приближениям, 3 семестр"
+\pdf_author "Иващенко Дмитрий"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref page
+\pdf_pdfusetitle true
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Предметный указатель
+\shortcut idx
+\color #008000
+\end_index
+\bottommargin 3cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+\paragraph_spacing single
+\noindent
+\begin_inset Formula $Диофантовы\ приближения$
+\end_inset
+
+, 3 семестр
+\end_layout
+
+\begin_layout Author
+Иващенко Дмитрий
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Boxed
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\noun on
+Disclaimer: these pages come with absolutely no warranty, use at your own
+ risk ;)
+\end_layout
+
+\begin_layout Plain Layout
+
+\noun on
+This work is licensed by WTFPL, you can redisribute it and/or it under the
+ term of 
+\begin_inset CommandInset href
+LatexCommand href
+name "Do What The Fuck You Want To Public License, version 2"
+target "http://www.wtfpl.net/txt/copying/"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Багрепорты, комментарии, предложения и прочее приветствуются посредством
+ 
+\begin_inset CommandInset href
+LatexCommand href
+name "vk.com/skird"
+target "https://vk.com/skird"
+
+\end_inset
+
+, а также 
+\begin_inset CommandInset href
+LatexCommand href
+name "e-mail"
+target "ivaschenko.dmitry@gmail.com"
+type "mailto:"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Последние изменения: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+today
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $\;$
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+currenttime
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Лекция 1.
+ Теорема Минковского и совместные приближения
+\end_layout
+
+\begin_layout Section
+Теорема Минковского о выпуклом теле
+\end_layout
+
+\begin_layout Theorem*
+Пусть 
+\begin_inset Formula $B\subset\mathbb{R}^{n}$
+\end_inset
+
+--- выпуклое центрально-симметричное тело объема 
+\begin_inset Formula $Vol\ \Omega>2^{n}$
+\end_inset
+
+, тогда 
+\begin_inset Formula $\Omega\cap\left(\mathbb{Z}^{n}\setminus\left\{ 0\right\} \right)\ne\varnothing$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Exercise*
+Показать, что выпуклое центрально-симметричное тело измеримо по Жордану.
+\end_layout
+
+\begin_layout Proof
+(Минковского)
+\end_layout
+
+\begin_deeper
+\begin_layout Lemma*
+(Блихфельдт) Пусть 
+\begin_inset Formula $B\subset\mathbb{R}^{n}$
+\end_inset
+
+, 
+\begin_inset Formula $Vol\ B>1$
+\end_inset
+
+, тогда 
+\begin_inset Formula $\exists x,y\in B,\ y\ne x:\ x-y\in\mathbb{Z}^{n}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Для простоты положим, что 
+\begin_inset Formula $B$
+\end_inset
+
+ --- ограничено (иначе нам нужна счетно-аддитивная мера).
+ Рассмотрим разбиение 
+\begin_inset Formula $B$
+\end_inset
+
+: 
+\begin_inset Formula $B=\underset{i=1}{\overset{k}{\bigsqcup}}B\cap E_{i}$
+\end_inset
+
+, где 
+\begin_inset Formula $E_{i}=\left[a_{i,1};a_{i,1}+1\right)\times\ldots\times\left[a_{i,n};a_{i,n}+1\right),\ a_{i,j}\in\mathbb{Z}$
+\end_inset
+
+.
+ Каждое из множеств сдвинем переносом на целочисленный вектор 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ в куб 
+\begin_inset Formula $\left[0;1\right)^{n}$
+\end_inset
+
+.
+ Если все 
+\begin_inset Formula $E_{i}-v_{i}$
+\end_inset
+
+ не пересекаются, то 
+\begin_inset Formula $\mu\left[0;1\right)^{n}\ge\underset{i=1}{\overset{k}{\sum}}\mu E_{i}=Vol\ B>1$
+\end_inset
+
+, противоречие, значит 
+\begin_inset Formula 
+\begin{multline*}
+\exists1\le i<j\le k:\ p\in\left(E_{i}-v_{i}\right)\cap\left(E_{j}-v_{j}\right)\Rightarrow\\
+\Rightarrow\exists x\in E_{i},\ y\in E_{j}:\ x-v_{i}=y-v_{j}\Rightarrow x-y=\left(v_{i}-v_{j}\right)\in\mathbb{Z}^{n}
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Теперь легко доказать утверждение теоремы: положим 
+\begin_inset Formula $B=\frac{1}{2}\Omega$
+\end_inset
+
+, тогда 
+\begin_inset Formula $Vol\ B>1$
+\end_inset
+
+.
+ По лемме 
+\begin_inset Formula $\exists x\ne y\in B,\ x-y\in\mathbb{Z}^{n}$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\left\{ 2x,2y,-2x,-2y\right\} \in\Omega$
+\end_inset
+
+ (т.к.
+ оно центрально-симметрично).
+ Тогда 
+\begin_inset Formula $\frac{2x-2y}{2}\in\Omega$
+\end_inset
+
+ как середина отрезка 
+\begin_inset Formula $\left(2x;-2\cdot y\right)$
+\end_inset
+
+, а значит 
+\begin_inset Formula $\mathbb{Z}_{n}\ni\left(x-y\right)\in\Omega$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Proof
+(Морделло)
+\end_layout
+
+\begin_layout Proof
+Снова действуем в предположении ограниченности.
+ Рассмотрим характеристическую функцию 
+\begin_inset Formula $\Omega$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\chi_{\Omega}(x)=\begin{cases}
+1, & x\in\Omega\\
+0, & x\notin\Omega
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Поскольку 
+\begin_inset Formula $B$
+\end_inset
+
+ --- измеримо, то существует интеграл
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\underset{\mathbb{R}^{n}}{\dotsint}\chi_{\Omega}(x)\cdot dx_{1}\cdot\ldots\cdot dx_{n}=Vol\ \Omega
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Тогда составим сумму Римана по сетке с шагом 
+\begin_inset Formula $\frac{1}{q}$
+\end_inset
+
+, где 
+\begin_inset Formula $q\in\mathbb{N}$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula 
+\begin{gather*}
+\exists q:\ \frac{1}{q^{n}}\underset{x\in\mathbb{Z}^{n}}{\sum}\chi_{\Omega}\left(\frac{x_{1}}{q},\ldots,\frac{x_{n}}{q}\right)\ge Vol\ \Omega-\varepsilon>2^{n}\\
+\underset{x\in K\subset\mathbb{Z}^{n}}{\sum}\chi_{\Omega}(\frac{x}{q})>\left(2q\right)^{n},\ \left|K\right|<\infty
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Сумма слева это в точности мощность 
+\begin_inset Formula $\left|\Omega\cap\frac{1}{q}\mathbb{Z}^{n}\right|$
+\end_inset
+
+.
+ Тогда по принципу Дирихле 
+\begin_inset Formula 
+\[
+\exists x,y\in N:\ \frac{x}{q},\frac{y}{q}\in\Omega:\ \forall1\le i\le n\rightarrow x_{i}\equiv y_{i}\left(mod\ 2q\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Тогда 
+\begin_inset Formula $0\ne\frac{x-y}{2q}\in\left(\Omega\cap\mathbb{Z}^{n}\right)$
+\end_inset
+
+, что доказывает теорему.
+\end_layout
+
+\begin_layout Exercise*
+Доказать утверждение теоремы, если 
+\begin_inset Formula $Vol\ \Omega=2^{n}$
+\end_inset
+
+ и 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ --- замкнуто.
+\end_layout
+
+\begin_layout Section
+Совместные приближения
+\end_layout
+
+\begin_layout Problem*
+Пусть есть вектор 
+\begin_inset Formula $\alpha=\left(\alpha_{1},\ldots,\alpha_{n}\right)\in\left(\mathbb{R}^{n}\setminus\mathbb{Q}^{n}\right)$
+\end_inset
+
+, нужно как можно лучше приблизить их рациональными числами со знаменателем
+ 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ Иными словами, подобрать такое 
+\begin_inset Formula $q$
+\end_inset
+
+ и такие 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+, что 
+\begin_inset Formula $\underset{1\le j\le n}{\max}\left|q\cdot\alpha_{j}-a_{j}\right|\rightarrow\min$
+\end_inset
+
+, что эквивалентно минимизации 
+\begin_inset Formula $\underset{1\le j\le n}{\max}\left\Vert q\alpha_{j}\right\Vert $
+\end_inset
+
+, где 
+\begin_inset Formula $\left\Vert \xi\right\Vert =\underset{a\in\mathbb{Z}}{\min}\left|\xi-a\right|$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+(Дирихле) 
+\begin_inset Formula $\forall Q\in\mathbb{N}\ \exists q\le Q,\ q\in\mathbb{N}:\ \underset{1\le j\le n}{\max}\left\Vert q\alpha_{j}\right\Vert <Q^{-\frac{1}{n}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Используем теорему Минковского самым простым способом.
+ 
+\end_layout
+
+\begin_layout Proof
+Проведем в 
+\begin_inset Formula $\mathbb{R}^{n+1}$
+\end_inset
+
+ прямую 
+\begin_inset Formula $\overline{y}=\overline{\alpha}\cdot x,\ y\in\mathbb{R}^{n},\ x\in\mathbb{R}$
+\end_inset
+
+.
+ Обозначим 
+\begin_inset Formula 
+\[
+\Pi_{Q}=\left\{ z=\left(x,y\right)\in\mathbb{R}^{n+1}\mid\left|x\right|<Q+1,\ \underset{1\le j\le n}{\max}\left|x\alpha_{j}-y_{i}\right|<Q^{-\frac{1}{n}}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Это множество представляет собой параллелограмм, у которого каждое сечение
+ 
+\begin_inset Formula $x=c$
+\end_inset
+
+ представляет собой 
+\begin_inset Formula $n$
+\end_inset
+
+-мерный куб со стороной 
+\begin_inset Formula $2Q^{-\frac{1}{n}}$
+\end_inset
+
+.
+ Тогда можно легко посчитать его объем: 
+\begin_inset Formula 
+\[
+Vol\ \Pi_{Q}=\left(2Q+2\right)\cdot\left(2\cdot Q^{-\frac{1}{n}}\right)^{n}=2^{n+1}\cdot\frac{Q+1}{Q}>2^{n+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Тогда в 
+\begin_inset Formula $\Pi_{Q}$
+\end_inset
+
+ есть целая точка, которая дает нам утверждение теоремы.
+\end_layout
+
+\begin_layout Remark*
+Очевидное следствие --- для любого 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ существует бесконечно много 
+\begin_inset Formula $q\in\mathbb{N}$
+\end_inset
+
+, таких, что 
+\begin_inset Formula $\underset{1\le j\le n}{\max}\left\Vert q\alpha_{j}\right\Vert <q^{-\frac{1}{n}}$
+\end_inset
+
+.
+ Это довольно слабое утверждение, далее мы сформулируем и докажем гораздо
+ более сильную теорему.
+\end_layout
+
+\begin_layout Theorem*
+(Минковского о совместных приближениях)
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula $\forall\alpha\in\left(\mathbb{R}^{n}\setminus\mathbb{Q}^{n}\right)$
+\end_inset
+
+ существует бесконечно много таких 
+\begin_inset Formula $q$
+\end_inset
+
+, что 
+\begin_inset Formula 
+\[
+\underset{1\le j\le n}{\max}\left\Vert q\alpha_{j}\right\Vert <\frac{1}{\left(\mu_{n}q\right)^{\frac{1}{n}}},\ \mu_{n}=\left(1+\frac{1}{n}\right)^{n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Рассмотрим множество 
+\begin_inset Formula $K_{\mu}=\left\{ \left(\underset{1\le j\le n}{\max}\left|x\cdot\alpha_{j}-y_{j}\right|\right)^{n}\cdot\left|x\right|\cdot\mu\le1\right\} $
+\end_inset
+
+, где 
+\begin_inset Formula $\mu$
+\end_inset
+
+ --- некоторая константа, зависящая только от 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Для удобства введем линейные преобразования
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+A_{\alpha}=\left(\begin{array}{cccc}
+1 & 0 & \ldots & 0\\
+\alpha_{1} & 1 & \ddots & \vdots\\
+\vdots & \ddots & \ddots & 0\\
+\alpha_{n} & \ldots & 0 & 1
+\end{array}\right),\ G_{t}=\left(\begin{array}{cccc}
+t & 0 & \ldots & 0\\
+0 & t^{-\frac{1}{n}} & \ddots & \vdots\\
+\vdots & \ddots & \ldots & 0\\
+0 & \ldots & 0 & t^{-\frac{1}{n}}
+\end{array}\right),\ \det A_{\alpha}=\det G_{t}=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Преобразование 
+\begin_inset Formula $A_{\alpha}^{-1}$
+\end_inset
+
+ переводит прямую 
+\begin_inset Formula $y=\alpha x$
+\end_inset
+
+ в ось 
+\begin_inset Formula $Ox$
+\end_inset
+
+, а 
+\begin_inset Formula $G_{t}$
+\end_inset
+
+ сжимает по осям 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ в 
+\begin_inset Formula $t^{\frac{1}{n}}$
+\end_inset
+
+ раз и растягивает по 
+\begin_inset Formula $x$
+\end_inset
+
+ в 
+\begin_inset Formula $t$
+\end_inset
+
+ раз, сохраняя тем самым объем.
+ Также можно заметить, что преобразование 
+\begin_inset Formula $\left(A_{\alpha}\cdot G_{t}\cdot A_{\alpha}^{-1}\right)$
+\end_inset
+
+ осуществляет автоморфизм из 
+\begin_inset Formula $K_{\mu}$
+\end_inset
+
+ в себя.
+ Теперь мы имеем дело со множеством 
+\begin_inset Formula $\widetilde{K_{\mu}}=\left\{ \underset{1\le j\le n}{\max}\left|y_{j}\right|^{n}\cdot\left|x\right|\cdot\mu\le1\right\} $
+\end_inset
+
+.
+ Нам нужно вписывать в 
+\begin_inset Formula $K_{\mu}$
+\end_inset
+
+ множества объема, большего 
+\begin_inset Formula $2^{n+1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Рассмотрим процесс на примере двумерного множества (в любом сечении, содержащем
+ ось 
+\begin_inset Formula $Ox$
+\end_inset
+
+, множество выглядит одинаково).
+ Мы возьмем точку 
+\begin_inset Formula $\left(\xi;\left(\frac{1}{\mu\xi}\right)^{\frac{1}{n}}\right)$
+\end_inset
+
+, построим касательную в ней.
+ Множество точек под касательной обозначим за 
+\begin_inset Formula $\widetilde{\Omega_{\xi}}$
+\end_inset
+
+.
+ Заметим, что нам достаточно найти только 
+\begin_inset Formula $\widetilde{\Omega_{1}},$
+\end_inset
+
+ так как 
+\begin_inset Formula $\widetilde{\Omega_{\xi}}=G_{\xi}(\widetilde{\Omega_{1}})$
+\end_inset
+
+.
+ Теперь составим уравнение касательной: 
+\begin_inset Formula 
+\[
+\left(y-\mu^{-\frac{1}{n}}\right)=\left(x-1\right)\cdot\left(-\frac{1}{n}\right)\cdot\mu^{-\frac{1}{n}}\Rightarrow y=-x\cdot\mu^{-\frac{1}{n}}\cdot\frac{1}{n}+\mu^{-\frac{1}{n}}\left(1+\frac{1}{n}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+В многомерном случае неравенство, задающее интересующую нас область под
+ касательными, выглядит следующим образом
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+\underset{1\le j\le n}{\max}y_{j}\le-x\cdot\mu^{-\frac{1}{n}}\cdot\frac{1}{n}+\mu^{-\frac{1}{n}}\cdot\left(1+\frac{1}{n}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Это конус, в сечении 
+\begin_inset Formula $x=0$
+\end_inset
+
+ имеющий 
+\begin_inset Formula $n$
+\end_inset
+
+-мерный куб со стороной 
+\begin_inset Formula $2\mu^{-\frac{1}{n}}\left(1+\frac{1}{n}\right)$
+\end_inset
+
+, высота его равна 
+\begin_inset Formula $n\cdot\left(1+\frac{1}{n}\right)=n+1$
+\end_inset
+
+.
+ Тогда можно вычислить его объем
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+Vol\ \widetilde{\Omega_{1}}=\frac{\left(2\mu^{-\frac{1}{n}}\cdot\left(1+\frac{1}{n}\right)\right)^{n}\cdot\left(n+1\right)}{n+1}=\frac{2^{n}\cdot\left(1+\frac{1}{n}\right)^{n}\cdot\left(n+1\right)}{\mu\left(n+1\right)}=2^{n}\cdot\frac{\left(1+\frac{1}{n}\right)^{n}}{\mu}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Тогда, выбрав 
+\begin_inset Formula $\mu=\left(1+\frac{1}{n}\right)^{n}$
+\end_inset
+
+, мы получим (так как конус нужно симметрично отразить по 
+\begin_inset Formula $Ox$
+\end_inset
+
+) 
+\begin_inset Formula $Vol\ \widetilde{\Omega_{1}}=2\cdot Vol\ \Omega_{t}=2^{n+1}$
+\end_inset
+
+, что дает нам целую точку в 
+\begin_inset Formula $K_{\mu}$
+\end_inset
+
+ (две, одна из которых имеет отрицательный 
+\begin_inset Formula $x$
+\end_inset
+
+) и даже бесконечное их число.
+\end_layout
+
+\begin_layout Part*
+Лекция 2.
+ Теорема Спона
+\end_layout
+
+\begin_layout Section
+Теорема Спона
+\end_layout
+
+\begin_layout Theorem*
+(Spone, 1967) 
+\begin_inset Formula $\forall\alpha\in\left(\mathbb{R}^{n}\setminus\mathbb{Q}^{n}\right)$
+\end_inset
+
+ существует бесконечно много таких 
+\begin_inset Formula $q\in\mathbb{N}$
+\end_inset
+
+, что 
+\begin_inset Formula 
+\[
+\underset{1\le j\le n}{\max}\left\Vert q\alpha_{j}\right\Vert <\frac{1}{\left(I_{n}q\right)^{\frac{1}{n}}},\ I_{n}=n\cdot2^{n+1}\cdot\underset{0}{\overset{1}{\int}}\frac{t^{n-1}}{\left(1+t^{n}\right)\left(1+t\right)^{n}}\cdot dt
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Exercise*
+(Б) Показать, что 
+\begin_inset Formula $n\cdot2^{n+1}\cdot\underset{0}{\overset{1}{\int}}\frac{t^{n-1}}{\left(1+t^{n}\right)\left(1+t\right)^{n}}\cdot dt\rightarrow\pi$
+\end_inset
+
+ при 
+\begin_inset Formula $n\rightarrow\infty$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Рассмотрим множество 
+\begin_inset Formula $K=\left\{ \left(x,\overline{y}\right)\in\mathbb{R}^{n+1}:\ x\cdot\left(\max\left|y_{i}\right|\right)^{n}<\lambda\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Будем искать множество 
+\begin_inset Formula $B\subset\mathbb{R}^{n+1}$
+\end_inset
+
+: 
+\begin_inset Formula $Vol\ B>1,\ B-B=\left\{ z\mid z=z_{1}-z_{2},\ z_{1}\in B,\ z_{2}\in B\right\} \subset K$
+\end_inset
+
+.
+ Если мы это сделаем, то мы найдем в 
+\begin_inset Formula $K$
+\end_inset
+
+ целую точку по лемме Блихфельдта.
+\end_layout
+
+\begin_layout Proof
+Как и раньше, нам достаточно найти только одно такое 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Для простоты будем искать множество 
+\begin_inset Formula $D$
+\end_inset
+
+ в 
+\begin_inset Formula $\mathbb{R}^{2}$
+\end_inset
+
+ такое, что 
+\begin_inset Formula $D+D$
+\end_inset
+
+ вписано в 
+\begin_inset Formula $y^{n}x\le1$
+\end_inset
+
+ и будем искать его в виде 
+\begin_inset Formula $D=\left\{ x,y\ge0\mid x\le\Phi(y)\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+По множеству 
+\begin_inset Formula $D$
+\end_inset
+
+ множество 
+\begin_inset Formula $B$
+\end_inset
+
+ строится как 
+\begin_inset Formula $B=\left\{ z=\left(x,\overline{y}\right):\ \left(\left|x\right|,\max\left|y_{i}\right|\right)\in D\right\} $
+\end_inset
+
+.
+ Тогда из того что 
+\begin_inset Formula $D+D$
+\end_inset
+
+ лежит под 
+\begin_inset Formula $y^{n}x=1\Rightarrow B+B\subset K$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Введем функции 
+\begin_inset Formula $f(y)=\frac{1}{y^{n}},\ g=g(t)$
+\end_inset
+
+, 
+\begin_inset Formula $t^{n}+g^{n}=\frac{1}{2^{n-1}}$
+\end_inset
+
+.
+ Некоторые факты про нее:
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+n\cdot t^{n-1}\cdot ng^{n-1}\cdot g^{\prime}=0\Rightarrow g^{\prime}=-\frac{t^{n-1}}{g^{n-1}}\\
+g(0)=\frac{1}{2^{\frac{n-1}{n}}}=\beta\\
+g(\beta)=0\\
+g(g(t))=t\\
+g(\frac{1}{2})=\frac{1}{2},\ g(t)\searrow
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Теперь определяем функцию
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+\Phi(y)=\frac{1}{2}+\underset{\frac{1}{2}}{\overset{y}{\int}}f^{\prime}(t+g(t))\cdot dt\\
+\Phi(\frac{1}{2})=\frac{1}{2}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Exercise*
+(А) Найти явный вид 
+\begin_inset Formula $\Phi(y)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Claim*
+\begin_inset Formula $\Phi(y)+\Phi(g(y))=f(y+g(y))$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Remark*
+Это значит, что складывая вектора 
+\begin_inset Formula $\left(t,\Phi(t)\right)+\left(g(t),\Phi(g(t))\right)$
+\end_inset
+
+ мы попадем в точности на кривую 
+\begin_inset Formula $x\cdot y^{n}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+В силу симметрии достаточно доказать при 
+\begin_inset Formula $y\ge\frac{1}{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+\Phi(y)+\Phi(g(y))=1+\underset{\frac{1}{2}}{\overset{y}{\int}}f^{\prime}(t+g(t))\cdot dt+\underset{\frac{1}{2}}{\overset{g(y)}{\int}}f^{\prime}(t+g(t))\cdot dt
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Проведем замену переменной 
+\begin_inset Formula $u=g(t),\ t=g(u)\Rightarrow dt=g_{u}^{\prime}\cdot du$
+\end_inset
+
+ в первом интеграле:
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{multline*}
+\Phi(y)+\Phi(g(y))=1+\underset{\frac{1}{2}}{\overset{g(y)}{\int}}f^{\prime}(u+g(u))\cdot g_{u}^{\prime}\cdot du+\underset{\frac{1}{2}}{\overset{g(y)}{\int}}f^{\prime}(t+g(t))\cdot dt=\\
+=1+\underset{\frac{1}{2}}{\overset{g(y)}{\int}}f^{\prime}\left(u+g(u)\right)\cdot\left(g_{u}^{\prime}(u)+1\right)\cdot du=1+\underset{\frac{1}{2}}{\overset{g(y)}{\int}}f^{\prime}\left(u+g(u)\right)\cdot d\left(u+g(u)\right)=\\
+=1+f(u+g(u))\mid_{0.5}^{g(y)}=1+f(y+g(y))-f(1)=f(y+g(y))
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Что нам и нужно было.
+ Нам осталось доказать только следующее утверждение:
+\end_layout
+
+\begin_layout Claim*
+Если 
+\begin_inset Formula $0\le y\le\frac{1}{2},\ t\ne g(y),\ \frac{1}{2}\le t\le\beta$
+\end_inset
+
+, то 
+\begin_inset Formula $\Phi(y)+\Phi(t)<f(y+t)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Зафиксируем 
+\begin_inset Formula $y$
+\end_inset
+
+ и исследуем 
+\begin_inset Formula $F_{y}(t)=\Phi(y)+\Phi(t)-f(y+t)$
+\end_inset
+
+ на максимум (покажем, что он достигается в точке 
+\begin_inset Formula $t=g(y)$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+F_{y}^{\prime}(t)=f^{\prime}(t+g(t))-f^{\prime}(t+y)
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Функция 
+\begin_inset Formula $f^{\prime}(t)$
+\end_inset
+
+ возрастает.
+ Если 
+\begin_inset Formula $y>g(t)$
+\end_inset
+
+, то 
+\begin_inset Formula $F_{y}^{\prime}(t)<0$
+\end_inset
+
+, а если 
+\begin_inset Formula $y<g(t)$
+\end_inset
+
+, то 
+\begin_inset Formula $F_{y}^{\prime}(t)>0$
+\end_inset
+
+ в силу возрастания 
+\begin_inset Formula $f^{\prime}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Тогда при 
+\begin_inset Formula $g(y)<t\Rightarrow F_{y}^{\prime}(t)<0$
+\end_inset
+
+, а при 
+\begin_inset Formula $g(y)>t\Rightarrow F_{y}^{\prime}(t)>0$
+\end_inset
+
+.
+ То есть в точке 
+\begin_inset Formula $t=g(y)$
+\end_inset
+
+ производная меняет знак с 
+\begin_inset Quotes fld
+\end_inset
+
++
+\begin_inset Quotes frd
+\end_inset
+
+ на 
+\begin_inset Quotes fld
+\end_inset
+
+-
+\begin_inset Quotes frd
+\end_inset
+
+, а значит 
+\begin_inset Formula $t=g(y)$
+\end_inset
+
+ --- точка максимума, что и требовалось показать.
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Осталось показать, что 
+\begin_inset Formula $Vol\ B>1$
+\end_inset
+
+.
+ 
+\begin_inset Formula $B=\left\{ \left(x,\overline{y}\right)\in\mathbb{R}^{n+1},\ \left(\left|x\right|,\max\left|y_{j}\right|\right)\in D\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+\left|x\right|\le\Phi\left(\max\left|y_{j}\right|\right)
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Зафиксируем 
+\begin_inset Formula $t=\max\left|y_{j}\right|$
+\end_inset
+
+.
+ Тогда нам нужен интеграл
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+\underset{0}{\overset{\beta}{\int}}2\cdot2\cdot n\cdot\left(2t\right)^{n-1}\cdot\Phi(t)\cdot dt=n\cdot2^{n+1}\left(\underset{0}{\overset{\frac{1}{2}}{\int}}t^{n-1}\cdot\Phi(t)\cdot dt+\underset{0}{\overset{\frac{1}{2}}{\int}}\ldots\cdot dt\right)
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part*
+Лекции 3-4.
+ Пифагоровы тройки и рациональные точки на сфере
+\end_layout
+
+\begin_layout Section
+Рациональная параметризация сферы
+\end_layout
+
+\begin_layout Problem*
+Найти все рациональные точки на 
+\begin_inset Formula 
+\[
+\mathbb{R}^{n+1}\supset S_{n}=\left\{ \left(x_{1},\ldots,x_{n+1}\right)\mid x_{1}^{2}+\ldots+x_{n+1}^{2}=1\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem*
+то есть 
+\begin_inset Formula 
+\[
+\xi=\left(\xi_{1},\ldots,\xi_{n+1}\right)\in S^{n}\cap\mathbb{Q}^{n+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem*
+Такие что 
+\begin_inset Formula $\xi_{i}=\frac{a_{j}}{q_{j}}$
+\end_inset
+
+, то есть 
+\begin_inset Formula 
+\[
+\left(\xi_{1},\ldots,\xi_{n+1}\right)=\frac{\left(A_{1},\ldots,A_{n+1}\right)}{\left[a_{1},\ldots,a_{n+1}\right]},\ Q=\left[a_{1},\ldots,a_{n+1}\right],\ \left(A_{1},\ldots,A_{n+1},Q\right)=1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Problem*
+(отметим, что преставление в таком каноническом виде единственно).
+\end_layout
+
+\begin_layout Standard
+Возьмем 
+\begin_inset Formula $\frac{\overline{a}}{q}=\left(\frac{a_{1}}{q},\ldots,\frac{a_{n}}{q}\right)\in\mathbb{Q}^{n}$
+\end_inset
+
+ в каноническом виде.
+ Проведем прямую, соединяющую 
+\begin_inset Formula $\left(-1;0,\ldots,0\right)$
+\end_inset
+
+ и 
+\begin_inset Formula $\left(0;\overline{q}\right)$
+\end_inset
+
+, зададим ее параметрически:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left(\begin{array}{c}
+x_{1}\\
+\vdots\\
+x_{2}\\
+x_{n+1}
+\end{array}\right)=\left(\begin{array}{c}
+0\\
+\vdots\\
+0\\
+-1
+\end{array}\right)+t\cdot\left(\begin{array}{c}
+\frac{a_{1}}{q}\\
+\vdots\\
+\frac{a_{n}}{q}\\
+1
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Если мы будем искать пересечение этой прямой и сферы, то получим квадратное
+ уравнение.
+ Но один из корней у него рациональный, поэтому и второй тоже.
+ Обратное тоже верно, для каждой рациональной точки сферы мы найдем единственную
+ рациональную точку пересечения этой прямой с осью 
+\begin_inset Formula $Ox_{n+1}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+\left(\frac{a_{1}t}{q}\right)^{2}+\ldots+\left(\frac{a_{n}t}{q}\right)^{2}+\left(t-1\right)^{2}=1\\
+\frac{a_{1}^{2}+\ldots+a_{n}^{2}}{q^{2}}t^{2}+t^{2}-2t+1=1\\
+\frac{a_{1}^{2}+\ldots+a_{n}^{2}+q^{2}}{q^{2}}\cdot t=2\\
+t=\frac{2q^{2}}{q^{2}+a_{1}^{2}+\ldots+a_{n}^{2}}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Тогда 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{gather*}
+x_{j}=\frac{2a_{j}q}{q^{2}+a_{1}^{2}+\ldots+a_{n}^{2}},\ 1\le j\le n\\
+x_{n+1}=\frac{q^{2}-a_{1}^{2}-\ldots-a_{n}^{2}}{q^{2}+a_{1}^{2}+\ldots+a_{n}^{2}}
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Exercise*
+Пусть 
+\begin_inset Formula $G$
+\end_inset
+
+ --- поверхность второго порядка в 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+, задаваемая уравнением с целыми коэффициентами.
+ Доказать, что если 
+\begin_inset Formula $G\cap\mathbb{Q}^{n}\ne\varnothing$
+\end_inset
+
+, то в 
+\begin_inset Formula $G$
+\end_inset
+
+ бесконечно много рациональных точек.
+\end_layout
+
+\begin_layout Section
+Пифагоровы тройки
+\end_layout
+
+\begin_layout Standard
+Пусть теперь 
+\begin_inset Formula $n=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{A_{1}}{Q}=x_{1}=\frac{2aq}{q^{2}+a^{2}},\ \frac{A_{2}}{Q}=x_{2}=\frac{q^{2}-a^{2}}{q^{2}+a^{2}}
+\]
+
+\end_inset
+
+ При этом должно быть
+\begin_inset Formula $\left(A_{1},A_{2},Q\right)=1$
+\end_inset
+
+.
+ Нужно выразить 
+\begin_inset Formula $Q$
+\end_inset
+
+ через 
+\begin_inset Formula $q$
+\end_inset
+
+ и 
+\begin_inset Formula $a$
+\end_inset
+
+, зная, что 
+\begin_inset Formula $\left(a,q\right)=1$
+\end_inset
+
+.
+ Введем 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\Delta=\left(q^{2}+a^{2},2aq,q^{2}-a^{2}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Если 
+\begin_inset Formula $\Delta=1$
+\end_inset
+
+, то 
+\begin_inset Formula $Q=q^{2}+a^{2}$
+\end_inset
+
+.
+ Однако это не всегда так.
+\end_layout
+
+\begin_layout Claim*
+\begin_inset Formula $\Delta\mid2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Delta\mid2q^{2}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\exists p\mid\Delta:\ \Delta\mid2$
+\end_inset
+
+ или 
+\begin_inset Formula $p\mid q^{2}$
+\end_inset
+
+.
+ Второй случай невозможен (иначе 
+\begin_inset Formula $p^{2}\mid q^{2}\Rightarrow p^{2}\mid a^{2}$
+\end_inset
+
+, что невозможно).
+\end_layout
+
+\begin_layout Standard
+Тогда при 
+\begin_inset Formula $\Delta=2$
+\end_inset
+
+ получаем 
+\begin_inset Formula $Q=\frac{q^{2}+a^{2}}{2}$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $q\not\equiv a\left(\mod2\right)$
+\end_inset
+
+, то 
+\begin_inset Formula $Q=q^{2}+a^{2},\ A_{1}=2q\cdot a,\ A_{2}=q^{2}-a^{2}$
+\end_inset
+
+.
+ Единственная возможность (с точностью до перестановки 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ и 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+, будем считать 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ всегда нечетным): 
+\begin_inset Formula $A_{1},Q$
+\end_inset
+
+ --- нечетные, 
+\begin_inset Formula $A_{2}$
+\end_inset
+
+ --- четное.
+\end_layout
+
+\begin_layout Corollary*
+Всякое решение уравнения 
+\begin_inset Formula $a^{2}+b^{2}=c^{2}$
+\end_inset
+
+ представляется в описанном виде.
+\end_layout
+
+\begin_layout Remark*
+Мы видим, что по порядку величины 
+\begin_inset Formula $Q$
+\end_inset
+
+ оценивается сверху и снизу величиной 
+\begin_inset Formula $q^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Более высокие размерности
+\end_layout
+
+\begin_layout Standard
+Перейдем к случаю 
+\begin_inset Formula $n=2$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\begin{cases}
+\frac{A_{1}}{Q}= & \frac{2a_{1}q}{q^{2}+a_{1}^{2}+a_{2}^{2}}\\
+\frac{A_{2}}{Q}= & \frac{2a_{2}q}{q^{2}+a_{1}^{2}+a_{2}^{2}}\\
+\frac{A_{3}}{Q}= & \frac{q^{2}-a_{1}^{2}-a_{2}^{2}}{q^{2}+a_{1}^{2}+a_{2}^{2}}
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Question*
+Обозначим 
+\begin_inset Formula $\Delta=\left(q^{2}+a_{1}^{2}+a_{2}^{2},2a_{1}q,2a_{2}q,q^{2}-a_{1}^{2}-a_{2}^{2}\right)$
+\end_inset
+
+.
+ Насколько большим может быть 
+\begin_inset Formula $Q$
+\end_inset
+
+?
+\end_layout
+
+\begin_layout Claim*
+Если 
+\begin_inset Formula $a_{1}^{2}+a_{2}^{2}\equiv0\pmod q$
+\end_inset
+
+, то 
+\begin_inset Formula $q\mid\Delta\Rightarrow\Delta\ge q$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Приближения на сфере
+\end_layout
+
+\begin_layout Standard
+Мы умеем приближать 
+\begin_inset Formula $\alpha_{1},\ldots,\alpha_{m}\in\mathbb{R}^{m}\setminus\mathbb{Q}^{m}$
+\end_inset
+
+.
+ Теорема Дирихле: найдется бесконечно много таких 
+\begin_inset Formula $q$
+\end_inset
+
+, что:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\left|\alpha_{i}-\frac{a_{i}}{q}\right|<\frac{1}{q^{1+\frac{1}{m}}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Если все точки приближения лежат на сфере, то можно использовать это так:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\forall\alpha_{1}^{2}+\ldots+\alpha_{n+1}^{2}=1\rightarrow\exists$
+\end_inset
+
+бесконечно много 
+\begin_inset Formula $\frac{A}{Q}\in S^{n}$
+\end_inset
+
+, таких что 
+\begin_inset Formula $\underset{1\le j\le n}{\max}\left|\alpha_{j}-\frac{A_{j}}{Q}\right|\le\frac{1}{q^{1+\frac{1}{m}}}=\frac{1}{Q^{\frac{1}{2}+\frac{1}{2n}}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Theorem*
+(Д.
+ Клейнбок) Если 
+\begin_inset Formula $\alpha\in S^{n}$
+\end_inset
+
+, то существует бесконечно много дробей 
+\begin_inset Formula $\frac{A}{Q}\in S^{n}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Theorem*
+\begin_inset Formula 
+\[
+\underset{1\le j\le n}{\max}\left|\alpha_{j}-\frac{A_{j}}{Q}\right|<\frac{c_{n}}{Q},\ c_{n}=f(n)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Theorem*
+Пусть 
+\begin_inset Formula $\left(\beta_{1},\beta_{2}\right)\in\mathbb{R}^{2}\setminus\mathbb{Q}^{2}$
+\end_inset
+
+.
+ Тогда существует бесконечно много 
+\begin_inset Formula $\left(q,a_{1},a_{2}\right)\in\mathbb{Z}^{3}$
+\end_inset
+
+, таких что:
+\end_layout
+
+\begin_layout Theorem*
+(1) 
+\begin_inset Formula $\left(q,a_{1},a_{2}\right)=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+(2) 
+\begin_inset Formula $\sqrt{\underset{j=1}{\overset{2}{\sum}}\left(q\beta_{j}-a_{j}\right)^{2}}<1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem*
+(3) 
+\begin_inset Formula $a_{1}^{2}+a_{2}^{2}\equiv0\left(q\right)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+На 
+\begin_inset Formula $w=\left(z,y,x_{1},x_{2}\right)$
+\end_inset
+
+ введем 
+\begin_inset Formula $f(w)=zy-x_{1}^{2}-x_{2}^{2}$
+\end_inset
+
+ и тела
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+K=\left\{ w\mid\left|f(w)\right|<1\right\} \\
+B=\left\{ w\mid\left|z+y\right|<2,\ \left|z-y\right|<2\sqrt{1-x_{1}^{2}-x_{2}^{2}}\right\} 
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Claim*
+\begin_inset Formula $B\subset K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Проверяем 
+\begin_inset Formula 
+\begin{gather*}
+yz=\frac{\left(z+y\right)^{2}-\left(z-y\right)^{2}}{4}<\frac{4}{4}=1\\
+yz>-\frac{4\left(1-x_{1}^{2}-x_{2}^{2}\right)}{4}=-1+x_{1}^{2}+x_{2}^{2}\\
+-1+x_{1}^{2}+x_{2}^{2}<yz<1\\
+-1<yz-x_{1}^{2}-x_{2}^{2}<1\\
+\left|yz-x_{1}^{2}-x_{2}^{2}\right|<1
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Заменяя 
+\begin_inset Formula $z=\xi+\eta,\ y=\xi-\eta$
+\end_inset
+
+ для тела 
+\begin_inset Formula $B$
+\end_inset
+
+ имеем
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+B=\left\{ w\mid\left|\xi\right|<1,\ \eta^{2}+x_{1}^{2}+x_{2}^{2}<1\right\} 
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+В координатах 
+\begin_inset Formula $\eta,\xi$
+\end_inset
+
+ 
+\begin_inset Formula $Vol\ B=2\cdot\frac{4}{3}\pi$
+\end_inset
+
+ (это просто цилиндр над шаром).
+ В изначальных координатах 
+\begin_inset Formula $Vol\ B=\frac{16\pi}{3}>2^{4}$
+\end_inset
+
+.
+ Тогда в нем по теореме Минковского есть нетривиальная целая точка.
+ Чтобы найти бесконечно много, сделаем линейные преобразования
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+G_{t}=\left(\begin{array}{cccc}
+t & 0 & 0 & 0\\
+0 & t^{-1} & 0 & 0\\
+0 & 0 & 1 & 0\\
+0 & 0 & 0 & 1
+\end{array}\right),\ R_{\beta}=\left(\begin{array}{cccc}
+1 & 0 & 0 & 0\\
+\beta_{1}^{2}+\beta_{2}^{2} & 1 & -2\beta_{1} & -2\beta_{2}\\
+-\beta_{1} & 0 & 1 & 0\\
+-\beta_{2} & 0 & 0 & 1
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\det G_{t}=\det A_{\alpha}=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Exercise*
+(Очевидное) 
+\begin_inset Formula $f(G_{t}w)=f(w)$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Proof
+Тогда 
+\begin_inset Formula $K_{t}^{\prime}=\left\{ w\mid\left|f(G_{t}w)\right|<1\right\} =\left\{ w\mid G_{t}w\in K\right\} =G_{t}^{-1}K$
+\end_inset
+
+.
+ Второй автоморфизм также сохраняет значение формы:
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+R_{\beta}\left(\begin{array}{c}
+z\\
+y\\
+x_{1}\\
+x_{2}
+\end{array}\right)=\left(\begin{array}{c}
+z\\
+z\left(\beta_{1}^{2}+\beta_{2}^{2}\right)+y-2\beta_{1}x_{1}-2\beta_{2}x_{2}\\
+-z\beta_{1}+x_{1}\\
+-z\beta_{2}+x_{2}
+\end{array}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Тогда значение формы: 
+\begin_inset Formula 
+\begin{multline*}
+f(A_{\beta}w)=z\cdot\left(z\left(\beta_{1}^{2}+\beta_{2}^{2}\right)+y-2\beta_{1}x_{1}-2\beta_{2}x_{2}\right)-\left(-z\beta_{1}+x_{1}\right)^{2}-\left(-z\beta_{2}+x_{2}\right)^{2}=\\
+=z^{2}\left(\beta_{1}^{2}+\beta_{2}^{2}\right)+zy-2z\beta_{1}x_{1}-2z\beta_{2}x_{2}-z^{2}\beta_{1}^{2}+2zx_{1}\beta_{1}-x_{1}^{2}-z^{2}\beta_{2}^{2}+2z\beta_{2}-x_{2}^{2}=\\
+=zy-x_{1}^{2}-x_{2}^{2}=f(w)
+\end{multline*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+То есть 
+\begin_inset Formula $A_{\beta}$
+\end_inset
+
+ --- автоморфизм формы.
+\end_layout
+
+\begin_layout Proof
+Итак, у нас есть форма, которая на самом деле задает в координатах 
+\begin_inset Formula $\xi,\eta,x_{1},x_{2}$
+\end_inset
+
+ область, ограниченную двумя гиперболическими поверхностями.
+ Также это некоторая небольшая окрестность прямого кругового конуса.
+ Автоморфизм 
+\begin_inset Formula $R_{\beta}$
+\end_inset
+
+ берет точку 
+\begin_inset Formula $\left(\beta_{1},\beta_{2}\right)$
+\end_inset
+
+ на сфере (в которую мы потом спроецируем вектор 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ на трехмерной сфере) и поворачивает координаты по направлению касательной.
+ Далее мы производим растяжение вдоль этой оси и сжатие вдоль другой.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $B\subset K=G_{t}^{-1}R_{\beta}K$
+\end_inset
+
+.
+ 
+\begin_inset Formula $B_{t}=R_{\beta}^{-1}G_{t}B\subset K$
+\end_inset
+
+.
+ 
+\begin_inset Formula $Vol\ B_{t}=Vol\ B>16$
+\end_inset
+
+.
+ Тогда в нем есть целая точка со следующими свойствами 
+\begin_inset Formula 
+\begin{gather*}
+\left(z_{0};y_{0};x_{1,0},x_{2,0}\right)=\left(q,A,a_{1},a_{2}\right)\\
+qA=a_{1}^{2}+a_{2}^{2}\\
+a_{1}^{2}+a_{2}^{2}\equiv0\pmod q\\
+\sqrt{\left(q\beta_{1}-a_{1}\right)^{2}+\left(q\beta_{2}-a_{2}\right)^{2}}\le1
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Покажем последнее, для этого обозначим
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+L=q\left(\beta_{1}^{2}+\beta_{1}^{2}\right)+A-2a_{1}\beta_{1}-2a_{2}\beta_{2}\\
+\Delta=\underset{i=1}{\overset{2}{\sum}}\left(q\beta_{i}-a_{i}\right)^{2}\\
+w\in B_{t}=R_{\beta}^{-1}G_{t}B
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Теперь 
+\begin_inset Formula $G_{t^{-1}}R_{\beta}w\in B,\ R_{\beta}w=\left(\begin{array}{c}
+q\\
+L\\
+a_{1}-q\beta_{1}\\
+a_{2}-q\beta_{2}
+\end{array}\right),\ G_{t^{-1}}R_{\beta}w=\left(\begin{array}{c}
+q\cdot t^{-1}\\
+L\cdot t\\
+a_{1}-q\beta_{1}\\
+a_{2}-q\beta_{2}
+\end{array}\right)\in B\Rightarrow$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\begin{gather*}
+x_{1}^{2}+x_{2}^{2}+\eta^{2}\le1\Rightarrow\Delta=\left(a_{1}-q\beta_{1}\right)^{2}+\left(a_{2}-q\beta_{2}\right)^{2}\le1
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Если 
+\begin_inset Formula $q=0$
+\end_inset
+
+, то 
+\begin_inset Formula $\Delta=a_{1}^{2}+a_{2}^{2}<1\Rightarrow a_{1}=a_{2}=0$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\left|L\cdot t\right|<2\Rightarrow A=0$
+\end_inset
+
+, при 
+\begin_inset Formula $t>2$
+\end_inset
+
+.
+ То есть при 
+\begin_inset Formula $t>2$
+\end_inset
+
+ такое невозможно.
+\end_layout
+
+\begin_layout Proof
+Тело 
+\begin_inset Formula $B$
+\end_inset
+
+ выпукло и центрально-симметрично, то есть 
+\begin_inset Formula $q>0$
+\end_inset
+
+.
+ Используем 
+\begin_inset Formula $\left|\frac{q}{t}-L\cdot t\right|<2$
+\end_inset
+
+, значит 
+\begin_inset Formula $\left(q;L\right)$
+\end_inset
+
+ лежит в ромбе с вершинами 
+\begin_inset Formula $\left(0;2t^{-1}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left(2t;0\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left(0;-2t^{-1}\right)$
+\end_inset
+
+, 
+\begin_inset Formula $\left(-2t;0\right)$
+\end_inset
+
+.
+ Если мы покажем, что 
+\begin_inset Formula $L\ne0$
+\end_inset
+
+, то мы будем сужать ромб по вертикали, устремляя 
+\begin_inset Formula $t$
+\end_inset
+
+ к бесконечности.
+ 
+\end_layout
+
+\begin_layout Proof
+Но мы показали, что 
+\begin_inset Formula $qA-a_{1}^{2}-a_{2}^{2}=0$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $L=0$
+\end_inset
+
+, то 
+\begin_inset Formula 
+\begin{gather*}
+q^{2}\beta_{1}^{2}+q^{2}\beta_{2}^{2}+a_{1}^{2}+a_{2}^{2}-2a_{1}q\beta_{1}-2a_{2}q\beta_{2}=0\\
+\left(q\beta_{1}-a_{1}\right)^{2}+\left(q\beta_{2}-a_{2}\right)^{2}=0
+\end{gather*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Но тогда 
+\begin_inset Formula $\Delta=0$
+\end_inset
+
+, что невозможно.
+\end_layout
+
+\begin_layout Exercise*
+(Неочевидное) Доказать теорему при 
+\begin_inset Formula $n=4$
+\end_inset
+
+, используя кватернионы.
+\end_layout
+
+\begin_layout Remark*
+Теорема влечет за собой теорему Клейнбока при 
+\begin_inset Formula $n=2$
+\end_inset
+
+.
+ Для рациональной точки на сфере нужно спроецировать ее на плоскость и приблизит
+ь по теореме.
+ По рациональной точке на окружности восстановим рациональную точку на сфере.
+ При этом ошибка в приближении сильно не увеличится 
+\begin_inset Formula 
+\[
+\left|\beta_{j}-\frac{a_{1}}{q}\right|<\frac{1}{q}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Remark*
+Но 
+\begin_inset Formula $Q\ll q$
+\end_inset
+
+, так как 
+\begin_inset Formula $a_{1}^{2}+a_{2}^{2}\equiv0\left(q\right)$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula $\left|\alpha_{j}-\frac{A_{j}}{Q}\right|\le\frac{c}{q}<\frac{c_{1}}{Q}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Part*
+Лекции 5.
+ 
+\end_layout
+
+\begin_layout Definition*
+
+\emph on
+Решетка
+\emph default
+ в 
+\begin_inset Formula $\mathbb{R}^{n}$
+\end_inset
+
+ на векторах 
+\begin_inset Formula $e_{1},\ldots,e_{d}$
+\end_inset
+
+ есть 
+\begin_inset Formula $\Lambda=\left\{ \xi=\lambda_{1}e_{1}+\ldots+\lambda_{d}e_{d},\ \lambda_{j}\in\mathbb{Z}\right\} $
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Definition*
+
+\emph on
+Размерность
+\emph default
+ решетки 
+\begin_inset Formula $\dim\Lambda=d$
+\end_inset
+
+.
+ Если 
+\begin_inset Formula $d=n$
+\end_inset
+
+, то решетка 
+\emph on
+полная
+\emph default
+.
+\end_layout
+
+\begin_layout Remark*
+Если 
+\begin_inset Formula $\Omega$
+\end_inset
+
+ --- линейный оператор 
+\begin_inset Formula $\mathbb{R}^{n}\mapsto\mathbb{R}^{n}$
+\end_inset
+
+, 
+\begin_inset Formula $\det\Omega\ne0$
+\end_inset
+
+, то 
+\begin_inset Formula $\Lambda=\Omega\cdot\mathbb{Z}^{n}$
+\end_inset
+
+ --- решетка.
+\end_layout
+
+\begin_layout Theorem*
+(Минковского) 
+\begin_inset Formula $B$
+\end_inset
+
+ --- выпуклое центрально-симметричное тело, 
+\begin_inset Formula $Vol\ B>2^{n}\det\Lambda$
+\end_inset
+
+, то 
+\begin_inset Formula $\exists z\in\Lambda:\ z\ne0,\ z\in B$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $\Gamma\subset\Lambda$
+\end_inset
+
+ --- подрешетка, если она решетка.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Definition*
+\begin_inset Formula $span\ Z$
+\end_inset
+
+ --- минимальное линейное подпространство, содержащее 
+\begin_inset Formula $Z$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark*
+Если количество классов смежности 
+\begin_inset Formula $K=\left[\Lambda:\Gamma\right]$
+\end_inset
+
+ в 
+\begin_inset Formula $\Lambda/\Gamma$
+\end_inset
+
+ конечно, то 
+\begin_inset Formula $\dim\Lambda=\dim\Gamma$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Claim*
+Если количество классов смежности 
+\begin_inset Formula $\Lambda/\Gamma$
+\end_inset
+
+ конечно,то 
+\begin_inset Formula 
+\[
+\left[\Lambda:\Gamma\right]=\frac{\det\Gamma}{\det\Lambda}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Exercise*
+Доказать это.
+\end_layout
+
+\begin_layout Remark*
+В двумерном случае нужно рассмотреть в 
+\begin_inset Formula $\Lambda\setminus Lin\left(e_{1}\right)$
+\end_inset
+
+ ближайшую к началу координат точку.
+ 
+\end_layout
+
+\begin_layout Remark*
+В 3D можно дополнить два вектора до базиса тогда и только тогда, когда 
+\begin_inset Formula $span\left(e_{1},e_{2}\right)\cap\Lambda=\left\{ \lambda_{1}e_{1}+\lambda_{2}e_{2}\mid\lambda_{i}\in\mathbb{Z}\right\} $
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\Lambda=\mathbb{Z}^{2}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\Gamma=\Gamma_{a,p}=\left\{ z:\ \left(z_{1},z_{2}\right)\in\Lambda:\ z_{1}\equiv az_{2}\pmod p\right\} $
+\end_inset
+
+, 
+\begin_inset Formula $p$
+\end_inset
+
+ --- простое, 
+\begin_inset Formula $\left(a,p\right)=1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\Gamma\subset\Lambda$
+\end_inset
+
+ полная подрешетка.
+ 
+\begin_inset Formula $\left[\Lambda:p\Lambda\right]=p^{2},\ \left[\Lambda:\Gamma\right]=p,\ \left[\Gamma,p\Lambda\right]=p$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\exists i:\ i^{2}\equiv-1\pmod p$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example*
+Если 
+\begin_inset Formula $p=4k+1$
+\end_inset
+
+, то 
+\begin_inset Formula $\exists a,b:\ p=a^{2}+b^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $\Gamma\subset\Lambda,\ \Gamma=\left\{ z:\ z_{1}\equiv iz_{2}\pmod p\right\} $
+\end_inset
+
+.
+ 
+\begin_inset Formula $\det\Gamma=p,\ B=\left\{ z_{1}^{2}+z_{2}^{2}<2p\right\} $
+\end_inset
+
+.
+ 
+\begin_inset Formula $Vol\ B=2\pi p>4p$
+\end_inset
+
+.
+ Тогда 
+\begin_inset Formula 
+\[
+\exists\left(a,b\right)\in\mathbb{Z}^{2}\setminus\left\{ 0\right\} ,\ a\equiv ib\pmod p,\ a^{2}+b^{2}<2p
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Значит 
+\begin_inset Formula $a^{2}+b^{2}\equiv\left(i^{2}+1\right)b^{2}\equiv0\pmod p\Rightarrow a^{2}+b^{2}\equiv0\pmod p$
+\end_inset
+
+, то есть 
+\begin_inset Formula $a^{2}+b^{2}=p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Exercise*
+Если 
+\begin_inset Formula $m=2^{\alpha}p_{1}\cdot\ldots\cdot p_{t}\cdot\left(p_{1}^{\prime}\right)^{2}\cdot\ldots\cdot\left(p_{l}^{\prime}\right)^{2},\ p_{i}=4k_{i}+1,\ p_{j}^{\prime}=4l_{1}-1$
+\end_inset
+
+, то 
+\begin_inset Formula $\exists a,b:\ a^{2}+b^{2}=m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $\Lambda=\mathbb{Z}^{4}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\Gamma_{a,b,p}=\left\{ \left(z_{1},z_{2},z_{3},z_{4}\right)\in\Lambda:\ z_{1}\equiv az_{3}+bz_{4}\pmod p,\ z_{2}\equiv bz_{3}-az_{4}\pmod p\right\} $
+\end_inset
+
+.
+ 
+\begin_inset Formula $d=\left[\Lambda:\Gamma\right]\le p^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Example*
+\begin_inset Formula $B=\left\{ z:\ z_{1}^{2}+z_{2}^{2}+z_{3}^{3}+z_{4}^{2}<2p\right\} ,\ Vol\ B=\frac{\pi^{2}}{2}\cdot R^{4}=\frac{\pi^{2}}{2}4p^{2}<2\pi^{2}p^{2}>16p^{2}$
+\end_inset
+
+.
+ 
+\begin_inset Formula $\det\Gamma\le p^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example*
+Итого, 
+\begin_inset Formula $\exists0\ne\left(z_{1},z_{2},z_{3},z_{4}\right)\in\left(\Gamma_{a,b,p}\cap B\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Lemma*
+\begin_inset Formula $\forall p\ge3\rightarrow\exists a,b:\ a^{2}+b^{2}+1\equiv0\pmod p$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula $0\le a<\frac{p}{2}$
+\end_inset
+
+, 
+\begin_inset Formula $\frac{p+1}{2}\mapsto a^{2}$
+\end_inset
+
+ (
+\begin_inset Formula $\frac{p+1}{2}$
+\end_inset
+
+ штук).
+ 
+\begin_inset Formula $0\le b<\frac{p+1}{2}\mapsto b^{2}-1$
+\end_inset
+
+ (
+\begin_inset Formula $\frac{p+1}{2}$
+\end_inset
+
+ штук).
+ Два множества размера больше половины, стало быть, пересечение не пусто.
+\end_layout
+
+\begin_layout Standard
+Теперь берем эту точку теоремы Минковского при найденных 
+\begin_inset Formula $a$
+\end_inset
+
+ и 
+\begin_inset Formula $b$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+z_{1}^{2}+z_{2}^{2}+z_{3}^{2}+z_{4}^{2}\equiv\left(az_{3}+bz_{4}\right)^{2}+\left(bz_{3}-az_{4}\right)^{2}+z_{3}^{2}+z_{4}^{2}\equiv\left(a^{2}+b^{2}+1\right)z_{3}^{2}+\left(a^{2}+b^{2}+1\right)z_{4}^{2}\equiv0\pmod p
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Итого, 
+\begin_inset Formula $p=z_{1}^{2}+z_{2}^{2}+z_{3}^{2}+z_{4}^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Exercise*
+Показать, что 
+\begin_inset Formula $\left[\Lambda:\Gamma\right]=p^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Exercise*
+\begin_inset Formula $Vol\ B^{d}=\frac{\pi^{d/2}}{\Gamma\left(\frac{n+2}{2}\right)}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout --Separator--
+
+\end_layout
+
+\begin_layout Exercise*
+Любое число представимо в виде суммы 4 квадратов.
+\end_layout
+
+\end_body
+\end_document
