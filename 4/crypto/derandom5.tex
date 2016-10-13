@@ -1,0 +1,132 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 5. Экспандеры на основе зигзаг-произведения}
+\addcontentsline{toc}{section}{Лекция 5. Экспандеры на основе
+зигзаг-произведения}
+\resetcntrs
+
+Строим граф с~тремя параметрами $N$~--- число вершин, $D$~--- степень каждой
+вершины, $\gamma = 1 - \lambda$~--- spectral gap.
+
+Рассмотрим три операции, для которых оценим влияние на каждый параметр.
+
+\section{Squaring}
+
+Эта операция преобразует $G = (V, E) \mapsto (V, E') = G^2$, причем ребро
+в~новом графе есть ребре $(u, w) \in E' \Leftrightarrow \exists v: (u, v) \in E,
+(v, w) \in E$ с~кратностью, равной числу таких~$v$. В~матричном виде это
+собственно возведение матрицы в~квадрат.
+
+Тогда $\Vert xM^2 \Vert \le \lambda^2 \Vert x \Vert$. При такой операции $(N, D,
+1 - \lambda) \mapsto (N, D^2, 1 - \lambda^2)$.
+
+\section{Tensor product}
+
+Принимает на вход $G_1 = (V_1, E_1), M_1$ с~параметрами~$D_1, \gamma_1$ и~$G_2 =
+(V_2, E_2), M_2$ с~параметрами~$D_2, \gamma_2$. Результата $G_1 \otimes G_2 =
+(V_1 \times V_2, E), D = D_1 D_2$. $(i, j)$ сосед пары $(v_1, v_2)$ есть пара
+из~$i$-го соседа~$v_1$ и~$j$-го соседа~$v_2$.
+
+Случайное блуждание по такому графу~--- это независимое одновременное случайное
+блуждание по двум сомножителям.
+
+\begin{claim}
+	$\gamma(G) = \min\{\gamma(G_1), \gamma(G_2)\}$.
+\end{claim}
+\begin{proof}
+	Покажем, что для $\forall x \in \mathbb{R}^{N_1 N_2}, x \bot u_{N_1 N_2}
+	\rightarrow \Vert x M \Vert \le \lambda \Vert x \Vert$.
+
+	$x = x^\Vert + x^\bot, x^\Vert \Vert u_{N_2}$ в~каждом облаке. $x^\Vert = y
+	\times u_{N_2}$, где $y \bot u_{N_1}$.
+
+	$\Vert xM^\Vert = y \otimes u_{N_2} = \Vert x^\Vert M + x^\bot M \Vert^2 =
+	\Vert x^\Vert M\Vert^2 + \Vert x^\bot M\Vert^2 \le \lambda_1^2 \Vert x^\Vert
+	\Vert^2 + \lambda_2^2 \Vert x^\bot \Vert$. Поясним, почему это так:
+
+	$x^\Vert M = (y \otimes u_{N_2}) (M_1 \otimes M_2) = (yM_1) \otimes (u_{N_2}
+	M_2) = yM_1 \otimes u_{N_2}.
+	\Vert yM_1 \Vert \le \lambda_1 \Vert y \Vert
+	\Rightarrow \Vert x^\Vert M \Vert \le \lambda_1 \Vert x^\Vert \Vert$.
+
+	$x^\bot M = x^\bot (I_{N_1} \otimes M_2) (M_1 \otimes I_{N_2})$. Первое
+	уменьшает норму в~$\lambda_2$ раз, второе нормы не уменьшает, поэтому $\Vert
+	x^\bot M \Vert \le \lambda_2 \Vert x \Vert$.
+
+	Из конструкции видно, что $x^\Vert M \bot x^\bot M$, значит утверждение
+	доказано.
+\end{proof}
+
+\section{Zigzag product}
+
+Принимает на вход $G = (N, D_1, \gamma_1), H = (D_1, D_2, \gamma_2)$ и~выдает $G
+\textcircled{z} H$ с~параметрами~$(N D_1, D_2^2, \gamma = \gamma_1 \gamma_2^2),
+\lambda \le \lambda_1 + 2 \lambda_2$.
+
+$V = V_1 \times V_2, (u \in V_1, i \in V_2)$. Сосед $(u, i)$ с~номером~$(a,
+b)$~--- это:
+\begin{itemize}
+	\item $i'$~--- $a$-й сосед~$i$ в~$H$.
+	\item $v$~--- $i'$-й сосед $u$ в~$G$.
+	\item $j'$~--- номер~$u$ среди соседей~$v$.
+	\item $j$~--- $b$-й сосед $j'$ в~$H$.
+	\item $(v, j)$~--- результат.
+\end{itemize}
+
+Если $H$~--- полный граф с~петлями, то $G \textcircled{z} H = G \otimes H$.
+
+\begin{claim}
+	Если~$A, B, M$~--- матрицы случайных блужданий графов~$G, H, G \textcircled{z}
+	H$, то $M = \widetilde{B} \widehat{A} \widetilde{B}$, где $\widetilde{B} =
+	I_{N_1} \otimes B$, $\widehat{A}_{(u, i), (v, j)} = 1$, если ребро $(u, v)$
+	присутствует в~$G$, имеет номер~$i$ среди соседей~$u$ и~номер~$j$ среди
+	соседей~$v$.
+\end{claim}
+\begin{proof}
+	Следует из конструкции.
+\end{proof}
+
+$B = \gamma_2 J + (1 - \gamma_2) E$, где $J$ есть матрица из $\frac{1}{D_1}$,
+а~$\Vert E \Vert \le 1$.
+
+Тогда~$\widetilde{B} = \gamma_2 \widetilde{J} + (1 - \gamma_2) \widetilde{E}$.
+
+$$B = (\gamma_2 \widetilde{J} + (1 - \gamma_2) \widetilde{E}) \widehat{A}
+(\gamma_2 \widetilde{J} + (1 - \gamma_2) \widetilde{E} = \gamma_2^2
+\widetilde{J} \widehat{A} \widetilde{J} + (1 - \gamma^2) F, \Vert F \Vert
+\le 1.$$
+
+При этом $\widetilde{J} \widehat{A} \widetilde{J} = A \otimes J$ так как $J$
+соответствует полному графу. Тогда $M = \gamma_2^2 A \otimes J + (1 -
+\gamma_2^2) F$.
+
+$\Vert xM \Vert \le \gamma_2^2 \Vert x A \otimes J \Vert + (1 -
+\gamma_2^2) \Vert xF \Vert \le (\gamma_2^2 (1 - \gamma_1) + (1 - \gamma_2^2))
+\Vert x \Vert = (1 - \gamma_1 \gamma_2^2) \Vert x \Vert$.
+
+\section{Конструкции экспандеров}
+
+Первая конструкция. Пусть есть экспандер~$H$
+с~параметрами~$(D^4, D, \frac{7}{8})$. Будем итерировать
+процесс~$G_1 = H^2, G_{t+1} = G_t^2 \textcircled{z} H$.
+
+$G_1$ тогда будет иметь параметры~$(D^4, D^2, \frac{63}{64})$. Если $G_t$ имеет
+параметры $(N, D^2, 1 - \lambda)$, то у~$G_t^2$ они будут $(N, D^4, 1 -
+\lambda^2)$. Тогда $G_{t+1}$ имеет параметры~$(ND^4, D^2, (1 - \lambda^2)
+\frac{49}{64})$. Если $\lambda > \frac{1}{2}$ (что верно для $G_1$), то разрыв
+сохраняется $>\frac{1}{2}$.
+
+Вторая конструкция дает более быстрый рост графа. Если~$H$~--- экспандер
+с~параметрами~$(D^8, D, \frac{7}{8})$, то $G_1 = H^2$, $G_{t+1} =
+(G_t \otimes G_t)^2 \textcircled{z} H$.
+
+$(G_t \otimes G_t)^2$ имеет параметры~$(N^2, D^8, >\frac{3}{4})$. $(G_t \otimes
+G_t)^2 \textcircled{z} H$ тогда имеет параметры~$(N^2 D^8, D^2, >\frac{1}{2})$.
+
+Если считать таким образом, то можно за полилог перечислить всех соседей
+конкретной вершины.
+
+\end{document}
