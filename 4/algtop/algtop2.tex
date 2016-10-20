@@ -3,8 +3,8 @@
 
 \begin{document}
 
-\section*{Лекция 2. }
-\addcontentsline{toc}{section}{Лекция 2. }
+\section*{Лекция 2. Группа монодромии накрытия}
+\addcontentsline{toc}{section}{Лекция 2. Группа монодромии накрытия}
 
 \resetcntrs
 
@@ -94,6 +94,38 @@
 	выполнено $\psi([\phi])(v) = v e^{\frac{2\pi it}{k}}$, то есть $G_{b_0} \cong
 	\mathbb{Z}_k$.
 \end{example}
+
+Вообще говоря, корректность определения группы монодромии не очевидна.
+\begin{claim}
+	Пусть $\phi_1 \sim \phi_2$, $\Theta: [0; 1]^2 \rightarrow B: \Theta(t, 0) =
+	\phi_1(t), \Theta(t, 1) = \phi_2(t)$, тогда $\psi(\phi_1) = \psi(\phi_2)$.
+\end{claim}
+\begin{proof}
+	$\psi([\phi_j])(x) = \overline\phi_{j,x}(1)$. Нужно показать, что
+	$\overline\phi_{1,x}(1) = \overline\phi_{2,x}(1)$. Мы будем определять
+	отображение $\overline\Theta: [0; 1]^2 \rightarrow E$ так, чтобы
+	еще~$\Theta(0, t) = x$.
+
+	\begin{lemma}[О~продолжении поднятия]
+		Пусть $f: D^n \rightarrow B$, $F_0: D_1 \rightarrow E: f\mid_{D_1} \equiv p
+		\circ F$, где $D_1 = \{x \in \partial D^n \mid x_n \le 0\}$. Тогда $\exists
+		F: D^n \rightarrow B, F_0 = F\mid_{D_1}, f = p \circ F$.
+	\end{lemma}
+
+	По лемме, такое поднятие $\overline\Theta$ существует. Тогда рассмотрим
+	$p \circ \overline\Theta\mid_{\{(1,t)\}} = \Theta(\{1, \tau\}) =
+	\{\phi_\tau(1)\}$, а~значит, что $\overline\Theta(\{1, \tau\}) \subset
+	p^{-1}(b)$~--- дискретно, то есть $|\overline\Theta(\{1, \tau\})| = 1$.
+
+	\begin{proof}[Доказательство леммы]
+		Легко показать, что у~каждой точки~$x_0$, которую мы смогли поднять, есть
+		окрестность, которую можно поднять. В~силу компактности квадрата, достаточно
+		взять конечное число открытых множеств, чтобы его покрыть. Более того, можно
+		показать, что можно взять мелкую сетку из маленьких замкнутых квадратиков,
+		каждый из которых лежит в~открытом множестве, над которым накрытие
+		тривиально, и~продолжать поднятие построчно по этим квадратикам.
+	\end{proof}
+\end{proof}
 
 \begin{definition}[Изоморфизм накрытий]
 	Накрытия~$\pi_i: E_i \rightarrow B_i$, $i \in \{0, 1\}$ изоморфны, если
