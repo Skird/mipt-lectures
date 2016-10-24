@@ -1,0 +1,80 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 5. }
+\addcontentsline{toc}{section}{Лекция 5. }
+\resetcntrs
+
+\section{Общая спектральная теорема I}
+
+Список праздных фактов:
+\begin{itemize}
+	\item $\text{supp }\sigma = \bigcup\limits_{\substack{ \sigma(X
+		\setminus K) = 0,\\\text{K~--- замкнуто}}}$
+	\item $\sigma_1 \ast \sigma_2$~--- распределение случайной величины~$\xi_1 +
+		\xi_2, \xi_1 \bot \xi_2$.
+	\item (абсолютная непрерывность мер) $\nu \ll \mu \Leftrightarrow \nu = p(z)
+		\mu, p \in L^1(\mu)$.
+	\item (сингулярность мер) $\nu \bot \eta \Leftrightarrow \exists $борелевское
+		$F: \nu(F) = 1, \eta(\Omega \setminus F) = 1$
+	\item Любые две меры $\sigma_1, \sigma_2$ можно представить как $\sigma_1 =
+		\nu_1 + \omega_1, \sigma_2 = \nu_2 + \omega_2$, притом $\omega_1 \sim
+		\omega_2 \bot \nu_1 \bot \nu_2$.
+\end{itemize}
+
+\begin{theorem}
+	$\sigma = \sigma_d + \sigma_s + \sigma_{ac}$ (представляется
+	в~виде суммы дискретной составляющей, сингулярной составляюшей и~абсолютно
+	непрерывной составляющией), притом $(\sigma_d, \sigma_s) \bot \sigma_{ac}$.
+
+	При этом $\sigma_d \sim 1_\Lambda, \Lambda < S^1$~--- дискретная.
+\end{theorem}
+
+\begin{theorem}[$\ast$]
+	Если~$\hat T$~--- эргодическое в~бесконечномерном $L^2(x, \mu)$, тогда
+	$Sp(\hat T) = \text{supp }\sigma = S^1$.
+\end{theorem}
+
+Если рассматривать системы с~кратностью, получается картина, которую можно
+воспринимать двумя способами:
+\begin{itemize}
+	\item Есть меры $\sigma_1, \ldots, \sigma_{\infty}$, попарно сингулярные,
+		притом у~нас есть по $n$ копий пространства $V_n$: $\hat T\mid_{V_{2,j}}
+		\cong (L^2(\sigma_2), \mu_2)$.
+	\item У~нас есть $\sigma_1, \ldots, \sigma_{\infty}$, притом $\sigma_{k+1} \ll
+		\sigma_k, \sigma_1 = \sigma$. В~терминах предыдущего случая $\sigma =
+		\frac{\sigma_1}{4} + \ldots + \frac{\sigma_k}{2^{k+1}} + \ldots +
+		\frac{\sigma_\infty}{2}$.
+\end{itemize}
+
+Спектральный инвариант тогда имеет вид $(\sigma, M(z))$, где $M(z)$~---
+измеримая функция кратности.
+
+\section{Семинарская часть}
+
+\begin{definition}
+	Пусть $T: (X, \mu), S(Y \nu)$. Мура $\eta$ есть джойнинг $T, S$ если $\pi_x
+	\eta = \mu, \pi_y \eta = \nu, (T \times S) \eta = \eta$.
+\end{definition}
+
+Диагональный автоджойнинг: $\Delta(A \times B) = \mu(A \cap B)$.
+
+\begin{exercise}~
+	\begin{itemize}
+		\item $\Delta_S (A \times B) = \mu(AS \cap B)$~--- джойнинг, если $ST = TS$,
+			$S$ сохраняет меру. Замечание: $\Delta_{T^k}(A \times B) = \mu(T^k A \cap
+			B) \rightarrow \mu(A) \mu(B) \Leftrightarrow \Delta_{T^k}
+			\overset{w}\rightarrow \mu \times \mu$~--- джойнинговое определение
+			перемешивания.
+		\item $T: \sigma_1, S: \sigma_2, \sigma_1 \bot \sigma_2 \Rightarrow T \bot
+			S$~--- дизъюнктны, то есть единственный джойнинг~--- это $\mu \times \nu$.
+	\end{itemize}
+\end{exercise}
+
+Если есть $\beta(f(x), g(y)) = \int\limits_{X \times X} f(x)g(y) d\eta$, то она
+представима как $\left< J_\eta, g \right>$. Например, $J_{\mu \times \nu} =
+\Theta$~--- ортопроектор на константу, $J_\Delta = Id, J_{\Delta_S} = \hat S$.
+
+\end{document}
