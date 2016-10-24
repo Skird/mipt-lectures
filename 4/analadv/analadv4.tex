@@ -1,0 +1,66 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 4. }
+\addcontentsline{toc}{section}{Лекция 4. }
+\resetcntrs
+
+\section{Нормы на $\mathbb{Q}$}
+
+\begin{theorem}
+	Существуют следующие (мультипликативные) нормы на $\mathbb{Q}$:
+	\begin{itemize}
+		\item тривиальная
+		\item стандартная: $|x| = x sgn(x)$
+		\item $p$-адическая, $|x|_p = |\frac{a}{p^k}| = p^k$, $p$~--- простое.
+	\end{itemize}
+\end{theorem}
+
+\begin{exercise}
+	Если двигаться шагами по $2^k$ с~весом $2^{-k}$ от точки 0 к~точке $x \in
+	\mathbb{Z}$, то чему равен вес кратчайшего пути?
+\end{exercise}
+
+\begin{exercise}
+	$G = \left\{ \begin{bmatrix}a & b\\0 & \frac{1}{a}\end{bmatrix} \right\}$.
+	Найти левую и~правую меру Хаара.
+\end{exercise}
+
+Если пополнить $p$-адические числа, получим $\mathbb{Q}_{(p)} =
+[\mathbb{Q}]_{|\cdot|_p}$. Числа там имеют вид~$\sum\limits_{j=-\infty}^{\infty}
+x_j p^j$. Можно выделить абелеву подгруппу $\mathbb{Z}_{(p)}$ с~числами, где нет
+отрицательных~$j$.
+
+\begin{exercise}
+	$\mathbb{Z}_{(p)}$~--- компактно.
+\end{exercise}
+
+\begin{exercise}
+	$\mathbb{Z}_{(p)}$~--- гомеоморфно $p$-ичному дереву и~канторовскому множеству.
+\end{exercise}
+
+\begin{exercise}
+	Записать $-1, \frac{1}{2}$ как $p$-адическую дробь.
+\end{exercise}
+
+\begin{exercise}[$\ast\ast$]
+	Исследовать в~$p$-адических числах $e^t = 1 + x + \frac{x^2}{2} + \ldots$.
+\end{exercise}
+
+\begin{exercise}
+	Доказать, что $T: x \mapsto x + 1$ непрерывно, сохраняет меру Хаара, и~что все
+	сдвиги на этой группе $R_a: x \mapsto x + a$ сводятся к~$T$.
+\end{exercise}
+
+\begin{exercise}
+	Найти меру Хаара этой группы.
+\end{exercise}
+
+\begin{exercise}
+	Проверить, что характеры~$\mathbb{Z}_{(p)}$~--- это
+	$\gamma_{\frac{\alpha}{p^k}}(x) = \exp(2\pi i \frac{\alpha}{p^k}x)$.
+\end{exercise}
+
+\end{document}
