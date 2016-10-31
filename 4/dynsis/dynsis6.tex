@@ -1,0 +1,39 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 6. }
+\addcontentsline{toc}{section}{Лекция 6. }
+\resetcntrs
+
+Праздный факт:
+\begin{theorem}[Рохлин]
+	Любое пространство Лебега (конечной меры) без атомов (точек ненулевой меры)
+	изоморфно $[0; 1]$.
+\end{theorem}
+
+Рассмотрим множество всех джойнингов $J_{T,S}$. Оно выпукло и~компактно
+(множество всех мер компактно в~силу слабой компактности шара в~гильбертовом
+пространстве, а~замкунтое подмножество компакта компактно). Всякий джойнинг
+может быть тогда выражен как
+$$ \eta = \int\limits_{\partial J_{T,S}} \alpha d\xi_{(\eta)}. $$
+
+Утверждается, что $\partial J_{T,S}$ представляет собой все эргодические
+джойнинги.
+
+Пусть есть две эргодические системы $T$ и~$S$ с~общим дискретным спектром
+$\Lambda$. Тогда $J_{T,S}$ непусто и~компактно, то есть имеет границу. Значит
+существует какой-то эргодический джойнинг $\eta$.
+
+$L^2(\mu) = Span\{ \phi_\lambda(x): \lambda \in \Lambda \}$,
+$L^2(\nu) = Span\{ \psi_\lambda(x): \lambda \in \Lambda \}$.
+
+$(\hat T \times \hat S) \phi_{\lambda_1}(x) \psi_{\lambda_2}(y) = \lambda_1
+\lambda_2 \phi_{\lambda_1} \psi_{\lambda_2}$. $L^2(\eta) = \left<
+\phi_{\lambda_1} \otimes \psi_{\lambda_2} \right>$.
+
+Утверждается, что канонические вложения $\hat \pi_1: L^2(\mu) \rightarrow
+L^2(\eta), \hat \pi_2: L^2(\nu) \rightarrow L^2(\eta)$ являются изоморфизмами.
+
+\end{document}
