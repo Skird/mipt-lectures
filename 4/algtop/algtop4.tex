@@ -1,0 +1,138 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 4. Разрешимость группы монодромии}
+\addcontentsline{toc}{section}{Лекция 4. Разрешимость группы монодромии}
+
+\resetcntrs
+
+Список фактов с~подсказками:
+\begin{itemize}
+	\item Если группа транзитивна и~порождена транспозициями, то она есть $S_n$
+		(комбинаторный факт)
+	\item Группа монодромии транзитивна (нужно, чтобы $\mathbb{C} \setminus
+		p^{-1}(B')$ было линейно связно, что верно, так как второе множество
+		конечно, тогда все пути можно опустить, чтобы они стали петлями
+		в~фундаментальной группе).
+	\item Группа монодромии порождена транспозициями (нужно понять, как устроены
+		петли в~$\mathbb{C} \setminus p^{-1}(B')$).
+	\item Если $E_1$ вложено в~$E_2$ (то есть поднакрытие), то можно индуцировать
+		эпиморфизм $i^\ast$ из группы монодромии $G_2 \rightarrow G_1$.
+	\item Неразрешимая группа не может быть образом разрешимой при эпиморфизме.
+	\item Группа монодромии накрытия, заданного функцей, выраженной в~радикалах,
+		разрешима (ближайшая цель).
+\end{itemize}
+
+\section{Разрешимость группы монодромии накрытия функции, выраженной
+в~радикалах}
+
+Так или иначе, доказывать придется по индукции. База:
+\begin{itemize}
+	\item $g(x) = c$, $G = S_1$.
+	\item $g(x) = \sqrt[n]{x}, X = \{(x, y) \mid x = y^n \}, p: X \rightarrow
+		\mathbb{C}, p(x, y) = x, B' = \{0\}, x = f(y) = y^n$.
+
+		$S_{\left\{\sqrt[n]{1}\right\}} \supset G_{p,1} =
+		\psi(\underbrace{\pi_1(\mathbb{C} \setminus \{0\})}_{\cong \mathbb{Z}}
+		)$.
+
+		$G_{p,1} = \left< \psi([\phi]) \right>, \phi(t) = \exp(2\pi it),
+		\psi([\phi])(z) = \widetilde{\phi}_z(1)$.
+
+		Пусть $\widetilde{\phi}(t) =
+		z\exp(2\pi i \frac{t}{n}), p \circ \widetilde{\phi}(t) = (z \exp(2\pi i
+		\frac{t}{n}))^n = z^n \exp(2\pi it) = \exp(2\pi it) = \phi(t)$.
+
+		Тогда $\widetilde{\phi}$~--- действительно поднятие $\phi$. Таким образом
+		$\psi([\phi])(z) = \widetilde{\phi}_z(1) = z \exp(\frac{2\pi i}{n})$. Стало
+		быть группа монодромии $\mathbb{Z}_n$~--- разрешима.
+\end{itemize}
+
+Для шага нужно две вещи: любой полином от двух разрешенных функций и~их
+композиция.
+
+\begin{definition}
+	Пусть $p_1, p_2: E_1, E_2 \rightarrow B$~--- два разветвлённых накрытия. Тогда
+	$p_1 \oplus p_2: E_3 \rightarrow B, E_3 = \{z_1, z_2 \mid p_1(z_1) =
+	p_2(z_2)\} \subset E_1 \times E_2, p(z_1, z_2) = p_1(z_1) = p_2(z_2)$
+	называется прямой суммой разветвлённых накрытий.
+\end{definition}
+
+Прямая сумма разветвлённых накрытий есть разветвлённое накрытие: нужно выяснить,
+в~чём содержится бифуркационное множество.
+\begin{claim}
+	$B \subset B_1 \cup B_2$.
+\end{claim}
+\begin{proof}
+	Пусть $b \in B \setminus (B_1 \cup B_2)$. Дано: $\exists U_1 \ni b, U_2 \ni
+	b, \xi_1, \xi_2, \xi_j: p_j^{-1}(U_j) \rightarrow U_j \times F_j$.
+
+	Рассмотрим тогда $U_3 = U_1 \cap U_2$. $(p_1 \oplus p_2)^{-1}(U_3) = \{(z_1,
+	z_2) \in E_1 \times E_2 \mid p_1(z_1) = p_2(z_2) \in U_3\} \subset
+	p_1^{-1}(U_3) \times p_2^{-1}(U_3) = V_3$.
+
+	Нам нужно найти $\xi_3: V_3 \rightarrow U_3 \times F_1 \times F_2$. Определим
+	её как~$\xi_3(z_1, z_2) = (p_1(z_1) = p_2(z_2), \xi_1(z_1)_2, \xi_2(z_2)_2)$.
+	$z_j = \xi_j^{-1}(p_j(z_j), \xi_j(z_j)_2)$, значит это гомеоморфизм.
+
+	Проекция $\xi_3$ на первый сомножитель и~есть $p_1 \oplus p_2$, поэтому
+	корректность разветвлённого накрытия доказана.
+\end{proof}
+
+\begin{claim}
+	$G_{p_1 \oplus p_2} \cong G < G_{p_1} \oplus G_{p_2}$.
+\end{claim}
+\begin{proof}
+	Идея: сопоставить $\sigma = \psi_{p_1 \oplus p_2}([\phi]) \mapsto
+	(\psi_{p_1}([\phi]), \psi_{p_2}([\phi])) = (\sigma_1, \sigma_2)$. Нужно
+	показать, что отображение определено корректно.
+
+	Утверждение:
+	$\psi_{p_1 \oplus p_2}([\phi])(z_1, z_2) = (\sigma_1(z_1), \sigma_2(z_2))$,
+	где $\sigma_j = \psi_{p_j}([\phi])$. То есть, $\sigma_3(z_1, z_2) =
+	(\sigma_1(z_1), \sigma_2(z_2))$.
+
+	В~самом деле
+	$\widetilde{\phi}_{z_1,z_2}(t) = (\widetilde{\phi}_{z_1}(t),
+	\widetilde{\phi}_{z_2}(t)) \in E_3$, так как $p_1(\widetilde\phi_{z_1}(t)) =
+	\phi(t) = p_2(\widetilde\phi_{z_2}(t))$.
+
+	$\psi_{p_1 \oplus p_2}([\phi])(z_1, z_2) = \widetilde\phi_{z_1,z_2}(1) =
+	(\psi_{p_1}([\phi])(z_1), \psi_{p_2}([\phi])(z_2))$.
+
+	Зная это, определеим $\chi: G_{p_1 \oplus p_2} \rightarrow G_{p_1} \oplus
+	G_{p_2}$ по формуле $\chi(\sigma_3) = \sigma_{3,1} \oplus \sigma_{3,2}$.
+
+	Из доказанного, это корректный гомоморфизм. Докажем, что это мономорфизм.
+	В~самом деле, если образ какого-то элемента тривиален, то и~сам элемент есть
+	тривиальная перестановка (обе компоненты тривиальны).
+\end{proof}
+
+\begin{lemma}
+	Пусть $p_j$~--- накрытие многочлена $f_j$, $p_j: X_j \rightarrow \mathbb{C},
+	p_3: X_3 \rightarrow \mathbb{C}$~--- накрытие $f_1 + f_2$. Тогда существует
+	эпиморфизм накрытий~$h: E_3 \rightarrow X_3$, где $p_1 \oplus p_2: E_3
+	\rightarrow \mathbb{C}, E_3 \subset X_1 \times X_2$.
+\end{lemma}
+\begin{proof}
+	Положим $р((b, x_1), b(b, x_2)) = (b, x_1 + x_2)$. Легко видеть, что $p_3
+	\circ h = p_1 \oplus p_2$, а~также, что $h$~--- непрерывна. Более того,
+	$h$~--- сюрьекция. Значит~$h$~--- эпиморфизм.
+\end{proof}
+
+\begin{remark}
+	Аналогичная лемма дословно верна для произведения.
+\end{remark}
+
+\begin{lemma}
+	Пусть $h: E_1 \rightarrow E_2$ эпиморфизм накрытий $p_j: E_j \rightarrow B$.
+	Тогда существует индуцированный эпиморфизм $h_\ast: G_{p_1} \rightarrow
+	G_{p_2}$.
+\end{lemma}
+
+Из всего этого, $G_{p_1}, G_{p_2}$~--- разрешимы $\Rightarrow G_{f_1 + f_2},
+G_{f_1 \cdot f_2}$ разрешимы.
+
+\end{document}
