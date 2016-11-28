@@ -3,4 +3,55 @@
 
 \begin{document}
 
+\section{Обыкновенные производящие функции}
+
+$f(t) = \sum\limits_{n=0}^\infty x_n t^n \leftrightarrow (x_0, \ldots, x_n,
+\ldots)$. С~помощью них можем суммировать какие-то простые ряды и~прочее.
+
+Кстати,
+$\lim\limits_{n \rightarrow \infty} x_n = \lim_{t \rightarrow 1} (1-t)f(t)$.
+
+Тривиальная производящая функция: $1, 1, 1, \ldots \sim \frac{1}{1-t}$.
+
+Факториалы: $1, 1, \frac{1}{2}, \frac{1}{6}, \ldots \sim e^t$.
+
+Дельта-функция: $1, 0, 0, \ldots \sim 1$.
+
+Биномиальные коэффиенты: $C_n^k \sim (1 + t)^k$.
+
+\begin{exercise}
+	Производящая функция $C_n^{k_0}$ ($k_0$ фиксированно).
+\end{exercise}
+
+Соображениe: В~90\% случаев можно искать решение в~виде: $f(t) = \frac{\mu}{1-t}
++ \psi(t)$, где $\psi$~--- регулярная.
+
+Рассмотрим: $x_{n+1} = {nx_n + x_{n-1} \over n + 1}$.
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		$f(t)$ & $f'(t)$\\
+		\hline
+		$\sum x_n t^n$ & $\sum nx_n t^{n-1}$\\
+		$\sum x_{n+1} t^{n+1}$ & $\sum (n+1)x_{n+1} t^n$\\
+		$\sum x_{n-1} t^{n-1}$ & $\sum (n-1)x_{n-1} t^{n-2}$\\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{align*}
+	(n+1)x_{n+1} = nx_n + x_{n-1}\\
+	f' = tf' + tf\\
+	(1-t)f' = tf + x_1\\
+	\frac{df}{f}= \frac{t dt}{1-t}\\
+	f = -t + \int\frac{dt}{1-t} = -t - \ln(1- t) + c\\
+	c \frac{e^{-t}}{1-t} (1-t) = x_1 = \int x_1 e^t dt = x_1 e^t + c_0\\
+	f(t) = \frac{x_1 + (x_0 - x_1) e^{-t}}{1-t}
+\end{align*}
+
+\begin{exercise}
+	Какое отношение эта задача имеет к~числу беспорядков на~$n$ элементах?
+\end{exercise}
+
 \end{document}
