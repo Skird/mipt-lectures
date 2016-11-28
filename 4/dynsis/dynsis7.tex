@@ -1,0 +1,70 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 7. Про слабо-перемешивающие системы}
+\addcontentsline{toc}{section}{Лекция 7. Про слабо-перемешивающие системы}
+\resetcntrs
+
+Хотим построить слабо-перемешивающую, но не перемешивающую систему.
+
+Рассмотрим следующий процесс преобразования слов и~будем его анализировать.
+$w_0 = 0, w_1 = 0010, \ldots, w_{n+1} = w_n w_n 1 w_n$.
+
+Определим эмпирическое распределение: $p(u \Vert w_\infty) =
+\lim\limits_{n \rightarrow \infty} p(u \Vert w_n)$, где
+$p(u \Vert v) = \frac{\#\{\text{вхождений u в~v}\}}{|v| - |u| + 1}$.
+
+\begin{lemma}
+	Меры $\mu_n(u) = p(u \Vert w_\infty), |u| = n$ согласованы, то есть если по
+	большей мере рассмотреть маленькое слово, то получится то же, что по меньшей
+	мере (или, что существует мера $\mu$, проекцией которой являются все данные
+	меры). Таким образом имеется динамическая система на пространстве
+	$(\mathbb{A}^\mathbb{Z}, \mathcal{B}, \mu)$ с~оператором Купмана $T: (x_i)
+	\mapsto (x_{i+1})$.
+\end{lemma}
+
+\begin{theorem}~\\
+	\begin{itemize}
+		\item $T$~--- эргодическое;
+		\item $\hat T^{h_n} \underset{w}\rightarrow \frac{\hat T + 1}{2}$;
+		\item $T \in WMix, T \notin Mix$.
+	\end{itemize}
+\end{theorem}
+
+Процесс можно представить так: имеем слово $w$, записанное в~башню снизу вверх.
+За 1 шаг мы должны скопировать $w$, получив три башни рядом. Далее на среднюю
+башню нужно дописать $1$ и~склеить все в~один столбик.
+
+\begin{definition}
+	$T \in Rang(1)$, если $\exists \xi_n = \{B_n, TB_n, \ldots, T^{h_n-1}B_n,
+	\eps_n\} \rightarrow \eps$, то есть $\forall A \exists \xi_n$~--- измеримая на
+	$A$ и~$\mu(A \Delta A_n) \rightarrow 0$.
+\end{definition}
+
+Рассмотрим $\left< \hat T^{-h_n}f, g\right> = \int\limits_X
+\hat T^{h_n} f(x)g(x) d\mu = {1\over2} \left<f,g\right> +
+{1\over2} \left<\hat Tf, g\right>$. То есть второй пункт доказан.
+
+Этюд: характеризация полиномов, таких, что $\lim \hat T^{-mh_n} = P_m(\hat T)$.
+Можно получить, что $P_{3m} = P_m$ и~выразить $P_{3m+1}, P_{3m+2}$ через
+$P_{m}=P_{3m}$ и~$P_{m+1}=P{3m+3}$ и~изобразить их как результат случайного
+блуждания на графе Шреера $BS(1,3) / \left<t\right>$, где $BS(1,3)=\left<a,t\mid
+tat^{-1} = a^3\right>$ (стандартное действие $a: x \mapsto x + 1$, $t: x \mapsto
+3x$).
+
+\begin{theorem}
+	Для эргодических $T$ следующие утверждения эквивалентны:
+	\begin{itemize}
+		\item $T \in WMix$;
+		\item $\sigma_T = \sigma_s + \sigma_{ac} (\nexists \phi: \hat T\phi =
+			\lambda \phi, \lambda \ne 1)$;
+		\item Джойнинг $\mu \times \mu$ эргодичен относительно $T \times T$;
+		\item (Н. Винер) $\forall \eps > 0 \rightarrow \mathcal F = \{t:
+			|\left<\hat T^t f, g\right>| > \eps \}$ имеет нулевую плотность:
+			$\frac{\mathcal{F} \cap [1, N]}{N} \rightarrow 0$.
+	\end{itemize}
+\end{theorem}
+
+\end{document}
