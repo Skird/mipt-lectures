@@ -1,0 +1,127 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 8. Системы уравнений II}
+\addcontentsline{toc}{section}{Лекция 8. Системы уравнений II}
+
+\section{Основные соображения по упрощению}
+
+Самый общий вопрос: при каких $A$ общая система разрешима в~радикалах. Первые
+мысли:
+\begin{itemize}
+	\item Удобно рассматривать мономиальные замены переменных на комлексном торе
+		${\mathbb{C}^\ast}^k$. $x^k = u^{Mk}$, где $M \in GL_k(\mathbb{Z})$.
+	\item Случаи, которые можно свести к~более простым:
+		\begin{itemize}
+			\item $A$ называется \emph{невырожденной}, если $\forall i \rightarrow
+				A_i \ni 0 \in \mathbb{Z}^k$, $\left< \bigcup\limits_{j=1}^k A_j
+				\right>_\mathbb{Z} = \mathbb{Z}^k$. Вырожденные сводятся к~невырожденным.
+
+				Если $\exists i: 0 \notin A_i$. $\mathbb{C}^{A_j}$ заменяется на
+				$\mathbb{C}^{A_j - \{k_0\}}$.
+
+				Если же $\left< \bigcup\limits_{j=1}^k A_j \right>_\mathbb{Z} \ne
+				\mathbb{Z}^k$, то сведение делается (почти) мономиальной заменой
+				$M: M^{-1} e_j = v_j \Rightarrow M^{-1} = (v_1 \ldots v_k)$. Почти
+				потому что замена может быть необратимой.
+			\item Пусть $\exists j_1 < \ldots < j_l: \dim \sum\limits_{p=1}^l A_{j_p}
+				\le l < n$ (сумма Минковского). Тогда набор $A_1, \ldots, A_n$ называется
+				\emph{приводимым}.
+
+				Рассмотрим набор векторов $\alpha_1, \ldots, \alpha_l
+				\in \mathbb{Z}^n$, которые порождают $\mathbb{Z}^n \cap \left<
+				\sum\limits_{p=1}^l A_{j_p} \right>$. Чтобы сделать замену нам хочется
+				достроить этот набор до базиса $\mathbb{Z}^n$ (это возможно не всегда,
+				но можно достроить хотя бы просто до базиса подрешётки размерности $n$).
+
+				Рассмотрим мономиальную замену $u^k = x^{Mk}$, где $M = (\alpha_1,
+				\ldots, \alpha_n)$, переходя к~системе $P'_{j_s}(u) = P_{j_s}(x)$
+				с~носителем $A'_{j_s} = A(P_{j_s}') = M^{-1}(A_{j_s})$. В~частности
+				$M^{-1}(\alpha_j) = e_j$. Значит $A'_{j_s} \subset \mathbb{Z}^l \subset
+				\left< e_1, \ldots, e_l \right>$.
+
+				Тогда разрешимость системы сводится к~двум вопросам: разрешимость
+				системы $l$ уравнений с~носителями $A'_{j_s}, s = 1, \ldots, l$ (кроме
+				некоторых случаев, если она неразрешима, то и~большая тоже)
+				и~разрешимость системы с~носителями $\{ A'_{j_s} / {\mathbb{Z}^l} \mid s
+				> l\}$.
+		\end{itemize}
+\end{itemize}
+
+Теперь можно сформулировать гипотезу.
+
+\begin{claim}
+	Если система невырождена и~неприводима, а~ожидаемое количество решений больше
+	4, то она не разрешима в~радикалах.
+\end{claim}
+
+\section{Смешанный объём Минковского}
+
+Нужно только уточнить, что понимается под <<ожидаемым числом решений>>.
+
+\begin{theorem}[Бернштейн, Хованский] Для системы общего пололжения
+	с~носителями $A_1, \ldots, A_n$ (невырожденной) количество решений
+	в~$(\mathbb{C}^\ast)^n$ совпадает со смешанным объёмом Минковского
+	$MV_n(\left<A_1\right>, \ldots, \left<A_n\right>)$.
+\end{theorem}
+
+Смешанный объём Минковского можно определить многими способами:
+\begin{itemize}
+	\item Конструктивно. Пусть выпуклые тела $A_1, \ldots, A_n \subset
+		\mathbb{R}^n$, $F_A: (\mathbb{R}_+)^n \rightarrow \mathbb{R}$, $F(\lambda_1,
+		\ldots, \lambda_n) = V_n(\sum\limits_{j=1}^n \lambda_j A_j)$. Можно
+		показать, что $F$~--- гладкая, что даёт нам право рассмотреть
+		$\frac{\partial^n F_A}{\partial \lambda_1 \ldots \partial \lambda_n}(0)$
+		и~объявить это \emph{смешанным объёмом Минковского} $MV_n(A_1, \ldots,
+		A_n)$.
+	\item Некоторые свойства:
+		\begin{itemize}
+			\item $MV(A, \ldots, A) = n! V_n(A)$. В~самом деле~$F_A = V_n((\sum
+				\lambda_j) A) = V_n(A) (\sum \lambda_j)^n \Rightarrow
+				\frac{\partial^n F_A}{\partial \lambda_1 \ldots \partial \lambda_n} =
+				n!$.
+			\item $MV$~--- симметрична:
+				$$MV_n(A_1, \ldots, A_n) = MV(A_{\sigma(1)}, \ldots, A_{\sigma(n)}),
+				\sigma \in S_n.$$
+			\item $MV$~--- полилинейна:
+				\begin{multline*}
+					MV_n(\lambda_1 A_1' + \lambda_2 A_1'', A_2, \ldots, A_n) =\\
+					\lambda_1 MV_n(A_1', A_2, \ldots, A_n) + \lambda_2 MV_n(A_1'', A_2,
+					\ldots, A_n).
+				\end{multline*}
+		\end{itemize}
+	\item Предыдущих трёх свойств достаточно, чтобы определить функцию на
+		множестве $(\Omega_n)^n$ ($\Omega_n$~--- множество выпуклых тел
+		в~$\mathbb{R}^n$) однозначно. В~частности:
+
+		$$MV_2(A_1, A_2) = V(A_1 + A_2) - V(A_1) - V(A_2).$$
+	\item Предыдущая формула ведёт нас~к~явному определению:
+		\begin{multline*}
+			MV_n(A_1, \ldots, A_n) = \\
+			V_n\left(\sum A_j\right) - \sum_{k=1}^n V_n\left(\sum_{j \ne k} A_j\right)
+			+ \ldots + (-1)^{n-1}\sum_k V_n(A_k).
+		\end{multline*}
+\end{itemize}
+
+\begin{example}
+	Найдем ожидаемое число решений системы $P_1(x, y) = ax^3 + bxy + c =
+	P_2(x, y) = dx + ey^2 + f$. Выпуклые оболочки носителей~--- два треугольника,
+	посчитав площадь суммы и~суммы площадей, получаем 6.
+\end{example}
+
+\section{Критерий разрешимости системы в~радикалах}
+
+\begin{theorem}
+	Утверждение гипотезы верно для наборов $A_1, \ldots, A_n$, для которых
+	$\exists j \exists k_1, k_2 \in A_j: [k_1; k_2] \not\subset \partial \left<
+	A_j \right>$.
+\end{theorem}
+
+Частный случай такого препятствия~--- линейные уравнения ($A_j$~--- маленький
+симплекс, который мономиальной заменой приводится к~стандартному), которые,
+казалось бы, отметаются ограничением на невырожденность и~неприводимость,
+однако, оказываются, бывают более сложные примеры таких многогранников.
+
+\end{document}

@@ -3,8 +3,10 @@
 
 \begin{document}
 
-\section*{Лекция 7. Системы полиномиальных уравнений}
-\addcontentsline{toc}{section}{Лекция 7. Системы полиномиальных уравнений}
+\section*{Лекция 7. Системы уравнений I}
+\addcontentsline{toc}{section}{Лекция 7. Системы уравнений I}
+
+\section{Системы уравнений, их носитель, понятие разрешимости в~радикалах}
 
 У~нас теперь есть система полиномиальных уравнений: $P_1 = \ldots = P_k = 0$,
 притом $P_j \in \mathbb{C}[x_1, \ldots, x_k]$.
@@ -49,26 +51,5 @@
 	\setminus A \mid \exists l \in \mathbb{N}, P_1, \ldots, P_l \in
 	\mathbb{F}[x_1, \ldots, x_k] \mid A = \{P_1 = \ldots = P_l = 0\}\}$.
 \end{remark}
-
-Самый общий вопрос: при каких $A$ общая система разрешима в~радикалах. Первые
-мысли:
-\begin{itemize}
-	\item Удобно рассматривать мономиальные замены переменных на комлексном торе
-		${\mathbb{C}^\ast}^k$. $x^k = u^{Mk}$, где $M \in GL_k(\mathbb{Z})$.
-	\item Случаи, которые можно свести к~более простым:
-		\begin{itemize}
-			\item $A$ называется невырожденной, если $\forall i \rightarrow A_i \ni 0
-				\in \mathbb{Z}^k$, $\left< \bigcup\limits_{j=1}^k A_j \right>_\mathbb{Z}
-				= \mathbb{Z}^k$. Вырожденные сводятся к~невырожденным.
-
-				Если $\exists i: 0 \notin A_i$. $\mathbb{C}^{A_j}$ заменяется на
-				$\mathbb{C}^{A_j - \{k_0\}}$.
-
-				Если же $\left< \bigcup\limits_{j=1}^k A_j \right>_\mathbb{Z} \ne
-				\mathbb{Z}^k$, то сведение делается (почти) мономиальной заменой
-				$M: M^{-1} e_j = v_j \Rightarrow M^{-1} = (v_1 \ldots v_k)$. Почти
-				потому что замена может быть необратимой.
-		\end{itemize}
-\end{itemize}
 
 \end{document}
