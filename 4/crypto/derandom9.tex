@@ -3,8 +3,8 @@
 
 \begin{document}
 
-\section*{Лекция 9. Экстракторы}
-\addcontentsline{toc}{section}{Лекция 9. Экстракторы}
+\section*{Лекция 9. Экстракторы I}
+\addcontentsline{toc}{section}{Лекция 9. Экстракторы I}
 \resetcntrs
 
 \section{Общая идея}
@@ -24,14 +24,15 @@
 	как $p(1 - \delta_m) + (1 - p)\delta_m$ это выпуклая комбинация.
 \end{example}
 
-Более общий класс источников это $k$-слабые источники случайности. Мин-энтропия
-это $H_\infty(B) = -\log_2\left( \max\limits_x P(\vec b = x)\right)$.
+Более общий класс источников это $k$-слабые источники случайности.
+\emph{Мин-энтропия} это $H_\infty(B) = -\log_2\left( \max\limits_x P(\vec b = x)
+\right)$.
 
 $H_\infty(\vec b) \ge k \Leftrightarrow \forall x P(\vec b = x) \le
 \frac{1}{2^k}$. В~этом случае $\vec b$ содержит хотя бы $k$ случайных битов.
 
-Плоские распределения на $K \subset \{0, 1\}^n$, $|K| = 2^k$~--- это равномерные
-распределения.
+\emph{Плоские распределения} на $K \subset \{0, 1\}^n$, $|K| = 2^k$~--- это
+равномерные распределения.
 
 \begin{theorem}
 	Если $H_\infty(\vec b) \ge k$, то $\vec b$~--- выпуклая комбинация плоских
@@ -39,11 +40,21 @@ $H_\infty(\vec b) \ge k \Leftrightarrow \forall x P(\vec b = x) \le
 \end{theorem}
 
 \begin{definition}
-	Seeded extractor $Ext: \{0, 1\}^n \times \{0, 1\}^d \rightarrow \{0, 1\}^m$
-	с~параметрами $(k, \eps)$ обладает свойством, что: $\forall\xi, H_\infty(\xi)
-	\ge k \Rightarrow Ext(\xi, U_\alpha) \eps$-близка к~$U_m$.
+	\emph{Seeded-экстрактор} $Ext: \{0, 1\}^n \times \{0, 1\}^d \rightarrow
+	\{0, 1\}^m$ с~параметрами $(k, \eps)$ обладает свойством, что:
+	$\forall\xi, H_\infty(\xi)
+	\ge k \Rightarrow Ext(\xi, U_d)\ \eps$-близка к~$U_m$.
 \end{definition}
-Вероятностно можно показать существование экстрактора с~параметрами $m = k + d -
-2\log \frac{1}{\eps} - O(1)$ и~$d = \log(n - k) + 2\log\frac{1}{\eps} + O(1)$.
+
+Вероятностно можно показать существование seeded-экстрактора с~параметрами
+$m = k + d - 2\log \frac{1}{\eps} - O(1)$ и~$d = \log(n - k) +
+2\log\frac{1}{\eps} + O(1)$.
+
+\begin{definition}
+	\emph{Multisource-экстрактор} $MExt: \{0, 1\}^n \times \{0, 1\}^n \rightarrow
+	\{0, 1\}^m$ с~параметрами $(k, \eps)$ обладает свойством, что:
+	$\forall\xi, \eta: H_\infty(\xi), H_\infty(\eta) \ge k, \xi \bot \eta
+	\Rightarrow Ext(\xi, \eta)\ \eps$-близка к~$U_m$.
+\end{definition}
 
 \end{document}
