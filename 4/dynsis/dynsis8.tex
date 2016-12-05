@@ -1,0 +1,144 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section*{Лекция 8. Метрическая энтропия}
+\addcontentsline{toc}{section}{Лекция 8. Метрическая энтропия}
+\resetcntrs
+
+\section{Энтропия динамической системы}
+
+Рассмотрим фазовое пространство~$(X, \mathcal{B}, \mu)$ и~конечное разбиение
+$P = \{C_1, \ldots, C_n\}$.
+
+\begin{definition}
+	\emph{Энтропия} разбиения $P$~--- это $H(P) = -\sum \mu(C_i) \log_2 \mu(C_i)$.
+\end{definition}
+
+\begin{remark}
+	В~определении основание логарифма не так важно, но мы принимаем его за~2,
+	чтобы <<измерять>> информацию в~привычных битах.
+
+	Нетрудно понять, что $H(P) = E_\mu I_P(x)$, где $I(x)$~--- информационная
+	функция: $I_P(x) = -\log_2 \mu(C(x))$, где $C(x): X \rightarrow P, C(x) \ni
+	x$.
+\end{remark}
+
+Возьмём разбиение $P_0$ и~построим $Q_N = P_0 \lor T^{-1} P_0 \lor \ldots \lor
+T^{-N + 1} P_0$, где $A \lor B$ обозначает взятие минимального разбиения,
+содержащего~$A$ и~$B$.
+
+\begin{definition}
+	Пусть $(X, T)$~--- динамическая система, $P = \{C_\alpha, \alpha \in
+	\mathbb{A}\}$~--- разбиение. Пусть также~$x_j \in \mathbb{A}: C_{x_j} \ni
+	T^j(x)$. Тогда бесконечная последовательность $\{x_j \mid j \in G\}$
+	называется \emph{кодом} точки~$x$.
+\end{definition}
+
+Для $w \in \mathbb{A}^\ast$ примем обозначение $[w] = \{x: x_0 \ldots x_{|w|-1}
+= w\}$.
+
+Можно рассматривать проецсс кодирования как случайный процесс
+в~следующем смысле: пусть $\xi_0(x) = \alpha, x \in C_\alpha$~--- кодирующая
+случайная величина, тогда процесс кодирования $\xi_j = \xi_0 T^i$.
+
+\begin{definition}
+	\emph{Энтропией} процесса $\{\xi_j\}$ называется $h(\xi) = h_{P_0}(T) =
+	\lim\limits_{N \rightarrow \infty} \frac{1}{N} H(Q_N)$.
+\end{definition}
+
+Отметим также свойство: $H(P_0) \le \log_2 |P_0|$, достигается оценка очевидно
+для равномерного разбиения.
+
+Условную энтропию можно ввести с~помощью условное матожидание. Точно, через
+матожидание, также можно ввести энтропию бесконечного разбиения, однако, она уже
+не обязана быть конечной.
+
+\begin{theorem}
+	$H_P(T) = H(P \mid \bigvee\limits_{-\infty}^{-1} T^{i} P)$.
+\end{theorem}
+
+\begin{remark}
+	Представить себе процесс с~пространством, неизоморфным пространству Лебега не
+	очень просто, но такие есть (как пример, Винеровский процесс).
+\end{remark}
+
+\begin{definition}
+	$\eta$~--- \emph{измеримое разбиение}, если $\eta = \{f^{-1}(\{y\})\}$ для
+	некоторого измеримого $f: X \rightarrow Y$.
+\end{definition}
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		Разбиения & $\sigma$-алгебры\\
+		\hline
+		\multicolumn{2}{|c|}{пространство Лебега $\cong [0; 1]$ }\\
+		\hline
+		$\bbnu = \{X\}$ & $\{\varnothing, X\}$\\
+		\hline
+		$\bbespilon = \{\{x\}\mid x \in X\}$ & $\mathcal{A}$~--- полная на $[0;1]$\\
+		\hline
+		$\xi \lor \eta = \{C_1 \cap C_2\}$ & $\mathcal{B}_1 \land \mathcal{B}_2$\\
+		\hline
+		$\xi \land \eta$ & $\mathcal{B}_1 \cap \mathcal{B}_2$\\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{definition}
+	$\mathcal{A}$ называется \emph{$\mu$-полной}, если $\mathcal{A} =
+	[\mathcal{A}]_\mu$.
+\end{definition}
+\begin{definition}
+	Система $(Y, \mathcal{B}, \gamma, S)$ является \emph{фактором}
+	$(X, \mathcal{A}, \mu, T)$, если существует <<вложение>>:
+	$\exists \phi: X \rightarrow Y, \mathcal{B} \le \mathcal{A}$.
+
+	Или: $\mathcal{B} \le \mathcal{A}, S = T\mid_\mathcal{B}$ при условии, что
+	$T\mathcal{B} = \mathcal{B}$.
+\end{definition}
+
+\begin{definition}
+	\emph{Энтропия динамической системы} $h(T) = \sup\limits_P h_P(T)$, где $P$~--
+	конечное разбиение.
+\end{definition}
+
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		$h > 0$ & Спектр $(Leb, \infty)$\\
+		\hline
+		$h = 0$ & Самые разные спектры, разные кратности,\\
+		        & примеры субэкспоненциального роста сложности\\
+		\hline
+	\end{tabular}
+\end{center}
+
+\begin{theorem}[Шеннон-Макмилан-Брейман]
+	Энтропию процесса можно эквивалентно определить следующим образом:
+	$\exists h \ge 0: \forall \eps > 0 \rightarrow $ для $\mu$-большинства блоков
+	$[w]$ длины $n$ (мера всех остальных блоков стремится к~0): $2^{-n(h+\eps)} <
+	\mu([w]) < 2^{-n(h-\eps)}$. Такое $h$ и~есть энтропия процесса.
+\end{theorem}
+
+\section{Семинарская часть}
+
+Символическая сложность: $P_w(n) = \#L_n(w), L_n(w) = \{u \le w: |u| = n\}$.
+
+\begin{exercise}~\\
+	\begin{itemize}
+		\item $\min p(n)$ для непериодических слов?
+		\item построить экспоненциальный рост: $2^{h_n}$
+		\item построить линейный рост
+		\item достигается ли наименьшая скорость роста в~первом пункте
+		\item добиться квадратичной скрости
+		\item добиться кубической скорости
+		\item добиться субэкспоненциальной скорости
+		\item$(^\ast)$ какова скорость роста для слабо-перемешивающей системы из
+			предыдущей лекции? Для последовательности Туве-Морса.
+	\end{itemize}
+\end{exercise}
+
+\end{document}
