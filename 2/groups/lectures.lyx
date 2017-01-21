@@ -481,7 +481,7 @@ LatexCommand tableofcontents
 \end_inset
 
 , то обратного нет, в противном случае 
-\begin_inset Formula $\exists u,v:\ a\cdot u+n\cdot v=1\Rightarrow a\cdot u\equiv1(\mod n)$
+\begin_inset Formula $\exists u,v:\ a\cdot u+n\cdot v=1\Rightarrow a\cdot u\equiv1\pmod n$
 \end_inset
 
  и 
@@ -752,7 +752,7 @@ LatexCommand tableofcontents
 \begin_inset Formula $M$
 \end_inset
 
- , называется пересечение всех подгрупп 
+, называется пересечение всех подгрупп 
 \begin_inset Formula $G$
 \end_inset
 
@@ -806,7 +806,7 @@ LatexCommand tableofcontents
 , то 
 \begin_inset Formula 
 \[
-a,b\in H_{i}\Rightarrow a\cdot b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\in H_{i}\Rightarrow a\cdot b\in K,\ a^{-1}\in K
+a,b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\in H_{i}\Rightarrow a\cdot b\in K,\ a^{-1}\in K
 \]
 
 \end_inset
@@ -1047,7 +1047,7 @@ a,b\in H_{i}\Rightarrow a\cdot b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\
 
 \begin_layout Proof
 2) 
-\begin_inset Formula $\exists k\ne l:\ g^{k}=g^{l}\Rightarrow g^{k-l}=g^{k-l}=g^{k}\cdot\left(g^{l}\right)^{-1}=e=g^{l-k}$
+\begin_inset Formula $\exists k\ne l:\ g^{k}=g^{l}\Rightarrow g^{k-l}=g^{k}g^{-l}=g^{k}\cdot\left(g^{l}\right)^{-1}=e=g^{l-k}$
 \end_inset
 
 .
@@ -1120,7 +1120,7 @@ a,b\in H_{i}\Rightarrow a\cdot b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\
 \begin_inset Formula $\varphi$
 \end_inset
 
- --- биекция, так как пункты а) и б) доказывают инъективность и сюрьективность.
+ --- биекция, так как пункты а) и б) доказывают инъективность и сюръективность.
  Также 
 \begin_inset Formula $\varphi(k+l)$
 \end_inset
@@ -2152,7 +2152,7 @@ a,b\in H_{i}\Rightarrow a\cdot b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\
 \end_layout
 
 \begin_layout Proof
-Сопоставим классу 
+Каждому классу 
 \begin_inset Formula $gH\in G/H$
 \end_inset
 
@@ -2292,7 +2292,7 @@ a,b\in H_{i}\Rightarrow a\cdot b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\
 \end_inset
 
  --- простое, то 
-\begin_inset Formula $a^{p-1}\equiv1(\mod p)$
+\begin_inset Formula $a^{p-1}\equiv1\pmod p$
 \end_inset
 
 
@@ -2312,14 +2312,14 @@ a,b\in H_{i}\Rightarrow a\cdot b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\
 \end_inset
 
 , то 
-\begin_inset Formula $a^{\varphi(n)}\equiv1(\mod n)$
+\begin_inset Formula $a^{\varphi(n)}\equiv1\pmod n$
 \end_inset
 
 .
 \end_layout
 
 \begin_layout Proof
-\begin_inset Formula $ord\ a\mid\left|\mathbb{Z}_{n}^{\star}\right|,\ \left|\mathbb{Z}_{n}^{\star}\right|=\varphi(n)\Rightarrow a^{\varphi(n)}\equiv1(\mod n)$
+\begin_inset Formula $ord\ a\mid\left|\mathbb{Z}_{n}^{\star}\right|,\ \left|\mathbb{Z}_{n}^{\star}\right|=\varphi(n)\Rightarrow a^{\varphi(n)}\equiv1\pmod n$
 \end_inset
 
 .
@@ -2514,7 +2514,7 @@ a,b\in H_{i}\Rightarrow a\cdot b\in H_{i}\Rightarrow a\cdot b\in H_{i},\ a^{-1}\
 
 \begin_layout Proof
 Заметим, что 
-\begin_inset Formula $HK=\underset{k\in K}{\bigcap}Hk=\underset{k\in K}{\bigcup}Hk=KH$
+\begin_inset Formula $HK=\underset{k\in K}{\bigcup}Hk=\underset{k\in K}{\bigcup}kH=KH$
 \end_inset
 
 .
@@ -2814,7 +2814,7 @@ H\triangleleft G\Leftrightarrow\forall h\in H,g\in G\rightarrow h^{g}\in H\Leftr
 \emph on
 эпиморфизмом
 \emph default
-, если он сюрьективен.
+, если он сюръективен.
 \end_layout
 
 \begin_layout Definition*
@@ -2890,7 +2890,7 @@ H\triangleleft G\Leftrightarrow\forall h\in H,g\in G\rightarrow h^{g}\in H\Leftr
 \end_inset
 
 , 
-\begin_inset Formula $\varphi(k)=k\mod n$
+\begin_inset Formula $\varphi(k)=k\bmod n$
 \end_inset
 
 .
@@ -3509,7 +3509,7 @@ g^{\prime}\in\ker\varphi\cdot g=g\cdot\ker\varphi
 \begin_inset Formula $k=\varphi(g),\ g\in G\Rightarrow k=\psi(gH)\Rightarrow\psi$
 \end_inset
 
- --- сюрьекция.
+ --- сюръекция.
 \end_layout
 
 \end_deeper
@@ -3519,7 +3519,7 @@ g^{\prime}\in\ker\varphi\cdot g=g\cdot\ker\varphi
 
 .
  
-\begin_inset Formula $\varphi(k)=k\mod n$
+\begin_inset Formula $\varphi(k)=k\bmod n$
 \end_inset
 
 .
@@ -3739,7 +3739,7 @@ Im\ \varphi=G/K\cong\left(G/H\right)/\left(K/H\right)
 \end_layout
 
 \begin_layout Example*
-\begin_inset Formula $G=\mathbb{Z},\ H=n\mathbb{Z},\ K=mn\mathbb{Z}$
+\begin_inset Formula $G=\mathbb{Z},\ K=n\mathbb{Z},\ H=mn\mathbb{Z}$
 \end_inset
 
 , 
@@ -3964,11 +3964,11 @@ I_{g_{1}g_{2}}(w)=\left(g_{1}g_{2}\right)(w)=g_{1}(g_{2}(w))=I_{g_{1}}\circ I_{g
 \begin_inset Formula $I_{g}$
 \end_inset
 
- --- сюрьективно (так как 
+ --- сюръективно (так как 
 \begin_inset Formula $I_{g}\circ I_{g^{-1}}=id$
 \end_inset
 
- --- сюрьективно) и инъективно (так как 
+ --- сюръективно) и инъективно (так как 
 \begin_inset Formula $I_{g^{-1}}\circ I_{g}=id$
 \end_inset
 
@@ -4314,7 +4314,7 @@ I_{g_{1}g_{2}}(w)=\left(g_{1}g_{2}\right)(w)=g_{1}(g_{2}(w))=I_{g_{1}}\circ I_{g
 \end_inset
 
 , то есть это орбита 
-\begin_inset Formula $Gy$
+\begin_inset Formula $Gx$
 \end_inset
 
 .
@@ -4393,7 +4393,7 @@ I_{g_{1}g_{2}}(w)=\left(g_{1}g_{2}\right)(w)=g_{1}(g_{2}(w))=I_{g_{1}}\circ I_{g
 \end_inset
 
  верно 
-\begin_inset Formula $g_{1}w=w\Rightarrow g_{1}^{-1}g_{1}w=g^{-1}w\Rightarrow g_{1}^{-1}\in St(w)$
+\begin_inset Formula $g_{1}w=w\Rightarrow g_{1}^{-1}g_{1}w=g_{1}^{-1}w\Rightarrow g_{1}^{-1}\in St(w)$
 \end_inset
 
 .
@@ -4601,7 +4601,7 @@ I:\ G\mapsto S(G),\ I_{g}(h)=gh
 \begin_inset Formula $\ker I=\left\{ e\right\} \Rightarrow$
 \end_inset
 
-действие точно.
+ действие точно.
  Тогда 
 \begin_inset Formula $G$
 \end_inset
@@ -5078,7 +5078,7 @@ I_{g}(ab)=\left(ab\right)^{g^{-1}}=a^{g^{-1}}\cdot b^{g^{-1}}=I_{g}(a)\cdot I_{g
 \end_inset
 
  можно предъявить нетривиальный изоморфизм 
-\begin_inset Formula $\varphi:\ \mathbb{Z}_{n}\mapsto\mathbb{Z}_{n},\ \varphi(a)=\left(-a\right)\mod n$
+\begin_inset Formula $\varphi:\ \mathbb{Z}_{n}\mapsto\mathbb{Z}_{n},\ \varphi(a)=\left(-a\right)\bmod n$
 \end_inset
 
 .
@@ -5196,7 +5196,7 @@ I_{g}(H)=gHg^{-1}<G
 
 .
  Так как 
-\begin_inset Formula $\forall g\in N_{g}(H)\rightarrow gH=Hg$
+\begin_inset Formula $\forall g\in N_{G}(H)\rightarrow gH=Hg$
 \end_inset
 
 , то 
@@ -5419,7 +5419,7 @@ I_{g}(H)=gHg^{-1}<G
 \begin_inset Formula $G/Z(G)$
 \end_inset
 
- --- не циклический.
+ --- не циклическая.
 \end_layout
 
 \begin_layout Proof
@@ -5651,7 +5651,7 @@ Fix(g)=\left|\left\{ w\in\Omega\mid gw=w\right\} \right|
 
 \begin_layout Proof
 Значит 
-\begin_inset Formula $\underset{g\in G}{\sum}Fix(G)=\underset{w\in\Omega}{\sum}\left|\Omega\right|\cdot\frac{\left|G\right|}{\left|\Omega\right|}=\left|G\right|$
+\begin_inset Formula $\underset{g\in G}{\sum}Fix(G)=\underset{w\in\Omega}{\sum}\frac{\left|G\right|}{\left|\Omega\right|}=\left|G\right|$
 \end_inset
 
 .
@@ -5673,7 +5673,7 @@ Fix(g)=\left|\left\{ w\in\Omega\mid gw=w\right\} \right|
 \begin_inset Formula $G$
 \end_inset
 
- действует на конечно множество 
+ действует на конечное множество 
 \begin_inset Formula $\Omega$
 \end_inset
 
@@ -6052,7 +6052,7 @@ g(w_{1},w_{2})=\left(gw_{1},gw_{2}\right)
 \end_inset
 
 , а 
-\begin_inset Formula $A\times B=G$
+\begin_inset Formula $AB=G$
 \end_inset
 
 .
@@ -6126,8 +6126,8 @@ g(w_{1},w_{2})=\left(gw_{1},gw_{2}\right)
 \begin_inset Formula $\varphi$
 \end_inset
 
- --- сюрьекция, так как 
-\begin_inset Formula $A\times B=G$
+ --- сюръекция, так как 
+\begin_inset Formula $AB=G$
 \end_inset
 
 .
@@ -6274,7 +6274,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \begin_inset Formula $\varphi$
 \end_inset
 
- --- сюрьекция и гомоморфизм.
+ --- сюръекция и гомоморфизм.
  
 \begin_inset Formula $\ker\varphi=G_{1}\times H_{1}$
 \end_inset
@@ -6356,7 +6356,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \end_layout
 
 \begin_layout Remark*
-Если 
+Пусть 
 \begin_inset Formula $G$
 \end_inset
 
@@ -6387,7 +6387,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \end_inset
 
  так как 
-\begin_inset Formula $A_{n}\cap\left((1\ 2)\right)=\left\{ id\right\} ,\ A_{n}\times\left((1\ 2)\right)=S_{n}$
+\begin_inset Formula $A_{n}\cap\left((1\ 2)\right)=\left\{ id\right\} ,\ A_{n}\cdot\left((1\ 2)\right)=S_{n}$
 \end_inset
 
  и 
@@ -6532,7 +6532,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 
 \begin_layout Remark*
 Тогда 
-\begin_inset Formula $g,h\in G,\ gh=a_{g}b_{g}\cdot a_{h}b_{h}=a_{g}\cdot b_{g}\cdot a_{h}b_{g}^{-1}\cdot b_{g}\cdot b_{h}=\left(a_{g}\cdot\varphi_{b_{g}}(a_{h})\right)\cdot\left(b_{g}\cdot b_{h}\right)$
+\begin_inset Formula $g,h\in G,\ gh=a_{g}b_{g}\cdot a_{h}b_{h}=a_{g}\cdot b_{g}a_{h}b_{g}^{-1}\cdot b_{g}\cdot b_{h}=\left(a_{g}\cdot\varphi_{b_{g}}(a_{h})\right)\cdot\left(b_{g}\cdot b_{h}\right)$
 \end_inset
 
 .
@@ -6548,7 +6548,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \end_inset
 
 , операция: 
-\begin_inset Formula $\left(a_{1},b_{1}\right)\left(a_{2},b_{2}\right)=\left(a_{1}\varphi_{b}(a_{2}),b_{1}b_{2}\right)$
+\begin_inset Formula $\left(a_{1},b_{1}\right)\left(a_{2},b_{2}\right)=\left(a_{1}\varphi_{b_{1}}(a_{2}),b_{1}b_{2}\right)$
 \end_inset
 
 .
@@ -6828,7 +6828,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \begin_inset Formula $\varphi_{g}\mid_{K}$
 \end_inset
 
- --- сюрьективный гомоморфизм из 
+ --- сюръективный гомоморфизм из 
 \begin_inset Formula $K$
 \end_inset
 
@@ -6846,7 +6846,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 
 \begin_layout Remark*
 Отсюда получаем, что 
-\begin_inset Formula $G\triangleleft G^{\prime}\triangleleft G^{\prime\prime}\triangleleft\ldots\triangleleft G^{(n)}\triangleleft\ldots$
+\begin_inset Formula $G\triangleright G^{\prime}\triangleright G^{\prime\prime}\triangleright\ldots\triangleright G^{(n)}\triangleright\ldots$
 \end_inset
 
 
@@ -6889,7 +6889,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \end_layout
 
 \begin_layout Proof
-Из композиция --- эпиморфизм, причем 
+Их композиция --- эпиморфизм, причем 
 \begin_inset Formula $\ker\left(\pi_{1}\circ\pi_{2}\right)=\pi_{1}^{-1}\left(\pi_{2}^{-1}\left(e\right)\right)=\pi_{1}^{-1}\left(K/H\right)=K$
 \end_inset
 
@@ -7096,7 +7096,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 
 \begin_layout Theorem*
 Пусть 
-\begin_inset Formula $G=\left(\left\{ g_{i}\right\} \mid i\in I\right)$
+\begin_inset Formula $G=\left(\left\{ g_{i}\mid i\in I\right\} \right)$
 \end_inset
 
 .
@@ -7545,7 +7545,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \begin_inset Formula $G=G_{0}>G_{1}>\ldots>G_{n}=\left\{ e\right\} $
 \end_inset
 
-, такая что 
+, такая, что 
 \begin_inset Formula $G_{i}\triangleleft G$
 \end_inset
 
@@ -7562,8 +7562,8 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \begin_inset Formula $G$
 \end_inset
 
- существует цепочка подгрупп, такая, что 
-\begin_inset Formula $G=G_{0}>\ldots>G_{n}=\left\{ e\right\} $
+ существует цепочка подгрупп 
+\begin_inset Formula $G=G_{0}>G_{1}>\ldots>G_{n}=\left\{ e\right\} $
 \end_inset
 
 , такая, что 
@@ -7571,7 +7571,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 \end_inset
 
  и 
-\begin_inset Formula $G/G_{i+1}$
+\begin_inset Formula $G_{i}/G_{i+1}$
 \end_inset
 
  --- абелева.
@@ -7705,7 +7705,7 @@ a_{2}^{-1}a_{1}=b_{2}b_{1}^{-1}=e\Rightarrow a_{1}=a_{2},\ b_{1}=b_{2}
 
 \begin_layout Claim*
 Абелева группа 
-\begin_inset Formula $\left|G\right|$
+\begin_inset Formula $G$
 \end_inset
 
  проста, тогда и только тогда, когда 
@@ -8886,7 +8886,7 @@ x & 1
 \begin_inset Formula $\varphi$
 \end_inset
 
- --- сюрьективно, то 
+ --- сюръективно, то 
 \begin_inset Formula $G\cong F_{n}/K$
 \end_inset
 
@@ -9077,11 +9077,7 @@ x & 1
 \end_inset
 
 , то 
-\begin_inset Formula $\varphi(G)=H$
-\end_inset
-
-, то 
-\begin_inset Formula $\left|G\right|\ge4\Rightarrow\left|G\right|=4$
+\begin_inset Formula $\varphi(G)=H\Rightarrow\left|G\right|\ge4\Rightarrow\left|G\right|=4$
 \end_inset
 
 .
@@ -9486,14 +9482,14 @@ i & 0\\
 \end_inset
 
  и пусть 
-\begin_inset Formula $a_{i}Q\in\Omega_{i}$
+\begin_inset Formula $a_{j}Q\in\Omega_{j}$
 \end_inset
 
 .
  Тогда 
 \begin_inset Formula 
 \[
-\left|\Omega\right|=\underset{i=1}{\overset{s}{\sum}}\left|\Omega_{j}\right|=\underset{i=1}{\overset{s}{\sum}}\left|P:St_{p}\left(a_{j}Q\right)\right|
+\left|\Omega\right|=\underset{j=1}{\overset{s}{\sum}}\left|\Omega_{j}\right|=\underset{j=1}{\overset{s}{\sum}}\left|P:St_{p}\left(a_{j}Q\right)\right|
 \]
 
 \end_inset
@@ -9970,7 +9966,7 @@ i & 0\\
 
 \begin_layout Theorem*
 (1) 
-\begin_inset Formula $G=P_{1}\times\ldots\times P_{k}$
+\begin_inset Formula $G\cong P_{1}\times\ldots\times P_{k}$
 \end_inset
 
 
@@ -10077,7 +10073,7 @@ i & 0\\
 \end_inset
 
 , то 
-\begin_inset Formula $H=P_{1}\times\ldots\times P_{k-1}$
+\begin_inset Formula $H\cong P_{1}\times\ldots\times P_{k-1}$
 \end_inset
 
 .
@@ -11286,7 +11282,7 @@ b^{\prime\prime}=\left(d_{1}-qn_{1}\right)a_{1}^{\prime}+\underset{i=2}{\overset
 
 \begin_layout Proof
 (3) 
-\begin_inset Formula $d_{i}\vdots\ n$
+\begin_inset Formula $d_{i}\vdots\ n_{1}$
 \end_inset
 
 , 
@@ -11394,7 +11390,7 @@ b^{\prime\prime}=\left(d_{1}-qn_{1}\right)a_{1}^{\prime}+\underset{i=2}{\overset
 \end_layout
 
 \begin_layout Proof
-При это 
+При этом 
 \begin_inset Formula $A^{\prime}\cong\mathbb{Z}^{k-1}$
 \end_inset
 
@@ -11509,11 +11505,11 @@ b^{\prime\prime}=\left(d_{1}-qn_{1}\right)a_{1}^{\prime}+\underset{i=2}{\overset
 
 -порождена.
  Тогда 
-\begin_inset Formula $G\cong\mathbb{Z}^{+}/B$
+\begin_inset Formula $G\cong\mathbb{Z}^{t}/B$
 \end_inset
 
 , 
-\begin_inset Formula $B<\mathbb{Z}^{+}$
+\begin_inset Formula $B<\mathbb{Z}^{t}$
 \end_inset
 
 .
@@ -11964,7 +11960,7 @@ P(G)=\left\{ a\in G:\ ord\ a<\infty\right\}
 \begin_inset Formula $G$
 \end_inset
 
- --- конечные абелевы группа, 
+ --- конечная абелева группа, 
 \begin_inset Formula $p\mid\left|G\right|,\ G=\mathbb{Z}_{p^{\alpha_{1}}}\oplus\ldots\oplus\mathbb{Z}_{p^{\alpha_{k}}}\oplus\mathbb{Z}_{p_{1}^{\beta_{1}}}\oplus\ldots\oplus\mathbb{Z}_{p_{s}^{\beta_{s}}}$
 \end_inset
 
@@ -12233,7 +12229,7 @@ G\cong\mathbb{Z}^{k}\oplus\mathbb{Z}_{p_{1}^{\alpha_{1}}}\oplus\ldots\oplus\math
 \begin_inset Formula $k$
 \end_inset
 
- а также набор 
+, а также набор 
 \begin_inset Formula $\left(p_{1}^{\alpha_{1}},\ldots,p_{l}^{\alpha_{l}}\right)$
 \end_inset
 
