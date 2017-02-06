@@ -1,0 +1,52 @@
+\usepackage[utf8x]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amscd}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cmap}
+\usepackage{centernot}
+\usepackage{enumitem}
+\usepackage{perpage}
+\usepackage{chngcntr}
+\usepackage[bookmarks=true,pdfborder={0 0 0 }]{hyperref}
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black
+}
+
+\newtheorem*{conclusion}{Вывод}
+\newtheorem{theorem}{Теорема}
+\newtheorem*{lemma}{Лемма}
+
+\theoremstyle{definition}
+\newtheorem*{problem}{Задача}
+\newtheorem{claim}{Утверждение}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{definition}{Определение}
+\newtheorem*{example}{Пример}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\ndiv}{\centernot\mid}
+
+\MakePerPage{footnote}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\resetcntrs}{\setcounter{theorem}{0}\setcounter{definition}{0}
+\setcounter{claim}{0}\setcounter{exercise}{0}}
+
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\Cl}{Cl}
+\DeclareMathOperator{\kernel}{Ker}
+\DeclareMathOperator{\im}{Im}
+
+\frenchspacing
