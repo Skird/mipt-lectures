@@ -1,0 +1,213 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Тривиум}
+
+\begin{definition}
+	$H = (V, E), |V| < \infty, E \subset 2^V$~--- \emph{гиперграф}.
+	$V$~--- \emph{вершины}, $E$~--- \emph{рёбра}.
+
+	Если $\forall e \in E \rightarrow |e| = k$, то гиперграф
+	\emph{$k$-однородный} ($k = 2$~--- обычный граф).
+\end{definition}
+\begin{definition}
+	\emph{Число рёбер} гиперграфа $|E|$ или $|E(H)| = e(H)$.
+
+	\emph{Степень вершины} $v \in V$~--- $\deg v = \#\{e \in E \mid v \in e\}$.
+
+	$\sum\limits_{v \in V} \deg v = \sum\limits_{e \in E} |e| = k|E|$ (в~случае
+	$k$-однородности).
+
+	$\Delta(H) = \max\limits_{v \in V} \deg v$.
+
+	$\delta(H) = \min\limits_{v \in V} \deg v$.
+
+	$t(H) = \frac{1}{|V|} \sum\limits_{v \in V} \deg v$.
+\end{definition}
+\begin{definition}
+	\emph{Степенью ребра} в~$H = (V, E)$ называется $\deg e = \#\{f \in E \mid f
+	\ne e, |f \cap e| \ne \varnothing\}$.
+
+	$D(H) = \max\limits_{e \in E} \deg e$.
+
+	Если $H$ $k$-однороден, то $\Delta(H) - 1 \le D(H) \le k(\Delta(H) - 1)$.
+\end{definition}
+\begin{definition}
+	$W \subset V$ в~$H = (V, E)$ называется \emph{независимым}, если $\forall e
+	\in E \rightarrow |e \cap W| < |e|$.
+
+	\emph{Число независимости} $\alpha(H)$~--- максимальный размер независимого
+	множества в~$H$.
+\end{definition}
+\begin{definition}
+	Раскраска множества вершин $H = (V, E)$ называется \emph{правильной}, если
+	любое ребро не является одноцветным. Равносильно: все цветовые множества
+	независимы.
+
+	Хроматическое число $\chi(H)$~--- минимальное число цветов в~правильной
+	раскраске гиперграфа.
+
+	Очевидно $\frac{|V|}{\alpha(H)} \le \chi(H) \le \Delta(H) + 1$.
+\end{definition}
+
+\section{Теорема Турана и~её обобщения}
+
+$K_n$~--- полный граф на~$n$ вершинах.
+
+$K_{n_1, \ldots, n_r}$~--- полный $r$-дольный граф с~долями размера $n_1,
+\ldots, n_r$.
+
+$K_{m \ast r}$~--- полный $r$-дольный граф с~размерами долей $=m$.
+
+\begin{theorem}[Туран, 1941]
+	Пусть $n_1, \ldots, n_r$ числа, такие что $n_1 + \ldots + n_r = n, n_i =
+	\left\lceil \frac{n}{r} \right\rceil$ или $n_i = \left\lfloor \frac{n}{r}
+	\right\rfloor$. Пусть граф~$G$ на~$n$ вершинах не содержит подграфа,
+	изоморфного $K_{r+1}$. Тогда
+	$$ |E(G)| \le |E(K_{n_1,\ldots,n_r})| \le \left\lfloor \frac{n^2}{2} \left(1 -
+	\frac{1}{r}\right) \right\rfloor $$.
+\end{theorem}
+\begin{proof}
+	Пусть $G = (V, E)$~--- граф с~максимальным числом вершин, не содержащий
+	$K_{r+1}$. Покажем, что в~$G$ не существует тройки вершин $u, v, w$ такой, что
+	$(u, v) \in E, (u, w), (v, w) \notin E$. Пусть такая тройка есть, тогда
+	\begin{itemize}
+		\item Пусть $\deg w < \deg u$ (или $\deg w < \deg v$). Удалим $w$ из $G$
+			и~заменим её на копию $u$~--- вершину $u'$. Получится граф с~большим
+			числом рёбер, при этом $K_{r+1}$ он не содержит (иначе его содержал бы
+			и~$G$).
+		\item Пусть $\deg w \ge \deg u, \deg w \ge \deg v$. Тогда удалим $u, v$ из
+			графа, добавим вместо них две копии вершины $w$. По аналогичному
+			соображению число рёбер увеличилось, а~$K_{r+1}$ не появилось.
+	\end{itemize}
+
+	Вывод: отношение $u \sim v \Leftrightarrow (u, v) \notin E$ является
+	отношением эквивалентности. Значит наш граф~$G$ является полным многодольным
+	графом, притом ясно, что долей не больше $r$ (будем считать, что ровно $r$,
+	просто некоторые доли пусты). Покажем, что доли почти равны.
+
+	В~самом деле, если $\left|A\right| > |B| + 1$, то при перекладывании одной
+	вершины из~$A$ в~$B$ теряется $|B|$ рёбер и~проводится $\left|A\right| - 1$
+	рёбер, стало быть число рёбер увеличивается. Значит размеры всех долей
+	отличаются не более, чем на~1, что доказывает теорему.
+\end{proof}
+
+Граф $K_{n_1,\ldots, n_r}$ из~теоремы Турана принято называть графом Турана.
+
+\begin{claim}
+Следствие: $\alpha(G) \ge \frac{n}{t(G) + 1}$.
+\end{claim}
+\begin{proof}
+	Пусть $\alpha = \alpha(G)$, тогда $\overline{G}$ не содержит $K_{\alpha + 1}$.
+	По теореме Турана $|E(\overline{G})| \le \left(1 - \frac{1}{\alpha}\right)
+	\frac{n^2}{2} \Rightarrow |E(G)| \ge C_n^2 - \left(1 - \frac{1}{\alpha}\right)
+	\frac{n^2}{2}$.
+
+	Итак, $\frac{n^2}{2\alpha} \le |E(G)| + \frac{n^2}{2} - C_n^2 =
+	\frac{t(G)n}{2} + \frac{n}{2}$, что доказывает следствие.
+
+	Получается, что оценка точна и~достигается (с~точностью до округления) на
+	$\overline{T(n,r)}$.
+\end{proof}
+
+\section{Тоерема Эрдёша-Стоуна}
+Пусть $H$~--- произвольный граф. \emph{Числом Турана} $ex(n, H)$ называется
+$$ex(n, H) = \max\{|E(G)|: |V(G)| = n, G \text{ не содержит подграфа,
+изоморфного }H\}.$$
+
+Теорема Турана говорит, что $ex(n, K_{r+1}) = |E(K_{n_1,\ldots,n_r})|$.
+
+\begin{theorem}[Эрдёш-Стоун, 1946]
+	Пусть $r \ge 2$, $H$~--- фиксированный граф с~$\chi(H) = r + 1$, тогда
+	$ex(n, H) = \left(1 - \frac{1}{r}\right) \frac{n^2}{2} + o(n^2)$.
+\end{theorem}
+\begin{proof}
+	\begin{lemma}
+		Пусть $r \ge 1, \eps > 0$. Тогда для всех достаточно больших $n$ любой граф
+		на $n$ вершинах с~$\left(1 - \frac{1}{r} + \eps\right)C_n^2$ рёбрами
+		содержит подграф $K_{t \ast (r + 1)}$, где $t = \Omega_{r,\eps}(\log n)$.
+	\end{lemma}
+	\begin{proof}
+		Рассмотрим сначала случай, когда все вершины имеют степень не менее $\left(1
+		- \frac{1}{r} + \eps\right)n$. Будем доказывать по индукции по $r$.
+
+		База, $r = 1$, надо найти $K_{t,t}$. Пусть $v_1, \ldots, v_t$~--- случайно
+		выбранные $t$ вершин из~$V$, а~$X$ число их общих соседей.
+
+		$$EX = \sum\limits_{u \in V} \frac{C_{\deg u}^t}{C_n^t} \ge n
+		\frac{C_{n\eps}^t}{C_n^t} \ge n \frac{(n\eps - t)^t}{n^t} = n \left(
+		\frac{n\eps - t}{n}\right)^t.$$
+
+		Хотим, чтобы $EX > t$, для этого можно взять $t = \Omega_\eps(\log n)$
+		подходит для небольшой константы. При таком $t$ существуют $v_1, \ldots,
+		v_t$ с~не менее, чем $t$ общими соседями, это и~есть $K_{t,t}$.
+
+		Докажем шаг индукции. Пусть мы нашли $K_{T \ast r}$, где $T =
+		\Omega_{r,\eps}(\log n)$ в~графе $G$. Обозначим $U_1, \ldots, U_r$~--- доли
+		этого графа, $U = \bigcup\limits_{i=1}^{r} U_i$.
+
+		Пусть $v$~--- случайная вершина $G$, $X_v$~--- число её соседей внутри $U$.
+
+		$$ E X_v = \frac{1}{n} \sum\limits_{v \in V} \sum\limits_{(u,v) \in E} 1 =
+		\frac{1}{n} \sum\limits_{u \in U} \deg u \ge rT \left(1 - \frac{1}{r} +
+		\eps\right).$$
+
+		Однако $X_v \le rT$, значит
+		\begin{multline*}
+		EX_v \le rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)
+		P\left(X_v < rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right) +\\
+		rTP\left(X_v > rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right) =\\
+		rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right) +
+		rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)
+		P\left( X_v > rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right) \right).
+		\end{multline*}
+
+		Отсюда $P\left(X_v > rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right)
+		\ge \frac{rT \frac{\eps}{2}}{rT \left(\frac{1}{r} - \frac{\eps}{2}\right)}
+		\ge \frac{r\eps}{r} \ge \eps$.
+
+		Вывод: не менее $\eps n$ вершин имеют хотя бы $rT\left(1 - \frac{1}{r} +
+		\frac{\eps}{2}\right)$ соседей в~$U$. Обозначим его через~$S$, $|S| \ge \eps
+		n$.
+
+		Далее, любая вершина из~$S$ имеет хотя бы $\eps T$ соседей внутри $U_i$.
+		Иначе, множество соседей в~$U$ имеет мощности сторого меньше, чем
+		$$ \eps T + (r - 1) T = rT \left(1 - \frac{1}{r} + \frac{\eps}{r}\right) \le
+		rT \left( 1 - \frac{1}{r} + \frac{\eps}{2} \right).$$
+
+		Пусть $W_1, \ldots, W_r$ случайные $t$-подмножества $U_1, \ldots, U_r$,
+		а~$X$~--- число их общих соседей внутри~$S$.
+
+		$ EX \ge |S| \left( \frac{C_{\eps T}{t}}{C_T^t}\right)^r $, тогда положим $t =
+		\frac{\eps}{2}T$, тогда $EX \ge \eps n \left(\frac{\eps}{2}\right)^{rt} \ge
+		t$. Это выполнено при $t = c(r, \eps) \log n$ для подходящей константы $c(r,
+		\eps) > 0$.
+
+		Обратимся теперь к~случаю, если не все степени достаточно большие. Покажем,
+		что в~$G$ существует индуцированный подграф $G'$ на $s$ вершинах, все
+		степени которого не меньше $\left(1 - \frac{1}{r} + \eps\right)s$, а~$s \ge
+		\frac{1}{2} \sqrt{\eps} n$. Тогда по~предыдущему рассуждению $G'$ содержит
+		$K_{t \ast r}$, где $t = \Omega_{r,\eps}(\log s) = \Omega_{r,\eps}(\log s)$.
+
+		Построим $G'$ следующим образом: $G_n = G$. Далее:
+		\begin{itemize}
+			\item если $G_m$ содержит вершину степени $< \left( 1 - \frac{1}{r} +
+				\frac{\eps}{2}\right)m$, то удалим её из $G_m$.
+			\item продолжаем, пока процесс не остановится.
+		\end{itemize}
+
+		Пусть $G_s$~--- итоговый граф, тогда в~нём не менее чем $|E(G_n)| -
+		\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)(n + n - 1 + \ldots + s + 1)
+		\ge \left(1 - \frac{1}{r} + \eps\right) C_n^2 - \left( 1 - \frac{1}{r} +
+		\frac{\eps}{2}\right)C_{n+1}^2 = \frac{\eps}{2} C_n^2 - n$ рёбер.
+
+		С~другой стороны, $|E(G_s)| \le C_s^2 \Rightarrow C_s^2 \ge
+		\frac{\eps}{2}C_n^2 - n \Rightarrow s \ge \frac{1}{2} \sqrt{\eps} n$.
+
+		Итак, лемма доказана.
+	\end{proof}
+\end{proof}
+
+\end{document}
