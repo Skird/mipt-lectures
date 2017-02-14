@@ -123,91 +123,89 @@ $$ex(n, H) = \max\{|E(G)|: |V(G)| = n, G \text{ не содержит подгр
 	Пусть $r \ge 2$, $H$~--- фиксированный граф с~$\chi(H) = r + 1$, тогда
 	$ex(n, H) = \left(1 - \frac{1}{r}\right) \frac{n^2}{2} + o(n^2)$.
 \end{theorem}
+\begin{lemma}
+	Пусть $r \ge 1, \eps > 0$. Тогда для всех достаточно больших $n$ любой граф
+	на $n$ вершинах с~$\left(1 - \frac{1}{r} + \eps\right)C_n^2$ рёбрами
+	содержит подграф $K_{t \ast (r + 1)}$, где $t = \Omega_{r,\eps}(\log n)$.
+\end{lemma}
 \begin{proof}
-	\begin{lemma}
-		Пусть $r \ge 1, \eps > 0$. Тогда для всех достаточно больших $n$ любой граф
-		на $n$ вершинах с~$\left(1 - \frac{1}{r} + \eps\right)C_n^2$ рёбрами
-		содержит подграф $K_{t \ast (r + 1)}$, где $t = \Omega_{r,\eps}(\log n)$.
-	\end{lemma}
-	\begin{proof}
-		Рассмотрим сначала случай, когда все вершины имеют степень не менее $\left(1
-		- \frac{1}{r} + \eps\right)n$. Будем доказывать по индукции по $r$.
+	Рассмотрим сначала случай, когда все вершины имеют степень не менее $\left(1
+	- \frac{1}{r} + \eps\right)n$. Будем доказывать по индукции по $r$.
 
-		База, $r = 1$, надо найти $K_{t,t}$. Пусть $v_1, \ldots, v_t$~--- случайно
-		выбранные $t$ вершин из~$V$, а~$X$ число их общих соседей.
+	База, $r = 1$, надо найти $K_{t,t}$. Пусть $v_1, \ldots, v_t$~--- случайно
+	выбранные $t$ вершин из~$V$, а~$X$ число их общих соседей.
 
-		$$EX = \sum\limits_{u \in V} \frac{C_{\deg u}^t}{C_n^t} \ge n
-		\frac{C_{n\eps}^t}{C_n^t} \ge n \frac{(n\eps - t)^t}{n^t} = n \left(
-		\frac{n\eps - t}{n}\right)^t.$$
+	$$EX = \sum\limits_{u \in V} \frac{C_{\deg u}^t}{C_n^t} \ge n
+	\frac{C_{n\eps}^t}{C_n^t} \ge n \frac{(n\eps - t)^t}{n^t} = n \left(
+	\frac{n\eps - t}{n}\right)^t.$$
 
-		Хотим, чтобы $EX > t$, для этого можно взять $t = \Omega_\eps(\log n)$
-		подходит для небольшой константы. При таком $t$ существуют $v_1, \ldots,
-		v_t$ с~не менее, чем $t$ общими соседями, это и~есть $K_{t,t}$.
+	Хотим, чтобы $EX > t$, для этого можно взять $t = \Omega_\eps(\log n)$
+	подходит для небольшой константы. При таком $t$ существуют $v_1, \ldots,
+	v_t$ с~не менее, чем $t$ общими соседями, это и~есть $K_{t,t}$.
 
-		Докажем шаг индукции. Пусть мы нашли $K_{T \ast r}$, где $T =
-		\Omega_{r,\eps}(\log n)$ в~графе $G$. Обозначим $U_1, \ldots, U_r$~--- доли
-		этого графа, $U = \bigcup\limits_{i=1}^{r} U_i$.
+	Докажем шаг индукции. Пусть мы нашли $K_{T \ast r}$, где $T =
+	\Omega_{r,\eps}(\log n)$ в~графе $G$. Обозначим $U_1, \ldots, U_r$~--- доли
+	этого графа, $U = \bigcup\limits_{i=1}^{r} U_i$.
 
-		Пусть $v$~--- случайная вершина $G$, $X_v$~--- число её соседей внутри $U$.
+	Пусть $v$~--- случайная вершина $G$, $X_v$~--- число её соседей внутри $U$.
 
-		$$ E X_v = \frac{1}{n} \sum\limits_{v \in V} \sum\limits_{(u,v) \in E} 1 =
-		\frac{1}{n} \sum\limits_{u \in U} \deg u \ge rT \left(1 - \frac{1}{r} +
-		\eps\right).$$
+	$$ E X_v = \frac{1}{n} \sum\limits_{v \in V} \sum\limits_{(u,v) \in E} 1 =
+	\frac{1}{n} \sum\limits_{u \in U} \deg u \ge rT \left(1 - \frac{1}{r} +
+	\eps\right).$$
 
-		Однако $X_v \le rT$, значит
-		\begin{multline*}
-		EX_v \le rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)
-		P\left(X_v < rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right) +\\
-		rTP\left(X_v > rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right) =\\
-		rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right) +
-		rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)
-		P\left( X_v > rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right) \right).
-		\end{multline*}
+	Однако $X_v \le rT$, значит
+	\begin{multline*}
+	EX_v \le rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)
+	P\left(X_v < rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right) +\\
+	rTP\left(X_v > rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right) =\\
+	rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right) +
+	rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)
+	P\left( X_v > rT \left(1 - \frac{1}{r} + \frac{\eps}{2}\right) \right).
+	\end{multline*}
 
-		Отсюда $P\left(X_v > rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right)
-		\ge \frac{rT \frac{\eps}{2}}{rT \left(\frac{1}{r} - \frac{\eps}{2}\right)}
-		\ge \frac{r\eps}{r} \ge \eps$.
+	Отсюда $P\left(X_v > rT\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)\right)
+	\ge \frac{rT \frac{\eps}{2}}{rT \left(\frac{1}{r} - \frac{\eps}{2}\right)}
+	\ge \frac{r\eps}{r} \ge \eps$.
 
-		Вывод: не менее $\eps n$ вершин имеют хотя бы $rT\left(1 - \frac{1}{r} +
-		\frac{\eps}{2}\right)$ соседей в~$U$. Обозначим его через~$S$, $|S| \ge \eps
-		n$.
+	Вывод: не менее $\eps n$ вершин имеют хотя бы $rT\left(1 - \frac{1}{r} +
+	\frac{\eps}{2}\right)$ соседей в~$U$. Обозначим его через~$S$, $|S| \ge \eps
+	n$.
 
-		Далее, любая вершина из~$S$ имеет хотя бы $\eps T$ соседей внутри $U_i$.
-		Иначе, множество соседей в~$U$ имеет мощности сторого меньше, чем
-		$$ \eps T + (r - 1) T = rT \left(1 - \frac{1}{r} + \frac{\eps}{r}\right) \le
-		rT \left( 1 - \frac{1}{r} + \frac{\eps}{2} \right).$$
+	Далее, любая вершина из~$S$ имеет хотя бы $\eps T$ соседей внутри $U_i$.
+	Иначе, множество соседей в~$U$ имеет мощности сторого меньше, чем
+	$$ \eps T + (r - 1) T = rT \left(1 - \frac{1}{r} + \frac{\eps}{r}\right) \le
+	rT \left( 1 - \frac{1}{r} + \frac{\eps}{2} \right).$$
 
-		Пусть $W_1, \ldots, W_r$ случайные $t$-подмножества $U_1, \ldots, U_r$,
-		а~$X$~--- число их общих соседей внутри~$S$.
+	Пусть $W_1, \ldots, W_r$ случайные $t$-подмножества $U_1, \ldots, U_r$,
+	а~$X$~--- число их общих соседей внутри~$S$.
 
-		$ EX \ge |S| \left( \frac{C_{\eps T}{t}}{C_T^t}\right)^r $, тогда положим $t =
-		\frac{\eps}{2}T$, тогда $EX \ge \eps n \left(\frac{\eps}{2}\right)^{rt} \ge
-		t$. Это выполнено при $t = c(r, \eps) \log n$ для подходящей константы $c(r,
-		\eps) > 0$.
+	$ EX \ge |S| \left( \frac{C_{\eps T}{t}}{C_T^t}\right)^r $, тогда положим $t =
+	\frac{\eps}{2}T$, тогда $EX \ge \eps n \left(\frac{\eps}{2}\right)^{rt} \ge
+	t$. Это выполнено при $t = c(r, \eps) \log n$ для подходящей константы $c(r,
+	\eps) > 0$.
 
-		Обратимся теперь к~случаю, если не все степени достаточно большие. Покажем,
-		что в~$G$ существует индуцированный подграф $G'$ на $s$ вершинах, все
-		степени которого не меньше $\left(1 - \frac{1}{r} + \eps\right)s$, а~$s \ge
-		\frac{1}{2} \sqrt{\eps} n$. Тогда по~предыдущему рассуждению $G'$ содержит
-		$K_{t \ast r}$, где $t = \Omega_{r,\eps}(\log s) = \Omega_{r,\eps}(\log s)$.
+	Обратимся теперь к~случаю, если не все степени достаточно большие. Покажем,
+	что в~$G$ существует индуцированный подграф $G'$ на $s$ вершинах, все
+	степени которого не меньше $\left(1 - \frac{1}{r} + \eps\right)s$, а~$s \ge
+	\frac{1}{2} \sqrt{\eps} n$. Тогда по~предыдущему рассуждению $G'$ содержит
+	$K_{t \ast r}$, где $t = \Omega_{r,\eps}(\log s) = \Omega_{r,\eps}(\log s)$.
 
-		Построим $G'$ следующим образом: $G_n = G$. Далее:
-		\begin{itemize}
-			\item если $G_m$ содержит вершину степени $< \left( 1 - \frac{1}{r} +
-				\frac{\eps}{2}\right)m$, то удалим её из $G_m$.
-			\item продолжаем, пока процесс не остановится.
-		\end{itemize}
+	Построим $G'$ следующим образом: $G_n = G$. Далее:
+	\begin{itemize}
+		\item если $G_m$ содержит вершину степени $< \left( 1 - \frac{1}{r} +
+			\frac{\eps}{2}\right)m$, то удалим её из $G_m$.
+		\item продолжаем, пока процесс не остановится.
+	\end{itemize}
 
-		Пусть $G_s$~--- итоговый граф, тогда в~нём не менее чем $|E(G_n)| -
-		\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)(n + n - 1 + \ldots + s + 1)
-		\ge \left(1 - \frac{1}{r} + \eps\right) C_n^2 - \left( 1 - \frac{1}{r} +
-		\frac{\eps}{2}\right)C_{n+1}^2 = \frac{\eps}{2} C_n^2 - n$ рёбер.
+	Пусть $G_s$~--- итоговый граф, тогда в~нём не менее чем $|E(G_n)| -
+	\left(1 - \frac{1}{r} + \frac{\eps}{2}\right)(n + n - 1 + \ldots + s + 1)
+	\ge \left(1 - \frac{1}{r} + \eps\right) C_n^2 - \left( 1 - \frac{1}{r} +
+	\frac{\eps}{2}\right)C_{n+1}^2 = \frac{\eps}{2} C_n^2 - n$ рёбер.
 
-		С~другой стороны, $|E(G_s)| \le C_s^2 \Rightarrow C_s^2 \ge
-		\frac{\eps}{2}C_n^2 - n \Rightarrow s \ge \frac{1}{2} \sqrt{\eps} n$.
+	С~другой стороны, $|E(G_s)| \le C_s^2 \Rightarrow C_s^2 \ge
+	\frac{\eps}{2}C_n^2 - n \Rightarrow s \ge \frac{1}{2} \sqrt{\eps} n$.
 
-		Итак, лемма доказана.
-	\end{proof}
+	Итак, лемма доказана.
 \end{proof}
 
 \end{document}

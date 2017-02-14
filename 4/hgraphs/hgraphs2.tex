@@ -1,0 +1,190 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\begin{proof}[Доказательство теоремы Эрдёша-Стоуна]
+	Так как $\chi(H) = r + 1$, то $H$ вкладывается в~$K_{(r+1) \ast m}$ для
+	какого-то~$m$. Значит $ex(n, H) \le ex(n, K_{(r+1) \ast m})$, что по лемме не
+	больше, чем $(1 - \frac{1}{r}) \frac{n^2}{2} + o(n^2)$.
+
+	С~другой стороны граф Турана $T_{n,r}$ не содержит $H$, значит $ex(n, H) \ge
+	|E(T_{n,r})| = (1 - \frac{1}{r})\frac{n^2}{2}$.
+\end{proof}
+
+\section{Двудольные графы}
+
+Теорема Эрдёша-Стоуна говорит про двудольные графы только, что $ex(n, H) =
+o(n^2)$. Займёмся выяснением более точной оценки.
+
+\begin{theorem}[Шош, Ковари, Туран, 1954]
+	$ex(n, K_{s,t}) \le \frac{1}{2} (s - 1)^{\frac{1}{t}} n^{2-\frac{1}{t}} +
+	\frac{1}{2}(t-1)n$.
+\end{theorem}
+\begin{proof}
+	Пусть $d_1 \ge \ldots \ge d_n$~--- степени вершин $G$. Пусть, кроме того,
+	$d_1 \ge \ldots \ge d_m \ge t > d_{m+1} \ge \ldots d_n$. Тогда
+	$$\sum\limits_{i=1}^n C_{d_i}^t = \sum\limits_{i=1}^m C_{d_i}^t > \frac{1}{t!}
+	m \sum\limits_{i=1}^m (d_i - t + 1)^t \frac{1}{m}.$$
+	По неравенству Йенсена ($E\xi^t \ge (E\xi)^t$) получаем
+	\begin{multline*}
+		\sum\limits_{i=1}^n C_{d_i}^t = \frac{m}{t!} \left(\sum\limits_{i=1}^m
+		\frac{d_i	- t + 1}{m}\right)^t \ge \frac{1}{t!} m^{1-t} \left(
+		\sum\limits_{i=1}^m (d_i - t + 1)\right)^t \ge\\
+		\frac{1}{t!} n^{1-t} \left( \sum_{i=1}^n d_i - m(t-1) - \sum_{i=m+1}^n
+		d_i\right)^t > \frac{1}{t!} n^{1-t} \left((s-1)^{\frac{1}{t}}
+		n^{2-\frac{1}{t}}\right)^t =\\
+		\frac{s - 1}{t!} n^t > (s - 1) C_n^t.
+	\end{multline*}
+
+	Рассмотрим $v_1, \ldots, v_t$~--- случайные $t$~вершин и~введём $X$~--- число
+	их общих соседей, тогда $EX = \frac{\sum\limits_{i=1}^n C_{d_i}^t}{C_n^t} >
+	s - 1$. Значит существуют $v_1, \ldots, v_t$, имеющие хотя бы $s$ общих
+	соседей, значит $K_{s,t}$ найдено
+\end{proof}
+
+Это только оценка, в~отличие от теоремы Эрдёша-Стоуна, получить точную
+асимптотику оказывается совсем непросто. Известно, что если $s > (t - 1)!$, то
+оценка из теоремы точна асимптотически. Однако, уже для $s = t = 4$ поведение
+$ex(n, K_{4,4})$ неизвестно.
+
+\begin{claim}
+	\begin{itemize}
+		\item Если $G$~--- дистанционный граф в~$\mathbb{R}^2$ на~$n$ вершинах, то
+			$|E(G)| = O(n^{\frac{3}{2}})$
+		\item Для дистанционного графа в~$\mathbb{R}^3$ на~$n$ вершинах $|E(G)| =
+			O(n^{\frac{5}{3}})$
+	\end{itemize}
+\end{claim}
+\begin{proof}
+	Нужно заметить, что в~первом случае $G$ не содержит $K_{3,2}$, а~во втором
+	$K_{3,3}$, и~применить теорему.
+\end{proof}
+
+\section{Числа Турана для гиперграфов}
+
+\begin{definition}
+	Пусть $n > b > k$. Числом Турана $T(n, b, k)$ называется минимальное рёбер
+	в~$k$-однородном гиперграфе на~$n$ вершинах и~числом независимости $<b$.
+
+	$$T(n, b, k) = \min\{ |E(H)|: H \in \mathcal{H}_k, |V(H)| = n, \alpha(G) <
+	b\}.$$
+
+	Гиперграфы данного множества называются $(n, b, k)$-системами.
+\end{definition}
+
+\begin{example}
+	$T(n, b, 2) = |E(\overline{T_{n,b-1}})| = C_n^2 - |E(T_{n,b-1})| \sim
+	\frac{n^2}{2(b-1)}$.
+\end{example}
+
+Если $C_v^k$~--- все $k$-подмножества, $C_v^b$~--- все $b$-подмножества,
+($k$-подмножество $A$ представляет $b$-подмножество $B$, если $A \subset B$), то
+$T(n,b,k)$~--- наименьшая система общих представителей.
+
+\begin{claim}
+	$T(n,b,k) \ge \lceil \frac{n}{n-k} T(n - 1, b, k) \rceil$.
+\end{claim}
+\begin{proof}
+	Пусть $H = (V, E)$~--- произвольная $(n,b,k)$-система. Возьмём одну
+	вершину~$v$ и~удалим её вместе с~рёбрами, останется $H_v$~---
+	$(n-1,b,k)$-система, в~которой хотя бы $T(n-1,b,k)$ рёбер. Тогда
+	$$ |E(H)| (n - k) = \sum_{v \in V} |E(H_v)| \ge T(n - 1, b, k) \cdot n,$$
+	откуда следует утверждение.
+\end{proof}
+
+\begin{claim}
+	$\forall b > k \ge 2 \rightarrow \exists \lim_{n \rightarrow \infty}
+	\frac{T(n,b,k)}{C_n^k} = t(b, k)$.
+\end{claim}
+\begin{proof}
+	$\frac{T(n,b,k)}{C_n^k} \ge \frac{T(n-1, b, k)}{C_{n-1}^k}$ по утверждению,
+	значит последовательность монотонна (и~ограничена единицей).
+\end{proof}
+
+\begin{definition}
+	Величина $t(b, k)$ называется Турановской плотностью.
+\end{definition}
+
+Из доказательства следует, что $T(n, b, k) \le t(b, k) C_n^k$.
+
+\begin{claim}
+	$T(n,b,k) \le T(n-1,b,k) + T(n-1,b-1,k-1)$.
+\end{claim}
+\begin{proof}
+	Пусть $H_1 = (V, E_1)$~--- это минимальная $(n-1,b,k)$-система, $H_2 = (V,
+	E_2)$~--- это минимальная $(n-1,b-1,k-1)$-система. Возьмём $v \notin V$
+	и~рассмотри $H = (V \cup \{v\}, E_1 \cup E_2'), E_2' = \{e \cap \{v\}: e \in
+	E_2\}$. Тогда $H$~--- это $(n,b,k)$-система, значит $|E(H)| \ge T(n, b, k)$,
+	а~с~другой стороны $|E(H)| = T(n-1,b,k) + T(n-1,b-1,k-1)$.
+\end{proof}
+
+\begin{claim}
+	$t(b,k) \le t(b-1,k-1)$.
+\end{claim}
+\begin{proof}
+	$\frac{k}{n} T(n,b,k) = T(n,b,k) - \frac{n-k}{n}T(n,b,k) \le T(n,b,k) -
+	T(n-1,b,k) \le T(n-1,b-1,k-1) \Rightarrow \frac{T(n,b,k)}{C_n^k} = \frac{k}{n}
+	\frac{T(n,b,k)}{C_{n-1}^{k-1}} \le \frac{T(n-1,b-1,k-1)}{C_{n-1}^{k-1}}$.
+	Переходя к~пределу, получаем требуемое.
+\end{proof}
+
+\begin{claim}[из анализа]
+	Пусть $b_0, \ldots, b_{l-1}$~--- циклически упорядоченные действительные
+	числа, $b = \frac{b_0 + \ldots + b_{l-1}}{l}$. Тогда $\exists n: \forall s =
+	1, \ldots, l \rightarrow b_m + b_{m+1} + \ldots + b_{m+s-1} \ge sb$.
+\end{claim}
+\begin{proof}
+	Возьмём циклический сдвиг, соответствующий минимуму префиксных сумм.
+\end{proof}
+
+\section{Верхняя оценка на турановскую плотность}
+
+\begin{theorem}
+	$t(n,k) \le \left( \frac{k-1}{b-1} \right)^{k-1}$.
+\end{theorem}
+\begin{proof}
+	Пусть $V$~--- некоторое множество из~$n$ вершин и~возьмём $l, d$ так, что $k =
+	\lceil \frac{db}{l} \rceil$. Разделим~$V$ на примерно равные части $A_0,
+	\ldots, A_{l-1}$ и~построим следующий гиперграф. Каждое $B \subset V$,
+	$|B| = k$, включается в~$H$ в~качестве ребра, если числа $b_i = |B \cap A_i|$
+	удовлетворяют свойству: $\exists m: \forall s = 1, \ldots, d \rightarrow
+	\sum\limits_{i=1}^s b_{m+i-1} \ge s \frac{b}{l}$.
+
+	Покажем, что это $(n,b,k)$-система. Пусть $C \subset V$, $|C| = b$. Введём
+	$c_i = |C \cap A_i|$. Для чисел~$c_0, \ldots, c_{l-1}$ существует сдвиг, для
+	которого все частичные суммы не меньше $\sum\limits_{i=1}^s c_{m+i-1} \ge s
+	\frac{b}{l}$. Тогда выберем~$B \subset C$ следующим образом $B = (C \cap A_m)
+	\sqcup (C \cap A_{m+1}) \sqcup \ldots \sqcup W$, где $W = C \cap A_{j+m}$.
+	Заметим, что $\frac{db}{l} \le k$, а~это значит для всех $s = 1, \ldots, l$
+	неравенство на префиксные суммы $b_i$ будет следовать либо из того, что
+	$b_i = c_i$ до какого-то момента, либо из того, что $s \le d$.
+
+	Оценим теперь число рёбер:
+		$$|E(H)| = \sum_{m=0}^{l-1} \sum_{a_1, \ldots, a_d} \prod_{i=1}^d
+		C_{A_{m+i-1}}^{a_i}$$
+	Притом средняя сумма берётся по наборам $a_1, \ldots, a_d$, таким что $a_1,
+	\ldots, a_d \in \{0,\ldots,k\} a_1 + \ldots + a_d = k, a_1 + \ldots + a_s \ge
+	\frac{sb}{l} \forall s = 1, \ldots d$. Тогда
+	$$ E(H) \le l \sum_{a_1,\ldots,a_d} \left(\prod_{i=1}^{d}
+	C_{\frac{n}{l}}^{d_i}\right) \le l \left( \frac{n}{e} \right)^k
+	\sum_{a_1,\ldots,a_d} \frac{1}{a_1! \ldots a_d!}. $$
+
+	Положим $l = b - 1, d = k - 1$. Если условия на частичные суммы нет, то сумма
+	по всем~$a_1, \ldots, a_d$ равна $\frac{d^k}{k!}$.
+
+	Если $l = b - 1$, то $s \frac{b}{b-1} \in (s,s+1)$, то есть $a_1 + \ldots +
+	a_s \ge s \frac{b}{b-1}$ эквивалентно $a_1 + \ldots + a_s > s$. Введем $y_i =
+	a_i - 1$, $y_1 + \ldots + y_{k-1} = 1, y_i \ge -1, y_1 + \ldots + y_s > 0
+	\forall s = 1, \ldots, k$.
+
+	Тогда $\exists$ ровно один циклический сдвиг последовательности $y_1, \ldots,
+	y_{k-1}$, такой, что все частичные суммы положительны.
+
+	Вывод: $\sum\limits_{a_1,\ldots,a_d} \frac{1}{a_1!\ldots a_d!} = \frac{1}{k-1}
+	\frac{(k-1)^k}{k!}$, стало быть $|E(H)| \le (1 + o(1)) (b - 1)\left(
+	\frac{n}{b-1}\right)^k \frac{(k-1)^k}{k!} \Rightarrow t(b,k) \le \left(
+	\frac{k-1}{b-1} \right)^{k-1}$.
+\end{proof}
+
+\end{document}
