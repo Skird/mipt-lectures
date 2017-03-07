@@ -1,0 +1,182 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Графы без больших клик}
+
+
+Далее мы займёмя графами, не содержащими $K_n$ и~покажем, что $\alpha(G) \ge
+c \frac{n \ln t}{t \ln \ln t}$, что является нетривиальной оценкой по сравнению
+с~теоремой Турана. Для начала вспомним некоторые вещи:
+
+\begin{definition}
+	Пусть $X$~--- случайная величина или вектор с~плотностью $p$. Тогда
+	энтропия это $H(X) = E\left[ -\log_2 p(x) \right]$.
+\end{definition}
+
+Простые свойства:
+\begin{itemize}
+	\item $H(X) \ge 0$, $H(X) = 0 \Leftrightarrow X = a_j$ п. н.
+	\item $H(X) \le \log_2 n$
+	\item $H(X_1, \ldots, X_m) \le \sum\limits_{j=1}^m H(X_j)$
+	\item $h(x) = -x \log_2 x - (1 - x) \log_2 (1 - x)$~--- это энтропия
+		распределения $Bern(p)$. Притом $h(x)$ выпукла вверх.
+\end{itemize}
+
+\begin{lemma}
+	Пусть $G = (V, E), |V| = n, \omega(G) < r, r \ge 3$. Обозначим через $i(G)$
+	число независимых множеств в~$G$, а~$\overline\alpha(G)$~--- их средний
+	размер. Тогда
+	$$ \overline\alpha(G) \ge c(r) \frac{\ln i(G)}{\ln \ln i(G)}, $$
+	где $c(r) > 0$ зависит только от $r$.
+\end{lemma}
+\begin{proof}
+	Пусть $S$~--- случайное (равномерно выбранное) независимое множество. Тогда
+	$H(S) = \log_2 i(G)$. Считаем, что $V(G) = \{1, \ldots, n\}$. Обозначим $\phi
+	= \frac{\overline\alpha(G)}{n}, \alpha = \alpha(G)$. Тогда выполнено
+	следующее:
+	\begin{itemize}
+		\item $i(G) \le 2^{nh(\phi)}$
+		\item $\overline\alpha(G) = n\phi$
+		\item $i(G) \ge 2^\alpha$
+	\end{itemize}
+	Последние два пункта очевидны, докажем первый. Для $\forall v \in V(G)$
+	положим $X_v = I\{v \in \}$. $\forall \beta \in \{0, 1\}^n, \beta = (\beta_1,
+	\ldots, \beta_n)$. $P(X_1 = \beta_1, \ldots, X_n = \beta_n) = \frac{1}{i(G)}
+	I(\beta \text{ определяет независимое множество})$. Значит
+	$$\log_2 i(G) = H(X_1, \ldots, X_n) \le \sum\limits_{j=1}^n H(X_j) =
+	\sum\limits_{j=1}^n h\left(\frac{i_j(G)}{i(G)}\right),$$
+	где $i_j(G)$~--- число независимых множеств, содержащих вершину $j$. По
+	неравенству Йенсена получаем: $$\log_2 i(G) \le n h\left(\frac{1}{n}
+	\sum\limits_{j=1}^n \frac{i_j(G)}{i(G)}\right) = n h\left(\frac{1}{n}
+	\overline\alpha(G)\right) = nh(\phi).$$
+
+	Из первых двух неравенств $\overline\alpha(G) = n\phi = \frac{\phi}{h(\phi)} n
+	h(\phi) \ge \frac{\phi}{h(\phi)} \log_2 i(G)$. Заметим, что $\frac{x}{h(x)}$
+	возрастает по $x$. Из первого и~третьего неравенства получаем, что
+	$nh(\phi) \ge \alpha$. По условию $\omega(G) < r, \alpha(G) < \alpha + 1$,
+	значит $n < R(r, \alpha + 1) \le (\alpha + 1)^{r-1} \Rightarrow \alpha + 1 >
+	n^\frac{1}{r-1}$. $h(\phi) \ge \frac{1}{n} \left( n^\frac{1}{r-1} - 1\right) =
+	\frac{1 + o(1)}{n^\frac{r-2}{r-1}}$.
+
+	Если $-x \ln x \ge \beta$, то $x \ge \frac{(1 + o(1)) \beta}{\ln \beta}$.
+	Тогда $\phi \ge \frac{(1 + o(1)) \ln 2}{n^\frac{r-2}{r-1} \frac{r-2}{r-1}
+	\ln n}$. Наконец, $\log_2 i(G) \ge \alpha \ge n^\frac{1}{r-1} - 1 \Rightarrow
+	\log_2 \log_2 i(G) \ge \frac{1}{r-1} \log_2 n (1 + o(1))$.
+
+	Подставляем всё в~нашу оценку:
+	\begin{multline*}
+		\overline\alpha(G) \ge \frac{\phi}{h(\phi)} \log_2 i(G) =
+		\frac{1}{-\log_2 \phi (1 + o(1))} \log_2 i(G) \ge \frac{\log_2
+		i(G)}{\frac{r-2}{r-1} \log_2 n} (1 + o(1)) \ge\\
+		\frac{1}{r-2} \frac{\log_2 i(G)}{\log_2 \log_2 i(G)} (1 + o(1)) =
+		\frac{1}{r-2} \frac{\ln i(G)}{\ln \ln i(G)} (1 + o(1)).
+	\end{multline*}
+\end{proof}
+
+\begin{theorem}[Ширер]
+	Пусть $G$~--- $d$-регулярный граф на~$n$ вершинах, не содержащий $K_r, r \ge
+	4$. Тогда $\alpha(G) \ge c(r) \frac{n \ln d}{d \ln \ln d}$.
+\end{theorem}
+\begin{proof}
+	Пусть $\mathcal{F}$~--- множество всех независимых множеств в~$G$, а~$S$~---
+	его случайный элемент (с~равномерным распределением). Для $\forall v \in V(G)$
+	положим $p_v = P(v \in S)$. $\overline p_v = \frac{1}{d} E \sum\limits_{u \in
+	V} I\left\{ (u, v) \in E(G), u \in S\right\}$~--- среднее число соседей в~$S$.
+
+	Обозначим $T_v$~--- множество соседей $v$. $H_v = G \setminus (\{v\} \cup
+	T_v)$. Для $\forall U \subset T_v$ положим $f(U)$~--- вероятность того, что
+	случайное независимое множество в~$H_v$ не имеет соседей в~$U$, но соединено
+	со~всеми вершинами из $T_v \setminus U$. Пусть $I(U)$~--- число независимых
+	множеств внутри $U$. Тогда
+	$$p_v = \frac{i_v}{i(G)} = \frac{i_v}{i_v +
+	\sum\limits_{U \subset T_v} I(U) f(U) i(H_v)} = \frac{1}{1 +
+	\sum\limits_{U \subset T_v} f(U) I(U)}.$$
+
+	Аналогично $$ \overline p_v = \frac{\sum\limits_{U \subset T_v} f(U) I(U)
+	\overline\alpha(U)}{d\left(1 + \sum\limits_{U \subset T_v} f(U) I(U)\right)}.
+	$$
+
+	Заметим, что если $G$ не содержит $K_r$, то $T_v$ не содержит $K_{r-1}$,
+	значит по лемме $\overline\alpha(U) \ge c(r - 1)
+	\frac{\ln I(U)}{\ln \ln I(U)}$. Тогда для $\lambda > 0$ рассмотрим сумму
+	$w = \sum\limits_{U \subset T_v, |I(U)| \ge \lambda} I(U) f(U)$.
+
+	Положим $y = c(r - 1) \frac{\ln \lambda}{\ln \ln \lambda}$. Тогда
+	$p_v \ge \frac{1}{1 + \lambda + w}$ и~$\overline p_v \ge \frac{yw}{(1 +
+	\lambda + w) d}$. Первая оценка убывает, а~вторая возрастает, отсюда $p_v +
+	\overline p_v \ge \max(p_v, \overline p_v) \ge \max\left( \frac{1}{1 + \lambda
+	+ w}, \frac{yw}{(1 + \lambda + w)d}\right) \ge \frac{1}{1 + \lambda +
+	\frac{d}{y}}$. Находим оптимальное $\lambda \sim \frac{d}{\ln d}$ и~получаем
+	оценку
+	$$p_v + \overline p_v \ge \frac{1}{1 + \frac{d}{\ln d} + \frac{d \ln \ln
+	d}{c(r-1)\ln d} (1 + o(1))} = c(r-1) \frac{\ln d}{d \ln \ln d} (1 + o(1)).$$
+
+	Осталось заметить, что $\overline\alpha(G) = E|S| = \sum\limits_{v \in V}
+	p_v$, а~с~другой стороны $\overline\alpha(G) = E\sum\limits_{v \in V} I\{u
+	\in S\} \frac{\deg u}{d} = E \sum\limits_{v \in V} \frac{1}{d}
+	\sum\limits_{U \in T_v} I\{u \in S\} = \overline p_v$. Тогда
+	$$\alpha(G) \ge \overline \alpha(G) = \frac{1}{2} \sum\limits_{v \in V}
+	(p_v + \overline p_v) \ge \frac{c(r-1)}{2} \frac{n \ln d}{d \ln \ln d}
+	(1 + o(1))$$.
+\end{proof}
+
+\begin{corollary}
+	Пусть $G$~--- граф на~$n$ вершинах, не содержащий $K_r$ с~максимальной
+	степенью $\Delta(G) = d$. Тогда $\alpha(G) \ge c(r)
+	\frac{n \ln d}{d \ln \ln d}$.
+\end{corollary}
+\begin{proof}
+	Пусть $G$~--- не $d$-регулярный. Рассмотрим $G'$~--- копию $G$, не
+	пересекающуюся по вершинам. Соединим ребрами $v' \in G', v \in G$, если
+	$v'$~--- копия $v$ и~$\deg_G v < d$. Продолжим процедуру, пока граф не станет
+	$d$-регулярным. Тогда полученный граф $G^\ast$ не содержит $K_r$ и~$n^\ast =
+	|V(G^\ast)| = 2^k n$, тогда по теореме $\alpha(G^\ast) \ge c(r) \frac{n^\ast
+	\ln d}{d \ln \ln d}$. Но $\alpha(G^\ast) \le \alpha(G) 2^k$, значит $\alpha(G)
+	\ge c(r) \frac{n \ln d}{d \ln \ln d}$.
+\end{proof}
+
+\begin{corollary}
+	Пусть $G$~--- граф на~$n$ вершинах, не содержащий $K_r$ со~средней
+	степенью $t(G) = t$. Тогда $\alpha(G) \ge c(r) \frac{n \ln t}{t \ln \ln t}$.
+\end{corollary}
+\begin{proof}
+	Удалим из~$G$ все вершины степени больше $2t$. Для оставшегося графа $G'$
+	максимальная степень не больше $2t$. При этом $|V(G')| = n' \ge \frac{n}{2}$.
+	Тогда $\alpha(G) \ge \alpha(G') \ge c(r) \frac{n \ln 2t}{2t \ln \ln 2t} \ge
+	c'(r) \frac{n \ln t}{t \ln \ln t}$.
+\end{proof}
+
+\begin{corollary}
+	Пусть $H$~--- какой-то граф, а~$G$~--- граф на $n$ вершинах со~средней
+	степенью вершины $t$, не содержащий подграфов, изоморфных $H$. Тогда
+	$\alpha(G) \ge c(H) \frac{n \ln t}{t \ln \ln t}$.
+\end{corollary}
+
+Недоказанное пока что предположение состоит в~том, что повторный логарифм можно
+убрать аналогично задаче о~графах без треугольников.
+
+\section{Теорема Алона}
+
+Далее мы докажем, что приведенная гипотеза верна, если $G$ удовлетворяет
+свойству: $\forall v \in V(G) \chi(G_v) \le r \Rightarrow $ нет $K_{r+2}$. Пусть
+
+\begin{lemma}
+	$X$~--- некоторое конечное множество, $|X| = x, \mathcal{F} \subset 2^X$~---
+	система подмножеств такая, что $|\mathcal{F}| = 2^{\eps x}$. Тогда средний
+	размер элементов $\mathcal{F}$ не меньше $\frac{\eps x}{10 \log_2 \left(1 +
+	\frac{1}{\eps}\right)}$.
+\end{lemma}
+\begin{proof}
+	Считаем, что $\mathcal{F}$ состоит $2^{\eps x}$ самых маленьких множеств.
+	В~силу того, что $\frac{6}{7} \frac{1}{8} > \frac{1}{10}$, достаточно
+	проверить, что $\frac{6}{7}$ элементов $\mathcal{F}$ имеют размер не менее
+	$\frac{\eps x}{8 \log_2 \left(1 + \frac{1}{\eps}\right)} < \frac{x}{8}$. Для
+	любого $r \le \frac{x}{8}$ выполнено $C_x^r > 7 C_{x-1}^{r-1}$. Значит $C_x^r
+	\ge \frac{6}{7} \sum\limits_{i=0}{r} C_x^i$. Осталось проверить, что
+	$$\sum\limits_{i=0}^\frac{\eps x}{8 \log_2 \left( 1 + \frac{1}{\eps}
+	\right)} C_x^i \le 2^{\eps x}.$$
+\end{proof}
+
+\end{document}
