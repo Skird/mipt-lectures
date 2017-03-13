@@ -1,0 +1,27 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\subsection*{Задача 1}
+	$g \in H(A) \Rightarrow g + A = A \Rightarrow g + A + B = A + B \Rightarrow g
+	\in H(A + B)$.
+
+\subsection*{Задача 2}
+	Пусть $A < G$. Тогда если $g \in H(A) \Rightarrow g + A = A \Rightarrow g + 0
+	\in A \Rightarrow g \in A$.
+
+	Пусть $H(A) = A$. Рассмотрим $a \in H(A) = A, b \in A \Rightarrow a + A = A
+	\Rightarrow a +	b \in A$. Теперь рассмотрим $-a$. В~силу того, что множество
+	$A$ замкнуто по сложению и~конечно, приходим к~выводу, что $a$ имеет конечный
+	порядок, то есть $k \cdot a = 0 \Rightarrow -a = a + \ldots + a \in A$.
+
+\subsection*{Задача 3}
+	По теореме Кнезера:
+	$|A_1 + \ldots + A_h| \ge |A_1 + \ldots + A_{h-1}| + |A_h| - |H(A_1 + \ldots
+	+ A_h)| \ge \ldots \ge |A_1| + \ldots + |A_h| - |H(A_1 + A_2)| - \ldots
+	- |H(A_1 + \ldots + A_h)|$. Так как $H(A_1 + A_2) < \ldots < H(A_1 + \ldots +
+	A_h)$, можем оценить последнее выражение как $\sum\limits_{i=1}^h |A_i| -
+	(h-1) |H(A_1 + \ldots + A_h)|$.
+
+\end{document}
