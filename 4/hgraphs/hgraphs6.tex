@@ -1,0 +1,213 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Теорема Алона}
+
+Далее мы докажем, что приведенная гипотеза верна, если $G$ удовлетворяет
+свойству: $\forall v \in V(G) \chi(G_v) \le r \Rightarrow $ нет $K_{r+2}$. Пусть
+
+\begin{lemma}
+	$X$~--- некоторое конечное множество, $|X| = x, \mathcal{F} \subset 2^X$~---
+	система подмножеств такая, что $|\mathcal{F}| = 2^{\eps x}$. Тогда средний
+	размер элементов $\mathcal{F}$ не меньше $\frac{\eps x}{10 \log_2 \left(1 +
+	\frac{1}{\eps}\right)}$.
+\end{lemma}
+\begin{proof}
+	Считаем, что $\mathcal{F}$ состоит $2^{\eps x}$ самых маленьких множеств.
+	В~силу того, что $\frac{6}{7} \frac{1}{8} > \frac{1}{10}$, достаточно
+	проверить, что $\frac{6}{7}$ элементов $\mathcal{F}$ имеют размер не менее
+	$\frac{\eps x}{8 \log_2 \left(1 + \frac{1}{\eps}\right)} < \frac{x}{8}$. Для
+	любого $r \le \frac{x}{8}$ выполнено $C_x^r > 7 C_{x-1}^{r-1}$. Значит $C_x^r
+	\ge \frac{6}{7} \sum\limits_{i=0}{r} C_x^i$. Осталось проверить, что
+	$$\sum\limits_{i=0}^\frac{\eps x}{8 \log_2 \left( 1 + \frac{1}{\eps}
+	\right)} C_x^i \le 2^{\eps x}.$$
+
+	Пусть $\xi \sim Bin(x, \frac{1}{2})$, тогда $\sum\limits_{i=0}^r C_x^i 2^{-x}
+	= P(\xi \le r) = P(\xi \ge x - r) \le |\forall u > 0| \le P(e^{u\xi} \ge
+	e^{u(x-r)}) \le \frac{Ee^{u\xi}}{u(x-r)} = \left( \frac{1}{2} + \frac{1}{2}e^u
+	\right)^x e^{-u(x-r)} = 2^{-x} \frac{(e^u + 1)^x}{e^{u(x-r)}}$. Минимум по $u$
+	достигается на $e^u = \frac{x}{r}$, поэтому
+	\begin{multline*}
+		\sum\limits_{i=0}^r C_x^i \le
+		\left(\frac{x}{r}\right)^x \left( \frac{x}{r} - 1\right)^{r-x} = \left(
+		\frac{x}{r}\right)^r \left(1 - \frac{r}{x}\right)^{r-x} =\\ 2^{-r \log_2
+		\frac{r}{x} - (r-x) \log_2\left(1 - \frac{r}{x}\right)} =
+		2^{h\left(\frac{r}{x}\right)x}.
+	\end{multline*}
+
+	Теперь достаточно показать, что $h\left( \frac{\eps}{8 \log_2 \left(1 +
+	\frac{1}{\eps} \right)}\right) \le \eps$. Если $y < \frac{1}{2}$, то $h(y) \le
+	2y \log_2 \frac{1}{y}$, а~значит, что $h\left( \frac{\eps}{8 \log_2 \left(1 +
+	\frac{1}{\eps} \right)}\right) \le \frac{1}{4 \log_2 \left(1 +
+	\frac{1}{\eps}\right)} \log_2 \left( \frac{8 \log_2 \left(1 + \frac{1}{\eps}
+	\right) }{\eps}\right)$.
+
+	$4 \log_2 \left(1 + \frac{1}{\eps}\right) \ge 3 + \log_2 \log_2 \left( 1 +
+	\frac{1}{\eps} \right) + \log_2 \frac{1}{\eps}$, так как $\log_2
+	\frac{1}{\eps} < \log_2 \left( 1 + \frac{1}{\eps} \right)$ и~$\forall s \ge
+	1 \rightarrow 3 + \log_2 s \le 3s$.
+\end{proof}
+
+\begin{theorem}[Алон]
+	Пусть $G = (V, E)$~--- граф на $n$~вершинах, с~$\Delta(G) = d$. Пусть граф,
+	индуцированный на множестве соседей любой вершины $v$ является
+	$r$-раскрашиваемым. Тогда $\alpha(G) \ge \frac{1}{160 \log_2 (r + 1)} \frac{n
+	\log_2 d}{d}$.
+\end{theorem}
+\begin{proof}
+	Если $d \le 16$, то все следует из теоремы Турана $\alpha(G) \ge \frac{n}{d +
+	1}$. Далее считаем, что $d > 16$.
+
+	Пусть $W$~--- равномерно случйаное независимое множество. Для $\forall v \in
+	V$ обозначим множество её соседей за~$N(v)$ и~введём случйную величину
+	$$X_v = d|\{v\} \cap W| + |N(v) \cap W|.$$
+
+	Если $v \in W$, то $X_v = d$. Иначе $X_v \le |N(v)| \le d$. Покажем, что $EX_v
+	\ge \frac{\log_2 d}{80 \log_2 (r+1)}$.
+
+	Пусть $H_v$~--- подграф, индуцированный на $\{v\} \cup N(v)$. Покажем, что
+	$\forall S$~--- независимых подмножеств выполнено:
+	$$ E(X_v \mid W \cap H_v = S) \ge \frac{\log_2 d}{80 \log_2 (r + 1)}. $$
+
+	Пусть $X$~--- множество не-соседей $s$ в~$N(v), |X| = x$. Путь число
+	независимых множеств в~подграфе, индуцированном на $X$ равно $2^{\eps x}$. По
+	условию такой подграф является $r$-раскрашиваемым, значит в~$X$ существует
+	независимое множество размера хотя бы $\frac{x}{r}$, значит $2^{\eps x} \ge
+	2^{\frac{x}{r}} \Rightarrow \eps \ge \frac{1}{r}$.
+
+	Если $W \cap H_v = S$, то для дополнения $W$ есть $1 + 2^{\eps x}$ вариантов.
+	Значит
+	$$
+		E(X_v \mid W \cap H_v = S) = \frac{d}{2^{\eps x} + 1} + \frac{\sum\limits_{I
+		\subset X, I \in Indep}|I|}{2^{\eps x} + 1}
+	$$
+	По лемме $\sum\limits_{I\subset X, I \in Indep} |I| \ge 2^{\eps x} \frac{\eps
+	x}{10 \log_2 \left( 1 + \frac{1}{\eps}\right)} \ge \frac{d}{2^{\eps x} + 1} +
+	\frac{2^{\eps x}}{2^{\eps x} + 1} \frac{\eps x}{10 \log_2 \left( 1 +
+	\frac{1}{\eps} \right)}$.
+
+	Если $2^{\eps x + 1} \le \sqrt{d}$, то первое слагаемое уже больше $\sqrt{d} >
+	\log_2 \frac{d}{2}$. Если же $\eps x > \frac{1}{2} \log_2 d - 1 \ge
+	\frac{1}{4} \log_2 d$, значит
+	$$
+		E(X_v \mid W \cap H_v = S) \ge \frac{\log_2 d}{80 \log_2
+		\left( 1 + \frac{1}{\eps} \right)} \ge \frac{\log_2d}{80 \log_2 (r + 1)}.
+	$$
+
+	В~итоге, $\sum\limits_v X_v = d|W| + \sum\limits_{u \in W} \deg u \le 2d|W|$,
+	значит $\alpha(G) \ge \overline\alpha(G) = E|W| \ge \frac{1}{2d} \sum\limits_{v
+	\in V} EX_v \ge \frac{n \log_2 d}{160 d \log_2 (r + 1)}$.
+\end{proof}
+
+\begin{corollary}
+	В~условиях теоремы Алона, если $t = t(G)$~--- средняя степень, то $\alpha(G)
+	\ge \frac{c}{\log_2 (1 + r} \frac{n \log_2 t}{t}$, где $c > 0$~--- абсолютная
+	константа.
+\end{corollary}
+
+\section{Числа независимости гиперграфов с~большим обхватом}
+
+\begin{corollary}[Из теоремы Спенсера]
+	Если $H$~--- $k$-однородный гиперграф, на $n$ вершинах, тогда
+	$\alpha(H) \ge \frac{k-1}{k} \frac{n}{t(H)^{\frac{1}{k-1}}}$.
+\end{corollary}
+
+\begin{theorem}[Айтан, Комлош, Пинтц, Спенсер, Семереди]
+	Пусть $H$~--- $k$-однородный гиперграф на~$n$ вершинах, а~также
+	\begin{itemize}
+		\item $g(H) > 4$
+		\item $t = t(H) \ge t_0(k)$
+		\item $n \ge n_0(t, k)$.
+	\end{itemize}
+	Тогда $\alpha(H) \ge \left(\frac{0.98}{e}\right) \cdot
+	10^{-\frac{5}{k+1}} n \left( \frac{\ln t}{t} \right)^{\frac{1}{k-1}}$.
+
+	Если отказаться от последнего условия, то оценка $\alpha(H) \ge c(k)
+	n\left(\frac{\ln t}{t}\right)^\frac{1}{k-1}$.
+\end{theorem}
+
+\begin{theorem}[Дьюк, Лефман, Рёдль]
+	Пусть $H$~--- простой ($g(H) > 2$) $k$-однородный гиперграф на $n$ вершинах,
+	$\Delta(H) = \Delta \ge \Delta_0(k)$, тогда
+	$$
+		\alpha(H) \ge c(k) n\left( \frac{\ln \Delta}{\Delta} \right)^{
+			\frac{1}{k-1}},
+	$$
+	где $c(k) > 0$~--- положительная функция.
+\end{theorem}
+\begin{proof}
+	Пусть $m_i$~--- число циклов длины $i$ в~$H$, $i = 3, 4$. Так как $H$ простой,
+	то $m_i \le n (\Delta_k-1)^{i-1} \le c_i(k) n \Delta^{i-1}$. Рассмотрим
+	$Y$~--- случайное подмножество вершин $H$ по схеме Бернулли с~вероятностью
+	$p$. Выберем $p = \Delta^{\frac{\eps - 1}{k - 1}}, \eps \in (0, 1)$. $|Y| \sim
+	Bin(n, p), np \ge \Delta^{1+\frac{\eps+1}{k-1}} \rightarrow \infty$. Значит
+	при достаточно большом $\Delta$ $P\left(|Y| \in [np - o(np), np + o(np)]
+	\right) \ge 0.99$.
+
+	Пусть $\mu_i, i = 3,4$~--- число циклов длины $i$ в~гиперграфе, индуцированном
+	на $Y$, тогда $E\mu_i = m_i p^{i(k-1)} \le c_i(k) n \Delta^{i-1}
+	\Delta^{i(\eps - 1)} = c_i(k) n \Delta^{i\eps - 1}$. Хотим, чтобы $i\eps - 1
+	< \frac{\eps - 1}{k - 1} \Rightarrow \eps < \frac{k-2}{4k-5}$. В~таком случае
+	$E\mu_i = o(np), i=3,4$ при $\Delta \rightarrow \infty$. Число рёбер в~$Y$
+	в~среднем равно $p^k|E| \le p^k \frac{n\Delta}{k}$. Тогда с~положительной
+	вероятностью будет выполнено следующее:
+	\begin{itemize}
+		\item $|Y| = np + o(np)$
+		\item $\mu_i = o(np), i=3,4$
+		\item Число рёбер в~$Y$ не больше $\frac{2p^k n\Delta}{k}$.
+	\end{itemize}
+
+	Удалим из всех циклов внутри $Y$ по вершине. Остаётся гиперграф $H'$
+	с~условием $g(H') > 4$, притом $|V(H')| = np + o(np) \ge \frac{np}{2}$, $t(H')
+	\le \frac{2p^k n\Delta}{|V'(H)|} \le 4p^{k-1} \Delta$. По теореме АКПСС
+	\begin{multline*}
+		\alpha(H') \ge c'(k) |V(H')| \left(\frac{\ln t(H')}{t(H')}
+		\right)^\frac{1}{k-1} \ge c'(k) \frac{np}{2} \left( \frac{\ln 4p^{k-1}
+		\Delta}{4p^{k-1}\Delta} \right)^\frac{1}{k-1} \ge\\ c'(k) \frac{n}{2} \left(
+		\frac{\ln 4\Delta^\eps}{4\Delta}\right)^\frac{1}{k-1} \ge c(k) n \left(
+		\frac{\ln \Delta}{\Delta}\right)^\frac{1}{k-1}
+	\end{multline*}
+\end{proof}
+
+\begin{corollary}
+	Если $H$~--- простой $k$-однородный гиперграф со средней степенью вершины $t$,
+	то $\alpha(H) \ge c(k) n \left( \frac{\ln t}{t}\right)^\frac{1}{k-1}$.
+\end{corollary}
+
+\section{Гипотеза Хейлбронна в~комбинаторной геометрии}
+
+В~единичный круг вброшено $N$ точек. $\exists c > 0$ такое, что при любом
+расположении точек найдётся треугольник с~площадью $\le \frac{c}{N^2}$.
+
+\begin{claim}
+	Гипотеза Хейлбронна неверна.
+\end{claim}
+\begin{proof}
+	$t = n^{\frac{1}{10}}, \delta = \frac{t^2}{51n^2}, n$~--- какое-то большое
+	число. Пусть $X, Y, Z$~--- три случайные точки в~единичном круге $U$.
+	Геометрическими соображениями вероятность того, что треугольник с~вершинами
+	в~$X, y, Z$ имеет площадь меньше $\Delta$ оценивается как
+	$\frac{1}{\pi^2} \int\limits_0^2 \frac{4\Delta}{r} 2\pi r dr \le
+	\frac{16}{\pi}\Delta < \frac{t^2}{n^2}$.
+
+	Рассмотрим $n$ случайных точек внутри $U$ и~посторим 3-однородный гиперграф
+	$H'$, где в~ребро объединяются те тройки вершин, которые образуют треугольник
+	площади меньше $\Delta$. По неравенству Маркова хотя бы $\frac{1}{2}$ число
+	рёбер будет $2C_n^3 \frac{t^2}{n^2} \le \frac{nt^2}{3}$.
+
+	Веротяность образования 2-цикла среди 4 вершин в~таком графе оценивается как
+	$\frac{1}{\pi^3} \int\limits_0^2 \min\left(2, \frac{4\Delta}{r}\right)^2 2\pi
+	r dr \le \frac{1}{\pi^3} \int\limits_0^{2\Delta} 8\pi r dr +
+	\frac{1}{\pi^3}\int\limits_{2\Delta}^2 \frac{32\Delta^2}{r^2}\pi r dr =
+	o(\Delta^2 \ln \Delta) = o(n^\frac{\frac{4}{10}-4 \ln n}) = o(n^{\frac{1}{2} -
+	4})$. Значит среднее число 2-циков есть $o(\sqrt{n})$. Удалим по одной вершине
+	из каждого. Останется простой гиперграф, в~котором по теореме ДЛР $\alpha(H)
+	\ge c n \left(\frac{\ln t}{t}\right)^{\frac{1}{2}}$. Заметим, что $t(H) <
+	\frac{nt^2}{|V(H)|} \sim t^2 \Rightarrow \alpha(H) \ge cn \frac{\sqrt{\ln
+	t}}{t} = N$. Эти $N$ точек не содержат ни одного треугольника большой площади.
+	$\Delta = \frac{t^2}{51n^2} \ge c' \frac{\ln N}{N^2}$.
+\end{proof}
+
+\end{document}
