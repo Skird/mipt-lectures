@@ -201,13 +201,14 @@
 	$\frac{1}{\pi^3} \int\limits_0^2 \min\left(2, \frac{4\Delta}{r}\right)^2 2\pi
 	r dr \le \frac{1}{\pi^3} \int\limits_0^{2\Delta} 8\pi r dr +
 	\frac{1}{\pi^3}\int\limits_{2\Delta}^2 \frac{32\Delta^2}{r^2}\pi r dr =
-	o(\Delta^2 \ln \Delta) = o(n^\frac{\frac{4}{10}-4 \ln n}) = o(n^{\frac{1}{2} -
-	4})$. Значит среднее число 2-циков есть $o(\sqrt{n})$. Удалим по одной вершине
-	из каждого. Останется простой гиперграф, в~котором по теореме ДЛР $\alpha(H)
-	\ge c n \left(\frac{\ln t}{t}\right)^{\frac{1}{2}}$. Заметим, что $t(H) <
-	\frac{nt^2}{|V(H)|} \sim t^2 \Rightarrow \alpha(H) \ge cn \frac{\sqrt{\ln
-	t}}{t} = N$. Эти $N$ точек не содержат ни одного треугольника большой площади.
-	$\Delta = \frac{t^2}{51n^2} \ge c' \frac{\ln N}{N^2}$.
+	o(\Delta^2 \ln \Delta) = o\left(n^\frac{\frac{4}{10}-4 \ln n}{?}\right) =
+	o(n^{\frac{1}{2} - 4})$. Значит среднее число 2-циков есть $o(\sqrt{n})$.
+	Удалим по одной вершине из каждого. Останется простой гиперграф, в~котором по
+	теореме ДЛР $\alpha(H) \ge c n \left(\frac{\ln t}{t}\right)^{\frac{1}{2}}$.
+	Заметим, что $t(H) < \frac{nt^2}{|V(H)|} \sim t^2 \Rightarrow \alpha(H) \ge
+	cn \frac{\sqrt{\ln t}}{t} = N$. Эти $N$ точек не содержат ни одного
+	треугольника большой площади.  $\Delta = \frac{t^2}{51n^2} \ge c'
+	\frac{\ln N}{N^2}$.
 \end{proof}
 
 \end{document}
