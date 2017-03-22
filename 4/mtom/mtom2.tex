@@ -1,0 +1,89 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Простейшая задача вариационного исчисления}
+
+Небольшая известная мотивировочная задача:
+\begin{problem}[1696, о~брахистохроне]
+	Две точки: $(0, 0)$, $(a, b)$. Нужно найти кривую $y(x)$, по которой точка
+	скатится под действием силы тяжести быстрее всего.
+
+	Иными словами
+	$\int dt = \int\limits_0^a \sqrt{\frac{1 + (y')^2}{2gy}}dx \rightarrow \min,
+	y(0) = 0, y(a) = b$
+\end{problem}
+
+Итак, простейшая задача классического вариационного исчисления: $I(x) =
+\int\limits_{t_0}^{t_1} L(t, x, \dot{x}) \rightarrow \inf, x(t_0) = x_0, x(t_1)
+= x_1$.
+
+\begin{definition}
+	$\hat{x} \in C^1[t_0, t_1]$~--- слабый locmin $\Leftrightarrow \exists \delta
+	> 0: \forall x: \norm{x - \hat{x}}_{C^1} < \delta \Rightarrow I(x) \ge
+	I(\hat{x}), x(t_0) = x_0, x(t_1) = x_1$.
+
+	Слабым он называется, потому что выбран довольно узкий функциональный класс
+	$C^1$.
+\end{definition}
+
+\begin{theorem}[Необходимое условие слабого минимума]
+	Пусть $\hat{x}$~--- слабый locmin, $L, L_x, L_{\dot{x}} \in C^1$. Тогда
+	выполнено уравнение Эйлера-Лагранжа:
+	$$ -\frac{d}{dt}\hat{L}_{\dot{x}} + \hat{L}_x = 0 $$
+\end{theorem}
+\begin{proof}
+	Пусть $h \in C_0^1[t_0, t_1]$, то есть $h(t_0) = 0, h(t_1) = 0$. $I(\hat{x} +
+	\lambda h) = \phi(\lambda)$. Рассмотрим $\phi'(0) = 0$:
+
+	$$ \int\limits_{t_0}^{t_1} \frac{L(t, \hat{x} + \lambda h, \hat{\dot{x}}) -
+	L(t, \hat{x}, \hat{\dot{x}})}{\lambda} dt = \int\limits_{t_0}^{t_1} (\hat{L}_x
+	h + \hat{L}_{\dot{x}} \dot{h})dt = 0 \quad\forall h \in C_0^1$$
+
+	\begin{lemma}[Дюбуа-Раймон]
+		Пусть $a, b \in C[t_0, t_1]$ и~$\int\limits_{t_0}^{t_1} (a(t)h(t) +
+		b(t)\dot{h}(t))dt = 0 \quad \forall h \in C_0^1$, тогда $b \in C^1[t_0,
+		t_1], \dot{b} = a$.
+	\end{lemma}
+\end{proof}
+
+\section{Интегралы уравнения Эйлера}
+
+$-\frac{d}{dt}\hat{L}_{\dot{x}} + \hat{L}_x = 0$. Иногда можно указать первые
+интегралы:
+\begin{itemize}
+	\item $L = L(t, x), L_x = 0$.
+	\item $L = L(t, \dot{x}), L_{\dot{x}} = 0$, интеграл импульса
+	\item $L = L(x, \dot{x}), H = \dot{x}L_{\dot{x}} - L$~--- интеграл энергии
+\end{itemize}
+
+С~помощью такого первого интеграла можем сократить себе работу по нахождению
+брахистохроны, получим в~итоге $x = \frac{c}{2}(\tau - \sin\tau), y =
+-\frac{c}{2} (1 - \cos \tau)$.
+
+\begin{exercise}
+	Сколько есть экстремалей у~уравнения Эйлера для брахистохроны? Как ведет себя
+	найденное $\hat{y}$ в~окрестности 0? Даёт ли $\hat{y}$ минимум?
+\end{exercise}
+
+\begin{problem}[Задача Больца]
+	$B(x) = \int\limits_{t_0}^{t_1} L(t, x, \dot{x}) dt + l(x(t_0), x(t_1))
+	\rightarrow \min$.
+\end{problem}
+
+\begin{theorem}[Необходимое условие]
+	Пусть $L, L_x, L_{\dot{x}}, l_{x(t_0}, l_{x(t_1)} \in C, \hat{x}$~--- слабый
+	$locmin$, тогда выполнены условия:
+	\begin{itemize}
+		\item Уравнение Эйлера: $-\frac{d}{dt} \hat{L}_{\dot{x}} + \hat{L}_x = 0$
+		\item Условие трансверсальности: $\hat{L}_{\dot{x}} =
+			(-1)^j \hat{l}_{x(t_j)}$
+	\end{itemize}
+\end{theorem}
+\begin{proof}
+	$\phi(\lambda) = B(\hat{x} + \lambda h), h \in C^1[t_0, t_1]$. $\phi'(0) = 0
+	\Rightarrow $ to be continued (no).
+\end{proof}
+
+\end{document}
