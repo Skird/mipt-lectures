@@ -1,0 +1,209 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Модели случайных графов}
+
+\begin{definition}
+	\emph{Случайный граф}~--- случайный элемент со значениями в~некотором конечном
+	множестве графов.
+\end{definition}
+
+\begin{definition}
+	\emph{Равномерная модель}. $K_n$~--- полный граф, $0 \le m \le C_n^2$,
+	$\mathcal{G}_m$~--- множество всех остовных подграфов $K_n$, имеющих ровно $m$
+	рёбер. Случайный граф в~этой модели~--- случайный элемент с~равномерным
+	распределением на $\mathcal{G}_m$.
+
+	$$ P(G(n, m) = F) = \frac{1}{C_{C_n^2}^m} \,\forall F \in \mathcal{G}_m $$
+\end{definition}
+
+Фиксировано число рёбер, но другие характеристики выглядят посложнее, скажем
+$\deg v$ имеет гипергеометрическое распределение.
+
+\begin{definition}
+	\emph{Биномиальная модель}. $\mathcal{G}$~--- множество всех остовных
+	подграфов $K_n$, $p \in [0, 1]$. Случайный граф в~этой модели~--- случайный
+	элемент на $\mathcal{G}$ со следующим распределением:
+
+	$$ P(G(n, p) = F) = p^{|E(F)|} (1 - p)^{C_n^2 - |E(F)|} \, \forall F \in
+	\mathcal{G}$$
+\end{definition}
+
+Много независимых событий, из-за чего многие характеристики имеют удобное
+распределение, например $\deg v \sim B(n - 1, P)$. Число рёбер, впрочем,
+случайно.
+
+Другие модели:
+\begin{itemize}
+	\item Граф $G$, схема Бернулли на его рёбрах. Скажем, $G = K_{n,m}$~---
+		случайный двудольный граф.
+	\item Равномерное распределение на какой-то совокупности графов $\mathcal{F}$.
+		Например, случайный $d$-регулярный граф
+		\begin{itemize}
+			\item $d = 1$~--- случайное совершенное паросочетание
+			\item $d = 2$~--- случайный набор циклов
+			\item $d = 3$~--- можно показать, что а.п.н. это гамильтонов цикл плюс
+				какое-то совершенное паросочетание
+		\end{itemize}
+	\item Случайный процесс на графе
+		\begin{itemize}
+			\item С~дискретным временем: $\tilde{G} = (\tilde{G}(n,m), m = 0 \ldots
+				C_n^2)$, в~котором на каждом шаге появляется новое случайное равномерно
+				выбранное ребро. $\tilde{G}(n,m) \overset{d}= G(n, m)$. Можно смотреть
+				случайные моменты
+				\begin{itemize}
+					\item $\tau_1(n) = \min\{m: \delta(\tilde{G}(n,m)) \ge 1\}$
+					\item $\sigma_1(n) = \min\{m: \tilde{G}(n,m)\text{ связен}\}$
+				\end{itemize}
+				\begin{theorem}[Баллобаш, Томасон]
+					$$ P\left(\tau_1(n) = \sigma_1(n)\right) \rightarrow 1, n \rightarrow
+					\infty $$
+				\end{theorem}
+			\item С~непрерывным временем: пусть для каждого ребра $e$ графа $K_n$
+				задана случайная величина $T_e$. Тогда для $\forall t > 0$ можно
+				рассмотреть процесс:
+				$$ \tilde{G}_T = \{e \mid T_e \le t\} $$
+				Если все $T_e$ распределены одинаково, $\tilde{G}_T(n,t) \overset{d}=
+				G(n, p)$, где $p = P(T_e \le t)$.
+			\item Triangle-free process. На каждом шаге включаем одно случайное ребро
+				так, чтобы не возникало треугольников. Можно показать, что в~результате
+				такого процесса $\alpha(\text{итогового графа}) = O(\sqrt{n \ln n})$.
+				Следствие: оценка на число Рамсея $R(3, t) \ge c \frac{t^2}{\ln t}$.
+		\end{itemize}
+\end{itemize}
+
+\section{Общая теория случайных подмножеств}
+
+Пусть $\Gamma$~--- конечное множество, $|\Gamma| = N$.
+\begin{itemize}
+	\item $\Gamma(p)$~--- схема Бернулли на $\Gamma$.
+	\item $\Gamma(n)$~--- случайное подмножество размера $n$ с~равномерным
+		распределением
+	\item $\tilde\Gamma(m)$~--- случайный процесс, включающий элементы
+		последовательно
+\end{itemize}
+
+В~асимптотиских утверждениях $\Gamma = \Gamma_n, n \in \mathbb{N}$~---
+последовательность, притом $N=N(n)$.
+
+\section{Монотонные и~выпуклые свойства}
+
+\begin{definition}
+	$Q$~--- семейство подмножеств $\Gamma$ называется \emph{возрастающим}, если
+	$A \in Q, A \subset B \rightarrow B \in Q$, \emph{убывающим}, если $A \supset
+	B \rightarrow B \in Q$, \emph{монотонным}, если оно возрастающее или
+	убывающее.
+\end{definition}
+
+Ясно, что $Q$~--- возрастающее тогда и~только тогда, когда $\overline{Q} =
+2^\Gamma \setminus Q$~--- убывающее. Будем обозначать $\Gamma(p) \models Q
+\Leftrightarrow \Gamma(p) \in Q$ (<<обладает свойством Q>>).
+
+\begin{example}
+	$\Gamma$~--- рёбра $K_n$. Возрастающие свойства:
+	\begin{itemize}
+		\item связность
+		\item содержит какой-то подграф
+		\item $\delta(G) \ge k$
+	\end{itemize}
+	Убывающие свойтва:
+	\begin{itemize}
+		\item планарность
+		\item $\chi(G) \le k$
+		\item ацикличность
+	\end{itemize}
+\end{example}
+
+\begin{lemma}
+	Пусть $Q$~--- возрастющее свойство. Тогда $\forall p_1 \le p_2, m_1 \le m_2$:
+	$$ P(\Gamma(p_1) \models Q) \le P(\Gamma(p_2) \models Q) $$
+	$$ P(\Gamma(m_1) \models Q) \le P(\Gamma(m_2) \models Q) $$
+\end{lemma}
+\begin{proof}~\
+	\begin{itemize}
+		\item $P(\Gamma(m_1) \models Q) = P(\tilde\Gamma(m_1) \models Q) \le
+			P(\tilde\Gamma(m_2) \models Q) = P(\Gamma(m_2) \models Q)$
+		\item Пусть $\Gamma(p') \bot \Gamma(p'')$~--- два независимых подмножества.
+			Тогда $\Gamma(p') \cup \Gamma(p'') \overset{d}= \Gamma(p)$, где $p = p' +
+			p'' - p' p''$. Тогда можно положить $p' = \frac{p_2 - p_1}{1 - p_1}$,
+			а~также, что $\Gamma(p') \bot \Gamma(p_1)$. Тогда
+			$$P(\Gamma(p_1) \models Q) \le P(\Gamma(p_1) \cup \Gamma(p') \models Q) =
+			P(\Gamma(p_2) \models Q).$$
+	\end{itemize}
+\end{proof}
+
+\begin{definition}
+	Свойство $Q$ называется \emph{выпуклым}, если $A \subset C \subset B \in Q
+	\Rightarrow C \in Q$
+\end{definition}
+
+\begin{example}~\
+	\begin{itemize}
+		\item все монотонные выпуклы
+		\item $\chi(G) = k$
+	\end{itemize}
+\end{example}
+
+\section{Асимптотическая эквивалентность моделей}
+
+Хотим установить какую-то связь между моделями $\Gamma(p)$ и~$\Gamma(m)$ при $pN
+\sim m$. Для этого введём следующий контекст:
+
+\begin{itemize}
+	\item $\Gamma(n), n \in \mathbb{N}$~--- последовательность конечных множеств
+	\item $N = N(n) \rightarrow +\infty$
+	\item $Q = Q(n)$
+	\item $p = p(n) \in [0, 1]$
+	\item $m = m(n) \in \{0, \ldots, N\}$
+	\item $\Gamma(n, p), \Gamma(n, m)$~--- случайные подмножества $\Gamma(n)$
+\end{itemize}
+
+\begin{lemma}
+	Пусть $Q$~--- свойство $\Gamma(n)$. Пусть $p = p(n) \in [0, 1]$~--- некоторая
+	функция. Если для любой последовательности $m = m(n)$, такой что
+	$$ m = Np + O(\sqrt{Npq}), q = 1 - p$$ выполнено
+	$$P(\Gamma(n, m) \models Q) \rightarrow a, n \rightarrow \infty$$
+	то
+	$$P(\Gamma(n, p) \models Q) \rightarrow a, n \rightarrow \infty.$$
+\end{lemma}
+\begin{proof}
+	Пусть $C > 0$~--- большая константа и~положим $M(C) = \{m \mid |m - Np| \le
+	C\sqrt{Npq}\}$. Обозначим
+	$$ m_\ast = \underset{m \in M(C)}\argmin P(\Gamma(n, m) \models Q) $$
+	$$ m^\ast = \underset{m \in M(C)}\argmax P(\Gamma(n, m) \models Q) $$
+	По формуле полной вероятности:
+	\begin{align*}
+		P(\Gamma(n, p) \models Q) = &\sum\limits_{m=0}^N P(\Gamma(n,p) \models Q \mid
+		& |\Gamma(n, p)| = m) P(|\Gamma(n, p)| = m) = \\
+		& \sum\limits_{m=0}^N P(\Gamma(n,m) \models Q) P(|\Gamma(n,p)|=m) \ge \\
+		& \sum\limits_{m \in M(C)} P(\Gamma(n,m) \models Q) P(|\Gamma(n,p)|=m) \ge \\
+		& P(\Gamma(n, m_\ast) \models Q) P(|\Gamma(n, p)| \in M(C)|)
+	\end{align*}
+	Но $|\Gamma(n, p)| \sim Bin(N, p), E|\Gamma(n, p)| = Np, D|\Gamma(n, p)| =
+	Npq$. По неравенству Чебышева:
+	$$ P(||\Gamma(n, p)| - Np| > C\sqrt{Npq}) \le \frac{Npq}{C^2Npq} =
+	\frac{1}{C^2} $$
+	Значит $P(\Gamma(n, p) \models Q) \ge P(\Gamma(n,m_\ast) \models Q)\left(
+	1 - \frac{1}{C^2}\right)$.
+
+	Аналогично
+	\begin{multline*}
+		P(\Gamma(n, p) \models Q) \le
+		\sum\limits_{m \in M(C)} P(\Gamma(n,m) \in Q) P(|\Gamma(n,p)| = m) +
+		\sum\limits_{m \notin M(C)} P(|\Gamma(n,p)| = m) \\
+		\le P(\Gamma(n,m^\ast) \in Q) + \frac{1}{C^2}
+	\end{multline*}
+
+	Значит $\overline{\lim\limits_{n\rightarrow \infty}} P(\Gamma(n, p) \models Q)
+	\le a + \frac{1}{C^2}$.
+
+	Также $\underline{\lim\limits_{n \rightarrow \infty}} P(\Gamma(n, p) \models Q)
+	\ge a(1 - \frac{1}{C^2})$.
+
+	Это верно для любого $C > 0$. Тогда $\exists \lim P(\Gamma(n, p) \models Q) =
+	a$.
+\end{proof}
+
+\end{document}
