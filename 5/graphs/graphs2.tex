@@ -1,0 +1,231 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Связь в~обратную сторону}
+
+\begin{lemma}
+	Пусть $Q$~--- монотонное свойтво, $a \in [0; 1]$. Если $\forall p = p(n)$
+	такой, что $p = \frac{m}{N} + o(\sqrt\frac{m(N-m)}{N^3})$ выполнено, что
+	$P(\Gamma(n, p) \models Q) \rightarrow a$, то $P(\Gamma(n, m) \models Q)
+	\rightarrow a$.
+\end{lemma}
+
+Докажем только ослабленный вариант, где $a = 0$ или $a = 1$.
+
+\begin{lemma}
+	Пусть $Q$~--- монотонное свойство, $m = m(n), m(n) \rightarrow +\infty$
+	и~$\overline{\lim\limits_{n\rightarrow \infty}} \frac{m}{N} < 1$. Тогда если
+	$P(\Gamma(n, \frac{m}{N}) \models Q) \rightarrow 1$, то $P(\Gamma(n, m)
+	\models Q) \rightarrow 1$.
+\end{lemma}
+\begin{proof}~\\
+	\begin{enumerate}
+		\item Если $Q$~--- возрастающее свойство, то
+			\begin{align*}
+				P(\Gamma(n, \frac{m}{N}) \models Q) = \sum\limits_{k=0}^N P(\Gamma(n,
+				\frac{m}{N}) \models Q \mid |\Gamma(n, \frac{m}{N})| = k) P(|\Gamma(n,
+				\frac{m}{N})| = k) \le \\
+				\sum\limits_{k=0}^N P(\Gamma(n, k) \models Q) P(|\Gamma(n, \frac{m}{N})|
+				= k) \le \sum\limits_{k=0}^m + \sum\limits_{k>m+1} \le\\
+				P(\Gamma(n, m) \models Q) P(|\Gamma(n, \frac{m}{N})| \le m) + P(|\Gamma(n,
+				\frac{m}{N})| > m)
+			\end{align*}
+			По ЦПТ (условие на скорость роста $m(n)$ позволяет ею воспользоваться),
+			получаем, что
+			$$1 \le \frac{1}{2} \lowlim\limits_n P(\Gamma(n, m) \models Q) +
+			\frac{1}{2} $$
+			Значит $\exists\lim\limits_n P(\Gamma(n, m) \models Q) = 1$.
+		\item
+			Если $Q$~--- убывающее, то $P(\Gamma(n, \frac{m}{N}) \models Q) \le
+			P(|\Gamma(n, m)| > m) P(\Gamma(n, m) \models Q) + P(|\Gamma(n, m)| \le
+			m)$. Далее, все тоже самое.
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+	То же самое верно и~для $a = 0$.
+\end{corollary}
+
+\begin{corollary}[Асимптотическая эквивалентность моделей]
+	Пусть $Q$~--- возрастающее свойство, $m = m(n) \rightarrow +\infty$,
+	$\uplim\limits_n \frac{m}{N} \le 1 - \delta$. Тогда
+	\begin{enumerate}
+		\item $P(\Gamma(n, \frac{m}{N}) \models Q) \rightarrow 1 \Rightarrow
+			P(\Gamma(n, m) \models Q) \rightarrow 1$.
+		\item $P(\Gamma(n, \frac{m}{N}) \models Q) \rightarrow 0 \Rightarrow
+			P(\Gamma(n, m) \models Q) \rightarrow 0$.
+		\item $P(\Gamma(n, m) \models Q) \rightarrow 1 \Rightarrow \forall \eps > 0
+			\,P(\Gamma(n, \frac{m}{N}(1 + \eps)) \models Q) \rightarrow 1$.
+		\item $P(\Gamma(n, m) \models Q) \rightarrow 0 \Rightarrow \forall \eps > 0
+			\,P(\Gamma(n, \frac{m}{N}(1 - \eps)) \models Q) \rightarrow 0$.
+	\end{enumerate}
+\end{corollary}
+\begin{proof}
+	Первые два~--- это лемма и~следствие. Положим $\frac{m}{N}(1 + \eps) = p(n)$.
+	Тогда если $m'(n) = NP + O(\sqrt{Npq}) = (1 + \eps)m + O(\sqrt{m})$, то $m'(n)
+	\ge m(n)$ начиная с~какого-то момента, значит в~силу возрастания $Q$
+	$P(\Gamma(n, m') \models Q) \ge P(\Gamma(n, m) \models Q) \rightarrow 1$.
+	Значит $P(\Gamma(n, m') \models Q) \rightarrow 1$, то есть по лемме
+	$P(\Gamma(n, \frac{m}{N}(1 + \eps)) \models Q) \rightarrow 1$. Аналогично
+	следует последний пункт.
+\end{proof}
+
+\section{Пороговые вероятности}
+
+Мы доказали эквивалентность моделей только в~случае вероятности, стремящейся к~0
+или к~1. Однако, это самый важный случай, так как имеет место эффект
+<<пороговой вероятности>>.
+
+\begin{definition}
+	Пусть $Q$~--- возрастающее свойство подмножеств $\Gamma(n)$. Функция $\hat{p}
+	= \hat{p}(n)$ называется \emph{пороговой вероятностью} для $Q$, если выполнено
+	$\lim\limits_{n\rightarrow\infty} P(\Gamma(n, p) \models Q) = 1$ при $p =
+	\omega(\hat{p})$ и~0, если $p = o(\hat{p})$.
+\end{definition}
+\begin{definition}
+	Если $Q$~--- возрастающее свойство, то функция $\hat{m} = \hat{m}(n)$
+	называется \emph{пороговой функцией} для $Q$, если выполнено
+	$\lim\limits_{n\rightarrow\infty} P(\Gamma(n, m) \models Q) = 1$ при $m =
+	\omega(\hat{m})$ и~0 при $m = o(\hat{m})$.
+\end{definition}
+
+\begin{remark}
+	Для убывающих свойств все то же самое, с~точностью до наоборот.
+\end{remark}
+\begin{remark}
+	$\hat{m}$~--- пороговая вероятность $\Leftrightarrow \hat{p} =
+	\frac{\hat{m}}{N}$~--- пороговая функция.
+\end{remark}
+
+\begin{example}
+	\begin{itemize}
+		\item $\Gamma(n) = \{1, \ldots, n\}$, $Q = \{\text{внутри есть
+			3-прогрессия}\}$. Тогда $\hat{p} = n^{-\frac{2}{3}}$~--- пороговая
+			вероятность, $\hat{m} = n^{\frac{1}{3}}$~--- пороговая функция.
+		\item $\Gamma(n)$~--- рёбра $K_n$, $Q = \{\text{есть }\Delta\}$. Тогда
+			$\hat{p} = \frac{1}{n}$~--- пороговая вероятность.
+	\end{itemize}
+\end{example}
+
+\begin{claim}
+	Пусть $Q$~--- нетривиальное возрастающее свойство подмножеств $\Gamma(n)$.
+	Тогда функция $f(p) = P(\Gamma(n, p) \models Q)$ является непрерывной, строго
+	возрастающей на $[0; 1], f(0) = 0, f(1) = 1$.
+\end{claim}
+\begin{proof}
+	Возрастание следует из предыдущих лемм.
+	$$f(p) = \sum\limits_{A \in Q} P(\Gamma(n, p) = A) =
+	\sum\limits_{A \in Q} p^{|A|}(1 - p)^{N - |A|}.$$
+	Это многочлен, строго возрастающая непрерывная функция.
+\end{proof}
+
+\begin{definition}
+	Если $Q$~--- возрастающее свойство, то $\forall a \in (0, 1)$ положим $p(a, n)
+	= f_n^{-1}(a)$. Введём также $m(a, n) = \min \{m: P(\Gamma(n, m) \models Q)
+	\ge a\}$.
+\end{definition}
+
+\begin{lemma}
+	Пусть $Q$~--- возрастающее свойство, тогда $\hat{p} = \hat{p}(n)$ является
+	пороговой вероятностью для $Q$ $\Leftrightarrow \forall a \in
+	(0, 1)$ выполнено $\hat{p} \asymp p(a, n)$. И~$\hat{m}$~--- пороговая
+	вероятность для $Q \Leftrightarrow \forall a \in (0, 1)$ выполнено $\hat{m}
+	\asymp m(a, n)$.
+\end{lemma}
+\begin{proof}
+	Докажем для равномерной модели. Пусть $\hat{m}$~--- пороговая, но $\exists a:
+	\in (0, 1)$ такое, что $\hat{m} \not\asymp m(a, n)$. Тогда существует
+	подпоследовательность $\hat{m}_{n_k}$ такая, что отношение
+	$\frac{\hat{m}_{n_k}}{m(a, n_k)} \rightarrow 0$ или $+\infty$.
+
+	Пусть предел нулевой. Тогда $m' = m(a, n_k) - 1$ есть $\omega(\hat{m})$.
+	В~таком случае $\lim\limits_{k\rightarrow\infty} P(\Gamma(n, m'(n_k)) \models
+	Q) = 1$.  Но $P(\Gamma(n, m'(n_k)) \models Q) \le a < 1$, противоречие.
+
+	Если же предел равен $+\infty$, то $m(n_k) = o(\hat{m})$. Тогда
+	$\lim\limits_k P(\Gamma(n, m(n_k)) \models Q) = 0$. Но для любого $k$
+	выполнено $P(\Gamma(n, m(n_k)) \models Q) \ge a > 0$, противоречие.
+
+	В~обратную сторону: пусть $\hat m = \omega(\hat{m})$. Тогда $\forall a \in (0,
+	1) \,m = \omega(m(a, n))$, значит в~силу возрастания $Q$
+	$P(\Gamma(n, m) \models Q) \ge P(\Gamma(n, m(a, n)) \models
+	Q) \Rightarrow \lowlim\limits_n P(\Gamma(n, m) \models Q) \ge \lowlim\limits_n
+	P(\Gamma(n, m(a, n)) \models Q) \ge a$, то есть $\exists \lim\limits_n
+	P(\Gamma(n, m) \models Q) = 1$.
+
+	Если $m = o(\hat{m})$, то все аналогично.
+\end{proof}
+
+\begin{theorem}
+	Каждое монотонное свойство имеет пороговую вероятность.
+\end{theorem}
+\begin{proof}
+	Считаем, что $Q$~--- возрастающее свойство. Надо показать, что все функции
+	$p(a, n)$ имеют один и~тот же порядок. Возьмём $\eps \in (0, \frac{1}{2})$
+	и~такое $m$, что $(1 - \eps)^m \le \eps$. Рассмотрим $\Gamma^{(1)}(n, p(\eps,
+	n)), \ldots, \Gamma^{(m)}(n, p(\eps, n_))$~--- н.о.р. случайные подмножества
+	$\Gamma(n)$. Тогда
+	$$\tilde\Gamma = \Gamma^{(1)}(n, p(\eps, n)) \cup \ldots \cup
+	\Gamma^{(m)}(n, p(\eps, n)) \overset{d}= \Gamma(n, p'),$$
+	где $p' = 1 - (1 - p(\eps, n))^m \le m p(\eps, n)$.
+
+	$P(\tilde\Gamma \models Q) = P(\Gamma(n, p') \models Q) \le P(\Gamma(n,
+	mp(\eps, n)) \models Q)$.
+
+	С~другой стороны $P(\tilde\Gamma \not\models Q) \le P(\forall i \Gamma^{(i)}(n,
+	p(\eps, n)) \not\models Q) = P^m(\Gamma^{(1)}(n, p(\eps, n)) \not\models Q) =
+	(1 - \eps)^m \le \eps$. Тогда $P(\tilde\Gamma \models Q) \ge 1 - \eps) =
+	P(\Gamma(n, p(1 - \eps, n)) \models Q)$.
+
+	Значит $\forall n\, mp(\eps, n) \ge p(1 - \eps, n)$. Итого $p(\eps, n) \le
+	p(\frac{1}{2}, n) \le p(1 - \eps, n) \le mp(\eps, n)$. Значит по лемме,
+	$p(\frac{1}{2}, n) = \hat{p}$~--- пороговая вероятность для $Q$.
+\end{proof}
+
+\begin{corollary}
+	Для $\forall$монотонного свойства $\exists$ пороговая функция $\hat{m}$.
+\end{corollary}
+
+\begin{definition}
+	Пусть $Q$~--- выпуклое свойство. Тогда функции $\hat{p_1} \le \hat{p_2}$
+	называются \emph{пороговыми} для $Q$, если...
+\end{definition}
+
+\begin{example}
+	$\Gamma(n)$~--- рёбра $K_n$.
+	\begin{itemize}
+		\item $Q = \{\text{обхват} = 4\}$, $\hat{p_1} = \hat{p_2} = \frac{1}{n}$
+		\item $Q = \{\text{кликовое число}  = 4\}$, $\hat{p_1} = n^{-\frac{2}{3}}$,
+			$\hat{p_2} = n^{-\frac{1}{2}}$
+	\end{itemize}
+\end{example}
+
+\begin{definition}
+	Пусть $Q$~--- возрастающее. Тогда $\hat{p} = \hat{p}(n)$ называется
+	\emph{точной пороговой вероятностью} для $Q$, если $\forall \eps > 0$
+	выполнено $\lim\limits_{n\rightarrow\infty} P(\Gamma(n, p) \models Q) = 1$ при
+	$p \ge (1 + \eps) \hat{p}$ и~0 при~$p \le (1 - \eps)\hat{p}$.
+\end{definition}
+
+\begin{example}
+	$\Gamma(n)$~--- рёбра $K_n$.
+	\begin{itemize}
+		\item $Q = \{\text{связность}\}$, $\hat{p} = \frac{\ln n}{n}$~--- точная
+			пороговая вероятность
+		\item $Q = \{\text{есть } \Delta\}$, $\hat{p} = \frac{1}{n}$~--- пороговая
+			вероятность, но точной пороговой вероятности нет
+		\item $Q = \{\text{ацикличность}\}$, $\hat{p} = \frac{1}{n}$~--- пороговая
+			вероятность для $Q$, но точна она только с~одной стороны
+	\end{itemize}
+\end{example}
+
+\begin{theorem}[Фридгут]
+	Пусть $Q$~--- монотонное свойство графов, $\hat{p}$~--- пороговая и~она не
+	точная. Тогда существует конечное разбиение $N_j, j = 1, \ldots, k$ множества
+	$\mathbb{N}$ и~рациональные числа $\alpha_1, \ldots, \alpha_k > 0$ такие, что
+	$\forall n \in N_j$ выполнено $\hat{p}(n) \asymp n^{-\alpha_j}$.
+\end{theorem}
+
+\end{document}
