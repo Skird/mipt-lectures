@@ -1,0 +1,220 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Малые подграфы в~случайном графе}
+
+Рассмотрим $G(n, p), p = p(n)$. Пусть $G$~--- фиксированный. Вопросы:
+\begin{itemize}
+	\item с~какой вероятностью $G(n, p)$ содержит копию $G$?
+	\item $X_G$~--- число копий $G$ в~$G(n, p)$. Каково предельное распределение
+		$X_G$?
+\end{itemize}
+
+\section{Пороговая вероятность}
+
+\begin{claim}[Метод первого момента]
+	Пусть $(X_n, n \in \mathbb{N})$~--- последовательность с.в. со значениями
+	в~$\mathbb{Z}_+$. Тогда $P(X_n > 0) \le EX_n$. То есть если $EX_n \rightarrow
+	0$, то $P(X_n > 0) \rightarrow 0 \Rightarrow P(X_n = 0) \rightarrow 1$.
+\end{claim}
+
+\begin{claim}[Метод второго момента]
+	Пусть $(X_n, n \in \mathbb{N})$~--- последовательность с.в. со значениями
+	в~$\mathbb{Z}_+$. Тогда $P(X_n = 0) \le P(|X_n - EX_n| \le EX_n) \le
+	\frac{DX_n}{(EX_n)^2}$. То есть если $DX_n = o(E(X_n)^2)$, то $P(X_n = 0)
+	\rightarrow 0$, то есть $P(X_n \ge 1) \rightarrow 1$.
+\end{claim}
+
+\begin{definition}
+	\emph{Плотностью} графа $G = (V, E)$ называется $\rho(G) = \frac{|E|}{|V|}$.
+
+	$m(G) = \max\limits_{H \subseteq G} \rho(H)$.
+
+	Граф $G$ \emph{сбалансирован}, если $\rho(G) = m(G)$ и~\emph{строго
+	сбалансирован}, если $\rho(H) < \rho(G) \forall H \subset G$.
+\end{definition}
+
+\begin{definition}
+	\emph{Группой автоморфизмов} $Aut(G)$ графа $G$ называется группа всех
+	изоморфизмов графа с~собой. $aut(G) = |Aut(G)|$.
+\end{definition}
+
+\begin{lemma}
+	Пусть $G$~--- фиксированный. $X_G$~--- число копий $G$ в~$G(n, p)$. Тогда
+	$$EX_G = C_n^v \frac{v!}{aut(G)} p^{|E|} = \Theta_G(n^v p^{|E|}).$$
+\end{lemma}
+
+Посчитаем дисперсию. Введём $\Phi_G = \min\{ EX_H: H \subset G, H \ne
+\varnothing \}$. Тогда
+$$\Phi(G) \asymp \min\limits_{H \subset G, |E(H)| > 0} n^{|V(H)|} p^{|E(H)|}$$.
+
+\begin{lemma}
+	$$DX_G \asymp (1 - p) \sum\limits_{H \subset G} n^{2v - v_H} p^{2e - e_H}
+	\asymp (1 - p) \sum\limits_{H \subset G} \frac{(EX_G)^2}{EX_H} \asymp (1 - p)
+	\frac{(EX_G)^2}{\Phi_G}.$$
+\end{lemma}
+\begin{proof}
+	Пусть $G'$~--- копия $G$ в~$K_n$, $I_{G'} = I\{G' \subset G(n, p)\}$. Тогда
+	$X_G = \sum\limits_{G'} I_{G'}$.
+
+	Тогда $DX_G = cov(X_G, x_G) = \sum\limits_{G', G''} cov(I_{G'}, I_{G''}) =
+	\sum\limits_{G', G'', |E(G' \cap G'')| > 0} cov(I_{G'}, I_{G''})$.
+
+	Это можно переписать как
+	$$\sum\limits_{H \subset G} \sum\limits_{G', G'', G'
+	\cap G'' \equiv H} (p^{2e - e_H} - p^{2e}) \asymp \sum\limits_{H \subset G}
+	n^{2v-v_H}p^{2e - e_H}(1 - p^{e_H})$$
+
+	С~точки зрения порядка $1 - p^{e_H} \asymp 1 - p$, что даёт требуемое.
+\end{proof}
+
+\begin{theorem}
+	Пороговая вероятность наличия графа $G$ равна $\hat{p} = n^{-\frac{1}{m(G)}}$.
+\end{theorem}
+\begin{proof}
+	Пусть $p = p(n) = o(n^{-\frac{1}{m(G)}}_)$. Возьмём $H \subset G, \rho(H) =
+	m(G)$. По лемме $P(G(n, p) \models G) \le P(G(n, p) \models H) \le EX_H =
+	\Theta(n^{v_H} p^{e_H})$.
+
+	При данном $p$ получаем $\Theta((np^{\rho(H)})^{v_H}) \rightarrow 0$.
+
+	Пусть наоборот, $p = p(n) = \omega(n^{-\frac{1}{m(G)}})$. Тогда $\Phi(G) =
+	\min\limits_{H \subset G} EX_H \asymp \min\limits_H n^{v_H} p^{e_H} =
+	\min\limits_H (np^{\rho(H)})^{v_H} \rightarrow +\infty$. По лемме, $P(G(n, p)
+	\not\models G) = P(X_G = 0) \le \frac{DX_G}{(EX_G)^2} = o(\frac{1}{\Phi_G})
+	\rightarrow 0$.
+\end{proof}
+
+\begin{theorem}
+	Для любого непустого графа $G$ вероятность $P(G(n, p) \not\models G) \le
+	\exp(-\Theta(\Phi_G))$.
+\end{theorem}
+
+А~что будет, если $n p^{m(G)} \rightarrow c > 0$?
+
+\begin{theorem}[Пуассоновская предельная теорема]
+	Если $G$ строго сбалансирован и~$n p^{m(G)} \rightarrow c > 0$, то $X_G
+	\rightarrow Pois(\lambda)$, где $\lambda = \frac{c^{v_G}}{aut(G)}$.
+\end{theorem}
+
+\section{Метод моментов}
+
+\begin{definition}
+	Последовательность вероятностных мер $\{P_n, n \in \mathbb{N}\}$ на
+	метрическом пространстве $S$ \emph{слабо сходится} к~мере $P$, если
+	$\forall f: S \rightarrow \mathbb{R}$~--- ограниченной непр. функции
+	выполнено:
+	$$ \int\limits_S f(x) P_n(dx) \rightarrow \int\limits_S f(x) P(dx).$$
+
+	Обозначение: $P_n \overset{w}\rightarrow P$.
+\end{definition}
+\begin{definition}
+	Семейство вероятностных мер $\{P_\alpha\}$ на метрическм пространстве $S$
+	называется \emph{плотным}, если $\forall \eps \exists K_\eps$~--- компакт,
+	такой что $\forall \alpha P_\alpha(S \setminus K_\eps) \le \eps$.
+
+	Семейство мер называется \emph{относительно компактным}, если в~любой
+	последовательности мер из семейства найдётся сходящаяся подпоследовательность.
+\end{definition}
+
+\begin{theorem}[Прохоров]
+	В~полном сепарабельном простравнстве семейство мер плотно тогда и~только
+	тогда, когда оно относительно компактно.
+\end{theorem}
+
+\begin{corollary}
+	Пусть есть плотная последовательность мер на полном сепарабельном метрическом
+	пространстве. Пусть кроме того любая слабо сходящаяся подпоследовательность
+	слобо сходится к~одной и~той же мере $Q$. Тогда $P_n \overset{w}\rightarrow
+	Q$.
+\end{corollary}
+
+\begin{definition}
+	Распределение случайной величины $X$ однозначно определяется своими моментами,
+	если из того, что выполнено $\forall k\ EX^k = EY^k$ следует $X \overset{d}=
+	Y$.
+\end{definition}
+
+\begin{lemma}
+	Пусть $\exists \eps > 0$, такое что $Ee^{tX}$ конечно $\forall t \in (-\eps,
+	\eps)$. Тогда распределние однозначно определено своиоми моментами.
+\end{lemma}
+\begin{proof}
+	Рассмотрим $f(z) = E\exp(zX)$ как функцию комплексного переменного. В~области
+	$|\re z| < \eps$ она голоморфна. Тогда $f(z)$ раскладывается в~ряд Тейлора
+	в~окрестности нуля:
+	$$f(z) = \sum\limits_{k=0}^\infty \frac{EX^k}{k!} z^k.$$
+
+	Пусть $Y$~--- другая с.в., такая что $EY^k = EX^k$. Составим функцию $g9z) =
+	E\exp(zY)$. $g(z)$ аналитична в~той же полосе и~$g(z)$ раскладывается в~такой
+	же ряд Тейлора в~окрестности 0. По теореме о~единственности они совпадают
+	полностью, значит характестические функции у~них одинаковые, то есть
+	и~распределения.
+\end{proof}
+
+\begin{example}~\
+	\begin{itemize}
+		\item Все распределения с~конечным носителем
+		\item Все распределения с~экспоненциально убывающими хвостами:
+			экспоненциальные, гамма, нормальные, пуассоновские
+		\item Пример плохого распределения: $X^3, X \sim N(0, 1)$
+	\end{itemize}
+\end{example}
+
+\begin{definition}
+	Последовательность $\xi_n$ называется \emph{равномерно интегрирумой}, если
+	$$ \lim\limits_{c \rightarrow \infty} \sup\limits_n E(|\xi_n|I(|\xi_n| \ge c))
+	= 0.$$
+\end{definition}
+
+\begin{theorem}
+	Пусть $\{\xi_n, n \in \mathbb{N}\}$, $\xi \ge 0$, $\xi_n
+	\overset{d}\rightarrow \xi$. Тогда $E\xi_n \rightarrow E\xi \Leftrightarrow
+	\{\xi_n\}$~--- равномерно интегрируема.
+\end{theorem}
+
+\begin{theorem}[Метод моментов]
+	Пусть распределение $X$ однозначно определяется своими моментами. Тогда если
+	$\forall k \in \mathbb{N}\  EX_n^k \rightarrow EX^k$, то $X_n
+	\overset{d}\rightarrow X$.
+\end{theorem}
+\begin{proof}
+	Хотим проверить, что наша последовательность плотная, удостовериться, что
+	частичный предел может быть только один и~получить требуемое.
+
+	Итак, пусть $P_n$~--- распределние с.в. $X_n$. Пусть $M_k = \sup\limits_n
+	EX_n^k$. Тогда $\forall R > 0\ P_n(\mathbb{R} \setminus [-R; R]) = P(|X_n| >
+	R) \le \frac{E|X_n|^2}{R^2} \le \frac{M_2}{R^2} \rightarrow 0$ равномерно по
+	$n$ с~ростом $R$.
+
+	По теореме Прохорова $P_n$ содерит слабо сходящуюся подпоследовательность
+	$P_{n_k}$. Покажем, что $P_{n_k} \overset{d}\rightarrow P_X$. Если $P_{n_k}
+	\overset{w}\rightarrow Q$, то $X_{n_k} \overset{d}\rightarrow Y$, где $Y$~---
+	какая-то с.в. Заметим, что $X_{n_k}^s$~--- равномерно интегрируема:
+	$$ \sup\limits_k E(|X_{n_k}^s| I(|X_{n_k}^s| \ge c)) \le \sup\limits_k
+	E\frac{X_{n_k}^{2s}}{c} \le \frac{M_{2s}}{c} \rightarrow 0.$$
+
+	По теореме о~равномерной интегрирумости $EX_{n_k}^s \rightarrow EY^k$. По
+	условию $EX_{n_k}^s \rightarrow EX^s$, то есть $EX^s = EY^s$. Зрачит $X
+	\overset{d}= Y$ и~$P_{n_k} \rightarrow P_X$.
+
+	По следствию из теоремы Прохорова $P_n \overset{w}\rightarrow P_X$, то есть
+	$X_n \overset{d}\rightarrow X$.
+\end{proof}
+
+\begin{definition}
+	Пусть $Z$~--- случайный вектор. Его распределение однозначено определяется
+	своими моментами, если из того, что $\forall \alpha (\alpha_1, \ldots,
+	\alpha_k)\ EZ^\alpha = EZ_1^{\alpha_1} \ldots Z_m^{\alpha_m} = EY^\alpha$
+	следует, что $Z \overset{d} = Y$.
+\end{definition}
+
+\begin{theorem}[Метод моментов]
+	Пусть распределение случайного ветора $Z$ однозначно определяется своими
+	моментами. Тогда если $\forall \alpha \in \mathbb{Z}_+^n\ EX_n^\alpha
+	\rightarrow EX^\alpha$, то $Z_n \overset{d}\rightarrow Z$.
+\end{theorem}
+
+\end{document}
