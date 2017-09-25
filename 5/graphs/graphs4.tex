@@ -1,0 +1,199 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Предельные теоремы для $X_G$}
+
+\begin{proof}[Доказательство пуассоновской предельной теоремы]
+	Воспользуемся методом моментов. Факториальные моменты $Y \sim Pois(\lambda)$
+	равны $E(Y)_k = EY(Y-1)\ldots(Y-k+1) = \lambda^k$. Достаточно показать, что
+	$E(X_G)_k \rightarrow \lambda^k$ при $n \rightarrow \infty$.
+
+	Пусть $G_1, \ldots, G_N$~--- копии $G$ в~$K_n$, $I_{G_i} = I\{G_i \subset G(n,
+	p)\}$. Тогда $X_G = \sum\limits_{i=1}^N I_{G_i}$ и
+	$$(X_G)_k = \sum\limits_{i_1,\ldots,i_k} I_{G_{i_1}} \ldots I_{G_{i_k}}.$$
+
+	$$ E(X_G)_k = \sum\limits_{i_1\ldots,i_k} E I_{G_{i_1}} \ldots I_{G_{i_k}} =
+	E_k' + E_k'',$$
+	где $E'_k$~--- сумма по тем наборам, где все $G_{i_k}$ попарно не имеют общих
+	вершин, $E''_k$~--- остальные слагаемые.
+
+	\begin{multline*}
+		E'_k = (p^{e_G})^k \sum 1 = (p^{e_G})^k C_n^{v_G} \frac{v_G!}{\aut(G)}
+		C_{n-v_G}^{v_G} \frac{v_G!}{\aut{G}} \ldots C_{n-(k-1)v_G}^{v_G}
+		\frac{v_G!}{\aut{G}} \sim \\
+		(p^{e_G} \frac{n^{v_G}}{\aut(G)})^k \rightarrow
+		(\frac{c^{v_G}}{\aut(G)})^k = \lambda^k
+	\end{multline*}
+
+	Нужно показать, что $E_k'' = o(1)$. Для каждого $t$ рассмотрим $e(t) =
+	\min\{|E(G_1 \cup \ldots \cup G_k)| \mid |V(G_1 \cup \ldots G_k)| = t\}$.
+
+	\begin{claim}
+		Пусть $k \ge 2, 2 \le t < kv_G$, тогда $e(t) > t m(G)$.
+	\end{claim}
+	\begin{proof}
+		Пусть $F$~--- любой граф. Положим $f_F = m(G)v_F - e_F$. Тогда $f_G = 0$
+		и~$f_H > 0$ для любого собственного подргафа $H \subset G$.
+
+		Покажем, что если $F = G_1 \cup \ldots G_k$, то $f_F < 0$. Заметим, что
+		$f_{F_1 \cup F_2} = f_{F_1} + f_{F_2} - f_{F_1 \cap F_2}$. Если $k = 2$, то
+		$F = G_1 \cup G_2$ и~$|V(G_1 \cap G_2)| > 0$. Тогда $f_{G_1 \cup G_2} =
+		f_{G_1} + f_{G_2} - f_{G_1 \cap G_2} = 0 + 0 - f_{G_1 \cap G_2} < 0$.
+
+		Работаем по индукции: пусть $F' = G_1 \cup \ldots \cup G_{k-1}$ и~считаем,
+		что $f_{F'} < 0$. Тогда $f_{G_1 \cup \ldots G_k} = f_{F'} + f_{G_k} - f_{F'
+		\cap G_k} < 0$.
+
+		Это и~означает, что $|E(G_1 \cup \ldots G_k)| > tm(G)$.
+	\end{proof}
+
+	Применим утверждение к~оценке $E''_k$. Если $A(k, t)$~--- это число способов
+	разместить $k$ копий на $t$ вершинах.
+	\begin{multline*}
+		E''_k \le \sum\limits_{t=k}^{kv_G - 1} C_n^t A(k, t) p^{e(t)} =
+		o\left(\sum\limits_{t=k}^{kv_G - 1} n^t p^{e(t)}\right) =\\
+		o\left(\sum\limits_{t=k}^{kv_G - 1} (n^t p^{tm(G)}) p^{e(t) - tm(G)} \right)
+		\rightarrow 0
+	\end{multline*}
+\end{proof}
+
+\begin{theorem}[Многомерный случай]
+	Пусть $G_1, \ldots, G_s$~--- различные строго сбалансированные графы одной
+	и~той же плотности $m = m(G_i)$. Тогда если $np^m \rightarrow c > 0$, то
+	$(X_{G_1}, \ldots, X_{G_s}) \overset{d}\rightarrow (Z_1, \ldots, Z_s)$, где
+	$Z_j$~--- независимые случайные величины, $Z_j \sim Pois(\lambda_j), \lambda_j
+	= \frac{c^{V_{G_j}}}{\aut(G)}$.
+\end{theorem}
+
+\begin{example}
+	Всюду $m(G) = 1$, $np \rightarrow c > 0$
+	\begin{itemize}
+		\item $G = C_3 \sqcup C_3$~--- два неперсекающихся треугольника. Тогда $X_G
+			\overset{d}\rightarrow \frac{1}{2}Z(Z-1)$, где $Z \sim
+			Pois(\frac{c^3}{6})$. Тогда $P(X_G = 0) \rightarrow (1 +
+			\frac{c^3}{6})\exp(-\frac{c^3}{6})$
+		\item $G = C_3 \sqcup C_4$. $X_G \overset{d}\rightarrow Z_1 Z_2$, $Z_i$~---
+			независимые, $Z_1 \sim Pois\left(\frac{c^3}{6}\right),
+			Z_2 \sim Pois\left(\frac{c^4}{8}\right)$.
+			Тогда $P(X_G = 0) \rightarrow 1 - (1 - e^{-\frac{c^3}{6}})(1 -
+			e^{-\frac{c^4}{8}})$
+		\item $G$~--- треугольник с~висячей вершиной. Тогда $X_G
+			\overset{d}\rightarrow \sum_{i=1}^W Z_i$, где $Z_i$~--- независимые
+			$Pois(3c)$, $W$~--- независима с~ними, $W\sim
+			Pois\left(\frac{c^3}{6}\right)$.
+			$P(X_G = 0) \rightarrow \exp\left(-(1 - e^{-3c})\frac{c^3}{6}\right)$
+	\end{itemize}
+\end{example}
+
+Итого, ясно, что $np^{m(G)} \rightarrow 0 \Rightarrow X_G \overset{d}\rightarrow
+0$ и~$np^{m(G)} \rightarrow c \Rightarrow X_G \overset{d}\rightarrow Pois$.
+Утверждение состоит в~том, что в~случае, если $np^{m(G)} \rightarrow \infty
+\Rightarrow X_G \overset{d}\rightarrow N$.
+
+\begin{theorem}[ЦПТ для $X_G$]
+	Пусть $G$~--- непустой фиксированный граф, $np^{m(G)} \rightarrow \infty$,
+	$n^2(1-p) \rightarrow \infty$. Тогда
+	$$ \frac{X_G - EX_G}{\sqrt{DX_G}} \overset{d}\rightarrow N(0, 1). $$
+\end{theorem}
+\begin{proof}
+	Работаем по методу моментов. Вспомним, что если $Y \sim N(0, 1)$, то $EY^k =
+	(k-1)!!$ при чётных $k$ и~0 при нечётных.
+
+	Пусть $G_1, \ldots, G_N$~--- копии $G$ в~$K_n$, $I_{G_i}$~--- соответствующие
+	индикаторы. Тогда $X_G = \sum I_{G_i}$ и~обозначим $T(G_{i_1},\ldots,G_{i_k})
+	= E \prod\limits_j (I_{G_{i_j}} - EI_{G_{i_j}})$. Тогда $E(X_G - EX_G)^k =
+	\sum\limits_{i_1, \ldots, i_k} T(G_{i_1}, \ldots, G_{i_k})$.
+
+	Для набора копий $(G_1, \ldots G_K)$ введём граф $L(G_1, \ldots G_k)$
+	с~вершинами $\{1, \ldots, k\}$ и~$(j, m)$~--- ребро $\Leftrightarrow G_{i_j}$
+	и~$G_{i_m}$ имеют общее ребро. Тогда сумму перепишем как:
+	$$ E(X_G - EX_G)^k = \sum\limits_{L \subset K_k} \sum\limits_{i_1, \ldots,
+	i_k} T(G_{i_1}, \ldots, G_{i_k}). $$
+
+	Разбираем три случая. Если $L$~--- совершенное паросочетание. Вспомним, что
+	$Dx_G = \sum\limits_{H \subset G, e_H > 0} C_n^{v_H} C_{n-v_H}^{v_G-v_H}
+	C_{n-v_G}^{v_G - v_H} A(G, H) \cdot (p^{2e_G - e_H} - p^{2e_G}) = d(n, p)$.
+	Положим рёбра $L$ равными $\{(1, 2), \ldots, (k - 1, k)\}$, $k$~--- чётное.
+
+	\begin{multline*}
+	  \sum T = \sum\limits_{i_1,\ldots,i_k}
+		\prod\limits_{j=1}^{\frac{k}{2}} \cov(I_{G_{2j-1}}, I_{G_{2j}}) \\
+		\le \sum \prod\limits_{j=1}^{\frac{k}{2}} \sum\limits_{G_{2j-1} \not\cap
+		G_{2j}} \cov(I_{G_{2j-1}}, I_{G_{2j}}) = (DX_G)^\frac{k}{2}.
+	\end{multline*}
+	С~другой стороны
+	\begin{multline*}
+		\sum T \ge \sum \prod\limits_{j=1}^\frac{k}{2}
+		\cov(I_{G_{2j-1}},I_{G_{2j}})\\
+		= \sum\limits_{i_1, i_2} \cov(G_{i_1}, G_{i_2}) \sum\limits_{G_{i_3}
+		\cup G_{i_4} \not\cap G_{i_1} \cup G_{i_2}} \cov(G_{i_3}, G_{i_4}) \sum
+		\ldots \\
+		\ge d(n, p) d(n - 2v_G, p) \ldots \sim (d(n, p))^\frac{k}{2} =
+		(DX_G)^\frac{k}{2}
+	\end{multline*}
+
+	Таким образом, первый случай даёт вклад $(k-1)!! (DX_G)^\frac{k}{2}$.
+
+	Если $L$ имеет изолированную вершину, то $T = E(I_{G_{i_1}} - EI_{G_{i_1}})
+	\ldots = 0$, то есть вклад таких слагаемых равен 0.
+
+	В~противном случае в~$L$ строго меньше, чем $\frac{k}{2}$ компонент связности.
+	Пронумеруем его так, чтобы компоненты имели вид $\{1, \ldots, r_1\}, \{ r_1 +
+	1, \ldots, r_2 \}, \ldots$. Пусть также число компонент равно $c(L) <
+	\frac{k}{2}$, а~также $\forall i \notin \{1, r_1 + 1, \ldots, r_{c-1}+1\}
+	\exists j: (j, i) \in E(L)$.
+
+	Пусть $G_{i_1}, \ldots, G_{i_k}$~--- набор копий, такой что $L(G_{i_1},
+	\ldots, G_{i_k}) = L$. Обозначим $G^{(j)} = \bigcup\limits_{s=1}^j G_{i_s}$,
+	$F_j = G^{(j-1)} \cap G_{i_j}$. $e_{F_j} = 0 \Leftrightarrow j \in \{1, r_1 +
+	1, \ldots, r_{c-1} + 1\}$.
+
+	Если $p \le \frac{1}{2}$, то
+	$$|T| \le E \prod\limits_{j=1}^k (I_{G_{i_j}} + EI_{G_{i_j}}) \le 2^k
+	EI_{G_{i_1}} \ldots I_{G_{i_k}} = 2^k p^{e_{G^{(k)}}}.$$
+
+	Если же $p > \frac{1}{2}$, то оставим в~каждой компоненте по одному множителю.
+	\begin{multline*}
+	|T| \le E \prod\limits_{s=1}^c |I_{G_{i_{r_s}}} - EI_{G_{i_{r_s}}}| =
+	(E|I_{G_1} - EI_{G_1}|)^c =\\
+		(2(1-p)^{e_G}p^{e_G})^c \le (2e_G(1-p))^c
+	\end{multline*}
+
+	Итого, $|T(G_{i_1}, \ldots, G_{i_k})| = o(p^{e_{G^{(k)}}} (1 - p)^c)$. Далее
+	$e_{G^{(k)}} = k e_G - \sum\limits_{j=1}^k e_{F_j}$.
+
+	Тогда при заданных графах $F_1, \ldots, F_k$ число наборов $(G_{i_1}, \ldots,
+	G_{i_k})$ с~условием $G^{(j-1)} \cap G_{i_j} \cong F_j$ в~$K_n$ есть
+	$o(n^{kv_G - \sum\limits_{j=1}^k v_{F_j}})$.
+
+	$$\sum\limits_{i_1, \ldots, i_k, L(\ldots) = L, F_1, \ldots F_k \text{~---
+	фикс}} T = O\left(n^{kv_G - \sum\limits_{j=1}^k v_{F_j}} p^{ke_G -
+	\sum\limits_{j=1}^k e_{F_j}} (1-p)^c\right).$$
+
+	Если $e_{F_j} = 0$, то $n^{v_{F_j}} p^{e_{F_j}} = n^{v_{F_j}} \ge 1$. Таких
+	$F_j$ ровно $c$. Остальные $F_j$ имеют рёбра, значит $n^{v_{F_j}} p^{e_{F_j}}
+	\ge E X_{F_j} \ge \Phi_G$.
+
+	Значит
+	$$\sum T = O\left((n^{v_G} p^{e_G})^k \frac{(1-p)^c}{(\Phi_G)^{k-c}}\right) =
+	O\left((DX_G)^\frac{k}{2} \frac{(1-p)^{c-\frac{k}{2}}}{(\Phi_G)^{\frac{k}{2}
+	- c}}\right).$$
+
+	Осталось показать, что $((1-p)\Phi_G)^{c-\frac{k}{2}} \rightarrow 0$, но $c -
+	\frac{k}{2} < 0$, то есть $(1 - p)\Phi_G \rightarrow +\infty$.
+
+	Если $p \le \frac{1}{2}$, то $\Phi_G(1-p) \asymp \Phi_G$, но по условию
+	$np^{m(G)} \rightarrow \infty \Rightarrow \Phi_G \rightarrow \infty$.
+
+	Если же $p > \frac{1}{2}$, то $\Phi_G \asymp \min\limits_{H \subset G, e_H >
+	0} n^{v_H} p^{e_H} \asymp \min\limits_{H \subset G, e_H > 0} n^{v_H} = n^2$.
+
+	По условию $n^2(1-p) \rightarrow \infty \Rightarrow \Phi_G \rightarrow
+	\infty$.
+
+	Итого, по методу моментов, теорема доказана.
+\end{proof}
+
+\end{document}
