@@ -1,0 +1,37 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Эволюция случайного графа}
+
+\begin{itemize}
+	\item $p = o\left(\frac{1}{n^2}\right) \Rightarrow$ в~графе а.п.н. нет рёбер
+	\item $p = \frac{c}{n^2} \Rightarrow $ число рёбер равно $Pois(\frac{c}{2})$
+	\item $p = o\left(\frac{1}{n}\right) \Rightarrow $ ?
+\end{itemize}
+
+\begin{claim}
+	$p = o\left(\frac{1}{n}\right) \Rightarrow $ случайный граф~--- а. п. н. лес
+\end{claim}
+\begin{proof}
+	$X$~--- число простых циклов в~$G(n, p)$. Будем оценивать $P(X \ge 1) \le EX$.
+
+	$EX = \sum\limits_{k=3}^n C_n^k \frac{(k-1)!}{2} p^k \le \sum\limits_{k=3}^n \frac{n^k (k-1)!
+	p^k}{2k!} \le \sum\limits_{k=3}^\infty n^k p^k \le \frac{(np)^3}{1 - np} \rightarrow 0$.
+\end{proof}
+
+\begin{claim}
+	$\forall c > 0 P(G(n,p) \text{ содержит компоненту размера} \ge c \ln n) \rightarrow 0$.
+\end{claim}
+\begin{proof}
+	$X$~--- число древесных компонент размера $\ge c \ln n - 1$.
+
+	$EX = \sum\limits_{k=c \ln n - 1}^n C_n^k k^{k-2} p^{k-1} (1-p)^{C_k^2 - k + 1 + k(n - k)} \le
+	\sum\limits_{k = c \ln n - 1}^n C_n^k k^{k-2} p^{k-1} \le \sum\limits_{k = c\ln n - 1}^n
+	\left(\frac{en}{k}\right)^k k^{k-2} p^{k-1} = en \sum (enp)^{k-1} \frac{1}{k^2} \le en (enp)^{c\ln
+	n} \sum\limits_{c = 1}^\infty \frac{1}{k^2} < \frac{A}{p} (enp)^{c\ln n} = A
+	(e^\frac{1}{c}np)^{c\ln n} \rightarrow 0$
+\end{proof}
+
+\end{document}
