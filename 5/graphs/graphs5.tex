@@ -22,7 +22,7 @@
 \end{proof}
 
 \begin{claim}
-	$\forall c > 0 P(G(n,p) \text{ содержит компоненту размера} \ge c \ln n) \rightarrow 0$.
+	$\forall c > 0\ P(G(n,p) \text{ содержит компоненту размера} \ge c \ln n) \rightarrow 0$.
 \end{claim}
 \begin{proof}
 	$X$~--- число древесных компонент размера $\ge c \ln n - 1$.
@@ -32,6 +32,120 @@
 	\left(\frac{en}{k}\right)^k k^{k-2} p^{k-1} = en \sum (enp)^{k-1} \frac{1}{k^2} \le en (enp)^{c\ln
 	n} \sum\limits_{c = 1}^\infty \frac{1}{k^2} < \frac{A}{p} (enp)^{c\ln n} = A
 	(e^\frac{1}{c}np)^{c\ln n} \rightarrow 0$
+\end{proof}
+
+Пусть $X_k$~--- число древесных компонент размера $k$. Если $n = o(n^{-\frac{k}{k-1}})$, то
+$P(\exists \text{компонента размера} \ge k) \rightarrow 0$.
+Если $p \sim c n^{-\frac{k}{k-1}}$, то вероятность того, что есть компонента размера $> k$ стремится
+к~0. Если $T$~--- конкретное дерево размера $k$, то число копий такого дерева будет $X_T
+\overset{d}\rightarrow Pois\left( \frac{c^{k-1}}{\aut(T)}\right)$.
+
+$X_k = X_{T_1} + \ldots + X_{T_m}$. Раз нет циклов и~компонент размера больше $k$, то $X_k$ почти
+наверное равно $N_{T_1} + \ldots + N_{T_m} \sim Pois\left(\frac{c^{k-1}}{\aut(T_1)} +
+\frac{c^{k-1}}{\aut(T_m)}\right) = Pois\left(\frac{c^{k-1} k^{k-2}}{k!}\right)$.
+
+Если $p \gg n^{-\frac{k}{k-1}}$, то $\frac{N_T}{E N_T} \overset{P}\rightarrow 1$. $E N_T = C_n^k
+\cdot p^{k-1} \frac{k!}{\aut(T)} \sim \frac{n^k p^{k-1}}{\aut(T)} \gg 1$.
+
+Пусть $F$~--- дерево на $k+1$ вершине. Если $p \ll n^{-\frac{k+1}{k}}$, то таких деревьев нет.
+Иначе, пусть $c n^{-\frac{k+1}{k}} < p < C n^{-\frac{k+1}{k}}$. Так как свойство <<содержать
+подграф>> монотонно, то можно считать, что число деревьев, изоморфных $F$ не больше, чем для $p =
+Cn^{-\frac{k+1}{k}}$. Так как $N_F(p = Cn^{-\frac{k+1}{k}}) \rightarrow Pois$, то $\forall \eps > 0
+\exists M: P(N_F > M) < \eps$. Значит такие компоненты почти все не могут быть расширены.
+В~последнем случае $p >> n^{-\frac{k+1}{k}}$ $\frac{N_F}{E N_F} \overset{P}\rightarrow 1$. $EN_F <<
+EN_T$, притом оба стремятся к~бесконечности.
+
+\begin{corollary}
+	$\frac{X_k}{E(N_{T_1} + \ldots + N_{T_m})} \overset{P}\rightarrow 1$, притом $E(N_{T_1} + \ldots
+	E_{T_m}) \sim \frac{k^{k-2}}{k!} n^k p^{k-1}$.
+\end{corollary}
+
+\section{Неравенство Чернова}
+
+Рассмотрим $X \sim Bin(n, p), \lambda = np$. Хотим оценить $P(X > \lambda + t) = P(\exp(uX) >
+\exp(u(\lambda + t)) \le \frac{E\exp(uX)}{e^{u(\lambda + t)}}$.
+
+$E\exp(uX) = E(e^u)^{\xi_1 + \ldots + \xi_n} = (1 - p + pe^n)^n$. Нужно минимизировать по $u$ дробь
+$\frac{(1-p+pe^u)^n}{e^{u(\lambda + t)}}$.
+
+$f(u) = \exp(-u(\lambda + t))(1 - p + pe^u)^n$
+
+$f'(u) = -(\lambda + t)\exp^{-u(\lambda + t)}(1 - p + pe^u)^n + \exp(-u(\lambda + t)) npe^u(1 - p +
+pe^u)^{n-1} = 0$.
+
+$-(\lambda + t)(1 - p + pe^u) + npe^u = 0 \Rightarrow e^u (\lambda - p(\lambda + t)) = (\lambda +
+t)(1 - p)$.
+
+Отсюда находим $e^u = \frac{(\lambda + t)(1 - p)}{\lambda - p(\lambda + t)}$, ясно, что это минимум.
+
+Подставим. $P(X > \lambda + t) \le \left(\frac{\lambda - p(\lambda + t)}{(\lambda + t)(1 -
+p)}\right)^{\lambda + t} \left(1 - p + p \frac{(\lambda + t)(1 - p)}{\lambda - p(\lambda +
+t)}\right)^n$.
+
+Это равно $(1 - p)^{n - \lambda - t} \left(1 + \frac{\lambda + t}{n - (\lambda + t)}\right)^n
+\left(\frac{\lambda - p(\lambda + t)}{\lambda + t}\right)^{\lambda + t} = \frac{n^n}{(n - (\lambda +
+t))^n} (1 - p)^{n - \lambda - t} p^{\lambda + t} \frac{((n - (\lambda + t))^{\lambda + t}}{(\lambda
++ t)^{\lambda + t}} = \left(\frac{\lambda}{\lambda + t}\right)^{\lambda + t} \left( \frac{n -
+\lambda}{n - \lambda - t}\right)^{n - \lambda - t} = \exp(-\lambda (1 + \frac{t}{\lambda})\ln(1 +
+\frac{t}{\lambda}) - (n - \lambda)(1 - \frac{t}{n - \lambda}\ln(1 - \frac{t}{n - \lambda})))$.
+
+Если обозначить $\phi(x) = (1 + x)\ln(1 + x) - x$, то
+$$P(X > \lambda + t) \le \exp\left(-\lambda \phi(\frac{t}{\lambda}) - (n - \lambda)\phi(-\frac{t}{n -
+\lambda})\right).$$
+
+$\phi(0) = 0, \phi \sim \frac{x^2}{2}$ при $x \rightarrow 0$, поэтому можем оценить $P(X > \lambda +
+t) \le \exp\left(-\lambda \phi(\frac{t}{\lambda}) \right)$.
+
+Заметим, что $\phi'(0) = 0, \phi'' = \frac{1}{1 + x} \ge \left(
+\frac{x^2}{2(1+\frac{x}{3})}\right)''$, то есть $\phi(x) \ge \frac{x^2}{2(1 + \frac{x}{3})}$.
+
+Итак, $P(X > \lambda + t) \le \exp\left(-\lambda \frac{t^2}{2\lambda^2 (1 +
+\frac{t}{3\lambda})}\right)$.
+
+\begin{corollary}[Неравенство Чернова]
+	$P(|X - \lambda|) \le 2\exp\left(-\frac{t^2}{2(\lambda + \frac{t}{3})}\right)$.
+\end{corollary}
+
+\section{Эволюция при $np = c < 1$}
+
+Перейдём к~случаю $np = c < 1$.
+
+\begin{theorem}
+	$P(\text{наибольшая компонента } \le \frac{3}{(1 - c)^2} \ln n) \rightarrow 1$.
+\end{theorem}
+\begin{proof}
+	Рассмотрим случайный процесс, строящий компоненту, начиная с~какой-то вершины, добавляющий за 1
+	шаг всех соседей.
+
+	$P(\text{стартуя с~вершины 1, мы получим компоненту большого размера}) = o(\frac{1}{n})$.
+
+	Докажем это. Пусть $X_1, \ldots, X_\tau$~--- количество вершин, добавляемых на каждом шаге. Можно
+	с~помощью добавления фиктивных вершин апроксимировать $X_i \le Y_i \sim Bin(n, p)$, притом все
+	$Y_i$ независимы. Тогда искомая вероятность равна $P(X_1 + \ldots + X_t \ge t + 1)$, где $t =
+	\frac{3}{(1 - c)^2} \ln n$. Оцениваем через $Y_i$ и~применяем неравенство Чернова:
+
+	$P < \exp(-\frac{(t+1-tnp)^2}{2(tnp + \frac{t+1-tnp}{3})}) =
+	\exp(-\frac{(t(1-c)+1)^2}{2(\frac{1}{3} + t(\frac{1}{3} + \frac{2c}{3}))}) = \exp(-\ln n
+	\frac{3}{(1 - c)^2} (1 - c)^2 \frac{1}{\frac{2}{3} + \frac{4c}{3}} + O(1)) < \exp(-\frac{3}{2} \ln
+	n + O(1) = O(n^{-1.5}) = o(\frac{1}{n})$.
+\end{proof}
+
+\begin{theorem}
+	$P(G(n, p) \text{ содержит компоненту с~хотя бы 2 циклами}) \le \frac{2}{n(1-c)^3}$.
+\end{theorem}
+\begin{proof}
+	Пусть $X$~--- число <<сложных>> компонент. $P(X \ge 1) \le EX = \sum\limits_{k=4}^n EX_k$, где
+	$X_k$~--- число <<сложных>> компонент размера $k$. Будем оценивать $EX_k$.
+
+	$EX_k \le C_n^k k! k^2$ (считаем число вариантов сделать компоненту вида $o-o$ или $\Theta$).
+	$\tilde{X}_k$~--- число компонент указанного вида. $\tilde{X} = \sum\limits_{k=4}^n \tilde{X}_k$.
+	$\tilde X = 0 \Leftrightarrow X = 0$.
+
+	$\sum\limits_{k=4}^n E\tilde{X}_k \le \sum\limits_{k=4}^n \frac{k^2 c^{k+1}}{n} \le \frac{1}{n}
+	\sum\limits_{k=4}^\infty k^2 c^{k+1}\le \frac{1}{n} \int\limits_0^\infty x^2 c^x dx$.
+
+	$\int x^2 c^x dx = \int \frac{x^2 d(c^x)}{\ln c} = -\int\limits_0^\infty \frac{2xc^x dx}{\ln c} =
+	-\frac{2}{(\ln c)^3} < \frac{2}{(1 - c)^3}$.
 \end{proof}
 
 \end{document}
