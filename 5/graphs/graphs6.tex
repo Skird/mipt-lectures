@@ -1,0 +1,210 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Параметры унициклических компонент}
+
+\begin{corollary}
+	Если $c \in (0, 1)$, то сложных компонент в~графе нет.
+\end{corollary}
+
+\begin{theorem}
+	Пусть $np = c > 0, k \ge 3$. Обозначим за $U_k$~--- число унициклических компонент размера $k$
+	в~$G(n, p)$. Тогда $U_k \overset{d}\rightarrow Pois(\lambda)$, $\lambda = \frac{1}{2k} (c
+	e^{-c})^k \sum\limits_{j=0}^k \frac{k!}{j!}$.
+\end{theorem}
+\begin{proof}
+	Подсчёт по методу моментов.
+\end{proof}
+
+\begin{theorem}
+	Пусть $k_1, \ldots, k_s$~--- различные числа. Тогда $(U_{k_1}, \ldots, U_{k_s})
+	\overset{d}\rightarrow (Z_1, \ldots, Z_s)$, где $Z_i$ независимые $Pois(\lambda_i)$, $\lambda_i =
+	\frac{1}{2k_i} (ce^{-c})^{k_i} \sum\limits_{j=0}^{k_i} \frac{k_i^j}{j!}$.
+\end{theorem}
+
+\begin{theorem}
+	Пусть $U$~--- общее число вершин в~унициклических компонентах $G(n, p)$, притом $c < 1$. Тогда
+	$EU_n \underset{n\rightarrow \infty}\rightarrow \frac{1}{2} \sum_{k=3}^\infty (ce^{-c})^k
+	\sum_{j=0}^{k-3} \frac{k^j}{j!}$, а~также
+	$DU_n \underset{n\rightarrow \infty}\rightarrow \frac{1}{2} \sum_{k=3}^\infty (ce^{-c})^k
+	\sum_{j=0}^{k-3} \frac{k^j}{j!}$.
+\end{theorem}
+\begin{proof}
+	$U_n(k)$~--- число унициклических компонент размера $k$. $U_n = \sum\limits_{k=3}^n kU_n(k)$.
+	Отсюда $EU_n = \sum\limits_{k=3}^n kC_n^k C(k, k) p^k (1-p)^{C_k^2 - k + (n - k)k}$.
+
+	Каждое слагаемое сходится туда, куда нужно. Нужно показать, что сходимость равномерная. А~именно,
+	проверим, что $\exists \gamma > 0: \forall k \le n\ kC_n^k C(k, k) p^k (1-p)^{C_k^2 - k + (n -
+	k)k} \le \exp(-\gamma k)$.
+
+	$C(k, k) = \frac{(k-1)!}{2} \sum\limits_{j=0}^{k-3} \frac{k^j}{j!} \le \frac{(k-1)!}{2} e^k$.
+
+	$C_n^k = o\left(\frac{1}{k!} \left(\frac{n}{e}\right)^n \sqrt{n} \left(\frac{e}{n-k}\right)^{n-k}
+	\frac{1}{\sqrt{n-k}}\right) = o\left(\frac{1}{k!} e^{-k} \left(\frac{n}{n-k}\right)^{n - k +
+	\frac{1}{2}} n^k\right)$.
+
+	$(1-p)^{C_k^2 - k + (n - k)k} = o\left((1-p)^{nk - \frac{k^2}{2}}\right)$.
+
+	Итого, слагаемое $S_k$ равно
+	$o\left( \left(\frac{n}{n-k}\right)^{n-k+\frac{1}{2}} c^k (1-p)^{nk - \frac{k^2}{2}} \right) =
+	o\left( \sqrt\frac{n}{n-k} e^{f(\beta)} k\right)$, где $\beta = \frac{k}{n}$.
+
+	Заметим, что $\sqrt\frac{n}{n-k}$ не мешает экспоненциальной скорости сходимости по $k$ и~выкинем
+	это.
+
+	$1 - p = 1 - \frac{c}{n}, \ln p = -p + O(p^2)$. Тогда $f(\beta) = \ln c - c + \frac{c\beta}{2} +
+	\ln(1 - \beta)^{-1} \left( \frac{1}{\beta} - 1 \right) = -\frac{1 - \beta}{\beta} \ln(1 - \beta) +
+	\ln c - c + \frac{c\beta}{2}$.
+
+	Хотим показать, что $\forall \beta \in [0, 1] f(\beta) \le -\gamma$ для $\gamma > 0$. $f(0) = 1 +
+	\ln c - c < 0$ для $c < 1$. Тогда $\exists \beta_0 > 0: \forall \beta \le \beta_0\ f(\beta) \le
+	\frac{f(0)}{2} < 0$.
+
+	Рассмотрим $g(\beta) = \beta f(\beta) = -(1 - \beta)\ln(1 - \beta) + \ln c \beta - \beta c +
+	\frac{\beta^2 c}{2}$.
+
+	$g'(\beta) = \ln(1 - \beta) + 1 + \ln c - c + \beta c$.
+
+	$g''(\beta) = -\frac{1}{1 - \beta} + c$. Это равно 0 при $\beta = 1 - \frac{1}{c}$.
+
+	Если $c < 1$, то $g''(\beta) < 0$ на $[0, 1]$. $g'(1 - \frac{1}{c}) = 0$. То есть $g$ будет
+	убывать на $[0, 1]$.
+
+	Даже если $c > 1$, $1 - \frac{1}{c}$~--- точка максимума $g'(\beta)$. Но $g'(1 - \frac{1}{c}) = 0
+	\Rightarrow g'(\beta) \le 0$ на $[0, 1]$, то есть так или иначе $g(\beta)$ убывает на $[0, 1]$ для
+	всех $\beta > \beta_0$.
+
+	$f(\beta) = \beta^{-1}g(\beta) \le g(\beta) \le g(\beta_0) = \gamma' < 0$. Тогда взяв $\gamma =
+	\min\{-\frac{f(0)}{2}, -\gamma'\}$, получаем $f(\beta) \le -\gamma$. Тем самым, равномерная
+	сходимость доказана, значит $EU_n$ сходится к~сумме пределов.
+
+	Заметим также, что при фиксированных $k_1, k_2$ $E U_n(k_1) U_n(k_2) \sim EU_n(k_1) EU_n(k_2)$ при
+	$k_1 \ne k_2$. А~$EU_n(k)(U_n(k)-1) \sim EU_n(k)^2$.
+
+	Тогда $EU_n^2 = E\left(\sum\limits_{k=3}^n kU_n(k)\right)^2 \sim \sum\limits_{k_1 \ne k_2} k_1 k_2
+	EU_n(k_1) EU_n(k_2) + \sum\limits_{k=3}^n k^2 EU_n^2(k) \sim (EU_n)^2 + \sum\limits_{k=3}^n k^2
+	EU_n(k) \Rightarrow DU_n \rightarrow \frac{1}{2} \sum\limits_{k=3}^\infty k(ce^{-c})^k
+	\sum\limits_{j=0}^{k-3} \frac{k^j}{j!}$.
+\end{proof}
+
+\begin{corollary}
+	Общее число вершин в~унициклических компонентах ограничено по вероятности.
+\end{corollary}
+
+\section{Теорема о~гигантской компоненте}
+
+Ветвящиеся процессы Гальтона-Ватсона: $\{ \xi_k^{(n)} \}$~--- н. о. р., $\xi \in \mathbb{Z}_+$.
+
+$x_0 = 1, x_n = \sum_{k=1}^{X_n-1} \xi_k^{(n)}$.
+
+$\phi_\xi(z) = Ez^\xi = \sum\limits_{k=0}^\infty z^k P(\xi = k)$. $q = P(\exists n: X_n = 0)$.
+
+\begin{claim}
+	$q = \phi_\xi(q)$.
+\end{claim}
+
+\begin{theorem}
+	$\mu = E\xi, P(\xi = 1) < 1$. Тогда
+	\begin{enumerate}
+		\item $\mu \le 1 \Rightarrow q = 1$ и~других решений нет
+		\item $\mu > 1 \Rightarrow q = q_0 \in [0; 1]$ и~решений ровно два: $q_0$ и~$1$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{example}
+	$\xi \sim Pois(c)$, $\phi_\xi(z) = \sum\limits_{k=0}^\infty z^k \frac{c^k}{k!} e^{-c} =
+	\exp((z-1)c)$.
+
+	$q = e^{(q-1)c}, \beta = 1 - q$~--- вероятность невырождения. $\beta + \exp(-\beta c) = 1$.
+\end{example}
+
+\begin{theorem}
+	Пусть $np = c > 1$. Положим $\beta = \beta(c)$~--- решение уравнения $\beta + \exp(-\beta c) = 1$
+	из $(0, 1)$. Тогда с~вероятностью, стремящейся к~1 $G(n, p)$ содержит гигантскую компоненту, чей
+	размер при делении на $n$ стремится к~$\beta$ по вероятности.
+
+	Все остальные компоненты при этом имеют размер не более $\frac{16c}{(c-1)^2} \ln c$.
+\end{theorem}
+\begin{proof}
+	Обозначим $k_- = \frac{16c}{(c-1)^2} \ln n, k_+ = n^\frac{2}{3}$.
+
+	Для всех вершин $v$ запустим процесс набора её компоненты связности.
+
+	Для $\forall t=0, 1, \ldots$ введем тройку $(C_t, A_t, U_t)$, где $C_t$~--- рассмотренные вершины,
+	$A_t$~--- активные вершины, $U_t$~--- неактивные вершины.
+
+	$C_0 = \varnothing, A_0 = \{v\}, U_0 = V \{ v \}$.
+
+	При тройке $(C_t, A_t, U_t)$ на шаге $t+1$:
+	\begin{itemize}
+		\item берем первую вершину $v_t$ из $A_t$.
+		\item $C_{t+1} = C_t \cup \{v_t\}$
+		\item Пусть $X_{t+1}$~--- множество соседей $v_t$ в~$U_t$
+		\item $A_{t+1} = A_t \setminus \{v_t\} \cup X_{t+1}$.
+		\item $U_{t+1} = U_t \setminus X_{t+1}$.
+	\end{itemize}
+
+	Процесс останавливается когда либо $A_t = \varnothing, U_t = \varnothing$, компонента при этом
+	есть $C_t$.
+
+	Покажем, что с~вероятностью, стремящейся к~1 выполнена следующая альтернатива:
+	\begin{enumerate}
+		\item процесс закончился ко времени $k_-$
+		\item для $\forall t \in [k_-, k_+]\ |A_t| \ge \left(\frac{c-1}{2}\right)t$
+	\end{enumerate}
+
+	Пусть это не так. Тогда $\exists t \in [k_-; k_+]: |A_t| < \left(\frac{c-1}{2}\right)t$, притом
+	$|A_i| > 0$ при $i \le t - 1$. Заметим, что $|A_t| = \sum\limits_{k=1}^t Y_k - t + 1$, где
+	$Y_k = |X_k|$.
+
+	$P(|A_t| < \frac{c-1}{2}t) = P(\sum\limits_{k=1}^t Y_k < \frac{c+1}{2}t - 1)$. На любом шаге у~нас
+	есть не меньше, чем $n - \frac{c+1}{2}k_+$ неактивных вершин. Тогда $P(|A_t| < \frac{c-1}{2}t) \le
+	P(\sum\limits_{k=1}^t Z_k < \frac{c+1}{2}t - 1)$, где $Z_1, \ldots, Z_t$ независимые $Bin(n -
+	\frac{c + 1}{2}k_+, p)$.
+
+	Это равно $P(\sum\limits_{k=1}^t (Z_k - EZ_k) < \frac{c-1}{t} - 1 + \frac{c+1}{2}k + pt) \le
+	\exp\left(-\frac{(\frac{c-1}{2}t + 1 - \frac{c+1}{2}k + pt)^2}{2(ct - \frac{c+1}{2}k + pt)}\right)
+	= \exp\left(-\frac{(c-1)^2}{8c} t(1 + o(1))\right)$.
+
+	Так как $t \ge k = \frac{16c}{(c-1)^2} \ln n$, $P(|A_t| < \frac{c-1}{2}t) \le \exp(-2\ln n(1 +
+	o(1))) = n^{-2 + o(1)}$.
+
+	Суммируя по всем $v \in V$ ($n$ штук) и~$t \in [k-, k+]$ получаем следующее: $P(\text{альтернатива не
+	выполнена}) \le n^\frac{5}{3} n^{-2+o(1)} \rightarrow 0$.
+
+	Назовём компоненты размера $\ge k$ большими. Пусть $v, w$~--- две вершины из разных больших
+	компонент. Для них обоих выполнена вторая часть алтернативы. Значит в~любой момент времени между
+	их множествами активных вершин рёбер нет. Но в~момент времени $k_+$ в~этих множествах хотя бы
+	$\frac{c-1}{2}k_+$ активных вершин.
+
+	$P(v, w \text{ лежат в~разных компонентах} \mid (C_{k_+},
+	A_{k_+}, U_{k_+}), (C'_{k_+}, A'_{k_+}, U'_{k_+})) \le (1 - p)^{|A_{k_+}||A'_{k_+}|} \le (1 -
+	p)^{\left( \frac{c-1}{2}\right)^2 k_+^2} = \left(1 - \frac{c}{n}\right)^{\frac{(c-1)^2}{4}
+	n^\frac{4}{3}} \rightarrow 0$.
+
+	Будем называть вершины из большой компоненты большими, а~остальные~--- маленькими. Пусть $v$~---
+	вершина $G(n, p)$. Тогда
+
+	$P(v \text{ маленькая}) \le \rho(n - k_-, p)$, где $\rho(n, p)$~--- вероятность вырождения
+	ветвящегося процесса с~законом $Bin(n, p)$. $\rho(n, p) \rightarrow 1 - \beta$.
+
+	С~другой стороны $$P(v \text{ маленькая}) \ge P(\text{процесс выродился, набрав } Y \le k_-).$$
+
+	Так как $k_- \rightarrow \infty$, то $P(v \text{ маленькая}) \ge P(Y \le \infty) = 1 -
+	\beta$.
+
+	Значит $P(v \text{ маленькая}) = (1 - \beta)(1 + o(1))$. Пусть $X_n$~--- общее число маленьких
+	вершин в~$G(n, p)$, тогда $EX_n = n(1 - \beta)(1 + o(1))$.
+
+	$EX_n(X_n-1) \le n(1 - \beta)(1 + o(1))k_- + (n-k_-)(1 - \beta)(1 + o(1)) \sim (EX_n)^2$.
+
+	По неравенству Чебышева $\forall \eps > 0$
+	$$ P\left(\left|\frac{X_n - (1 - \beta)n}{n} \right| \ge \eps \right) \le \frac{DX_n}{(n\eps)^2} =
+	o\left(\frac{(EX_n)^2}{n^2}\right) = o(1)$$
+
+	Тогда $\frac{X_n}{n} \overset{P}\rightarrow 1 - \beta$, что и~требовалось доказать.
+\end{proof}
+
+\end{document}
