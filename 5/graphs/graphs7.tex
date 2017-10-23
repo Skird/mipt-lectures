@@ -1,0 +1,194 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\begin{theorem}[ЦПТ для размера гигантской компоненты]
+	Пусть $c > 1, p = \frac{c}{n}$, $N(n, p)$~--- размер гигантской компоненты $G(n, p)$. Тогда
+	$$ \sqrt{n} \left( \frac{N(n, p)}{n} - \beta \right) \overset{d}\rightarrow N(0, \sigma^2),$$
+	где $\sigma^2 = \frac{\beta(1 - \beta)}{(1 - c(1 - \beta))^2}$
+\end{theorem}
+
+\section{Случай $np \sim 1$}
+
+При $np < 1$ и~при $np > 1$ картина ясна. Высяним промежуточную картину, наблюдаемую при $np \sim
+1$.
+
+Введем параметризацию $G(\lambda) = G(n, p)$, где $p = \frac{1}{n} + \frac{\lambda}{n^\frac{4}{3}}$.
+
+\begin{definition}
+	Компонента связности называется \emph{$l$-компонентой}, если число рёбер равно числу вершин плюс
+	$l$.
+\end{definition}
+
+Введем такие обозначения:
+\begin{itemize}
+	\item $X(n, l)$~--- число $l$-компонент
+	\item $Y(n, l)$~--- общее число вершин во всех $l$-компонентах
+	\item $X(n, k, l)$~--- число $l$-компонент на $k$ вершинах
+	\item $C(k, k + l)$~--- число связных графов на $k$ вершинах
+\end{itemize}
+
+\begin{claim}~
+	\begin{enumerate}
+		\item $X(n, l) = \sum\limits_{k=1}^n X(n, k, l)$
+		\item $Y(n, l) = \sum\limits_{k=1}^n kX(n, k, l)$
+		\item $EX(n, k, l) = C_n^k C(k, k + l) p^{k+l} (1-p)^{C_k^2 - k - l + k(n - k)}$
+	\end{enumerate}
+\end{claim}
+
+\begin{claim}~
+	\begin{enumerate}
+		\item Если $a = o(b^\frac{3}{4})$, то $\frac{b(b-1)\ldots(b-a+1)}{b^2} = (1 + O(\frac{a}{b}) +
+			O(\frac{a^4}{b^3})) \exp\left(-\frac{a^2}{2b} - \frac{a^3}{6b^2}\right)$.
+		\item $\exists c > 0: \forall a \le b\ \frac{(b)_a}{b^a} = O(\exp\left(-\frac{a^2}{2b} -
+			\frac{a^3}{6b^2} - c\frac{a^4}{b^3}\right))$.
+	\end{enumerate}
+\end{claim}
+
+\begin{lemma}
+	В~модели $G(\lambda)$ для фиксированного $l \ge -1$
+	\begin{enumerate}
+		\item если $k = o(n^\frac{3}{4})$, то $EX(n, k, l) = (1 + l\lambda n^{-\frac{1}{3}} +
+			O(n^{-\frac{2}{3}}) + O(\frac{k}{n}) + O(\frac{k^4}{n^3})) n^{-l} c(k, k + l)
+			\frac{e^{-k}}{k!} \exp(-F(x_k))$
+		\item для всех $k$ $EX(n, k, l) = O(n^{-l} C(k, k + l) \frac{e^{-k}}{k!} \exp(-F(x_k))$,
+	\end{enumerate}
+	где $x_k = \frac{k}{n^\frac{2}{3}}, F(x) = \frac{1}{6}(x^3 - 3x^2\lambda + 3x\lambda^2) =
+	\frac{1}{6}((x - \lambda)^3 + \lambda^3)$.
+\end{lemma}
+\begin{proof}
+	$C_n^k = \frac{n^k}{k!} \frac{(n)_k}{n^k} = \frac{n^k}{k!}(1 + O(\frac{k}{n})
+	+ O(\frac{k^4}{n^3})) \exp(-\frac{k^2}{2n} - \frac{k^3}{6n^2})$.
+
+	$p^{k+l} = n^{-(k+l)} (1 + \lambda n^{-\frac{1}{3}})^{k+l} = n^{-(k+l)} (1 + l \lambda
+	n^{-\frac{1}{3}} + O(n^{-\frac{2}{3}}))(1 + \lambda n^{-\frac{1}{3}})^k = n^{-k - l}(1 +
+	l\lambda n^{-\frac{1}{3}} + o(n^{-\frac{2}{3}})) \exp(\lambda k n^{-\frac{1}{3}} -
+	\frac{\lambda^2 k}{2 n^\frac{2}{3}} + O(\frac{n}{k}))$.
+
+	Осталось рассмотреть $(1 - p)$.
+
+	$(1 - p)^{C_k^2 - k - l + k(n - k)} = (1 + O(\frac{k}{n})) (1 - p)^{\frac{k^2}{2} + kn - k^2} = (1
+	+ O(\frac{k}{n})) \exp(\frac{k^2}{2}p - pkn + O(\frac{k}{n})) = (1 + O(\frac{k}{n}))
+	\exp(\frac{k^2}{2n} - k + \frac{\lambda k^2}{2 n^\frac{4}{3}} - \lambda k n^{-\frac{1}{3}})$.
+
+	Собирая все вместе и~упрощая, получаем требуемое. Аналогично доказывается и~второй пункт.
+\end{proof}
+
+\begin{lemma}~
+	\begin{enumerate}
+		\item $EY(n, -1) = n - n^\frac{2}{3}(f_{-1}(\lambda) + O(n^{-\frac{1}{3}}))$
+		\item $EY(n, 0) = f_0(\lambda) n^\frac{2}{3} + O(n^\frac{1}{3})$,
+	\end{enumerate}
+	где $f_{-1}(\lambda) = \frac{1}{\sqrt{2\pi}} \int\limits_0^\infty x^{-\frac{3}{2}} (1 -
+	e^{-F(x)}) dx + \lambda$, $f_0(\lambda) = \frac{1}{4} \int\limits_0^\infty e^{-F(x)} dx$.
+\end{lemma}
+\begin{proof}
+	\begin{enumerate}
+		\item Разобъем сумму для $EY(n, -1)$ на две части: для $k \le n^\alpha$ и~$K > n^\alpha$ для
+			какого-то фиксированного $\alpha \in (\frac{2}{3}; \frac{3}{4})$.
+
+			$\sum\limits_{k \le n^\alpha} kEX(n, k, l) = \sum\limits_{k \le n^\alpha}
+			\frac{k^{k-1}e^{-k}}{k!} n e^{-F(X_k)} (1 - \lambda n^{-\frac{1}{3}} + O(n^{-\frac{2}{3}})) +
+			R_n$, где $R_n = O\left(\sum\limits_{k \le n^\alpha} \frac{k^{k-1} e^{-k}}{k!} k e^{-F(x_k)} +
+			\sum\limits_{k \le n^\alpha} \frac{k^{k-1} e^{-k}}{k!} \frac{k^4}{n^2} e^{-F(x_k)}\right)$.
+
+			Далее $\sum\limits_{k \le n^\alpha} \frac{k^k e^{-k}}{k!} e^{-F(x_k)} = O\left(\sum\limits_{k
+			\le n^\alpha} \frac{1}{\sqrt{k}} e^{-F(x_k)}\right) = O\left( \sum\limits_{k \le n^\alpha}
+			\frac{1}{\sqrt{x_k}} n^{-\frac{1}{3}} e^{-F(x_k)}\right) = O\left( n^\frac{1}{3}
+			\sum\limits_{k \le n^\alpha} \frac{1}{\sqrt{x_k}} e^{-F(x_k)} \delta x_k \right)$, где $x_k =
+			\frac{k}{n^\frac{2}{3}}, \delta x_k = \frac{1}{n^\frac{2}{3}}$.
+
+			Это равно $O\left(n^\frac{1}{3} \int\limits_0^\infty \frac{1}{\sqrt{x}} e^{-F(x)} dx\right) =
+			O\left(n^\frac{1}{3}\right)$
+
+			Оцениваем вторую часть суммы ($F(x) \ge \frac{x^3}{7}$ для больших $x$):
+			$\sum\limits_{k > n^\alpha} kE(x, n, -1) = O\left(\sum\limits_{k > n^\alpha} \frac{k^{k-1}
+			e^{-k}}{k!} n e^{-F(x_k)}\right) = O\left(n \sum\limits_{k > n^\alpha} \frac{k^{k-1}
+			e^{-k}}{k!} \exp(-\frac{x_k^3}{7})\right) = O\left(n \exp(-\frac{n^{\alpha - \frac{2}{3}}
+			\cdot 3} {7} \sum\limits_{k > n^\alpha} \frac{k^{k-1} e^{-k}}{k!} )\right) =
+			O\left(n e^{-\frac{1}{7} n^{3\alpha - 2} \sum\limits_k \frac{k^{k-1} e^{-k}}{k!} }\right) =
+			O\left(n^\frac{1}{3}\right)$.
+
+			Итого $EY(n, -1) = \sum\limits_{k \le n^\alpha} \frac{k^{k-1} e^{-k}}{k!} n
+			e^{-F(x_k)} (1  - \lambda n^{-\frac{1}{3}} + O(n^{-\frac{2}{3}})) + O(n^\frac{1}{3})$.
+
+			$\sum\limits_{k=1}^\infty \frac{k^{k-1} e^{-k}}{k!} e^{-F(x_k)} = 1 - \sum\limits_{k=1}^\infty
+			\frac{k^{k-1} e^{-k}}{k!} (1 - e^{-F(x_k)})$, так как $\sum\limits_{k=1}^\infty \frac{k^{k-1}
+			e^{-k}}{k!} = 1$ (это можно увидеть, сопоставив с~формулой для числа вершин, занимаемых
+			древесными компонентами).
+
+			По формуле Стирлинга: $\frac{k^{k-1} e^{-k}}{k!} (1 - e^{-F(x_k)}) = \frac{1}{\sqrt{2\pi x_k^3
+			n^2}}(1 - e^{-F(x_k)})(1 + O(\frac{1}{k}))$.
+
+			Тогда $EY(n, -1) = (1 - \lambda n^{-\frac{1}{3}}) (-1) \sum\limits_{k \le n^\alpha}
+			\frac{1}{\sqrt{2\pi x_k^3}} \delta x_k (1 - e^{-F(x_k)}) \cdot n^\frac{2}{3} + n - \lambda
+			n^\frac{2}{3} + O(n^\frac{1}{3})$.
+
+			С~ростом $n$ это асимптотически эквивалентно $n - n^\frac{2}{3}(\lambda + \int\limits_0^\infty
+			\frac{1}{\sqrt{2\pi}} x^{-\frac{3}{2}} (1 - e^{-F(x)}) dx) + O(n^\frac{1}{3})$.
+		\item Доказывается аналогично
+	\end{enumerate}
+\end{proof}
+
+\begin{corollary}
+	$EY(n, \ge 1) = n^\frac{2}{3}(f_{-1}(\lambda) - f_0(\lambda)) + O(n^\frac{1}{3})$
+\end{corollary}
+\begin{corollary}
+	В~модели $G(\lambda)$ размер наибольшей недревесной компоненты есть $O_P(n^\frac{2}{3})$.
+\end{corollary}
+
+\begin{lemma}
+	В~модели $G(\lambda)$ размер наибольшей древесной компоненты есть $O_P(n^\frac{2}{3})$.
+\end{lemma}
+\begin{proof}
+	Пусть $w(n) \rightarrow \infty$. $P(\exists T: |T| \ge n^\frac{2}{3} w(n)) \le \sum\limits_{k >
+	n^\frac{2}{3} w(n)} EX(n, k, -1) = O\left(\sum\limits_{k > n^\frac{2}{3} w(n)} n \frac{k^{k-2}
+	e^{-k}}{k!} e^{-F(x_k)}\right) = O\left(e^{-\frac{w^3}{7}} n \sum\limits_{k > w(n) n^\frac{2}{3}}
+	k^{-\frac{-5}{2}}\right) = O\left(e^{-\frac{w^3}{7} w(n)^{-\frac{3}{2}}}\right) \rightarrow 0$.
+\end{proof}
+
+\begin{corollary}
+	В~модели $G(\lambda)$ размер наибольшей компоненты есть $O_P(n^\frac{2}{3})$.
+\end{corollary}
+
+\section{Поведение сложных компонент}
+
+\begin{theorem}[Багаев]
+	$C(k, k + 1) \sim \frac{5}{24} k^{k+1}$.
+\end{theorem}
+
+\begin{theorem}[Райт, 1980]
+	Для $l \ge 2$ и~$l = o(k^\frac{1}{3})$ выпонено
+	$$C(k, k + l) = \gamma_l k^{k + \frac{3l - 1}{2}} \left(1 +
+	O\left(\sqrt{\frac{l^3}{k}}\right)\right),$$
+	где
+	$\gamma_l = \frac{\sqrt{\pi} 3^l (l - 1) \delta_l}{2^\frac{5l-1}{2} \Gamma(\frac{l}{2})}$,
+	$\delta_1 = \delta_2 = \frac{5}{36}, \delta_{l+1} = \delta_l + \sum\limits_{h=1}^{l-1}
+	\frac{\delta_h \delta_{l-h}}{(l+1)C_l^h}$.
+\end{theorem}
+
+\begin{theorem}[Боллобаш]~
+	\begin{enumerate}
+		\item Если $1 \le l \le k$, то $C(k, k + l) \le \left(\frac{c_1}{l}\right)^{\frac{l}{2}}
+			k^{k + \frac{3l - 1}{2}}$
+		\item Если $k \le l \le C_k^2 - k$, то $C(k, k + l) \le c_2 e^{-\frac{l}{2}} k^{k + \frac{3l -
+			1}{2}}$
+	\end{enumerate}
+\end{theorem}
+
+\begin{lemma}
+	Пусть $l \ge 1$~--- фиксировано, $w(n) \rightarrow \infty$. Тогда с~вероятностью, стремящейся к~1,
+	$G(\lambda)$ не содержит $l$-компонент размер $\le \frac{n^\frac{2}{3}}{w(n)}$.
+\end{lemma}
+\begin{proof}
+	Положим $k_1 = \frac{n^\frac{2}{3}}{w(n)}$, тогда $P(\exists H: |H| \le
+	\frac{n^\frac{2}{3}}{w(n)}) \le \sum\limits_{k \le k_1} EX(n, k, l) = O\left( e^{-\frac{l}{2}}
+	k^{k + \frac{3l - 1}{2}} \frac{e^{-k}}{k!} n^{-l} e^{-F(x_k)}\right) = O\left(\sum \limits_{k \le
+	k_1} k^{\frac{3l}{2} - 1} n^{-l} e^{-F(x_k)}\right) = O\left( \sum\limits_{k \le k_1}
+	x_k^{\frac{3l}{2} - 1} n^{l - \frac{2}{3}} n^{-l} e^{-F(x_k)}\right) = O\left( \sum\limits_{k \le
+	k_1} x_k^{\frac{3l}{2} - 1} \delta x_k e^{-F(x_k)}\right) = O\left( \int\limits_0^\frac{1}{w(n)}
+	x^{\frac{3l}{2}-1} e^{-F(x)} dx\right) \rightarrow 0$
+\end{proof}
+
+\end{document}
