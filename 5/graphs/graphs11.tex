@@ -1,0 +1,112 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Сложные компоненты в~фазовом переходе}
+
+В~предыдущих сериях мы выяснили, что в~$G(\lambda)$ нет сложных компонент размера
+$o_p(n^\frac{2}{3})$.
+
+$X(n,l)$~--- число $l$-компонент. $L_n = \max\{l: X(n, l) > 0\}$.
+
+\begin{theorem}
+	В~модели $G(\lambda)$ случайная величина $L_n$ ограничена по вероятности.
+\end{theorem}
+\begin{proof}
+	Пусть $l_0 = w(n) \rightarrow \infty$. Хотим показать, что $P(L_n \ge l_0) \rightarrow 0$. Положим
+	$w_1(n) = w^\frac{1}{4}(n) = l_0^\frac{1}{4}$ и~будем считать, что $w(n) =
+	O(n^{\frac{4}{3}-\delta})$ для какого-то $\delta > 0$. В~силу предыдущих результатов, можно
+	считать, что размер компоненты не превосходит $k_0 = w_1 n^\frac{2}{3}$. Итак, мы хотим получить,
+	что
+
+	$$\sum\limits_{k \le k_0, l_0 < l \le C_k^2 - k} EX(n, k, l) \rightarrow 0$$
+
+	$EX(n, k, l) = C_n^k C(k, k + l) p^{k+l} (1-p)^{C_k^2 - k - l + (n-k)k}$. Обозначим $\eps =
+	\lambda n^{-\frac{1}{3}}, p = \frac{1 + \eps}{n}$. Используем следущие оценки
+
+	$C_n^k = O\left(\frac{n^k}{k!} \exp\left(-\frac{k^2}{2n}\right)\right)$
+
+	$p^{k+l} = \left(\frac{1+\eps}{n}\right)^{k+l} \le \exp(\eps k) p^l \frac{1}{n^k}$
+
+	$(1 - p)^{C_k^2 - k - l + k(n - k)} = (1 - p)^{-l} (1 - p)^{C_k^2 - k + k(n - k)} \le (1 - p)^l
+	\exp\left(-\frac{1+\eps}{n} (C_k^2 - k + (n - k)k)\right) = O\left((1 - p)^l
+	\exp\left((1 + \eps)k + \frac{(1 + \eps)k^2}{2n}\right)\right)$
+
+	$\frac{|\eps|k^2}{n} \le \frac{k_0^2|\eps|}{n} = \frac{|\lambda| n^{-\frac{1}{3}} n^\frac{4}{3}
+	w_1^2(n)}{n} = |\lambda|w^\frac{1}{2}(n)$
+
+	В~итоге:
+	\begin{multline*}
+		\sum\limits_{k\le k_0, l_0 < l \le C_k^2 - k} EX(n, k, l) \le O\left(\sum\limits_{k\le k_0} C(k, k +
+		l) \frac{n^k}{k!} e^{-\frac{k^2}{2n}} e^{\eps k} p^l \frac{1}{n^k} (1 - p)^{-l} e^{-k}
+		e^{-\eps k} e^{\frac{k^2}{2n}} e^{\frac{|\lambda|\sqrt{w}}{2}}\right) = \\
+		O\left(\sum\limits_{k\le k_0, l_0 <
+		l \le C_k^2 - k} C(k, k + l) \frac{e^{-k}}{k!} \left(\frac{p}{1 - p}\right)^l
+		e^\frac{|\lambda|\sqrt{w}}{2}\right)
+	\end{multline*}
+
+	Сумму разобъем на две части: $l > k, l \le k$. Оценим по отдельности:
+
+	$\Sigma_1: C(k, k + l) = O(k^{k+l}), k! > \left(\frac{k}{e}\right)^k$
+
+	$\Sigma_1 = O\left( e^\frac{|\lambda|\sqrt{w}}{2} \sum\limits_{k=4}^{k_0} \sum\limits_{l > \max(k,
+	l_0)} \left( \frac{kp}{1 - p} \right)^l \right) = O\left( e^\frac{|\lambda|\sqrt{w}}{2}
+	\sum\limits_{k=4}^{k_0} \left( \frac{kp}{1-p} \right)^{\max(l_0, k)} \right) \le O\left(
+	e^\frac{|\lambda|\sqrt{w}}{2} l_0 \left( \frac{k_0 p}{1 - p} \right)^{l_0} \right) = O\left(
+	e^\frac{|\lambda|\sqrt{w}}{2} w(n) (2n^{-\frac{\delta}{4}})^{w(n)}\right) \rightarrow 0$
+
+	$\Sigma_2: C(k, k + l) = O(e^{-\frac{l}{2}} k^{k+\frac{3l-1}{2}}), k! > \left(\frac{n}{e}\right)^k
+	\sqrt{2\pi k}$
+
+	$\Sigma_2 \le O\left(e^{|\lambda|\sqrt{w}{2}} \sum\limits_{k=l_0}^{k_0} \sum\limits_{l=l_0}^k
+	e^{-\frac{l}{2}} k^\frac{3l-2}{2} \left(\frac{p}{1-p}\right)^l \right)$
+
+	$\frac{kp}{(1-p)\sqrt{l}} \le \frac{k_0^\frac{3}{2} p}{(1 - p)\sqrt{l_0}} \le \frac{(n^\frac{2}{3}
+	w_1(n))^\frac{3}{2} p}{(1 - p) \sqrt{w}} = \frac{np w^\frac{3}{8}}{(1-p)w^\frac{1}{2}} \le
+	\frac{2}{w^\frac{1}{8}(n)} \rightarrow 0$. Значит сумма оценивается сверху геометрической
+	прогрессией.
+
+	$\Sigma_2 = O\left( e^{|\lambda|\sqrt{w}}{2} \sum\limits_{k=l_0}^{k_0} \frac{1}{k} \left(
+	\frac{k\frac{3}{2}p}{(1-p)\sqrt{l_0}}\right)^{l_0} \right) \le
+	O\left(e^\frac{|\lambda|\sqrt{w}}{2} k_0 \frac{1}{k_0} \left(\frac{k_0^\frac{3}{2}
+	p}{(1-p)\sqrt{l_0}}\right)^{l_0} \right) \le O\left(e^\frac{|\lambda|\sqrt{w}}{2}
+	\left(\frac{2}{w(n)^\frac{1}{8}}\right)^{w(n)} \right) \rightarrow 0$
+\end{proof}
+
+\begin{corollary}
+	В~модели $G(\lambda)$ число сложных компонент ограничено по вероятности и~каждая из них имеет
+	размер $\Omega_P(n^\frac{2}{3})$.
+\end{corollary}
+\begin{proof}
+	Из теоремы следует, что сложность ограничена по вероятности. При фиксированной сложности $l$ число
+	$l$-компонент ограничено по вероятности, что было доказано ранее. По предыдущим утверждениям все
+	такие компоненты имеют размер $\Omega_P(n^\frac{2}{3})$.
+\end{proof}
+
+Дополнительные факты:
+\begin{itemize}
+	\item Сложные компоненты в~$G(\lambda)$ есть не всегда. Пусть $C_n$~--- число сложных компонент
+		в~$G(\lambda)$. Тогда $\lim EC_n = \int\limits_0^\infty g(x) e^{-F(x)} dx = I(\lambda), F(x) =
+		\frac{1}{6}((x-\lambda)^3 + \lambda^3)$, $g(x) = \sum\limits_{l\ge 1} \gamma_l
+		x^{\frac{3l}{2}-1}$, где $c(k, k + l) \sim \gamma_l k^{k + \frac{3l-1}{2}}$
+	\item $I(\lambda) \rightarrow 0, \lambda \rightarrow -\infty$
+	\item $I(\lambda) \rightarrow 1, \lambda \rightarrow +\infty$
+
+	\item $h_n(\lambda) = P(\text{нет сложных компонент})$.
+
+		Тогда $\lim h_n(\lambda) = h(\lambda)
+		e^{-\frac{\lambda^3}{6} \left( \frac{2}{3\pi} \right)^\frac{1}{2} \sum\limits_{j=0}^\infty
+		\frac{1}{j!} \left( -\frac{\lambda}{2} 3^\frac{2}{3} \right)^j \cos \frac{\pi j}{4}
+		\Gamma\left(\frac{2}{3}j + \frac{1}{2} \right)}$.
+
+		Например, $h(0) = \sqrt\frac{2}{3}$.
+
+	\item Пусть $C_n$~--- число циклов в~$G(\lambda)$, а~$C_n^\ast$~--- число унициклических
+		компонент. Тогда в~силу следствия $C_n - C_n^\ast = O_P(1)$. А~распределение $C_n^\ast$ (в
+		отличие от $c > 1$ и~$c < 1$) асимптотически нормальным. Например, при $\lambda < 0$
+
+		$$\frac{C_n^\ast - \frac{1}{6}\ln n}{\sqrt{\frac{1}{6}\ln n}} \overset{d}\rightarrow 1$$
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,193 @@
+\documentclass{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amscd}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cmap}
+\usepackage{centernot}
+\usepackage{enumitem}
+\usepackage{perpage}
+\usepackage{chngcntr}
+\usepackage{minted}
+\usepackage[bookmarks=true,pdfborder={0 0 0 }]{hyperref}
+\usepackage{indentfirst}
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black
+}
+
+\newtheorem*{conclusion}{Вывод}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem*{corollary}{Следствие}
+
+\theoremstyle{definition}
+\newtheorem*{problem}{Задача}
+\newtheorem{claim}{Утверждение}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{definition}{Определение}
+\newtheorem{example}{Пример}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\ndiv}{\centernot\mid}
+
+\MakePerPage{footnote}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\resetcntrs}{\setcounter{theorem}{0}\setcounter{definition}{0}
+\setcounter{claim}{0}\setcounter{exercise}{0}}
+
+\DeclareMathOperator{\aut}{aut}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator*\lowlim{\underline{lim}}
+\DeclareMathOperator*\uplim{\overline{lim}}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\frenchspacing
+
+\begin{document}
+
+\title{Задание 3 по случайным графам}
+\author{Дмитрий Иващенко}
+\date{\today}
+\maketitle
+
+\section*{Задача 1}
+
+Посчитаем ожидаемое число древесных компонент размера $k$. Константы при счете опустим.
+\begin{equation*}
+	EX_k = C_n^k k^{k-2} p^{k-1} (1-p)^{C_k^2 - (k-1) + k(n-k)} \sim \frac{n^k e^k
+	c^{k-1}}{k^2\sqrt{k}} \left(1 - \frac{c}{n}\right)^{\frac{(k-1)(k-2)}{2}+k(n-k)}
+\end{equation*}
+\begin{equation*}
+	\ln EX_k = \ln n + k + (k - 1) - \frac{5}{2} \ln k + \left(\frac{(k-1)(k-2)}{2} + k(n-k)\right)
+	\ln \left(1 - \frac{c}{n}\right)
+\end{equation*}
+Нас значение $\gamma$, при котором $\ln EX_k \rightarrow -\infty$. Подставим $k = \gamma \ln n$
+(аддитивные константы проигнорируем, распишем также $\ln(1 - x) = -x(1 + o(1))$):
+\begin{multline*}
+	\ln EX_k \sim \ln n (1 + \gamma + \gamma \ln c) -\frac{5}{2} \ln\ln n - (\gamma n \ln n + O(\ln n))
+	\cdot \frac{c}{n}(1 + o(1)) \sim\\
+	\ln n(1 + \gamma + \gamma \ln c - c\gamma(1 + o(1))) - \frac{5}{2} \ln\ln n
+\end{multline*}
+
+Итого, если $1 + \gamma + \gamma \ln c - c\gamma \le 0$, то $EX_k \rightarrow 0$. Значит искомая
+$\gamma$ есть $\gamma = \frac{1}{c - 1 - \ln c}$. Мы показали, что вероятность того, что есть
+компонента размером хотя бы $(\gamma + \eps) \ln n$ стремится к~0. Покажем, что вероятность наличия
+компоненты размером хотя бы $(\gamma - \eps) \ln n$ стремится к~1. Посчитаем по методу второго
+момента.
+
+\begin{multline*}
+EX_k^2 = EX_k + C_n^k C_{n-k}^k k^{2k-4} p^{2k-2} (1-p)^{(k-1)(k-2) + k(2n-3k)} \sim\\
+	\sim EX_k + (EX_k)^2 (1-p)^{-k^2} \sim EX_k + (EX_k)^2 \exp\left( \frac{c}{n} \ln^2 n (\gamma -
+	\eps)^2 (1 + o(1))\right) = o((EX_k)^2)
+\end{multline*}
+
+Последнее верно, так как при $k = (\gamma - \eps) \ln n$, $EX_k \rightarrow \infty$. Так, по методу
+второго момента компонента размера хотя бы $(\gamma - \eps)$ найдется, поэтому $\frac{L(G)}{\ln n}
+\overset{P}\rightarrow \frac{1}{c - 1 - \ln c}$.
+
+\section*{Задача 2}
+
+Оценим матожидание числа унициклических компонент размера $k$, учитывая асимптотическую
+формулу числа унициклических графов. Константы при счете опустим.
+
+\begin{multline*}
+	EX_k \sim C_n^k k^{k-\frac{1}{2}} p^k (1-p)^{C_k^2-k+k(n-k)} \sim
+	\frac{n^k}{k!} \frac{e^k}{k^k \sqrt{k}} \frac{k^k}{\sqrt{k}} \frac{\omega^k}{n^k}
+	(1-p)^{\frac{k(k-3)}{2} + k(n-k)} =\\
+	=\frac{e^k \omega^k}{k} (1-p)^{\frac{k(k-3)}{2} + k(n-k)} = \exp\left( \ln(1-p) \left(
+	\frac{k(k-3)}{2}+k(n-k)\right) + k \ln \omega + k - \ln k\right).
+\end{multline*}
+
+Далее анализируем выражение под экспонентой $A_k$, учитывая, что $\ln(1-p) = -\frac{\omega}{n} (1 +
+o(1))$ (случай $p \not\rightarrow 0$ опустим, так как очевидно, что тогда тем более $A_k \rightarrow
+-\infty$). Учтём также, что $\frac{k(k-3)}{2} + k(n-k) \ge \frac{n^2}{2}(1+o(1))$
+(дифференцированием получаем, что минимум при $k + \frac{3}{2} = n$, то есть примерно $k = n$):
+
+\begin{multline*}
+	A_k = -\omega n(\frac{1}{2}+o(1)) + k \ln \omega + k - \ln k = n\left(-\frac{\omega}{2} +
+	\frac{k}{n}\ln \omega + \frac{k}{n} - \frac{\ln k}{n}\right) (1 + o(1)) \le\\
+	\le n(1 + o(1))\left(-\frac{\omega}{2} + \ln \omega + 1\right) \rightarrow -\infty
+\end{multline*}
+
+Тогда $EX_k \rightarrow 0$, а~также $\sum\limits_{k=3}^n EX_k \rightarrow 0$, так как каждое
+слагаемое убывает экспоненциально быстро. По методу первого момента получаем требуемое.
+
+\section*{Задача 4}
+
+Считаем число $l$-компонент размера $k$. Оцениваем сверху, используя неравенство с~лекции, также
+учитывая, что $k \le d \ln n$ для какого-то $d$.
+
+\begin{multline*}
+	EX_{l,k} \le C_n^k C(k, k + l) p^{k+l} (1-p)^{k(n-k)} \le \frac{n^k}{k!} k^{k+\frac{3l-1}{2}}
+	\left(\frac{c}{n}\right)^{k+l} (1-p)^{k(n-k)} =\\
+	= \frac{e^k c^k c^l k^\frac{3l-2}{2}}{n^l} \left(1-\frac{c}{n}\right)^{k(n-k)}
+\end{multline*}
+
+Отсюда ясно, что на асимптотику суммы повлияет только случай $l = 1$, так как если суммировать
+сначала по $l$, то это слагаемое поглотит все остальные, за счет большей степени $n$
+в~знаменателе (при одинаковом размере).
+
+Тогда суммарное число $1$-компонент размера не больше $d \ln n$ не больше
+
+\begin{equation*}
+	\sum_{k=3}^{d\ln n} \frac{e^k c^{k} c \sqrt{k}}{n} \left(1 - \frac{c}{n}\right)^{k(n-k)} \le
+	\frac{c}{n} \sqrt{d \ln n} \sum\limits_{k=3}^{d\ln n} (ce)^k \left(1 - \frac{c}{n}\right)^{dn\ln
+	n}
+\end{equation*}
+
+Логарифм (без констант) оценим как:
+
+\begin{equation*}
+	-\ln n + \frac{3}{2} \ln \ln n + d \ln c \ln n + dn \ln n \ln\left(1 - \frac{c}{n}\right) = -\ln n
+	+ \frac{3}{2} \ln \ln n + d\ln c \ln n - dc\ln n (1 + o(1)) \rightarrow -\infty
+\end{equation*}
+
+Поэтому сложных компонент размера не больше $d \ln n$ нет. Значит, кроме гигантской компоненты их
+нет.
+
+\section*{Задача 8}
+
+Напишем ожидаемое число циклов длины $k$, учитывая, что размер наибольшей компоненты (и~цикла тоже) 
+не больше $O(n^\frac{2}{3})$:
+
+\begin{multline*}
+	EX_k = C_n^k \frac{(k-1)!}{2}p^k = \frac{n(n-1)\ldots(n-k+1) (k-1)!}{n^k 2k!} p^k =\\
+	= \frac{n(n-1)\ldots(n-k+1)}{n^k 2k} \left(1 + \frac{\lambda}{n^\frac{1}{3}}\right)^k
+\end{multline*}
+\begin{multline*}
+	\ln EX_k = \ln \left(1-\frac{1}{n}\right) + \ldots + \ln \left(1 - \frac{k-1}{n}\right) - \ln(2k)
+	+ k\ln\left(1 + \frac{\lambda}{n^\frac{1}{3}}\right) =\\
+	= -\sum_{i=0}^{k} \frac{i}{n} + \frac{i^2}{2n^2} + O\left(
+	\frac{i^3}{n^3}\right) - \ln(2k) + k(\lambda n^{-\frac{1}{3}} + O(n^{-\frac{2}{3}})) =\\
+	= -\frac{k^2}{2n} -\frac{k^3}{6n^2} -\ln(2k) + k\lambda n^{-\frac{1}{3}} + o(1)
+\end{multline*}
+
+Тогда $EX_k = \frac{1}{2k} \cdot \exp(-\frac{k^2}{2n} -\frac{k^3}{6n^2} + k\lambda
+n^{-\frac{1}{3}})$. Тогда в~сумме важны лишь первые $O(\sqrt{n})$ слагаемых, так как остальные дают
+вклад экспоненциально малый. С~другой стороны, если $\lambda < 0$, первые $n^\frac{1}{3}$ слагаемых
+тоже. Тогда, с~одной стороны сумма не больше $\frac{1}{2} \sum\limits_{k=n^\frac{1}{3}}^{\sqrt{n}}
+\frac{1}{k} \sim \frac{1}{6} \ln n$. А~с~другой стороны, на этом интервале она экспоненциально
+близка к~этому значению.
+
+Аналогично, при $\lambda = 0$ сумма экспоненциально близка к~$\frac{1}{2}
+\sum\limits_{k=1}^{\sqrt{n}} \frac{1}{k} \sim \frac{1}{4} \ln n$. Это решает первые два пункта
+задачи.
+
+\end{document}
