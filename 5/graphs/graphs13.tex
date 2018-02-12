@@ -1,0 +1,160 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{k-связность}
+
+\begin{definition}
+	Граф $G$ называется $k$-связным, если при удалении $k-1$ вершины нельзя получить несвязный или
+	пустой граф.
+
+	Минимальное $k$, такое, что $G$ $k$-связен~--- вершинная связность, $k(G)$.
+\end{definition}
+
+Аналогично определяется рёберная $k$-связность.
+
+Графовый случайный процесс: $\tilde{G} = (\tilde{G}(n,m), m = 0, \ldots, C_n^2)$.
+
+$\tilde{G}(n, 0)$~--- пустой. $\tilde{G}(n,m+1)$ получен из $\tilde{G}{n}{m}$ добавлением случайного
+недобавленного ребра.
+
+Для возрастающего свойства $Q$ введём $\tau(Q) = \min \{m: \tilde{G}(n, m) \models Q\}$.
+
+$\tau_k(\delta) = \tau(\delta(G) \ge k), \tau_k(\kappa) = \tau(k(G) \ge k), \tau_k(\lambda) =
+\tau(\lambda(G) \ge k)$.
+
+Цель: показать, что при фиксированном $k \in \mathbb{N}$ выполнено $P(\tau_k(\delta) =
+\tau_k(\kappa)) \rightarrow 1$.
+
+\begin{definition}
+	Пусть $G$~--- граф, подмножество $S \subset V$ называется \emph{сепаратором}, если $V \setminus S$
+	представимо в~виде $W_1 \sqcup W_2, |W_1| \le |W_2|$ и~между $W_1$ и~$W_2$ нет рёбер.
+
+	Сепаратор называется тривиальным, если $|W_1| = 1$.
+
+	$S$ называется $s$-сепаратором, если $|S| = s$.
+\end{definition}
+
+\begin{lemma}[О сепараторах]
+	Пусть $k \in \mathbb{N}$ и $w(n) \rightarrow \infty, w(n) \le \ln \ln \ln n$. Пусть $p = \frac{\ln
+	n + k \ln \ln n - w(n)}{n}$, тогда вероятность того, что $G(n, p)$ содержит нетривиальный
+	сепаратор стремится к 0.
+\end{lemma}
+\begin{proof}
+	$A_r = \{G(n, p) \text{ имеет нетривиальный $k$-сепаратор с $|W_1|=r$}\}$. Будем рассматривать
+	$r_0 = \max(k+1,10), r_1 = \lfloor n^\frac{5}{9} \rfloor, r_2 = \lfloor \frac{n-k}{2} \rfloor$
+
+	Хотим $P\left(\bigcup\limits_{r=2}^{r_2}A_r\right) \rightarrow 0$. Сумму разбиваем на три, каждую
+	будем оценивать отдельно.
+
+	\begin{enumerate}
+		\item $r \le r_0$. Из условия на $p$ получаем $P(\delta(G(n,p))=k) \rightarrow 1$. Тогда в $W_1$
+			найдутся две вершины степени $\le k + r$ на расстоянии не более 2 (либо рёбер внутри $W_1$
+			нет, тогда оно соединено со всем $S$, либо есть). Оценим вероятность этого события:
+			\begin{multline*}
+				\sum\limits_{i,j=k}^{k+r} \sum\limits_{k=1}^2 C_n^2 C_{n-2}^{l-1} p^l C_n^{i-1} C_n^{j-1}
+				p^{i+j-2} (1-p)^{2n-i-j+1} \le \\
+				\sum\limits_{i,j=k}^{k+r}\sum\limits_{r=1}^2i n^{l+1+i+j-2} p^{i+j-2+l} (1-p)^{2n-i-j+1} \le
+				\\
+				\sum\limits_{i,j=k}^{k+r} \sum\limits_{l=1}^2 n (np)^{i+j+l-2} e^{-2np + o(1)}
+				\le o\left((\ln n)^{2(k+r)} e^{-2np} n\right) = \\
+				o\left( (\ln n)^{2k + 2r} \exp(-2\ln n - 2k \ln \ln n + 2w) n \right) = o\left((\ln n)^r
+				e^{2w(n)} \frac{1}{n} \right) \rightarrow 0
+			\end{multline*}
+		\item $r_0 \le r \le r_1$. Заметим, что на множестве $S \cup W_1$ должно быть не меньше, чем
+			$\frac{rk}{2}$ рёбер.
+			\begin{multline*}
+				C_{C_{r+k}^2}^{\frac{rk}{2}} p^\frac{rk}{2} \le \left(
+				\frac{\exp(\frac{1}{4}(r+k)^2)}{\frac{rk}{2}}\right)^\frac{rk}{2} p^\frac{rk}{2} \le
+				\left(\frac{4er^2p}{rk}\right)^\frac{rk}{2} = \left(\frac{4erp}{k}\right)^\frac{rk}{2} \le\\
+				\left(n^{-\frac{4}{9} + o(1)}\right)^\frac{rk}{2} < n^{-\frac{3}{14}rk}
+			\end{multline*}
+			Отсюда 
+			\begin{multline*}
+				P\left( \bigcup\limits_{r=r_0+1}^{r_1} A_r \right) \le o(1) +
+				\sum\limits_{r=r_0+1}^{r_1} C_n^r C_{n-r}^k n^{-\frac{3}{14}rk} (1-p)^{r(n-r-k)} \le \\
+				o(1) + \sum\limits_{r=r_0+1}^{r_1} n^{r+k - \frac{3}{14}rk} \exp(-pr(n-r-k)) \le \\
+				o(1) + \sum\limits_{r=r_0+1}^{r_1} n^{k - \frac{3}{14}rk + \frac{r^2}{n}}
+			\end{multline*}
+			% \exp(-p(n -r - k)r) = e^{-r ln n} - kr\ln \ln n + w(n)r + o(1) + r^2p} 
+			Так как $r \ge 11$, то сумма стремится к 0.
+		\item $r > r_1$. Между $W_1$ и $W_2$ нет рёбер (и они большие).
+			\begin{multline*}
+				P\left( \bigcup\limits_{r=r_1+1}^{r_2} A_r \right) \le \sum\limits_{r=r_1+1}^{r_2} C_n^r
+				C_{n-r}^k (1 - p)^{r(n-r-k)} \le \sum\limits_{r=r_1+1}^{r_2} \left(\frac{en}{r}\right)^r n^k
+				e^{-pr(n-r-k)} \le \\
+				\sum\limits_{r=r_1+1}^{r_2} \left( \frac{en}{r} \right)^r n^k e^{-pr \frac{n-k}{2}} =
+				\sum\limits_{r=r_1+1}^{r_2} n^k \left( \frac{en}{r} e^{-p \frac{n-k}{2}}\right)^r \le
+				\sum\limits_{r=r_1+1}^{r_2} n^k e^{r(\frac{4}{9} - \frac{1}{2})} \ln n (1 + o(1)) \le \\
+				\sum\limits_{r=r_1+1}^{r_2} n^k n^{-\frac{r}{20}} \rightarrow 0
+			\end{multline*}
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+	В графовом случайном процессе для фиксированного $k$ $P(\tau_k(\delta) = \tau_k(\kappa))
+	\rightarrow 1$.
+\end{theorem}
+\begin{proof}
+	Пусть $k = 1$. Ясно, что $\tau_k(\kappa) \ge \tau_k(\delta)$. Положим $w(n) = \ln \ln \ln n$.
+
+	$m_1 = \lfloor \frac{n}{2} (\ln n - w(n)) \rfloor$
+
+	$m_2 = \lfloor \frac{n}{2} (\ln n + w(n)) \rfloor$
+
+	В силу асимп. эквивалентности моделей
+	
+	$P(\tilde{G}(n,m_1) \text{ связен}) \rightarrow 0$
+
+	$P(\tilde{G}(n,m_2) \text{ связен}) \rightarrow 1$
+
+	Тем самым $P(m_1 < \tau_k(\delta) \le m_2) \rightarrow 1$. Граф $\tilde{G}(n,m_1)$ с большой
+	вероятностью состоит из гигантской компоненты и изолированных вершин, причем число последних $\le
+	\ln n$. Обозначим это событие через $\mathcal{B}$. Тогда $\tau_1(\kappa) > \tau_1(\delta)$, если
+	в моменты времени $\{m_1 + 1, \ldots, m_2\}$ одно из рёбер было проведено между изолированными.
+
+	$ P(\tau_1(\kappa) > \tau_1(\delta) \mid \mathcal{B}) \le \frac{(m_2 - m_1) (\ln n)^2}{C_n^2 -
+	m_2} = o\left(\frac{nw(n) (\ln n)^2}{n^2}\right) \rightarrow 0$.
+
+	Пусть $k \ge 2$. По лемме о сепараторах при $m_0 = \lfloor \frac{n}{2}(\ln n + (k-1)\ln\ln n - \ln
+	\ln \ln n)\rfloor$
+
+	$P(\tilde{G}(n,m_0) \text{ содержит нетривиальный $(k-1)$-сеператор}) \rightarrow 0$.
+
+	Кроме того $P(\delta(\tilde{G}(n,m_0))=k-1) \rightarrow 1$. Тогда $\forall m \ge m_0$
+	$\tilde{G}(n,m)$ тоже не содержит нетривиальных $(k-1)$-сепараторов. Снова $\tau_k(\kappa) \ge
+	\tau_k(\delta)$ и если $\delta(\tilde{G}(n,m)) = k$, то $\tilde{G}(n, m)$ не будет вершинно
+	$k$-связным только при наличии нетривиального $(k-1)$-сепаратора. Но их нет, значит
+	$\tau_k(\delta) = \tau_k(\kappa)$.
+\end{proof}
+
+\begin{exercise}
+	Доказать, что при фиксированном $k$ $P(\tau_k(\delta) = \tau_k(\lambda)) \rightarrow 1)$.
+\end{exercise}
+
+\begin{corollary}
+	Если $p \le \frac{\ln n + k \ln \ln n}{n}$, $k$~--- фиксированное, то
+	$P(\delta(G(n,p))=k(G(n,p))=\lambda(G(n,p))) \rightarrow 1$.
+\end{corollary}
+\begin{corollary}
+	Пусть $p = \frac{\ln n + k \ln \ln n + x + o(1)}{n}$, $k \in \mathbb{Z}_{+}, x \in \mathbb{R}$, то
+
+	$P(k(G(n,p))=\lambda(G(n,p))=k) \rightarrow 1 - \exp\left(-\frac{e^{-x}}{k!}\right)$,
+
+	$P(k(G(n,p))=\lambda(G(n,p))=k+1) \rightarrow \exp\left(-\frac{e^{-x}}{k!}\right)$.
+\end{corollary}
+
+\section{Совершенные паросочетания}
+
+Пороговая вероятность наличия совершенного паросочетания в $G(n, p)$?
+
+\begin{theorem}[Холл]
+	Пусть $G$~--- двудольный с равными долями $X, Y$. Тогда в~$G$ есть совершенное паросочетание тогда
+	и только тогда, когда $\forall W \subset X |N(W)| \ge |W|$
+\end{theorem}
+
+В случайном графе сложно: он не двудольный, а также в~нём достаточно много <<плохих>> вершин.
+Оказывается, все зависит от наличия конфигурации <<вишня>>: пара вершин степени 1 с общим соседом.
+
+\end{document}
