@@ -1,0 +1,99 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+Литература:
+\begin{itemize}
+	\item ???
+\end{itemize}
+
+\section{Лямбда-исчисление}
+
+Безтиповое лямбда-исчисление: термы, $\alpha$-конверсия, $\beta, \eta$-редукция.
+
+\begin{definition}
+	$V = \{v_0, \ldots, v_1\} \sim \mathbb{N}$~--- алфавит. Определим $\lambda$-терм:
+	\begin{itemize}
+		\item $x \in V \Rightarrow x \in \Lambda$
+		\item $M, N \in \Lambda \rightarrow (MN) \in \Lambda$
+		\item $x \in V, M \in \Lambda \Rightarrow (\lambda x.M) \in \Lambda$
+	\end{itemize}
+\end{definition}
+
+\begin{remark}
+	Примечания: аппликация (применение) левоассоциативно, абстракция~--- наоборот.
+
+	Конверсии бывают некорректные. Можно сформулировать правило, определяющее корректную подстановку.
+	Но мы будем далее считать, что в~любом контексте ни одна переменная не имеет одновременно
+	сводобных и~связанных вхождений. Для этого примерним автоматические переименование
+	в~невстречающиеся: $\lambda x. M \rightarrow_\alpha \lambda y.(M[x \coloneqq y]), y \notin V(M)$.
+\end{remark}
+
+\begin{definition}
+	Определим абстрактные редукции. $R \subset \Lambda \times \Lambda$~--- редукция. Условия
+	совместимости:
+	\begin{enumerate}
+		\item $MRN \Rightarrow M \rightarrow_R N$
+		\item $M \rightarrow_R N \Rightarrow LM \rightarrow_R LN, ML \rightarrow_R NL, \lambda x.M
+			\Rightarrow_R \lambda x.N$
+	\end{enumerate}
+
+	Также замкнём нашу редукцию: $\doublearrow_R$ и~построим соответствующее отношение эквивалентности
+	$=_R$.
+\end{definition}
+
+\begin{definition}
+	Терм $R$-нормален, если $\nexists N M \rightarrow_R N$. Терм $N$ является нормальной формой терма
+	$M$, если он $R$-нормальный и~$M =_R N$.
+
+	Терм нормализуемый, если у~него есть нормальная форма и~сильно нормализуемый, если любая цепочка
+	редукций обрывается (на $R$-нормальной форме).
+\end{definition}
+
+\begin{lemma}[О~ромбе]
+	Пусть $R \in \{\beta, \beta\eta\}$. Тогда если $M \doublearrow N_1, M \doublearrow N_2$, то
+	$\exists L: N_1 \doublearrow L, N_2 \doublearrow L$.
+\end{lemma}
+
+\begin{theorem}[Чёрча-Россера]
+	Если $M =_R N \Rightarrow \exists L: M \doublearrow L, N \doublearrow L$.
+\end{theorem}
+\begin{corollary}
+	Нормальная форма (если существует) единственна.
+\end{corollary}
+
+Нормальная форма существует не всегда. Не каждая цепочка преобразований ведёт к~нормальной форме.
+
+\begin{claim}
+	На базе лямбда-термов можно построить логику высказываний и~примитивно-рекурсивную арифметику,
+	нужным образом закодировав нужные функции.
+\end{claim}
+
+Комбинатор неподвижной точки: $Y = \lambda f. (\lambda x.f(xx))(\lambda x.f(xx))$ обладает
+интересным свойством $F(YF) = YF$.
+
+\begin{example}
+	Хотим найти комбинатор $M$, заданный условием $MXY = XM(MM)Y(MMM)$. Рассмотрим $F = \lambda mxy.
+	xm(mm)y(mmm)$ и~положим $M = YF$. Тогда все получится.
+
+	Можно находить и~совместные неподвижные точки: $X = FXY, Y = GXY$. Возьмём $\Phi = \lambda
+	p.\left< F(\pi_1 p)(\pi_2 p), G(\pi_1 p)(\pi_2 p)\right>$. Тогда $Z = Y\Phi$ неподвижная точка,
+	значит $Z = \Phi Z = \left< F(\pi_1 Z)(\pi_2 Z), G(\pi_1 Z)(\pi_2 Z)\right>$. Тогда остаётся взять
+	$X = \pi_1 Z, Y = \pi_2 Z$.
+\end{example}
+
+Используя эту машинерию, можно построить все примитивно-рекурсивные функции, а~также другие виды
+рекурсии, а~также и~минимизацию.
+
+\begin{theorem}
+	Следующие условия равносильны:
+	\begin{itemize}
+		\item $f$ представимо лямбда-термом
+		\item $f$ вычислимо на машинах Тьюринга
+		\item $f$ частично-рекурсивна (примитивная рекурсия + минимизация, возможны не тотальные
+			функции)
+	\end{itemize}
+\end{theorem}
+
+\end{document}
