@@ -1,0 +1,166 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Гамильтоновы циклы}
+
+Какова пороговая вероятность для Гамильтонова цикла? С~одной стороны $\hat p \le \frac{\ln n + \ln
+\ln n - w(n)}{n}$, так как нужна связность и~степень каждой вершины хотя бы 2. С~другой стороны
+совсем понятная оценка только $p = \frac{1}{2}$.
+
+Цель: при $p = \frac{\ln n + \ln \ln n + w(n)}{n}$ $P(G(n, p) \text{ гамильтонов}) \rightarrow 1$
+при $w(n) \rightarrow +\infty$.
+
+\begin{definition}
+	Пусть $G = (V, E)$~--- граф и~$P = x_0 \ldots x_h$~--- самый длинный простой путь в~$G$. Пусть
+	есть ребро $(x_h, x_i)$ (не в~путь $P$ оно вести не может). \emph{Простой трансформацией} пути
+	назовём $P' = x_0 \ldots x_i x_h x_{h-1} \ldots x_{i+1}$. Композицию нескольких простых
+	трансформаций будем называть просто \emph{трансформацией}.
+\end{definition}
+
+Пусть $U(P)$~--- подмножество конечный вершин всех возможных трансформаций пути $P$, а~$N(P) =
+\{x_i: 0 \le i \le h - 1, \{x_{i-1}, x_{i+1}\} \cap U(P) \ne \varnothing\}$~--- их соседи по пути.
+$R(P) = V(P) \setminus (U(P) \cup N(P))$~--- остальные вершины.
+
+\begin{lemma}[Поша]
+	Между $R(P)$ и~$U(P)$ нет рёбер.
+\end{lemma}
+\begin{proof}
+	Пусть $x \in U(P), (x, y) \in E(G)$. Тогда, во-первых, $y \in V(P)$ в~силу максимальности $P$, так
+	как существует трансформация $P_x$ с~конечной вершиной $x$.
+	Если $y = x_h$, то $y \in U(P)$. Иначе пусть $z$~--- правый сосед в~$P_x$. Существует
+	трансформация с~последней вершиной $z$, значит $z \in U(P)$.
+
+	Если $(y, z) \in E(P)$, то $y \in N(P)$. Иначе, $(y, z) \notin E(P)$, пусть соседи $y$ есть $w,
+	w' \ne z$. Тогда при переходе от $P$ к~$P_x$ одно из рёбер $(w, y), (y, w')$ должно было быть
+	удалено и~в~этот момент либо $y$, либо кто-то из $w, w'$ стал последней вершиной, то есть $y \in
+	U(P) \cup N(P)$.
+\end{proof}
+
+Мы знаем, что $p$ уже достаточно велико, чтобы граф был связным. Если бы у~нас был длинный цикл, то
+мы бы могли продолжить его на 1 вершину, так как в~силу связности на нем что-то <<растёт>>. То есть
+единственное, что нам может помешать~--- наличие достаточно длинного пути при отсутствии длииного
+цикла.
+
+\begin{lemma}
+	Пусть $h \ge 2, u \ge 1$, граф $G$ имеет макс. длину пути $h$, но не имеет циклов длины $h + 1$.
+	Пусть для любого $U \subset V(G), |U| < u$ выполнено $|U \cup N(U)| \ge 3|U|$, тогда существует
+	набор из $u$ различных вершин $y_1, \ldots, y_u$ и~$u$ (не обязательно различных) подмножеств
+	$Y_1, \ldots, Y_u$ с~условием $|Y_j| \ge u$, такие что между $y_j$ и~$Y_j$ нет рёбер,
+	а~добавлением любого ребра между ними дает цикл длины $h + 1$.
+
+	Таким образом, имеется по крайней мере $\ge \frac{u(u+1)}{2}$ нерёбер в~$G$ добавление которых
+	дает цикл длины $h + 1$.
+\end{lemma}
+\begin{proof}
+	Пусть $P$~--- самый длинный путь, $R(P), N(P), U(P)$~--- множества из леммы Поша. По лемме $U(P)
+	\cup \Gamma(U(P)) \subset U(P) \cup N(P)$. Но $N(P) \setminus U(P) \subset
+	\{x_{h-1}\} \cup \{x_{i-1}, x_{i+1}: i \le i \le h - 2\} \Rightarrow |U(P) \cup \Gamma(U(P))| \le
+	|U(P)| + 2(|U(P)| - 1) + 1 = 3|U(P)| - 1 < 3|U(P)|$. Отсюда, по условию, $|U(P)| \ge u$.
+
+	Пусть $\{y_1, \ldots, y_u\} \subset U(P)$. Для каждого $y_i$ можем рассмотреть путь из $y_i$
+	в~$x_0$ (в~силу наличия трансформации). Для него верны те же самые рассуждения, то есть можно
+	выделить множество $Y_i$ размера хотя бы $u$, такое, что любое ребро между $y_i$ и~$Y_i$ дает цикл
+	длины $h + 1$. Ясно, что худший случай, если все $Y_j$ совпадут с~$\{y_1, \ldots, y_u\}$, то есть
+	существует хотя бы $\frac{u(u+1)}{2}$ подходящих нерёбер.
+\end{proof}
+
+\begin{lemma}
+	Пусть $\frac{\ln n}{n} \le p \le 2\frac{\ln n}{n}, 0 < \delta < \frac{1}{\gamma} <
+	\frac{1}{2}$~--- фиксированные константы. Положим $u_0 = \lfloor (\ln n)^\gamma \rfloor$, $u_1 =
+	\lfloor \delta n \rfloor$. Тогда с~вероятностью, стремящейся к~1 любое подмножество $U_n \subset
+	V(G(n, p))$ с~условием $u_0 \le |U_n| \le u_1$ удовлетворяет $|U_n \cup \Gamma(U_n)| \ge \gamma
+	|U_n|$.
+\end{lemma}
+\begin{proof}
+	Пусть $X_n(u, w)$~--- число пар множеств $(U, W), |U| = u, |W| = w, \Gamma(U) \setminus U = W$.
+	Тогда $EX_n(u, w) = C_n^u C_{n-u}^w (1-p)^{u(n-u-w)} (1 - (1 - p)^u)^w \le \frac{n^{u+w}}{w!}
+	\left( \frac{e}{u} \right)^u n^{-u(1 - \frac{u+w}{n})} (up)^w$.
+
+	Значит $P(G(n, p) \text{ не обладает искомым свойством}) \le \sum\limits_{u=u_0}^{u_1}
+	\sum\limits_{w=1}^{(\gamma - 1)u} EX_n(u, w) EX_n(u, w) \le \sum\limits_{u=u_0}^{u_1}
+	\sum\limits_{w=1}^{(\gamma - 1)u} \frac{n^{u+w}}{w!} \left(\frac{e}{u}\right)^u n^{-u}
+	n^{\frac{u(u+w)}{n}} (up)^w \le [ (np)^w \le (2\ln n)^w \le (2\ln n)^{(\gamma - 1)u} ] \le
+	\sum\limits_{u=u_0}^{u_1} (2 \ln n)^{(\gamma - 1)u} \left(\frac{e}{u}\right)^u n^\frac{\gamma
+	u^2}{n} \sum\limits_{w=0}^{(\gamma - 1)u} \frac{u^w}{w!} \le \left[\sum\limits_{w=0}^{(\gamma - 1)u}
+	\frac{u^w}{w!} \le e^u \right] \le \sum\limits_{u=u_0}^{u_1} \left( (2 \ln n)^{\gamma - 1} e^2
+	\frac{1}{u} n^\frac{\gamma u}{n} \right)^u \rightarrow 0$, так как
+	$(2 \ln n)^{\gamma - 1} e^2 \frac{1}{u} n^\frac{\gamma u}{n} \rightarrow 0$ равномерно.
+
+	Покажем это, возьмем $\eps > 0, \gamma \delta + \eps < 1$. Тогда для $u \le n^{\gamma \delta +
+	\eps}$ выполнено $u^\frac{\gamma u}{n} = 1 + o(1), \frac{(\ln n)^{\gamma - 1}}{n} \le
+	\frac{1}{\ln n} \rightarrow 0$.
+
+	Если же $u > n^{\gamma \delta + \eps}$, то $n^\frac{\gamma u}{n} u^{-1} \le n^{\gamma \delta}
+	n^{-\gamma \delta - \eps} = n^{-\eps} \rightarrow 0$ и~$(\ln n)^{\gamma - 1}$ мал по отношению
+	к~$n^\eps$.
+\end{proof}
+
+\begin{lemma}
+	Пусть $w(n) \rightarrow \infty, p = \frac{\ln n + \ln \ln n + w(n)}{n}$, тогда а.п.н. для любого
+	$U_n \subset V(G(n, p))$ выполняется $|U_n \cup \Gamma(U_n)| \ge 3|U_n|$ при $|U_n| \le
+	\frac{n}{4}$.
+\end{lemma}
+\begin{proof}
+	Можно считать, что $p \le \frac{2 \ln n}{n}$. Применим предыдущую лемму с~$\gamma = 3, \delta =
+	\frac{1}{4}$. Тогда все доказано для $|U_n| \ge (\ln n)^3 = u_0$.
+
+	При выбранном $p$ $P(\delta(G(n, p)) \ge 2) \rightarrow 1$. Если $|U_n| = 1$, то для него все
+	доказано. Легко проверить, что с~большой вероятностью вершины степени 2 не соединены друг с
+	другом. Пусть $U_n$~--- самое маленькое <<плохое>> множество: $|U_n \cup \Gamma(U_n)| < 3|U_n|$.
+	Считаем, что $2 \le |U_n| \le u_0, T = U_n \cup \Gamma(U_n), |T| = t, 4 \le t \le 3u_0$. Тогда
+	\begin{itemize}
+		\item подграф на $T$ связен, иначе $U_n$ не минимально
+		\item внутри $T$ есть $\frac{t}{3}$ вершин, имеющих соседей только внутри $T$
+	\end{itemize}
+
+	При фиксированном $t$ вероятность найти такое $T$ не больше
+	\begin{multline*}
+		\sum\limits_{l=-1}^{C_t^2 - t} C_n^t
+		C(t, t + l) p^{t+l} C_t^{\frac{t}{3}} (1-p)^{\frac{t}{3}(n-t} = o\left(
+		\sum\limits_{l=-1}^{C_t^2-t} \left(\frac{en}{t} \right)^t t^{t + \frac{3l - 1}{2}} p^{t+l} 2^t
+		\exp(-\frac{t}{3} np)\right) =\\
+		= o\left( e^t (2 \ln n)^t 2^t \exp(-\frac{t}{3} np)
+		\sum\limits_{l=-1}^{C_t^2-t} (t^\frac{3l-1}{2} p^l) \right) \le o\left( (4e \ln n)^t n^{1 -
+		\frac{t}{3}} \right)
+	\end{multline*}
+
+	Суммируя по $t$ от 4 до $3u_0$ получаем стремление к~0.
+\end{proof}
+
+\begin{theorem}[о~гамильтоновсти]
+	$\lim\limits_{n \rightarrow \infty} P(G(n,p) \text{ гамильтонов}) = 0$ при $np - \ln n - \ln \ln n
+	\rightarrow -\infty$ и~1 при $np - \ln n - \ln \ln n \rightarrow +\infty$.
+\end{theorem}
+\begin{proof}
+	Пусть $k = \frac{4n}{\ln n}, p_i = \frac{64\ln}{n^2}, p_0 = p - kp_1k = p - \frac{64\ln n}{n^2}k$.
+
+	Рассмотрим модель случайного мультиграфа $\hat{G_j} = G_j(n, p_0, \ldots, p_j)$, в~котором две
+	вершины с~вероятностью $p_i$ соединены ребром цвета $i$. При отождествленнии ребер получим граф
+	$G(n, p')$, где $p' \le p_0 + kp = p$.
+
+	Пусть $\hat{G_0}$~--- начальный граф. Введем свойство $Q$:
+	\begin{itemize}
+		\item $G$ связен
+		\item $\forall U \subset V(G), |U| \le \frac{n}{4}$ выполнено $|U \cup \Gamma(U)| \ge 3|U|$
+	\end{itemize}
+
+	В~силу предыдущих лемм граф $\hat{G_0}$ удовлетворяет $Q$ а.п.н., значит все $\hat{G_j}$ тоже. По
+	теореме о~длинном пути $l(\hat{G_0}) \ge n\left(1 - \frac{4\ln2}{\ln n - \ln \ln n}\right)$, так
+	как $p_0 \ge \frac{\ln n + \ln \ln n + w(n) - O(1)}{n}$, то есть $P(l(\hat{G_0} > n - k, \hat{G_0}
+	\models Q) \rightarrow 1$.
+
+	Пусть $\hat{G_j}$ удовлетворяет $Q$. Если там нет цикла длины $l(\hat{G_j})+1$, то по лемме в~нём
+	есть хотя бы $\frac{n^2}{32}$ нерёбер, добавление котороых даёт такой цикл. Если же такой цикл
+	есть, то в~силу связности $l(\hat{G_j}) > n - k + j + 1 \Rightarrow l(\hat{G_{j+1}}) > n - k + j +
+	1$.
+
+	Тогда $P(l(\hat{G_{j+1}}=l(\hat{G_j})) \mid \hat{G_j} \models Q, \text{ нет цикла длины }
+	l(\hat{G_j})+1) \le (1 - p_j)^\frac{n^2}{32} \le \exp(-p_j \frac{n^2}{32}) = \frac{1}{n^2}$.
+
+	Тогда $P(\text{нет цикла длины } n \text{ в~} \hat{G_n}) \le n\frac{1}{n^2} + P(\hat{G_0}
+	\not\models Q) \rightarrow 0$.
+\end{proof}
+
+\end{document}
