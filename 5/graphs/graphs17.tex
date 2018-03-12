@@ -1,0 +1,210 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Неравенство FKG}
+
+$f(x_1, \ldots, x_n): \mathbb{R}^n \rightarrow \mathbb{R}$
+
+\begin{definition}
+	Функция $f$ называется возрастающей, если не убывает по каждой переменной. Аналогично определяется
+	убывающая функция.
+\end{definition}
+
+\begin{theorem}[FKG-неравенство]
+	Пусть $X_1, \ldots, X_n$~--- независимые с.в., $f(x_1, \ldots, x_n), g(x_1, \ldots, x_n)$~---
+	возрастающие (убывающие) функции. Тогда
+	$$cov(f(X_1, \ldots, X_n), g(X_1, \ldots, X_n)) \ge 0.$$
+\end{theorem}
+\begin{proof}
+	Индукция по $n$. Пусть $n = 1$, тогда $(f(x) - f(y))(g(x) - g(y)) \ge 0$. Пусть $Y$ независима
+	с~$X_1$ с.в. с~тем же распределением, $Y \overset{d}= X_1$. Тогда
+	$$ (f(X_1) - f(Y))(g(X_1) - g(Y)) \ge 0.$$
+	Берем мат. ожидание:
+	\begin{multline*}
+		E(f(X_1) - f(Y))(g(X_1) - g(Y)) =\\
+		= 2Ef(X_1)g(X_1) - 2Ef(X_1) \cdot Eg(X_1) = 2\cov(f(X_1), g(X_1) \ge 0.
+	\end{multline*}
+
+	Докажем теперь шаг. Рассмотрим $f'(x_1, \ldots, x_{n-1}) = Ef(X_1, \ldots, X_n) \mid X_1 = x_1,
+	\ldots, X_{n-1} = x_{n-1}) = Ef(x_1, \ldots, x_{n-1},X_n), g'(x_1, \ldots, x_{n-1}) = Eg(x_1,
+	\ldots, x_{n-1}, X_n)$.
+
+	Это тоже возрастающие функции от $n - 1$ переменной. По предположению индукции $\cov(f'(x_1,
+	\ldots, x_{n-1}), g'(x_1, \ldots, x_{n-1})) \ge 0$. Аналогично, $\tilde{f}_{x_1, \ldots,
+	x_{n-1}}(x_n) = f(x_1, \ldots, x_n), \tilde{g}_{x_1, \ldots, x_{n-1}}(x_n) = g(x_1, \ldots,
+	x_n)$~--- возрастающие функции 1 переменной, то есть $\cov(\tilde{f}, \tilde{g}) \ge 0$.
+
+	В~итоге
+	\begin{multline*}
+		Ef(X_1, \ldots, X_n)g(X_1, \ldots, X_n) = E(E(f(X_1, \ldots, X_n)g(X_1, \ldots, X_n) \mid X_1,
+		\ldots X_n)) =\\
+		= \int\limits_{\mathbb{R}^n} E(f(x_1, \ldots, x_{n-1},X_n) g(x_1, \ldots, x_{n-1},x_n))
+		P_{X_1}(dx_1) \ldots P_{X_n}(dx_n) \ge\\
+		\ge \int\limits_{\mathbb{R}^n} E\tilde{f}_{x_1, \ldots, x_{n-1}}(x_n) \tilde{g}_{x_1, \ldots,
+		x_{n-1}}(x_n) P_{X_1}(dx_1) \ldots P_{X_n}(dx_n) =\\
+		= \int\limits_{\mathbb{R}^n} Ef'(x_1, \ldots, x_{n-1}) g'(x_1, \ldots, x_{n-1}) = Ef'(X_1,
+		\ldots, X_{n-1}) g'(X_1, \ldots, X_{n-1}) \ge\\
+		\ge Ef'(X_1, \ldots, X_{n-1}) g'(X_1, \ldots, X_{n-1}) = Ef(X_1, \ldots, X_n)g(X_1, \ldots,
+		X_n)
+	\end{multline*}
+\end{proof}
+
+\section{Неравенство Янсона}
+
+Пусть $\Gamma$~--- конечное множество мощности $N$. $\Gamma(p_1, \ldots, p_N)$~--- биномиальная
+модель случайного подмножества. Введем для $A \subset \Gamma$ величину $I_A = I(A \subset
+\Gamma(p_1, \ldots, p_N))$.
+
+\begin{theorem}[неравенство Янсона]
+	Пусть $S$~--- система подножеств $\Gamma$, $X = \sum\limits_{A \in S} I_A$, $\lambda = EX$,
+	$\overline{\Delta} = \sum\limits_{A,B\in S, A\cap B\ne\varnothing} EI_A I_B$. Тогда $\forall 0 \le
+	t \le EX$ выполнено
+	$$ P(X \le EX - t) \le \exp\left(-\frac{t^2}{2\overline{\Delta}}\right).$$
+\end{theorem}
+\begin{proof}
+	Рассмотрим $\psi(s) = Ee^{-sX}, s \ge 0$. Тогда
+	$$-\psi'(s) = EXe^{-sX} = \sum\limits_{A \in S} E(I_A e^{-sX}).$$
+
+	Для $A \in S$ введем $Y_A = \sum\limits_{B \in S, A \cap B \ne \varnothing} I_B, Z_A =
+	\sum\limits_{B \in S, A \cap B = \varnothing} I_B$.
+
+	Заметим, что $Y_A, Z_A$~--- возрастающие функции от $\{\xi_i = I(i \in \Gamma(p_1, \ldots, p_N)):
+	i \notin A \}$. Тогда
+
+	\begin{multline*}
+		E(I_A e^{-sX}) = p(A) E(e^{-sX} \mid I_A = 1) = p(A) E(e^{-sY_A} e^{-sZ_a} \mid I_A = 1) \ge\\
+		\ge [\text{FKG}] \ge p(A) E(e^{-sY_a} \mid I_A = 1) E(e^{-sZ_A} \mid I_A = 1) = [Z_A \bot I_A] =
+		\\ = p(A) E(e^{-sY_a} \mid I_A = 1) Ee^{-sZ_a} \ge p(A) E(e^{-sY_A} \mid I_A = 1) \psi(s)
+		\\ \Rightarrow  (-\ln \psi(s))' \ge \sum\limits_{A \in S} p(A) E(e^{sY_a} \mid I_A = 1) \ge
+		[\text{неравенство Йенсена}] \ge\\\ge \sum\limits_{A \in S} p(A) e^{-E(sY_a \mid I_A = 1)}
+	\end{multline*}
+
+	\begin{multline*}
+		-\ln \psi(s) = \int\limits_0^s (-\ln \psi(u))' du \ge \int\limits_0^s (\lambda
+		e^{-\frac{u}{\lambda}\overline{\Delta}}) du = \frac{\lambda^2}{\overline{\Delta}}(1 -
+		e^{-\frac{s\overline{\Delta}}{\lambda}}) \ge\\\ge [1 - e^{-x} \ge x - \frac{x^2}{2}]  \ge
+		s\lambda - \frac{s^2\overline{\Delta}}{2}
+	\end{multline*}
+
+	В~итоге, $P(X \le \lambda - t) = P(e^{-sX} \ge e^{-s(\lambda - t)}) \le
+	\frac{Ee^{-sX}}{e^{-s(\lambda - t)}} = e^{\ln\psi(s)} e^{s\lambda - st} \le e^{-s\lambda +
+	\frac{s^2\overline{\Delta}}{2} + s\lambda - st}$
+
+	Минимум при $s = \frac{t}{\overline{\Delta}}$, значит $P(X \le EX - t) \le
+	e^{-\frac{t^2}{2\overline{\Delta}}}$.
+\end{proof}
+
+\begin{corollary}
+	В~условиях неравенства Янсона $P(X = 0) \le e^{-\frac{\lambda^2}{2\overline{\Delta}}}$.
+\end{corollary}
+
+\section{Неравенство Азумы-Хёффдинга}
+
+\begin{definition}
+	$(X_n, n=0,\ldots,)$~--- мартингал относительно фильтрации $(F_n, n=0,\ldots)$, если
+	\begin{itemize}
+		\item $X_n$ измерим относительно $F_n$
+		\item $E|X_n| < +\infty$
+		\item $\forall n > k E(X_n \mid F_k) = X_k$
+	\end{itemize}
+\end{definition}
+
+\begin{exercise}
+	Последнее условие эквивалентно $E(X_n \mid F_{n-1}) = X_{n-1}$.
+\end{exercise}
+
+Если в~последнем условии неравенство вместо равенства, то это субмартингал или супермартингал.
+
+\begin{theorem}[неравенство Азумы-Хёффдинга]
+	Пусть $(X_k,k=0,\ldots,n)$~--- мартингал относительно $F_k$, причём $X_0 = EX_n$ и~для некоторых
+	констант $c_1, \ldots, c_n$ выполнено $|X_k - X_{k-1}| \le c_k\ \forall k=1,\ldots,n$.
+
+	Тогда $\forall t \ge 0$ выполнено
+	$$P(X_n \ge EX_n + t), P(X_n \le EX_n - t) \le e^{-\frac{t^2}{2\sum\limits_{k=1}^n c_k^2}}$$
+\end{theorem}
+\begin{proof}
+	Обозначим $Y_k = X_k - X_{k-1}, k = 1, \ldots, n$, тогда $X_n - X_0 = \sum\limits_{k=1}^n Y_k$.
+	Обозначим $S_j = \sum\limits_{k=1}^j Y_k$, тогда $\forall u > 0$ выполнено
+	\begin{multline*}
+		P(X_n \ge EX_n + t) = P(S_n \ge t) = P(e^{uS_n} \ge e^{ut}) \le [\text{Марков}] \le e^{-ut}
+		Ee^{uS_n} =\\= e^{-ut}E(E(e^{uS_n}\mid F_{n-1})) = e^{-ut} E(e^{uS_{n-1}}E(e^{uY_n}\mid
+		F_{n-1})).
+	\end{multline*}
+
+	Далее, $|Y_n| \le c_n$ и~$E(Y_n \mid F_{n-1}) = 0$. Тогда в~силу выпуклости функции $e^{ux}$:
+	$$e^{uY_n} \le \frac{c_n + Y_n}{2c_n} e^{uc_n} + \frac{c_n - Y_n}{2c_n} e^{-uc_n}.$$
+
+	Берем УМО относительно $F_{n-1}$:
+	$$
+		E(e^{uY_n} \mid F_{n-1}) \le \frac{1}{2}(e^{uc_n} + e^{-uc_n}) = \chos(uc_n) =
+		\sum\limits_{m=0}^{+\infty} \frac{(uc_n)^{2m}}{(2m)!} \le e^{\frac{(uc_n)^2}{2}}
+	$$
+
+	Отсюда $P(X_n \ge EX_n + t) \le e^{-ut} e^\frac{(uc_n)^2}{2} Ee^{uS_{n-1}} \le [\text{рекурсия}]
+	\le e^{-ut} e^{\frac{u^2}{2} \sum\limits_{k=1}^n c_k^2}$.
+
+	Минимум достигается при $u = \frac{t}{\sum\limits_{k=1}^n c_k^2}$, что нам и~нужно.
+\end{proof}
+
+Пусть $X$~--- случайная величина, а~$(F_0, \ldots, F_n)$~--- фильтрация, такая что $F_0$~---
+тривиальная и~$X$ измерим относительно $F_n$. Тогда $X_k = E(X \mid F_k)$~--- мартингал, почти
+подходящий под неравенство Азумы-Хёффдинга.
+
+\begin{corollary}
+	Пусть $Z_1, \ldots, Z_n$~--- независимые случайные вектора размерность $Z_i$ равна $k_i$.
+	Пусть $f(x_1, \ldots, x_n)$ такова, что $\forall i=1,\ldots,n \forall x_i, y_i \in
+	\mathbb{R}^{k_i}$ выполнено
+	$$|f(z_1, \ldots, x_i, \ldots, z_n) - f(z_1, \ldots, y_i, \ldots, z_n)| \le c_i.$$
+
+	Обозначим $X = f(Z_1, \ldots, Z_n)$, тогда $\forall t \ge 0$ выполнено:
+	$$ P(X \ge EX + t), P(X \le EX - t) \le e^{-\frac{t^2}{2\sum\limits_{k=1}^n c_k^2}} $$
+\end{corollary}
+\begin{proof}
+	Пусть $F_k = \sigma(Z_1, \ldots, Z_k)$. Тогда $F_0, \ldots, F_n$~--- фильтрация, $X_k = E(X \mid
+	F_k)$~--- мартингал, притом $X_0 = EX$, $X_n = X$. Тогда для неравенства Азумы-Хёффдинга
+	необходимо проверить, что $\forall k |X_k - X_{k-1}| \le c_k$.
+
+	Но для $\forall z_1, \ldots, z_k$ выполнено
+	\begin{multline*}
+		|E(X \mid Z_1 = z, \ldots, Z_{k-1}=z_{k-1}) - E(X \mid Z_1 = z_1, \ldots, Z_k=z_k)| =
+		[\text{нез}] =\\=
+		|Ef(z_1, \ldots, z_{k-1}, Z_k, \ldots, Z_n) - Ef(z_1,\ldots,z_k,Z_{k+1},\ldots,Z_n)| \le c_k
+	\end{multline*}
+\end{proof}
+
+\section{Мартингалы реберного и~вершинного типа}
+
+$Z_1, \ldots, Z_N$~--- индикаторы появления ребер в~$G(n, p), N = C_n^2$. $Z_j =
+I(E_j \in G(n, p))$.
+
+Таким образом, нас интересуют характеристики, которые слабо меняются при добавлении и~удалении
+ребра.
+\begin{itemize}
+	\item число ребер
+	\item макс. и~мин. степень
+	\item число компонент связности
+\end{itemize}
+
+Нарямую применять его тяжеловато из-за того, что $N$ достаточно большое. Можно перейти к~равномерной
+модели (если $p$ какое-то небольшое и~среднее число ребер, например, линейное). Другой путь:
+мартингалы вершинного типа.
+
+$v_1, \ldots, v_n$~--- вершины $K_n$, $Z_j = \{I\{(v_i, v_j) \in E(G(n, p))\}: i < j\}$~---
+случайный вектор из $(j-1)$-го индикатора. Такой процесс неформально <<проявляет>> вершины по одной.
+
+Таким образом, нас интересуют характеристики, которые слабо меняются при добавлении и~удалении
+вершины:
+
+\begin{itemize}
+	\item хроматическое число
+	\item число независимости, кликовое число
+\end{itemize}
+
+\begin{exercise}
+	$\forall \delta > 0$ выполнено
+	$$\frac{\alpha(G(n, p)) - E\alpha(G(n, p))}{n^{\frac{1}{2}+\delta}} \overset{P}\rightarrow 0.$$
+\end{exercise}
+
+\end{document}
