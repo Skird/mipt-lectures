@@ -1,0 +1,54 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Спектральный анализ операторов и~динамических систем на графах}
+
+Пусть $(X, \mathcal{A}, \mu)$~--- измеримое пространство с~мерой $\mu$. Пусть $T: X \rightarrow X,
+\mu(TA) = \mu(T^{-1}A) = \mu(A) \forall A \in \mathcal{A}$.
+
+$U = \hat{T}: f(x) \mapsto f(Tx),\ \hat{T}$~--- унитарный, $\hat{T}^{-1} = \hat{T}^\ast$.
+
+\begin{exercise}
+	Пусть $k_j \rightarrow +\infty$~--- последовательность натуральных чисел. Найти все матрицы $A$,
+	такие что $A^{k_j} \rightarrow \frac{A + E}{2}$.
+\end{exercise}
+
+\begin{theorem}[Спектральная теорема]
+	Пусть $U: H \rightarrow H$~--- унитарный оператор, $U^\ast = U^{-1}$.
+
+	Пусть $\exists h_0: Z(h_0) = Span(U^k h_0: k \in \mathbb{Z}) = H$.
+
+	Тогда объекты, указанные на диаграмме существуют и~она коммутирует:
+	$$\begin{CD}
+		H           @>U>>  H\\
+		@VV\psi V              @VV\psi V\\
+		L^2(S_1, \sigma) @> M_z: \phi(\lambda) \mapsto \lambda \phi(\lambda) >> L^2(S^1,\sigma)
+	\end{CD}$$
+
+	Притом $R_f(k) = \left< U^k h_0, h_0 \right> = \int\limits_{S^1} z^k d\sigma$, то есть мера
+	$\sigma$ есть преоразование Фурье корреляционной последовательности $R_f(k)$.
+\end{theorem}
+
+\begin{theorem}
+	Пусть $L_2 = \left< t, s \mid s^2 = 1, [s^{t^i}, s^{t^j}] = 1 \right>$. Тогда $Sp(\Delta) = \{\pm
+	\cos \pi \frac{p}{q}: \frac{p}{q} \in \mathbb{Q}\}$.
+\end{theorem}
+
+Рассматрим графы де Брёйна: $B_n = (\{x = x_{n-1} \ldots x_0, x_i \in \{0, 1\}\},
+x_{n-1}\ldots x_0 \rightarrow \{x_{n-2} \ldots x_0 0, x_{n-2} \ldots x_0 1\})$. У~них есть
+несколько естественных раскрасок (рёберных):
+\begin{itemize}
+	\item $x = x_{n-1} \ldots x_0 \mapsto f(t) = x_{n-1} t^{n-1} + \ldots + tx_1 + x_0$. Тогда два
+		действия (дописывания 0 или 1) выражаются как $\tilde{a}: f \mapsto tf$ и~$\tilde{b}: f \mapsto
+		tf + 1$ (действие в~факторкольце $\mathbb{Z}_2[t] / \left< t^n \right>$, необратимое)
+	\item Рассмотрим отдельно первый бит и~обозначим $a(0x) = x_{n-2} \ldots x_0 0, a(1x) = x_{n-2}
+		\ldots x_0 1$, а~$b$~все то же самое, но с~флипом последнего бита. То есть действие такое же
+		($\tilde{a}: f \mapsto tf$ и~$\tilde{b}: f \mapsto tf + 1$), но
+		$f \in \mathbb{Z}_2 / \left< t^n - 1\right>$.
+\end{itemize}
+
+Можно заметить, что это на самом деле граф Шрейра группы $L_2$.
+
+\end{document}
