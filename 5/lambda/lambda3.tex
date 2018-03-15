@@ -1,0 +1,136 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Типизированное лямбда-исчисление}
+
+Типы: пропозициональные формулы с~импликацией.
+
+\begin{definition}
+	Счетный алфавит типов
+
+	$A, B \in Tp, (A \rightarrow B) \in Tp$
+
+	$A_1 \rightarrow (A_2 \rightarrow \ldots \rightarrow (A_n \rightarrow B)) = A_1 \rightarrow \ldots
+	\rightarrow A_n \rightarrow B$
+\end{definition}
+
+\begin{definition}
+$PdTm$~--- псевдотермы.
+
+$X \in Var \Rightarrow X \in PdTm$
+
+$M, N \in PdTm \Rightarrow (MN) \in PdTm$
+
+$x \in Var, A \in Tp, M \in PdTm \Rightarrow (\lambda x^A.M) \in PdTm$.
+\end{definition}
+
+Псевдотермы, потому что не все из них будут считаться корректными.
+
+Контекст $\Gamma = \{x_1: A_1, \ldots, x_n: A_n\}$.
+
+Вывод типов: $\vdash \subset Context \times Statement$. Правила
+
+\begin{itemize}
+	\item $\Gamma, x: A \vdash x: A$
+	\item $\frac{\Gamma \vdash M: A \rightarrow B, \Gamma \vdash N: A}{\Gamma \vdash MN: B}$
+	\item $\frac{\Gamma, x: A \vdash M: B}{\Gamma \vdash (\lambda x^A.M): A \rightarrow B}$
+\end{itemize}
+
+Каждое выведение может быть получено единственным образом (лемма об обращении).
+
+\begin{lemma}[О~подстановке]~
+	\begin{itemize}
+		\item $\Gamma \vdash M: A \Rightarrow \Gamma[\alpha:= B] \vdash M:A[\alpha:=B]$
+		\item $\frac{\Gamma, x:A \vdash M: B, \Gamma \vdash N: A}{\Gamma \vdash M[x:=N]:B}$
+	\end{itemize}
+\end{lemma}
+
+\begin{lemma}[subject reduction]
+	$\Gamma \vdash M: A, M \doublearrow_{\beta\eta} N \Rightarrow \Gamma \vdash N:A$
+\end{lemma}
+
+\begin{claim}
+	$\Gamma \vdash M: A, \Gamma \vdash M: B \Rightarrow A = B$
+\end{claim}
+\begin{proof}
+	Разберём один из случаев: $\Gamma \vdash \lambda x^C.N:A \Rightarrow A = C \rightarrow D, \Gamma,
+	x: C \vdash N: D$. Если $B = C \rightarrow E$, то аналогично $\Gamma, x: C \vdash N: E$. По
+	индукции $D = E$, значит $A = B$.
+\end{proof}
+
+\begin{lemma}[о~ромбе]
+	Если $\Gamma \vdash M,N_1,N_2: A$, притом $M \doublearrow N_1, M \doublearrow N_2$, тогда $\exists
+	L: \Gamma \vdash L: A, N_1 \doublearrow L, N_2 \doublearrow L$.
+\end{lemma}
+
+\begin{theorem}[Чёрча-Россера]
+	Пусть $\Gamma \vdash M, N: A, M =_{\beta\eta} N$, тогда $\exists L: \Gamma \vdash L: A, M
+	\doublearrow L, N \doublearrow L$.
+\end{theorem}
+
+Более того, верно, что у~любого терма нормальная форма существует, единственна и~любая
+последовательность редукций конечна. В~частности, терму $\omega_2 = \lambda x.xx$ нельзя приписать
+никакой тип.
+
+\begin{example}
+	$\lambda x^Ay^B.x: A \rightarrow (B \rightarrow A)$.
+
+	Берём контекст $\Gamma = \{x: A, y: B\}$. Выводим:
+
+	$\Gamma \vdash x: A$
+
+	$x: A \vdash \lambda y^B.x: B \rightarrow A$
+
+	$\vdash \lambda x^A y^B.x:A \rightarrow B \rightarrow A$
+\end{example}
+
+Теперь можно определить <<корректные>> псевдотермы:
+$\Lambda_\rightarrow^\Gamma(A) = \{ M \in PdTm \mid \Gamma \vdash M: A\}$.
+
+$\Lambda_\rightarrow(A) = \bigcup\limits_{\Gamma} \Lambda^\Gamma_\rightarrow(A)$
+
+$\Lambda_\rightarrow = \bigcup\limits_{A \in Tb} \Lambda_\rightarrow(A)$
+
+\begin{theorem}[сильная нормализуемость]
+	Если $M \in \Lambda_\rightarrow$, то любая цепочка $\beta\eta$-редукций конечна и~может быть
+	прододжена до нормальной формы.
+\end{theorem}
+
+Что можно вычислить в~типизированном лямбда-исчислении?
+
+$Int = (\alpha_0 \rightarrow \alpha_0) \rightarrow (\alpha_0 \rightarrow \alpha_0)$~---
+целочисленный тип, взятый из привычных нумералов Чёрча: $\underline{n} = \lambda f^{\alpha_0
+\rightarrow \alpha_0} x^\alpha_0. f^n x$.
+
+\begin{claim}
+	$\forall n$ выполнено $\underline{n} \in \Lambda_\rightarrow(Int)$.
+	$\vdash \lambda f^{\alpha_0 \rightarrow \alpha_0} x^\alpha_0.f^nx$.
+\end{claim}
+
+Аналогично перенесём понятие представимости функций $f: \mathbb{N}^k \rightarrow \mathbb{N}$.
+
+Заметим, что $Sc = \lambda kfx.f(kfx)$ типизуем типом $Int \rightarrow Int$. Точно также типизуются
+сложением, умножение. Но с~возведением в~степень проблемы: $E = \lambda kl.lk$ не типизуется.
+
+Можно показать, что при таком кодировании чисел получится представить только эти операции,
+проекторы, проверку на 0 и~все их композиции.
+
+\begin{definition}~
+	\begin{itemize}
+		\item $PVar = \{p_0, \ldots, p_1\} \sim \mathbb{N}$
+		\item $p_i \in PVar \Rightarrow p_i \in IFm$
+		\item $A, B \in IFm \Rightarrow (A \rightarrow B) \in IFm$
+	\end{itemize}
+
+\end{definition}
+
+Натуральный вывод: помеченное дерево с~правилами элиминации импликации (modus ponens) и~добавлением
+импликации. Такой вывод двойственнен выводу типа.
+
+Интуиционистская имликация: $f$ <<доказательство>> импликации $A \rightarrow B$, если $f$ вычислима
+и~преобразует любое доказательство $A$ в~доказательство $B$. В~этом смысле типизированные функции
+интерпретируются как описания доказательств (изоморфизм Карри-Ховарда).
+
+\end{document}
