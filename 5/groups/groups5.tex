@@ -1,0 +1,42 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Спектральная теорема для унитарного оператора}
+
+\begin{definition}
+	Говорим, что для унитарного оператора $A$ наблюдается явление кратности, если $\exists L_1 \cap
+	L_2 = \{0\}: A|_{L_1} \simeq A\mid_{L_2}$.
+\end{definition}
+
+Что такое кратность? Модельный пример~--- система из двух одинаковых маятников, независимо
+колеблющихся. Более формально, $H > L_1 \oplus \ldots L_m: \hat A\mid_{H_i} \sim \hat A\mid_{H_j}$.
+
+Общие спектральные инварианты: $([\sigma], \mathcal{M}(\lambda))$, $\mathcal{M}$~--- функция
+кратности, $\mathcal{M}: S^1 \rightarrow \mathbb{N} \sqcup \{\infty\}$.
+
+Пусть теперь оператор самосопряженный: $A^\ast = A$. Нужно с~помощью дробно-линейного преобразования
+перевести спектр на окружность, применить теорему там и~применить обратное преобразование.
+
+Пусть $\Gamma$~--- граф Кэли $G$ по отношению ко множеству образующих~$S = S^{-1}$,
+$\mu = \frac{1}{|S|} \sum\limits_{s \in S} \delta_s$ (будем считать, что $\nexists a: a^2 = e$).
+
+$$M_\mu f = \mu \ast f = \sum\limits_{t \in G} f(t^{-1} x)\mu(t) = \sum\limits_{s \in S}
+f(s^{-1}x)\mu(s).$$
+
+\begin{remark}
+	$M_\mu \cdot M_\nu = M_{\mu \ast \nu}$, где свёртка $\mu \ast \nu$ определяется как распределение
+	произведения независимых $s_1 \cdot s_2$:
+	$$(\mu \ast \nu)(x) = \sum\limits_{t \in G} \mu(xt^{-1} \nu(t).$$
+\end{remark}
+
+\begin{lemma}
+	В~пространтсве $L^2(G): \|M\| \le 1$.
+\end{lemma}
+\begin{proof}
+	$M$ есть выпуклая комбинация элементарных действий: $\| Mf \| = \left\| \sum\limits_{s \in S}
+	\delta_s f\right\| \le \sum\limits_{s \in S} \left\| \delta_s f \right\| = \| f \|$.
+\end{proof}
+
+\end{document}
