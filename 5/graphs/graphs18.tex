@@ -1,0 +1,170 @@
+\documentclass{article}
+\input{common}
+
+\begin{document}
+
+\section{Число независимости случайного графа}
+
+Нас интересует три режима (анонсируем ответы):
+\begin{itemize}
+	\item $p = const \in (0, 1)$, независимое множество в~этом случае порядка $\ln n$
+	\item $pn \rightarrow +\infty$, $\alpha(G(n,p)) \sim \frac{\ln np}{p}$
+	\item $p = \frac{c}{n}, c > 0$, $\alpha(G(n,p)) \sim n$
+\end{itemize}
+
+\begin{theorem}[о~числе независимости]
+	Пусть $p \in (0, 1)$~--- фиксировано, $b = \frac{1}{1 - p}$. Для фиксированного $\eps > 0$ введем
+	$$k_{-\eps} = \left\lfloor 2\log_b n - 2\log_b\log_b n + 2 \log_b \frac{e}{2} + 1 - \eps
+	\right\rfloor,$$
+	$$k_{+\eps} = \left\lceil 2\log_b n - 2\log_b\log_b n + 2 \log_b \frac{e}{2} + 1 + \eps
+	\right\rceil.$$
+
+	Тогда $P(k_{-\eps} \le \alpha(G(n,p)) \le k_{+\eps} - 1) \rightarrow 1$.
+\end{theorem}
+\begin{proof}
+	Пусть $X_k$~--- число независимых множеств размера $k$. Тогда $EX_k = C_n^k (1 - p)^{C_k^2}$.
+
+	Покажем, что $X_{k_{-\eps}} \rightarrow +\infty$, а~$X_{k_{+\eps}} \rightarrow 0$.
+
+	Если $k = \Theta(\ln n)$, то
+	\begin{multline*}
+		EX_k \sim \frac{n^k}{k!} b^{C_k^2} \sim \left( \frac{en}{k} \right)^k \sqrt{2\pi k} b^{-C_k^2}
+		=\\= b^{-C_k^2 + k \log_b n + k \log_b e - k \log_b k + \frac{1}{2} \log_b k + O(1)} =\\=
+		b^{k(\log_b n + \log_b e - \log_b k - \frac{k}{2} + \frac{1}{2} + o(1))}
+	\end{multline*}
+
+	При $k = k_{\pm \eps}$ вычислим $\log_b k = \log_b(2 \log_b n - 2\log_b \log_b n + O(1)) =
+	\log_b \log_b n + \log_b 2 + \log_b(1 + O(\frac{\log_b \log_b n}{\log_b n})) = \log_b \log_b n +
+	\log_b 2 + o(1)$.
+
+	Тем самым
+	\begin{multline*}
+		\log_b n + \log_b e - \log_b k - \frac{k}{2} + \frac{1}{2} + O(1) =\\= \log_b n - \log_b \log_b
+		n + \log_b \frac{e}{2} + \frac{1}{2} - \frac{k}{2} + o(1)
+	\end{multline*}
+
+	При $k = k_{+\eps}$ это выражение не больше, чем $-\frac{\eps}{2} + o(1)$, значит $EX_{k_{+\eps}}
+	\rightarrow 0$. При $k = k_{-\eps}$ это выражение не меньше $\frac{\eps}{2} + o(1)$, то есть $E
+	X_{k_{-\eps}} \rightarrow +\infty$.
+
+	$P(\alpha(G(n,p)) \ge k_{+\eps}) = P(X_{k_{+\eps}} > 0) \le EX_{k_{+\eps}}$. Оценим
+	$DX_{k_{-\eps}}$.
+
+	$EX_k^2 = \sum\limits_{l=0}^k C_n^k C_k^l C_{n-k}^{k-l} (1-p)^{2C_k^2 - C_l^2}$.
+
+	$(EX_k)^2 = \sum\limits_{l=0}^k C_n^k C_k^l C_{n-k}^{k-l} (1-p)^{2C_k^2}$.
+
+	Тогда $DX_k = \sum\limits_{l=0}^k C_n^k C_k^l C_{n-k}^{k-l} (1-p)^{2C_k^2} ((1 - p)^{-C_l^2} -
+	1)$.
+
+	Отсюда (отбросим два первых слагаемых, они 0):
+	$$
+		\frac{DX_k}{(EX_k)^2} = \sum\limits_{l=2}^k \frac{C_k^l C_{n-k}^{k-l}}{C_n^k} (b^{C_l^2} - 1)
+		\le \sum\limits_{l=2}^k \frac{C_k^l C_{n-k}^{k-l}}{C_n^k} b^{C_l^2} = \sum\limits_{l=2} F_l
+	$$
+
+	Найдем наибольшее слагаемое в~сумме:
+	$$
+		\frac{F_{l+1}}{F_l} = \frac{C_l^k C_{n-k}^{k-l}}{C_k^{l+1} C_{n-l}^{k-l-1}} b^{C_l^2 -
+		C_{l+1}^2} = \frac{(l+1)(n + l + 1 - 2k)}{(k-l)(k - l)} b^{-l} = [k \sim 2 \log_b n].
+	$$
+
+	Пусть $i_0 = \min\{l: F_l < F_{l+1}\}$. Ясно, что $i_0 \sim \log_b n$. Наша цель: показать, что
+	$F_l$ сначала убывают, потом возрастают, то есть максимум где-то на концах. Если $i_0 \le l \le
+	i_0 + \sqrt{k}$:
+	$$
+		\frac{F_l}{F_{l+1}} \sim \frac{2n}{k} b^{-l} = \frac{2n}{k} b^{-i_0} b^{i_0 - l} \sim
+		\frac{F_{i_0}}{F_{i_0 + 1}} \frac{1}{b} < \frac{1}{b} (1 + o(1)) < 1
+	$$
+
+	Если же $i_0 > i_0 + \sqrt{k}$, то
+	$$
+		\frac{F_l}{F_{l+1}} = O(\ln n \cdot n \cdot b^{-l}) = O(n \ln n b^{-\frac{k}{2} - i_0 -
+		\sqrt{k}}) = O(b^{\ln \ln n -\sqrt{k}}) \rightarrow 0
+	$$
+
+	Вывод: максимумальное слагаемое либо $F_2$, либо $F_k$. Отсюда
+	\begin{multline*}
+		\frac{DX_k}{(EX_k)^2} \le (F_2 + F_k) (k-2) \le (k-2)\left(\frac{C_k^2 C_{n-k}^{k-2}}{C_n^k} +
+		\frac{1}{C_n^k} b^{C_k^2}\right) =\\= \left[\frac{1}{C_n^k} b^{C_k^2} = \frac{1}{EX_k} \le
+		b^{-k(\frac{\eps}{2}+o(1))}\right] = O\left(\frac{k^5}{n^2} + b^{-k(\frac{\eps}{2} +
+		o(1))}\right) \rightarrow 0
+	\end{multline*}
+\end{proof}
+
+\section{Случайный граф в~динамике}
+Пусть $p = const$. Мы можем строить граф $G(n, p)$ добавлением одной
+вершины, так как $p$ не зависит от $n$. В~итоге получится счетный граф $G(\mathbb{N}, p)$.
+$\alpha(G(n,p))$ не уменьшается. Мы можем указать две границы $n_r, n_r'$, такие что между ними
+число независимости будет $r$.
+
+Пусть $\eps \in (0, \frac{1}{2})$. Для фиксированного $r \in \mathbb{N}$. Положим $E(n, r) =
+C_n^r(1-p)^{C_r^2}$. Определим:
+
+$n_r = \max\{n: E(n, r) \le r^{-(1+\eps)}$.
+
+$n_r' = \min\{n: E(n, r) \le r^{1+\eps}$.
+
+По доказанной теореме $n_r \sim n_r' \sim \frac{r}{e}n^{\frac{r-1}{2}}$. $n_r < n_r'$ и~$n_r' - n_r
+< \frac{5\ln r}{2r} n_r$. Тогда при больших $r$: $n_r < n_r' < n_{r+1}$.
+
+\begin{theorem}
+	С~вероятностью 1 последовательность графов $\tilde{G}(n,p)$ в~модели $G(\mathbb{N}, p)$
+	удовлетворяет для всех достаточно больших $r$ свойству:
+	$$\alpha(\tilde{G}(n,p)) = r \forall n \in [n_r', n_{r+1}].$$
+\end{theorem}
+\begin{proof}
+	В~силу определения $n_r, n_r'$, $r = \Theta(\log_b n_r')$, значит из доказательства предыдущей
+	теоремы 
+	\begin{multline*}
+		P(\alpha(G(n,p)) < r) \le F_2 + F_r + (r-3)(F_3 + F_{r-1}) \le\\\le 2\frac{br^4}{(n_r')^2} +
+		\frac{1}{E(n_r', r)} + r \left(2\frac{b^3 r^6}{(n_r')^3} +  \frac{r n_r' b^{-(r-1)}}{E(n_r', r)}
+		\right) \le \left[n_r' \sim \frac{r}{e} b^\frac{r-1}{2} \right] \le\\\le \frac{4br^4}{(n_r')^4}
+		+ \frac{1}{E(n_r', r)} + \frac{\frac{2r^2}{l} b^{-\frac{(r-1)}{2}}}{E(n_r', r)} \le [r
+		\text{ достаточно велико}] \le \frac{2}{r^{1 + \eps}}
+	\end{multline*}
+
+	Кроме того, $P(\alpha(\tilde(G)(n_{r+1},p)) \ge r + 1) \le E(n_{r+1},r+1) \le r^{-(1+\eps)}$,
+	значит, в~силу вложенности графов $\tilde{G}(n, p)$, получаем, что
+	\begin{multline*}
+		P(\exists n: [n_r', n_{r+1}]:
+		\alpha(\tilde{G}(n,p)) \ne r) \le\\\le P(\alpha(\tilde{G}(n_r',p)) < r) +
+		P(\alpha(\tilde{G}(n_{r+1})) \ge r + 1) \le 3 r^{-(1+\eps)}
+	\end{multline*}
+
+	Сумма $\sum r^{-(1+\eps)} < +\infty$, поэтому по лемме Борелля-Кантелли с~вероятностью 1 выполнено
+	лишь конечное число событий из $\{ \exists n \in [n_r'; n_{r+1}]: \alpha(\tilde{G}(n, p)) \ne
+	r\}$.
+\end{proof}
+
+\begin{corollary}
+	Пусть $p \in (0, 1)$~--- константа. $b = \frac{1}{p}$. Для $\eps > 0$ положим
+
+	$k_{+\eps} = \left\lceil 2\log_b n + 2\log_b \log_b n + 2\log_b \frac{e}{2} + 1 + \eps
+	\right\rceil.$
+
+	$k_{-\eps} = \left\lfloor 2\log_b n + 2\log_b \log_b n + 2\log_b \frac{e}{2} + 1 - \eps
+	\right\rfloor.$
+
+	Тогда $P(k_{-\eps} \le \omega(G(n,p)) \le k_{+\eps} - 1) \rightarrow 1$.
+\end{corollary}
+
+\begin{theorem}[Фриз]
+	Для $\forall \eps > 0 \exists d_\eps > 0$ такое, что при $d_\eps \le np = o(n)$ выполнено:
+
+	$$ P\left(\left|\alpha(G(n,p)) - \frac{2}{p}(\ln(np) - \ln \ln (np) - \ln 2 + 1)\right|
+	\le \frac{\eps}{p}\right) \rightarrow 1.$$
+\end{theorem}
+
+Мы знаем, что $\chi(G) \ge \frac{n}{\alpha(G)}$.
+
+\begin{corollary}
+	Пусть $p = const \in (0, 1)$, $b = \frac{1}{1 - p}$, тогда
+	$$ P\left(\chi(G(n, p)) \ge \frac{n}{2\log_b n - 2\log_b \log_b n + O(1)}\right) \rightarrow 1 $$
+\end{corollary}
+
+Наивный жадный алгоритм дает порядка $\frac{n}{\log_b n}$ цветов. Можно действовать иначе: брать
+максимальное независимое множество и~красить его в~отдельный цвет. Оказывается, это даёт почти
+оптимальную оценку.
+
+\end{document}
