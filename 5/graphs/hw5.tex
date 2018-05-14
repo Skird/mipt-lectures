@@ -1,0 +1,147 @@
+\documentclass{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amscd}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cmap}
+\usepackage{centernot}
+\usepackage{enumitem}
+\usepackage{perpage}
+\usepackage{chngcntr}
+\usepackage{minted}
+\usepackage[bookmarks=true,pdfborder={0 0 0 }]{hyperref}
+\usepackage{indentfirst}
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black
+}
+
+\newtheorem*{conclusion}{Вывод}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem*{corollary}{Следствие}
+
+\theoremstyle{definition}
+\newtheorem*{problem}{Задача}
+\newtheorem{claim}{Утверждение}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{definition}{Определение}
+\newtheorem{example}{Пример}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\ndiv}{\centernot\mid}
+
+\MakePerPage{footnote}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\resetcntrs}{\setcounter{theorem}{0}\setcounter{definition}{0}
+\setcounter{claim}{0}\setcounter{exercise}{0}}
+
+\DeclareMathOperator{\aut}{aut}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator*\lowlim{\underline{lim}}
+\DeclareMathOperator*\uplim{\overline{lim}}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\frenchspacing
+
+\begin{document}
+
+\title{Задание 5 по случайным графам}
+\author{Дмитрий Иващенко}
+\date{\today}
+\maketitle
+
+\section*{Задача 1}
+
+Пусть $p = \frac{\ln n - w(n)}{n}$, $w(n) \rightarrow \infty$. Оценим по методу второго момента
+число изолированных вершин в~левой доле $X$:
+
+$\frac{DX}{(EX)^2} = \frac{nDI_1}{(n(1 - p)^n)^2} = \frac{1 - (1 - p)^n}{n(1 - p)^n}$.
+
+$\ln\frac{DX}{(EX)^2} = -\ln n - n\ln(1 - p) + \ln(1 - (1 - p)^n) \le -\ln n - n \ln (1 - p) \le
+-\ln n - n(-p + O(p^2)) = -w(n) -nO(p^2) \rightarrow -\infty$.
+
+Пусть теперь $p = \frac{\ln n + w(n)}{n}$. Оценим матожидание числа связных компонент размера
+$s \le \frac{n}{2}$. Учтем, что в~$G(n, m)$ ровно $n^{m-1} m^{n-1}$ остовных деревьев.
+
+\begin{multline*}
+	\sum\limits_{a+b\le \frac{n}{2}} C_n^a C_n^b a^{b-1} b^{a-1} p^{a+b-1} (1-p)^{n(a+b)-2ab} \le\\\le
+	\sum\limits_{a+b\le \frac{n}{2}} \frac{n}{ab} \frac{1}{2\pi \sqrt{ab}} \exp\left(a + b + (a -
+	b)\ln \frac{b}{a} + (a + b)\ln(\ln n + w) - (n(a+b) - 2ab) \ln(1 - p)\right) \le\\\le
+	\sum\limits_{a+b\le \frac{n}{2}} \frac{n}{(ab)^{1.5}} \exp\left(\left(\frac{2ab}{n} - a - b +
+	o(1)\right) (\ln n + w) \right) = \left|\frac{2ab}{n} \le \frac{(a+b)^2}{n} \le \frac{a+b}{2}
+	\right| \le\\\le
+	\sum\limits_{s=1}^{\frac{n}{2}} \sum\limits_{a=1}^{s-1} \frac{n}{(a(s-a))^{1.5}}
+	\exp\left(\frac{-s+o(1)}{2}(\ln n + w)\right) =\\= \sum\limits_{s=1}^{\frac{n}{2}}
+	\exp\left(\frac{-s+o(1)}{2}(\ln n + w)\right)\sum\limits_{a=1}^s \frac{n}{(a(s-a))^{1.5}}
+\end{multline*}
+
+\begin{multline*}
+	\sum\limits_{i=1}^{s-1} \frac{1}{i(s-i)} \le \sum\limits_{i=1}^{n^\frac{2}{5}} +
+	\sum\limits_{n^\frac{2}{5}}^{n-n^\frac{2}{5}} + \sum\limits_{n-n^\frac{2}{5}}^n \le 2n^\frac{2}{5}
+	\cdot \frac{1}{n^{1.5}} + n \cdot \frac{1}{n^\frac{2}{5} \cdot n} \le 3n^{-1.1}
+\end{multline*}
+
+Итого, вся сумма не больше $\sum\limits_{s=1}^\frac{n}{2} \exp\left(\frac{-s+o(1)}{2}(\ln n + w)
+\right) s^{-1.1} \rightarrow 0$
+
+\section*{Задача 7}
+
+По лемме Холла найдется $A$ такое что $|N(A)| < |A|$. Возьмём самое маленькое такое множество. Если
+$|N(A)| < |A| - 1$, то можно выбросить одну любую вершину слева. Если у~какой-то вершины справа
+число соседей в~$A$ меньше 2 (то есть 1), то выкинем её и~её соседа. Это противоречие, значит оно
+по размеру больше, чем $\left\lceil \frac{n}{2} \right\rceil$. Возьмем дополнение $N(S)$, оно
+подходит по размеру и~не связно с~$S$. Повторим те же самые рассуждения внутри это множества для
+другой доли.
+
+\section*{Задача 8}
+
+a) Оценим вероятность того, что нет совершенного парасочетания. Либо есть изолированная вершина,
+либо по задаче 7 существует множество $S, |S| = k, |N(S)| = k - 1$, такое, что между $S$ и~$N(S)$
+хотя бы $2k - 2$ ребер. Посчитаем ожидаемое количество таких множеств $EY$
+(здесь по книге
+\href{https://www.math.cmu.edu/~af1p/BOOK.pdf}{https://www.math.cmu.edu/~af1p/BOOK.pdf}), если
+изолированных вершин уже нет ($p = \frac{\ln n + w}{n}$)
+
+\begin{multline*}
+	EY \le 2\sum\limits_{k=2}^\frac{n}{2} C_n^k C_n^{k-1} C_{k(k-1)}^{2k-2} p^{2k-2} (1-p)^{k(n-k)}
+	\le\\\le 2\sum\limits_{k=2}^\frac{n}{2} \left( \frac{ne}{k} \right)^k \left( \frac{ne}{k-1}
+	\right)^{k-1} \left(\frac{ke(\ln n + w)}{2n} \right)^{2k-2} e^{-npk\left(1 - \frac{k}{n}\right)}
+	\le\\\le \sum\limits_{k=2}^\frac{n}{2} n \exp\left(O(1) + \ln k - \ln(k-1) + 2\ln(\ln n + w) -
+	(\ln n + w)\left(1 - \frac{k}{n}\right) \right)^k =\\= \sum\limits_{k=2}^\frac{n}{2} n\exp\left(c
+	+ \frac{\ln n(1 - \frac{k}{n} + o(1))}{n} \right)^k
+\end{multline*}
+
+При $2 \le k \le n^\frac{3}{4}$ слагаемые не больше $n \exp\left(ck + \frac{k\ln n + o(1)}{n}\right)$
+и~можно оценить геометрической прогрессией.
+
+При $k \ge n^\frac{3}{4}$ оцениваем слагаемое как $n^{1 - k(\frac{1}{2} - o(1))}$, а~число слагаемых
+не больше $n$. Таким образом, $EY \rightarrow 0$, поэтому таких множеств а.п.н. нет. Значит
+пороговые вероятности совпадают. Найдем их.
+
+b) Из первой задачи знаем, что при $p = \frac{\ln n - w}{n}$ изолированные вершины есть по методу
+второго момента. Теперь по методу первого момента проверим, что при $p = \frac{\ln n + w}{n}$ таких
+вершин нет.
+
+$\ln EX = \ln( n(1-p)^n ) = \ln(n) + n\ln(1 - p) \le \ln n - np \le \ln n - \ln n - w = -w
+\rightarrow -\infty$.
+
+Значит $EX \rightarrow 0$.
+
+\end{document}
