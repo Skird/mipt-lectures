@@ -219,9 +219,10 @@ Variable x : T.
 Lemma l9 : forall (P : T -> Prop), (forall n : T, P n) -> (exists n : T, P n).
 Proof.
 intros.
-
 exists x.
-(*apply (ex_intro P x).*)
+(*Check ex_intro.
+Check (ex_intro P x).
+apply (ex_intro P x).*)
 apply H.
 Qed.
 
@@ -247,6 +248,7 @@ intros.
 elim H0.
 intros.
 exists x0.
+Check H x0.
 apply (H x0).
 (*apply H.*)
 assumption.
@@ -265,7 +267,7 @@ exact (H0 x0).
 (* apply H0. *)
 Qed.
 
-Lemma l13_cl : forall (P : T -> Prop) (Q : Prop), (forall n : T, P n \/ Q) -> (forall n : T, P n) \/ Q.
+Lemma l13cl : forall (P : T -> Prop) (Q : Prop), (forall n : T, P n \/ Q) -> (forall n : T, P n) \/ Q.
 Proof.
 intros.
 cut (~Q \/ Q).
@@ -283,9 +285,86 @@ intro; right; assumption.
 exact (tnd Q).
 Qed.
 
-Print l13_cl.
+Print l13cl.
 
-Lemma l14 : forall (P : T -> T -> T -> Prop), (forall t : T, exists n : T, forall m : T, P t n m )-> (forall z : T, exists w : T, P z w z).
+Lemma l14 : forall (P: T -> Prop), (exists n : T, ~P n) -> ~(forall n : T, P n).
+Proof.
+intros.
+intro.
+elim H.
+intros.
+elim H1.
+exact (H0 x0).
+Qed.
+
+Lemma l15 : forall (P: T -> Prop), ~(exists n : T, P n) -> (forall n : T, ~P n).
+Proof.
+intros.
+intro.
+elim H.
+exists n.
+assumption.
+Qed.
+
+Lemma l14cl : forall (P: T -> Prop), ~(forall n : T, P n) -> (exists n : T, ~P n).
+Proof.
+intros.
+cut (~(exists n : T, ~P n) \/ (exists n : T, ~P n)).
+intro.
+elim H0.
+intro.
+elim H.
+cut (forall n : T, ~~P n).
+intros.
+cut (~~P n).
+exact (d_neg (P n)).
+apply H2.
+Check (l15 (fun n : T => ~P n)).
+apply (l15 (fun n : T => ~P n )).
+exact H1.
+intro; assumption.
+exact (tnd ((exists n : T, ~P n))).
+Qed.
+
+Lemma l16cl : forall (P Q : T -> Prop),  ((forall n : T, P n) ->
+    (exists n : T, Q n)) -> (exists n : T, P n -> Q n).
+Proof.
+intros.
+cut (exists n : T, ~~(P n -> Q n)).
+intro.
+elim H0.
+intros.
+exists x0.
+apply (d_neg (P x0 -> Q x0)).
+assumption.
+cut (~(forall n : T, ~(P n -> Q n))).
+exact (l14cl (fun n : T => ~(P n -> Q n))).
+intro.
+elim H.
+intros.
+elim (H0 x0).
+intro; assumption.
+intro.
+cut (~(P n -> Q n)).
+intro.
+cut (~P n \/ P n).
+intro.
+elim H2.
+intro.
+elim H1.
+intro.
+elim H3.
+assumption.
+intro; assumption.
+exact (tnd (P n)).
+apply H0.
+Qed.
+
+Print l16cl.
+
+
+Lemma l17 : forall (P : T -> T -> T -> Prop), (forall t : T, exists n : T, forall m : T, P t n m )->
+     (forall z : T, exists w : T, P z w z).
 Proof.
 intros.
 cut (exists n : T, forall m : T, P z n m).
@@ -297,11 +376,45 @@ exact (H1 z).
 exact (H z).
 Qed.
 
-Print l14.
+Print l17.
+
+
+Lemma l18 : forall f: T -> T, (exists x : T , forall y : T, x = y) ->
+ (forall x y, f x = f y).
+Proof.
+intros.
+elim H.
+intros.
+transitivity (f x1).
+cut (x1 = x0).
+intro.
+rewrite -> H1.
+reflexivity.
+apply H0.
+cut (x1 = y).
+intro.
+rewrite -> H1; reflexivity.
+exact (H0 y).
+Qed.
+
+Lemma l19 : forall f: T -> T, (forall x : T, f (f x) = x) ->
+   (forall (x y : T), x = f y -> f x = y).
+Proof.
+intros.
+rewrite -> H0.
+exact (H y).
+Qed.
 
 End Sct1.
 
+Require Import Classical.
 
+Lemma l20cl : forall A : Prop, ~A \/ A.
+Proof.
+intro.
+classical_left.
+assumption.
+Qed.
 
 
 
