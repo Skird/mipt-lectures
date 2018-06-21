@@ -1,0 +1,316 @@
+\documentclass{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{amsmath,amscd}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{cmap}
+\usepackage{centernot}
+\usepackage{enumitem}
+\usepackage{perpage}
+\usepackage{chngcntr}
+\usepackage[bookmarks=true,pdfborder={0 0 0 }]{hyperref}
+\usepackage{indentfirst}
+\hypersetup{
+  colorlinks,
+  citecolor=black,
+  filecolor=black,
+  linkcolor=black,
+  urlcolor=black
+}
+
+\newtheorem*{conclusion}{Вывод}
+\newtheorem{theorem}{Теорема}
+\newtheorem{lemma}{Лемма}
+\newtheorem*{corollary}{Следствие}
+
+\theoremstyle{definition}
+\newtheorem*{problem}{Задача}
+\newtheorem{claim}{Утверждение}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{definition}{Определение}
+\newtheorem{example}{Пример}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Замечание}
+
+\renewcommand{\le}{\leqslant}
+\renewcommand{\ge}{\geqslant}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\newcommand{\ndiv}{\centernot\mid}
+
+\MakePerPage{footnote}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\resetcntrs}{\setcounter{theorem}{0}\setcounter{definition}{0}
+\setcounter{claim}{0}\setcounter{exercise}{0}}
+
+\DeclareMathOperator{\aut}{aut}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator*\lowlim{\underline{lim}}
+\DeclareMathOperator*\uplim{\overline{lim}}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\im}{Im}
+
+\frenchspacing
+
+\begin{document}
+
+\title{Задание 6 по случайным графам}
+\author{Дмитрий Иващенко}
+\date{\today}
+\maketitle
+
+\section*{Задача 1}
+
+Воспользуемся мартингалами вершинного типа. Пусть $v_1, \ldots, v_n$~--- вершины $G(n, p)$,
+а~$Z_j = (I((v_i, v_j) \in E) \mid i < j)$~--- случайный вектор размерности $j$. Введём функцию
+$f(x_1, \ldots, x_n)$, которая будет равна $\chi(G)$ либо $\alpha(G)$, либо $\omega(G)$. Заметим,
+что при изменении значений индикаторов у одной вершины значение функции изменится не более, чем на
+1: для клики и числа независимости эта вершина никак не влияет на остальные, поэтому она может либо
+войти либо не войти в клику/число независимости, а для хроматического числа для нее может
+потребоваться один новый цвет (ну или наоборот, можно будет обойтись без бывшего цвета этой
+вершины). Так или иначе:
+$$ \forall i \forall x_i, y_i\ |f(z_1, \ldots, x_i, \ldots, z_n) - f(z_1, \ldots, y_i, \ldots, z_n)|
+\le 1. $$
+
+Тогда из неравенства Азумы-Хёффдинга
+$$P(|X - EX| > \eps n^{\frac{1}{2} + \delta}) \le 2\exp\left(-\frac{n^{1+2\delta}}{2n}\right) =
+2\exp\left(-\frac{1}{2}n^{2\delta}\right) \rightarrow 0.$$
+
+\section*{Задача 2}
+
+Рассмотрим $d_\eps < \alpha = np = o(n)$, $k = \frac{2}{p}\left(\ln\alpha - \ln\ln\alpha - \ln 2 + 1
++ \eps \right)$, $b = \frac{n}{k} = \frac{\alpha}{2(\ln\alpha - \ln\ln\alpha - \ln 2 + 1 + \eps)}$.
+
+Будем доказывать по методу первого момента, для этого нужно показать, что $EX_k \rightarrow 0$, где
+$X_k$~--- число независимых множеств размера $k$.
+$$EX_k = C_n^k (1 - p)^{C_k^2}.$$
+\begin{multline*}
+	C_n^k \le \left(\frac{n}{k}\right)^k \left(\frac{n}{n-k}\right)^{n-k} \le
+	b^k \left(\frac{n}{n - \frac{n}{b}}\right)^{n-k} = b^k \left(\frac{b}{b-1}\right)^{n-k} =\\=
+	b^n (b - 1)^{-n + \frac{n}{b}} = b^n (b - 1)^{-n\left(\frac{b-1}{b}\right)}
+\end{multline*}
+$$
+	(1-p)^{\frac{k(k-1)}{2}} = \exp\left(\frac{k(k-1)}{2}\ln(1 - p)\right) \le
+	\exp\left(-\frac{pk^2}{2} + pk\right) = \exp\left(-\frac{pn^2}{2b^2} + \frac{pn}{b}\right)
+$$
+
+Итого, заносим все под экспоненту и получаем
+\begin{multline*}
+	EX_k \le \exp\left( \frac{n}{b} (b \ln b - (b - 1) \ln (b - 1) - \frac{\alpha}{2b} +
+	\frac{\alpha}{n}\right) =\\=
+	\exp\left(\frac{2}{p}(\ln \alpha - \ln\ln\alpha - \ln 2 + 1 + \eps)\left(b \ln b - (b - 1)\ln(b -
+	1) - \frac{\alpha}{2b} + \frac{\alpha}{n} \right)\right)
+\end{multline*}
+
+$p = o(1)$, поэтому $\frac{2}{p} \rightarrow \infty$, множитель $(\ln\alpha - \ln\ln\alpha - \ln 2 +
+1 + \eps)$ не меньше, чем $\ln d_\eps - \ln \ln d_\eps - const$, что можно сделать достаточно
+большой положительной константой. Обратимся к последнему множителю, покажем, что он отрицателен и
+отделён от 0.
+
+Во-первых, $\alpha = o(n) \Rightarrow \frac{\alpha}{n} = o(1) \rightarrow 0$.
+
+Во-вторых, рассмотрим $f(x) = x\ln x - (x - 1) \ln (x - 1)$. Разложение в $x \rightarrow
+\infty$ даёт $f(x) = \ln x + 1 + O\left(\frac{1}{x}\right)$, поэтому так как
+$b = \frac{\alpha}{2(\ln\alpha - \ln\ln \alpha - \ln 2 + 1 - \eps)} \sim \frac{\alpha}{2\ln\alpha}$
+можно сделать достаточно большим при достаточно большом $d_\eps$, то можем считать, что
+$b \ln b - (b - 1) \ln (b - 1)$ отличается от $\ln b + 1$ не более, чем на $\frac{\eps}{2}$.
+
+Таким образом, получаем, что последний множитель не больше, чем
+
+\begin{multline*}
+	\ln b + 1 - \ln \alpha + \ln \ln \alpha + \ln 2 - 1 - \frac{\eps}{2} =\\=
+	\ln\left(\frac{\alpha}{2(\ln\alpha -
+	\ln\ln \alpha - \ln 2 + 1 + \eps)}\right) - \ln \alpha + \ln\ln \alpha + \ln 2 - 1 -
+	\frac{\eps}{2} =\\=
+	\ln \alpha - \ln 2 - \ln(\ln \alpha - \ln\ln\alpha - \ln 2 + 1 + \eps) - \ln\alpha + \ln\ln\alpha
+	+ \ln 2 - 1 - \frac{\eps}{2} =\\=
+	\ln\left(\frac{\ln \alpha}{\ln \alpha - \ln\ln \alpha - \ln 2 + 1 + \eps}\right) - \frac{\eps}{2}
+\end{multline*}
+
+При достаточно большом $d_\eps$ это не больше, чем $-\frac{\eps}{4}$, что нам и нужно. Значит
+выражение под экспонентой стремится к $-\infty$, то есть $EX_k \rightarrow 0$.
+
+\section*{Задача 3}
+
+Пусть граф $k$-вырожден, то есть $D(G) = k$. Тогда индукцией легко показать, что он красится в $k+1$
+цвет: в самом деле, выберем вершину степени не более $k$, индуктивно покрасим все остальное в $k+1$
+цвет, оставшейся вершине по принципу Дирихле найдётся подходящий цвет, так как соседей у неё всего
+$k$.
+
+Пусть теперь $2m(G)$ это некотрое число $x$. Докажем, что наш граф $\lfloor x \rfloor$-вырожден.
+Рассмотрим любой подграф на $k$ вершинах, его плотность не больше $\frac{x}{2}$. Значит, в нём не
+более $\frac{kx}{2}$ рёбер. Тогда суммарная степень не больше $kx$, а средняя степень не превышает
+$x$, а значит найдётся вершина степени не больше $\lfloor x \rfloor$.
+
+\section*{Задача 4}
+
+Распишем сразу неравенство Чернова для относительного уклонения:
+
+\begin{multline*}
+	P(X > (1 + \delta)\mu) \le \left(\frac{e^\delta}{(1 + \delta)^{1 + \delta}}\right)^\mu \le
+	\exp(-\mu((1 + \delta) \ln(1 + \delta) - \delta)) =\\=
+	\exp\left(-\mu(1+\delta)\left( \ln(1 + \delta) - 1 + \frac{1}{1 + \delta} \right) \right)
+\end{multline*}
+
+Обозначим $t = 1 + \delta$, тогда $P(X > t\mu) \le \exp\left(-t\mu \left(t - 1 + \frac{1}{t}
+\right) \right) \le \exp\left(-t\mu \left(t - 1\right) \right)$.
+
+Далее, нужно оценить вероятность подграфа размера $k$ иметь больше, чем $m(F)k$ рёбер. То есть $\mu
+= \frac{k(k-1)p}{2}, t = \frac{2m(F)}{(k-1)p}$. Если $\sum\limits_{k=1}^{s} C_n^k P_s \rightarrow
+0$, то по методу первого момента а.п.н. подрграфов с <<плохой>> плотностью нет.
+
+a) $t = \frac{2n}{(k-1)\ln^2(np)}$, отсюда:
+
+\begin{multline*}
+	P(X \ge m(F)k) \le \exp\left(-\frac{npk}{\ln^2(np)}\left( \frac{2n}{(k-1)\ln^2(np)} - 1\right)
+	\right) =\\=
+	\exp\left(-\frac{2n^2p}{\ln^4{np}}\frac{k}{k-1} + \frac{npk}{\ln^2(np)} \right) \le
+	\exp\left(-\frac{2n^2p}{\ln^4{np}} + \frac{n^2p}{2\ln^4(np)} \right) \le\\\le \exp\left(
+	-\frac{3}{2} \frac{np}{\ln^4(np)} \cdot n\right)
+\end{multline*}
+
+Оцниваем теперь сумму:
+
+$$
+	\sum\limits_{k=1}^\frac{n}{2\ln^2(np)} C_n^k \exp\left(-\frac{3}{2} \frac{np}{\ln^4(np)} \cdot n
+	\right) \le \exp\left(-\frac{3}{2} \frac{np}{\ln^4(np)} \cdot n \right)
+	2^{H\left(\frac{1}{2\ln^2(np)}\right)n}
+$$
+
+Здесь $H(x) = -x \log_2(x) - (1 - x)\log_2(x)$~--- энтропийная функция.
+
+Ясно, что выбором достаточно большой константы $C_0$ $\frac{np}{\ln^4(np)}$ можно сделать достаточно
+большим, а $\frac{1}{2\ln^2(np)}$ достаточно малым, чтобы последнее выражение стремилось к 0.
+
+b) $t = \frac{2\ln^3 n}{(k-1)p}$, отсюда:
+
+\begin{multline*}
+	P(X \ge m(F)k) \le \exp\left(-k \ln^3 n \left( \frac{2\ln^3 n}{(k-1)p} - 1\right) \right) =
+	\exp\left( -\frac{k}{k-1} \frac{\ln^6 n}{p} - k\ln^3 n \right) \le\\\le
+	\exp\left( -\frac{\sqrt{n}}{\ln^4 n} - 2\sqrt{n} \ln^{3.5} n \right) = \exp\left( -\sqrt{n} \ln^4 n
+	(1 + o(1)) \right)
+\end{multline*}
+
+Теперь оценим
+\begin{multline*}
+\sum\limits_{k=1}^{2\sqrt{n\ln n}} C_n^k \le 2\sqrt{n \ln n} \left(
+\frac{ne}{2\sqrt{n \ln n}} \right)^{2\sqrt{n\ln n}} =\\= \exp\left( \ln 2 + \frac{1}{2} \ln n +
+\frac{1}{2} \ln \ln n + 2\sqrt{n \ln n}\left( \ln n + 1 - \ln 2 - \frac{1}{2}\ln n -
+	\frac{1}{2}\ln\ln n\right) \right) =\\= \exp\left(2\sqrt{n \ln n} (o(1) + \frac{1}{2} \ln n + 1 - \ln 2
+	- \frac{1}{2} \ln\ln n)\right) = \exp\left(\sqrt{n} \ln^{1.5} n (1 + o(1))\right).
+\end{multline*}
+
+Очевидно, что произведение оценок стремится к 0.
+
+c) $t = \frac{2.9}{(k-1)p}$, отсюда:
+
+\begin{multline*}
+	P(X \ge m(F)k) \le \exp\left(-1.45k \left( \frac{2.9}{(k-1)p} - 1\right) \right) =
+	\exp\left(-\frac{1.49 \cdot 2.9}{p} \frac{k}{k-1} + 1.45 k\right) \le\\\le
+	\exp(-4.2 n^\frac{6}{7} + 1.45 \cdot 70 \sqrt{n \l n}) = \exp\left( -4.2n^\frac{6}{7} (1 + o(1))
+	\right)
+\end{multline*}
+
+Теперь оценим аналогично предыдущему пункту
+$$
+	\sum\limits_{k=1}^{70\sqrt{n\ln n}} C_n^k \le \exp(35 \sqrt{n} \ln^{1.5} n (1 + o(1)).
+$$
+
+Снова, произведение оценок стемится к 0.
+
+\section*{Задача 5}
+
+Мы знаем, что при $np = 1.001$ размер гигантской компоненты, делёный на $n$ по вероятности стремится
+к $\beta$, где $\beta + e^{-\beta p} = 1$, то есть $\beta \approx 0.002$. Если же $np$ меньше, то
+наибольшая компонента будет меньше.
+
+Тогда, если мы докажем, что компонент размера, скажем, $0.05n$ с плохой плотностью а.п.н. не
+существует, то и плотность всего графа будет а.п.н. хорошая.
+
+Оценим ожидаемое число подграфов размера не более $0.05n$ с плотностью больше, чем $1.45$. Для
+фикисрованного $k \le 0.05n$:
+$P(X \ge 1.45k) = P(X \ge y\lambda) \le \exp(-y\lambda (y - 1))$, где
+$\lambda = \frac{k(k-1)c}{2n}$, $y = \frac{1.45k}{\lambda} = \frac{2.9n}{c(k-1)} \ge 1$. Получаем:
+
+\begin{multline*}
+	P(X \ge 1.45k) \le \exp\left(-1.45k \left(\frac{2.9n}{(k-1)c} - 1 \right)\right) \le\\\le
+	\exp\left( -1.45 \frac{k}{k-1}\frac{2.9n}{c} + 1.45k\right) \le\\\le
+	\exp\left(-\frac{1.45 \cdot 2.9}{c} n + 0.08n\right) \le \exp(-4n)
+\end{multline*}
+
+Тогда $\sum\limits_{k=1}^{0.05n} C_n^k \exp(-4n) \le \exp(-4n) 2^{H(0.05)n} \le e^{-4n + 0.2n} \le
+e^{-3n} \rightarrow 0$.
+
+\section*{Задача 6}
+
+Рассмотрим индикаторы $C_n^2$ рёбер, возможные циклы на $l = 2\lceil \ln \ln n \rceil + 1$
+вершины и соответствующие им случайные величины $X_A$ из неравенства Янсона.
+
+Здесь и далее, там как $l = o(\sqrt{n})$, то все $C_{n - a}^{b})$ оценены как $\frac{n^b}{b!} (1 +
+o(1))$ (там где $a = O(l), b = O(l)$).
+
+Вычислим матожидание числа циклов: $\lambda = EX = C_n^l \frac{(l-1)!}{2} p^l \sim \frac{n^l}{l!}
+\frac{(l-1)!}{2} \frac{c^l}{n^l} \sim \frac{c^l}{l}$.
+
+Далее будем оценивать величину $\overline{\Delta}$ сверху следующим образом. Нам нужно оценить
+вероятность появления двух пересекающихся циклов. Пусть циклы пересекаются по $1 \le k \le l - 2$
+рёбрам и имеют $k + q$ общих вершин, $1 \le q \ge k$.
+Тогда будем оценивать сверху вероятность появления ориентированной пары таких циклов (оценка
+увеличится еще в 2 раза, ну и ладно):
+\begin{itemize}
+	\item Выберем множество из $k + q$ вершин из $n$: $C_n^{k+q}$
+	\item Выберем позиции этих вершин в первом цикле и во втором: $(A_l^{k+p})^2$. Тут мы можем
+		выбрать невозможные варианты, например, если одна вершина не соседняя ни с кем, но у нас оценка
+		сверху
+	\item Выберем из $(n - k - q)$ неиспользованных вершин по порядку $l - k - q$, чтобы дополнить
+		первый цикл: $A_{n - k - q}^{l - k - q}$
+	\item Выберем из $(n - l)$ неиспользованных вершин по порядку $l - k - q$, чтобы дополнить
+		второй цикл: $A_{n - l}^{l - k - q}$
+	\item Всего проведено рёбер $2l - k$, поэтому вероятность $p^{2l - k}$
+	\item Отдельно надо учесть совпадающие циклы
+	\item В сумме также будут слагаемые с $k + q > l$, но оценка сверху
+\end{itemize}
+
+Итого:
+
+\begin{multline*}
+	\overline{\Delta} \le \lambda + \sum\limits_{k=1}^{l-2}\sum\limits_{q=1}^{k} C_n^{k+q}
+	(A_l^{k+q})^2 A_{n - k - q}^{l - k - q} A_{n - l}^{l - k - q} p^{2l - k} \le\\\le \lambda +
+	\sum\limits_{k=1}^{l-2}\sum\limits_{q=1}^{k} \frac{n^{k+q}}{(k+q)!} l^{2k+2q} n^{l-k-q} n^{l-k-q}
+	\frac{c^{2l-k}}{n^{2l-k}} \le\\\le \lambda + \sum\limits_{k=1}^{l-2}
+	c^{2l-k} l^{2k} \sum\limits_{q=1}^{k} \left(\frac{l^2}{n}\right)^q \le
+	\lambda + \sum\limits_{k=1}^{l-2} c^{2l-k} l^{2k} \frac{l^2}{n} \frac{n}{n - l^2} =\\=
+	\lambda + (1 + o(1)) \frac{l^2}{n} c^{2l} \sum\limits_{k=1}^{l-2} \left(\frac{l^2}{c}\right)^k
+	= \lambda + (1 + o(1)) \frac{l^2}{n} c^{2l} l^{2l-2} c^{1-l} \frac{1}{\frac{l^2}{c} - 1} =\\=
+	\lambda +  (1 + o(1)) \frac{c^{l+2}}{n} l^{2l-2} 
+\end{multline*}
+
+Отсюда $P(X = 0) \le \exp\left(-\frac{1}{2} \frac{\frac{c^{2l}}{l^2}}{\frac{c^l}{l} + (1 + o(1))
+\frac{c^{l+2} l^{2l-2}}{n}} \right) =
+\exp\left(-\frac{1}{2} \frac{\frac{c^l}{l}}{1 + (1 + o(1)) \frac{c^2 l^{2l-1} }{n}}\right) =
+\exp\left( -\frac{c^l}{2l} (1 + o(1)) \right) = o\left(\frac{1}{\ln n}\right)$ с запасом при $c >
+1$.
+
+\section*{Задача 7}
+
+Во-первых, заметим, что пороговая вероятность $\frac{1}{n}$. При $p = o\left(\frac{1}{n}\right)$
+граф состоит из деревьев и поэтому двудолен, при $p = \frac{w(n)}{n}$ есть треугольник. Даже более
+того, по задаче 6 при $p = \frac{1 + \eps}{n}$ есть цикл нечетной длины, то есть с одной стороны
+порог точный.
+
+Осталось показать, что при $np = c < 1$ граф имеет ненулевой и не единичный шанс быть двудольным. По
+Пуассоновской предельной теореме, так как цикл длины 3 является строго сбалансированным графом, то
+$X_{C_3} \rightarrow Pois\left(\frac{(1-\eps)^3}{6}\right)$. Таким образом $P(X_{C_3} = 0)
+\rightarrow \exp\left(-\frac{(1-\eps)^3}{6}\right)$. С другой стороны, мы знаем, что число вершин в
+унициклических компонентах имеет известное константное при фиксированном $c$ матожидание.
+Аналогично тому рассуждению, унициклические компоненты с нечетным циклом имеют константное
+матожидание, значит $P(X_{odd} \ge 1) \le \frac{1}{C}$, то есть имеется нетривиальная вероятность
+того, что унициклических компонент с нечётным циклом не будет.
+\end{document}
